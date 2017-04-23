@@ -1,0 +1,5 @@
+D:\Projects\HistoryQuest\HistoryQuest.Domain\bin\Debug\HistoryQuest.Domain.exe.config
+D:\Projects\HistoryQuest\HistoryQuest.Domain\bin\Debug\HistoryQuest.Domain.exe
+D:\Projects\HistoryQuest\HistoryQuest.Domain\bin\Debug\HistoryQuest.Domain.pdb
+D:\Projects\HistoryQuest\HistoryQuest.Domain\obj\Debug\HistoryQuest.Domain.exe
+D:\Projects\HistoryQuest\HistoryQuest.Domain\obj\Debug\HistoryQuest.Domain.pdb
