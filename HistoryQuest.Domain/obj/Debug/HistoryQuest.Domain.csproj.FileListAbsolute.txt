@@ -1,5 +1,6 @@
-D:\Projects\HistoryQuest\HistoryQuest.Domain\bin\Debug\HistoryQuest.Domain.exe.config
-D:\Projects\HistoryQuest\HistoryQuest.Domain\bin\Debug\HistoryQuest.Domain.exe
+D:\Projects\HistoryQuest\HistoryQuest.Domain\bin\Debug\HistoryQuest.Domain.dll.config
+D:\Projects\HistoryQuest\HistoryQuest.Domain\bin\Debug\HistoryQuest.Domain.dll
 D:\Projects\HistoryQuest\HistoryQuest.Domain\bin\Debug\HistoryQuest.Domain.pdb
-D:\Projects\HistoryQuest\HistoryQuest.Domain\obj\Debug\HistoryQuest.Domain.exe
+D:\Projects\HistoryQuest\HistoryQuest.Domain\obj\Debug\HistoryQuest.Domain.csprojResolveAssemblyReference.cache
+D:\Projects\HistoryQuest\HistoryQuest.Domain\obj\Debug\HistoryQuest.Domain.dll
 D:\Projects\HistoryQuest\HistoryQuest.Domain\obj\Debug\HistoryQuest.Domain.pdb

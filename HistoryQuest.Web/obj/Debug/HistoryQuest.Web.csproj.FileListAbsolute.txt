@@ -13,7 +13,9 @@ D:\Projects\HistoryQuest\HistoryQuest.Web\bin\roslyn\VBCSCompiler.exe.config
 D:\Projects\HistoryQuest\HistoryQuest.Web\bin\HistoryQuest.dll.config
 D:\Projects\HistoryQuest\HistoryQuest.Web\bin\HistoryQuest.dll
 D:\Projects\HistoryQuest\HistoryQuest.Web\bin\HistoryQuest.pdb
+D:\Projects\HistoryQuest\HistoryQuest.Web\bin\HistoryQuest.Domain.dll
 D:\Projects\HistoryQuest\HistoryQuest.Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\Projects\HistoryQuest\HistoryQuest.Web\bin\HistoryQuest.Domain.pdb
 D:\Projects\HistoryQuest\HistoryQuest.Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\Projects\HistoryQuest\HistoryQuest.Web\obj\Debug\HistoryQuest.Web.csprojResolveAssemblyReference.cache
 D:\Projects\HistoryQuest\HistoryQuest.Web\obj\Debug\HistoryQuest.dll
