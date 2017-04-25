@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HistoryQuest.Web", "History
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HistoryQuest.Domain", "HistoryQuest.Domain\HistoryQuest.Domain.csproj", "{EBC7E579-EC78-4870-B7F5-7809A3A09DEE}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "HistoryQuest.DataBase", "HistoryQuest.DataBase\HistoryQuest.DataBase.sqlproj", "{B02AB88C-0567-47C9-99BC-BE9290282822}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,12 @@ Global
 		{EBC7E579-EC78-4870-B7F5-7809A3A09DEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBC7E579-EC78-4870-B7F5-7809A3A09DEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBC7E579-EC78-4870-B7F5-7809A3A09DEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B02AB88C-0567-47C9-99BC-BE9290282822}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B02AB88C-0567-47C9-99BC-BE9290282822}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B02AB88C-0567-47C9-99BC-BE9290282822}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{B02AB88C-0567-47C9-99BC-BE9290282822}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B02AB88C-0567-47C9-99BC-BE9290282822}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B02AB88C-0567-47C9-99BC-BE9290282822}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

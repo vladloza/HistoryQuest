@@ -1,0 +1,9 @@
+D:\Projects\HistoryQuest\HistoryQuest.DataBase\bin\Debug\HistoryQuest.DataBase.dacpac
+D:\Projects\HistoryQuest\HistoryQuest.DataBase\bin\Debug\HistoryQuest.DataBase.dll
+D:\Projects\HistoryQuest\HistoryQuest.DataBase\bin\Debug\HistoryQuest.DataBase.pdb
+D:\Projects\HistoryQuest\HistoryQuest.DataBase\obj\Debug\Model.xml
+D:\Projects\HistoryQuest\HistoryQuest.DataBase\obj\Debug\refactor.xml
+D:\Projects\HistoryQuest\HistoryQuest.DataBase\obj\Debug\postdeploy.sql
+D:\Projects\HistoryQuest\HistoryQuest.DataBase\obj\Debug\predeploy.sql
+D:\Projects\HistoryQuest\HistoryQuest.DataBase\obj\Debug\HistoryQuest.DataBase.dll
+D:\Projects\HistoryQuest\HistoryQuest.DataBase\obj\Debug\HistoryQuest.DataBase.pdb
