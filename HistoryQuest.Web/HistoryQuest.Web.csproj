@@ -67,7 +67,21 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="libs\css\main.css" />
+    <Content Include="libs\img\gmail-icon.png" />
+    <Content Include="libs\img\ua2.gif" />
+    <Content Include="libs\img\vk-icon.png" />
+    <Content Include="libs\js\jquery-3.1.1.min.js" />
+    <Content Include="Login.aspx" />
     <Content Include="packages.config" />
+    <Content Include="Main.Master" />
+    <Content Include="libs\fonts\Roboto-Bold.ttf" />
+    <Content Include="libs\fonts\Roboto-BoldItalic.ttf" />
+    <Content Include="libs\fonts\Roboto-Italic.ttf" />
+    <Content Include="libs\fonts\Roboto-Light.ttf" />
+    <Content Include="libs\fonts\Roboto-Medium.ttf" />
+    <Content Include="libs\fonts\Roboto-Regular.ttf" />
+    <Content Include="libs\fonts\Roboto-Thin.ttf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -76,10 +90,32 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Registration.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Main.Master.cs">
+      <DependentUpon>Main.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Main.Master.designer.cs">
+      <DependentUpon>Main.Master</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registration.aspx.cs">
+      <DependentUpon>Registration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Registration.aspx.designer.cs">
+      <DependentUpon>Registration.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

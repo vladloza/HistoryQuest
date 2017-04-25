@@ -1,0 +1,122 @@
+﻿    body {
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        margin: 0px;
+        padding: 0px;
+        font-family: "Open Sans", sans-serif;
+        color: #1e1e1e;
+        font-size: 14px;
+        line-height: 1.42857143;
+        background-color: #fff;
+    }
+@font-face {
+        font-family: 'Roboto';
+        src: url(../fonts/Roboto-Regular.ttf) format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+    a {
+        outline: none;
+        color: #0B91EA;
+        text-decoration: none;
+    }
+    
+    a:hover,
+    a:focus {
+        color:#2986c3;
+        text-decoration: none;
+    }
+    img {
+        max-width: 100%;
+    }
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+   }
+.clearfix:after {
+    clear: both;
+}
+    
+    .register-href::before{
+        border-bottom: thin solid #cad4d8;
+        content: "";
+        display: block;
+        margin: 0 auto 10px auto;
+    }
+.login-page {
+    width: 360px;
+    padding: 8% 0 0;
+    margin: auto;
+}
+ 
+ .admin-form {
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    max-width: 360px;
+    margin: 0 auto;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+ }
+    
+.admin-form input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+    
+.admin-form button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #00a1e0;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: .3s ease 0s;
+    cursor: pointer;
+}
+ .admin-form button:nth-child(2){
+     margin-top:10px;
+     background: #e4df12;
+ }   
+ .admin-form button:nth-child(2):hover{
+     background: #d4cf15;
+ } 
+.admin-form button:hover,
+.admin-form button:active,
+.admin-form button:focus {
+    background: #147fa9;
+}
+    
+.admin-body {
+    background: #52b8b8;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(right, #52b8b8, #c4e0d4);
+    background: -moz-linear-gradient(right, #52b8b8, #c4e0d4);
+    background: -o-linear-gradient(right, #52b8b8, #c4e0d4);
+    background: linear-gradient(to left, #52b8b8, #c4e0d4);
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.login-icons {
+    margin-top: 10px;
+}
+.icons-inside {
+    width:15%;
+    padding: 0.5em;
+    display: inline-block;
+}
