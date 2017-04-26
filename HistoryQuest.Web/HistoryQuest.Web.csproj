@@ -91,6 +91,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Quest\Quest.aspx" />
+    <Content Include="Quest\Scripts\QuestMap.js" />
     <Content Include="Registration.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -113,6 +115,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Quest\Quest.aspx.cs">
+      <DependentUpon>Quest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quest\Quest.aspx.designer.cs">
+      <DependentUpon>Quest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Registration.aspx.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
