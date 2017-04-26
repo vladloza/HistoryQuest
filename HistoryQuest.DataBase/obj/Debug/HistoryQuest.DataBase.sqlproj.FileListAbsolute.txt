@@ -7,12 +7,3 @@ D:\Projects\HistoryQuest\HistoryQuest.DataBase\obj\Debug\postdeploy.sql
 D:\Projects\HistoryQuest\HistoryQuest.DataBase\obj\Debug\predeploy.sql
 D:\Projects\HistoryQuest\HistoryQuest.DataBase\obj\Debug\HistoryQuest.DataBase.dll
 D:\Projects\HistoryQuest\HistoryQuest.DataBase\obj\Debug\HistoryQuest.DataBase.pdb
-D:\Education\Course 2\2\Олимпиада\Project\HistoryQuest\HistoryQuest.DataBase\bin\Debug\HistoryQuest.DataBase.dacpac
-D:\Education\Course 2\2\Олимпиада\Project\HistoryQuest\HistoryQuest.DataBase\bin\Debug\HistoryQuest.DataBase.dll
-D:\Education\Course 2\2\Олимпиада\Project\HistoryQuest\HistoryQuest.DataBase\bin\Debug\HistoryQuest.DataBase.pdb
-D:\Education\Course 2\2\Олимпиада\Project\HistoryQuest\HistoryQuest.DataBase\obj\Debug\Model.xml
-D:\Education\Course 2\2\Олимпиада\Project\HistoryQuest\HistoryQuest.DataBase\obj\Debug\refactor.xml
-D:\Education\Course 2\2\Олимпиада\Project\HistoryQuest\HistoryQuest.DataBase\obj\Debug\postdeploy.sql
-D:\Education\Course 2\2\Олимпиада\Project\HistoryQuest\HistoryQuest.DataBase\obj\Debug\predeploy.sql
-D:\Education\Course 2\2\Олимпиада\Project\HistoryQuest\HistoryQuest.DataBase\obj\Debug\HistoryQuest.DataBase.dll
-D:\Education\Course 2\2\Олимпиада\Project\HistoryQuest\HistoryQuest.DataBase\obj\Debug\HistoryQuest.DataBase.pdb
