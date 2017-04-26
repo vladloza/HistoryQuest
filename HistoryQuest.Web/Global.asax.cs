@@ -33,7 +33,8 @@ namespace HistoryQuest
 
         protected void Application_Error(object sender, EventArgs e)
         {
-
+            Exception exc = Server.GetLastError();
+            string ErrorMessage = exc.Message;
         }
 
         protected void Session_End(object sender, EventArgs e)
