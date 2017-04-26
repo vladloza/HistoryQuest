@@ -73,6 +73,7 @@
     <Content Include="libs\css\font-awesome.min.css" />
     <Content Include="libs\css\main.css" />
     <Content Include="libs\img\gmail-icon.png" />
+    <Content Include="libs\img\sagay.jpg" />
     <Content Include="libs\img\ua2.gif" />
     <Content Include="libs\img\vk-icon.png" />
     <Content Include="libs\js\bootstrap.min.js" />

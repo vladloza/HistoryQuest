@@ -159,9 +159,6 @@ html, body, form {
     line-height: 1.42857143;
     width: auto;
 }
-.nav-wrapper, .dropdown {   
-    display: inline-block !important;
-}
 .cabinet{
     border: 0;
     background: none;
@@ -172,6 +169,7 @@ html, body, form {
 }
 .cabinet-wrapper {
         margin: 10px 0px;
+        display: table-caption;
 }
 .cabinet:hover{
     background:#f9f9f9;
@@ -197,8 +195,42 @@ html, body, form {
 {
     background: black;
 }
+.main {
+}
+.info {
+    margin-top: 20px;
+    padding:15px;
+    background: #fafbfb;
+    box-shadow: 1px 1px 15px 1px #ebecec;
+    border: 1px #f1f1f1  solid;
+}
+.info-image {
+    float:none;
+    display: table;
+    margin: 0 auto;
+}
+.info-body p {
+    text-indent: 1.5em;
+    text-align: justify;
+}
+.info-header h2{
+        text-align: center;
+    }
 @media (min-width: 768px) {
     .nav-wrapper, .dropdown {   
-    display: inline-block !important;
+    display: inline-block;
 }
+   
+}
+@media (min-width: 992px) {
+    .info-image {
+        float: left;
+        display: block;
+        margin-right: 15px;
+        margin-bottom: 15px;
+    }
+    .info-header h2{
+         text-align: initial;
+         margin-top: 0px;
+    }
 }
