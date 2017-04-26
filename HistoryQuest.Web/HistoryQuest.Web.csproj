@@ -68,10 +68,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="HistoricalInformation.aspx" />
+    <Content Include="libs\css\bootstrap.css" />
+    <Content Include="libs\css\font-awesome.min.css" />
     <Content Include="libs\css\main.css" />
     <Content Include="libs\img\gmail-icon.png" />
     <Content Include="libs\img\ua2.gif" />
     <Content Include="libs\img\vk-icon.png" />
+    <Content Include="libs\js\bootstrap.min.js" />
     <Content Include="libs\js\jquery-3.1.1.min.js" />
     <Content Include="Login.aspx" />
     <Content Include="packages.config" />
@@ -83,6 +87,7 @@
     <Content Include="libs\fonts\Roboto-Medium.ttf" />
     <Content Include="libs\fonts\Roboto-Regular.ttf" />
     <Content Include="libs\fonts\Roboto-Thin.ttf" />
+    <Content Include="libs\fonts\fontawesome-webfont.ttf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -95,6 +100,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HistoricalInformation.aspx.cs">
+      <DependentUpon>HistoricalInformation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HistoricalInformation.aspx.designer.cs">
+      <DependentUpon>HistoricalInformation.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
