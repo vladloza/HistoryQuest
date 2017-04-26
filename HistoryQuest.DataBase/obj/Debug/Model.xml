@@ -12,7 +12,7 @@
 		</CustomData>
 		<CustomData Category="Reference" Type="Assembly">
 			<Metadata Name="LogicalName" Value="HistoryQuest.DataBase.dll" />
-			<Metadata Name="FileName" Value="D:\PROJECTS\HISTORYQUEST\HISTORYQUEST.DATABASE\OBJ\DEBUG\HISTORYQUEST.DATABASE.DLL" />
+			<Metadata Name="FileName" Value="D:\EDUCATION\COURSE 2\2\ОЛИМПИАДА\PROJECT\HISTORYQUEST\HISTORYQUEST.DATABASE\OBJ\DEBUG\HISTORYQUEST.DATABASE.DLL" />
 			<Metadata Name="AssemblyName" Value="HistoryQuest.DataBase" />
 			<Metadata Name="PermissionSet" Value="SAFE" />
 			<Metadata Name="Owner" Value="" />
@@ -20,7 +20,7 @@
 			<Metadata Name="IsVisible" Value="True" />
 			<Metadata Name="IsModelAware" Value="True" />
 			<Metadata Name="SkipCreationIfEmpty" Value="True" />
-			<Metadata Name="AssemblySymbolsName" Value="D:\Projects\HistoryQuest\HistoryQuest.DataBase\obj\Debug\HistoryQuest.DataBase.pdb" />
+			<Metadata Name="AssemblySymbolsName" Value="D:\Education\Course 2\2\Олимпиада\Project\HistoryQuest\HistoryQuest.DataBase\obj\Debug\HistoryQuest.DataBase.pdb" />
 		</CustomData>
 		<CustomData Category="SqlCmdVariables" Type="SqlCmdVariable" />
 	</Header>
