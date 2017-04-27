@@ -1,0 +1,9 @@
+.vs/*
+HistoryQuest.DataBase/obj/*
+HistoryQuest.DataBase/bin/*
+HistoryQuest.Domain/obj/*
+HistoryQuest.Domain/bin/*
+HistoryQuest.Web/obj/*
+HistoryQuest.Web/bin/*
+HistoryQuest.Domain/connectionStrings.config
+HistoryQuest.Web/connectionStrings.config
