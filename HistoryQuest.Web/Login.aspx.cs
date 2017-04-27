@@ -13,5 +13,10 @@ namespace HistoryQuest
         {
 
         }
+
+        protected void LoginButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

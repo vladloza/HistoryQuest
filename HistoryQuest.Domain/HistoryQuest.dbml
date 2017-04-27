@@ -18,14 +18,23 @@
       <Association Name="User_CheckPoint" Member="User" ThisKey="AuthorGID" OtherKey="gid" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.UsersInRoles" Member="UsersInRoles">
-    <Type Name="UsersInRole">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="gid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="UserGID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Column Name="RoleGID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Association Name="Role_UsersInRole" Member="Role" ThisKey="RoleGID" OtherKey="gid" Type="Role" IsForeignKey="true" />
-      <Association Name="User_UsersInRole" Member="User" ThisKey="UserGID" OtherKey="gid" Type="User" IsForeignKey="true" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordFormat" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordSalt" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="FaceGID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Association Name="User_CheckPoint" Member="CheckPoints" ThisKey="gid" OtherKey="AuthorGID" Type="CheckPoint" />
+      <Association Name="User_Like" Member="Likes" ThisKey="gid" OtherKey="UserGID" Type="Like" />
+      <Association Name="User_Quest" Member="Quests" ThisKey="gid" OtherKey="AuthorGID" Type="Quest" />
+      <Association Name="User_Task" Member="Tasks" ThisKey="gid" OtherKey="AuthorGID" Type="Task" />
+      <Association Name="User_TasksToTry" Member="TasksToTries" ThisKey="gid" OtherKey="UserGID" Type="TasksToTry" />
+      <Association Name="User_Try" Member="Tries" ThisKey="gid" OtherKey="UserGID" Type="Try" />
+      <Association Name="User_UsersInRole" Member="UsersInRoles" ThisKey="gid" OtherKey="UserGID" Type="UsersInRole" />
+      <Association Name="Face_User" Member="Face" ThisKey="FaceGID" OtherKey="gid" Type="Face" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Comments" Member="Comments">
@@ -45,15 +54,14 @@
       <Column Name="FirstName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="LastName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="MiddleName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="UserGID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="TeacherGID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Column Name="Info" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="IsTeacher" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Face_User" Member="Users" ThisKey="gid" OtherKey="FaceGID" Type="User" />
       <Association Name="Face_Face" Member="Faces" ThisKey="gid" OtherKey="TeacherGID" Type="Face" />
       <Association Name="Face_PupilsToTeachersRequest" Member="PupilsToTeachersRequests" ThisKey="gid" OtherKey="PupilsGID" Type="PupilsToTeachersRequest" />
       <Association Name="Face_PupilsToTeachersRequest1" Member="PupilsToTeachersRequests1" ThisKey="gid" OtherKey="TeacherGID" Type="PupilsToTeachersRequest" />
       <Association Name="Face_Face" Member="Face1" ThisKey="TeacherGID" OtherKey="gid" Type="Face" IsForeignKey="true" />
-      <Association Name="User_Face" Member="User" ThisKey="UserGID" OtherKey="gid" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Likes" Member="Likes">
@@ -62,8 +70,8 @@
       <Column Name="gid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="UserGID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="TaskGID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Association Name="Task_Like" Member="Task" ThisKey="TaskGID" OtherKey="gid" Type="Task" IsForeignKey="true" />
       <Association Name="User_Like" Member="User" ThisKey="UserGID" OtherKey="gid" Type="User" IsForeignKey="true" />
+      <Association Name="Task_Like" Member="Task" ThisKey="TaskGID" OtherKey="gid" Type="Task" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.PupilsToTeachersRequests" Member="PupilsToTeachersRequests">
@@ -108,8 +116,8 @@
       <Column Name="AuthorGID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Association Name="Task_Like" Member="Likes" ThisKey="gid" OtherKey="TaskGID" Type="Like" />
       <Association Name="CheckPoint_Task" Member="CheckPoint" ThisKey="CheckPointGID" OtherKey="gid" Type="CheckPoint" IsForeignKey="true" />
-      <Association Name="TaskType_Task" Member="TaskType" ThisKey="TaskTypeGID" OtherKey="gid" Type="TaskType" IsForeignKey="true" />
       <Association Name="User_Task" Member="User" ThisKey="AuthorGID" OtherKey="gid" Type="User" IsForeignKey="true" />
+      <Association Name="TaskType_Task" Member="TaskType" ThisKey="TaskTypeGID" OtherKey="gid" Type="TaskType" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.TasksToTries" Member="TasksToTries">
@@ -120,8 +128,8 @@
       <Column Name="TryGID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="EarnedScore" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ElapsedTime" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Association Name="Try_TasksToTry" Member="Try" ThisKey="TryGID" OtherKey="gid" Type="Try" IsForeignKey="true" />
       <Association Name="User_TasksToTry" Member="User" ThisKey="UserGID" OtherKey="gid" Type="User" IsForeignKey="true" />
+      <Association Name="Try_TasksToTry" Member="Try" ThisKey="TryGID" OtherKey="gid" Type="Try" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.TaskTypes" Member="TaskTypes">
@@ -144,22 +152,14 @@
       <Association Name="User_Try" Member="User" ThisKey="UserGID" OtherKey="gid" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Users" Member="Users">
-    <Type Name="User">
-      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+  <Table Name="dbo.UsersInRoles" Member="UsersInRoles">
+    <Type Name="UsersInRole">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="gid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
-      <Column Name="Password" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
-      <Column Name="PasswordFormat" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="PasswordSalt" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
-      <Association Name="User_CheckPoint" Member="CheckPoints" ThisKey="gid" OtherKey="AuthorGID" Type="CheckPoint" />
-      <Association Name="User_UsersInRole" Member="UsersInRoles" ThisKey="gid" OtherKey="UserGID" Type="UsersInRole" />
-      <Association Name="User_Face" Member="Faces" ThisKey="gid" OtherKey="UserGID" Type="Face" />
-      <Association Name="User_Like" Member="Likes" ThisKey="gid" OtherKey="UserGID" Type="Like" />
-      <Association Name="User_Quest" Member="Quests" ThisKey="gid" OtherKey="AuthorGID" Type="Quest" />
-      <Association Name="User_Task" Member="Tasks" ThisKey="gid" OtherKey="AuthorGID" Type="Task" />
-      <Association Name="User_TasksToTry" Member="TasksToTries" ThisKey="gid" OtherKey="UserGID" Type="TasksToTry" />
-      <Association Name="User_Try" Member="Tries" ThisKey="gid" OtherKey="UserGID" Type="Try" />
+      <Column Name="UserGID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="RoleGID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="Role_UsersInRole" Member="Role" ThisKey="RoleGID" OtherKey="gid" Type="Role" IsForeignKey="true" />
+      <Association Name="User_UsersInRole" Member="User" ThisKey="UserGID" OtherKey="gid" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

@@ -18,7 +18,7 @@
             <form class="login-form" runat="server">
                 <input type="text" placeholder="Логін" />
                 <input type="password" placeholder="Пароль" />
-                <button>Увійти</button>
+                <asp:Button runat="server" onclick="LoginButton_Click" Text="Увійти"></asp:Button>
             </form>
             <div class="login-icons">
                 <div class="icons-inside">

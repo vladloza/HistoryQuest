@@ -24,13 +24,16 @@
             </div>
             <form runat="server" class="views">
                 <div id="pupil-view" style="display: none">
-                    <input type="text" placeholder="Прізвище" />
-                    <input type="text" placeholder="Ім'я" />
-                    <input type="text" placeholder="По батькові" />
+                    <input type="text" placeholder="Прізвище" runat="server" id="sur_box"/>
+                    <input type="text" placeholder="Ім'я" runat="server" id="name_box"/>
+                    <input type="text" placeholder="По батькові" runat="server" id="mid_box"/>
+                    <input type="text" placeholder="Логін" runat="server" id="login_box" />
+                    <input type="text" placeholder="Пароль" runat="server" id="pass_box" />
                     <input type="text" placeholder="ID вчителя" />
                     <div class="login-form">
-                        <button>Надіслати запит</button>
+                        <asp:Button runat="server" OnClick="RegisterButton_Click" Text="Зареєструватися"></asp:Button>
                     </div>
+                    <asp:Label runat="server" ID="error_box" />
                 </div>
                 <div id="teacher-view" style="display: none">
                     <input type="text" placeholder="Ваш email" />
