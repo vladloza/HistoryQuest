@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -12,7 +13,10 @@ namespace HistoryQuest
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Repository.CurrentUser != null)
+            {
+                Response.Redirect(FormsAuthentication.DefaultUrl);
+            }
         }
 
         protected void RegisterButton_Click(object sender, EventArgs e)
@@ -42,17 +46,18 @@ namespace HistoryQuest
                         {
                             gid = Guid.NewGuid(),
                             User = user,
-                            RoleGID = new Guid("024900db-2a68-4959-a0e9-10069608d923")
+                            RoleGID = new Guid(Constants.StudentRoleGID)
                         }
                     }
                 };
 
                 Repository.CurrentDataContext.Users.InsertOnSubmit(user);
                 Repository.CurrentDataContext.SubmitChanges();
+                Response.Redirect("~/Login.aspx");
             }
             else
             {
-                error_box.Text = "Вибачте, користувач з таким Логіном все існує";
+                error_box.Text = "Вибачте, користувач з таким Логіном вже існує";
             }
         }
     }

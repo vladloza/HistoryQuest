@@ -16,10 +16,11 @@
                 <h2>Вітаємо на проекті <br />"Моя Україна"!</h2>
             </div>
             <form class="login-form" runat="server">
-                <input type="text" placeholder="Логін" />
-                <input type="password" placeholder="Пароль" />
+                <input type="text" placeholder="Логін" runat="server" id="log_box"/>
+                <input type="password" placeholder="Пароль" runat="server" id="pass_box" />
                 <asp:Button runat="server" onclick="LoginButton_Click" Text="Увійти"></asp:Button>
             </form>
+            <asp:Label runat="server" id="error_text"/>
             <div class="login-icons">
                 <div class="icons-inside">
                        <a href="#"><img src="libs/img/gmail-icon.png" /></a>
