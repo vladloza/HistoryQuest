@@ -316,7 +316,36 @@ img {
 .about-block h4:first-child {
     background:#c4e0d4;
     padding: 0px 5px;
+
+}.small-header h2 {
+    font-size: 16px;
+    display: inline-block;
+    margin: 0px 0px 0px 5px;
+ }
+ .card-table {
+     margin-top:20px;
+     overflow-x:auto;
+ }
+ .card-table table {
+    border-collapse: collapse;
+    width: 100%;
 }
+
+ .card-table th,  .card-table td {
+    text-align: left;
+    padding: 8px;
+}
+ .card-table i {
+     cursor:pointer;
+     padding:3px;
+ }
+ .fa-check {
+     color:#04a004;
+ }
+ .fa-times {
+     color:#cc1010;
+ }
+ .card-table tr:nth-child(even){background-color: #f2f2f2}
 @media (min-width: 768px) {
     .profile-name,
     .sidebar-menu span {

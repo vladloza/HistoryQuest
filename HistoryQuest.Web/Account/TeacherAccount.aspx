@@ -1,23 +1,67 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeBehind="StudentAccount.aspx.cs" Inherits="HistoryQuest.StudentAccount" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true"  MasterPageFile="~/Main.master" CodeBehind="TeacherAccount.aspx.cs" Inherits="HistoryQuest.Account.TeacherAccount" %>
 <%@Import Namespace="HistoryQuest.Domain" %>
 <asp:Content runat="server" ContentPlaceHolderID="ContentPlaceHolder">
     <div id="page">
-
-        <div id="primary"><div class="tab-content">
+        <div id="primary">
+            <div class="tab-content">
             <div class="main tab-pane fade in active" id="account">
                 <div class="card card header-settings clearfix">
                     <div class="about-block">
                         <h4>ПІБ:</h4>
                         <h4>Прізвище Імя По батькові</h4>
                     </div>
-                    <div class="about-block">
-                        <h4>Вчитель:</h4>
-                        <h4>TeacherName</h4>
+                </div>
+                <div class="card income">
+                    <div class="small-header clearfix">
+                        <i class="fa fa-bell" aria-hidden="true"></i><h2>Запити</h2>
+                    </div>
+                    <div class="card-table">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Прізвище</th>
+                                    <th>Імя</th>
+                                    <th>По батькові</th>
+                                    <th>Дії</th>
+                                </tr>
+                                <tr>
+                                    <td>105</td>
+                                    <td>Трофименко</td>
+                                    <td>Маргарита</td>
+                                    <td>Юріївна</td>
+                                    <td>
+                                        <a><i class="fa fa-check" aria-hidden="true"></i></a>
+                                        <a><i class="fa fa-times" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                     <td>105</td>
+                                    <td>Трофименко</td>
+                                    <td>Маргарита</td>
+                                    <td>Юріївна</td>
+                                    <td>
+                                        <a><i class="fa fa-check" aria-hidden="true"></i></a>
+                                        <a><i class="fa fa-times" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                     <td>105</td>
+                                    <td>Трофименко</td>
+                                    <td>Маргарита</td>
+                                    <td>Юріївна</td>
+                                    <td>
+                                        <a><i class="fa fa-check" aria-hidden="true"></i></a>
+                                        <a><i class="fa fa-times" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="card statistics">
+                <div class="card statistic">
                     <div class="small-header clearfix">
-                        <h2>Досягнення</h2>
+                        <i class="fa fa-pie-chart"></i><h2>Статистика</h2>
                     </div>
                 </div>
             </div>
@@ -40,10 +84,6 @@
                             <fieldset class="form-fieldset">
                                 <label for="father_name" class="form-label">По батькові</label>
                                 <input type="text" id="father_name" name="father_name" class="form-input" />
-                            </fieldset>
-                            <fieldset class="form-fieldset">
-                                <label for="teacher_name" class="form-label">Вчитель</label>
-                                <input type="text" id="teacher_name" name="teacher_name" class="form-input" />
                             </fieldset>
                             <fieldset class="form-fieldset">
                                 <label for="description" class="form-label">Про мене</label>
@@ -79,7 +119,7 @@
                     </li>
                     <li>
                         <a href="#edit" data-toggle="pill">
-                            <i class="fa fa-pie-chart"></i><span>Редагувати профіль</span>
+                            <i class="fa fa-cog" aria-hidden="true"></i><span>Редагувати профіль</span>
                         </a>
                     </li>
                 </ul>
