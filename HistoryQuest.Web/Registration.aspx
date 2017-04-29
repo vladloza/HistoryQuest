@@ -8,6 +8,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="libs/css/main.css" />
     <script src="libs/js/jquery-3.1.1.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.10.0.min.js" type="text/javascript"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/jquery-ui.min.js" type="text/javascript"></script>
+    <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/themes/blitzer/jquery-ui.css" rel="Stylesheet" type="text/css" />
+    <script type="text/javascript">
+        $(function () {
+        $("[id$=txtSearch]").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: '<%=ResolveUrl("~/WebServices/WebService.asmx/GetTeachersByPrefix") %>',
+                    dataType: "json",
+                    data: "{ 'prefix': '" + request.term + "'}",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        response($.map(data.d, function (item) {
+                            return {
+                                label: item.LastName + ' ' + item.FirstName[0] + '.' + item.MiddleName[0] + '. (' + item.id + ')',
+                                val: item.gid
+                            }
+                        }))
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            },
+            select: function (e, i) {
+                $("[id$=hfCustomerId]").val(i.item.val);
+            },
+            minLength: 1
+        });
+    });
+    </script>
     <title></title>
 </head>
 <body class="admin-body">
@@ -29,7 +65,8 @@
                     <input type="text" placeholder="По батькові" runat="server" id="mid_box"/>
                     <input type="text" placeholder="Логін" runat="server" id="login_box" />
                     <input type="text" placeholder="Пароль" runat="server" id="pass_box" />
-                    <input type="text" placeholder="ID вчителя" />
+                    <asp:TextBox ID="txtSearch" runat="server" />
+                    <asp:HiddenField ID="hfCustomerId" runat="server" />
                     <div class="login-form">
                         <asp:Button runat="server" OnClick="RegisterButton_Click" Text="Зареєструватися"></asp:Button>
                     </div>
