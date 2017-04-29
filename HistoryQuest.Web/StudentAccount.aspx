@@ -5,16 +5,30 @@
 
         <div id="primary"><div class="tab-content">
             <div class="main tab-pane fade in active" id="account">
-                <div class="card clearfix">
-                    <div class="clearfix">
+                <div class="card card header-settings clearfix">
+                    <div class="about-block">
+                        <h4>ПІБ:</h4>
+                        <h4>Прізвище Імя По батькові</h4>
+                    </div>
+                    <div class="about-block">
+                        <h4>Вчитель:</h4>
+                        <h4>TeacherName</h4>
+                    </div>
+                </div>
+                <div class="card statistics">
+                    <div class="small-header clearfix">
+                        <h2>Досягнення</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="main tab-pane fade" id="edit">
+                <div class="card header-settings clearfix">
                         <div>
                             <span>Профіль</span>
                         </div>
-                    </div>
                 </div>
                 <div class="card profile-settings">
                     <div>
-                        <form>
                             <fieldset class="form-fieldset">
                                 <label for="first_name" class="form-label">Ім'я</label>
                                 <input type="text" id="first_name" name="first_name" class="form-input" />
@@ -24,8 +38,8 @@
                                 <input type="text" id="last_name" name="last_name" class="form-input" />
                             </fieldset>
                             <fieldset class="form-fieldset">
-                                <label for="user_name" class="form-label">Нікнейм</label>
-                                <input type="text" id="user_name" name="user_name" class="form-input" />
+                                <label for="father_name" class="form-label">По батькові</label>
+                                <input type="text" id="father_name" name="father_name" class="form-input" />
                             </fieldset>
                             <fieldset class="form-fieldset">
                                 <label for="teacher_name" class="form-label">Вчитель</label>
@@ -36,11 +50,20 @@
                                 <textarea id="description" name="description" class="form-input"></textarea>
                             </fieldset>
                             <button type="submit" class="btn btn-info center">Зберегти</button>
-                        </form>
                     </div>
                 </div>
+                <div class="card password-settings">
+                    <fieldset class="form-fieldset">
+                                <label for="password" class="form-label">Новий пароль</label>
+                                <input type="password" id="password" name="password" class="form-input" />
+                            </fieldset>
+                            <fieldset class="form-fieldset">
+                                <label for="commit_password" class="form-label">Повторіть пароль</label>
+                                <input type="password" id="commit_password" name="commit_password" class="form-input" />
+                            </fieldset>
+                    <button type="submit" class="btn btn-info center">Змінити пароль</button>
+                </div>
             </div>
-            <div class="main tab-pane fade active" id="statistic">Статистика</div>
             </div>
         </div>
         <div id="secondary">
@@ -55,8 +78,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#statistic" data-toggle="pill">
-                            <i class="fa fa-pie-chart"></i><span>Статистика</span>
+                        <a href="#edit" data-toggle="pill">
+                            <i class="fa fa-pie-chart"></i><span>Редагувати профіль</span>
                         </a>
                     </li>
                 </ul>

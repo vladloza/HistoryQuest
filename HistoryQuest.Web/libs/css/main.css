@@ -228,8 +228,15 @@ img {
     background: #fff;
     box-shadow: 0 0 0 1px rgba(200, 215, 225, 0.5), 0 1px 2px #e9eff3;
 }
+.header-settings,
+.password-settings
+{
+    margin-top: 20px;
+}
 .form-label {
-    display: block;
+    padding: 0px 5px;
+    background: beige;
+    display:inline-block;
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 5px;
@@ -252,6 +259,10 @@ img {
 #primary {
     display: inline-block;
     width: calc(100% - 60px);
+}
+.statistics h2{
+    text-align: center;
+    margin: 0px;
 }
 #secondary {
     height: 100vh;
@@ -297,6 +308,14 @@ img {
     position: absolute;
     bottom: 14px;
     left: 20px;
+}
+.about-block h4 {
+    font-size: 14px;
+    display: inline-block;
+}
+.about-block h4:first-child {
+    background:#c4e0d4;
+    padding: 0px 5px;
 }
 @media (min-width: 768px) {
     .profile-name,
