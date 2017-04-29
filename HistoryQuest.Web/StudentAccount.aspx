@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeBehind="StudentAccount.aspx.cs" Inherits="HistoryQuest.StudentAccount" %>
-
+<%@Import Namespace="HistoryQuest.Domain" %>
 <asp:Content runat="server" ContentPlaceHolderID="ContentPlaceHolder">
     <div id="page">
 
@@ -69,7 +69,7 @@
         <div id="secondary">
             <div class="">
                 <div class="profile-name">
-                    <h2>UserName</h2>
+                    <h2><%= Repository.CurrentUser?.Face.FirstName %></h2>
                 </div>
                 <ul class="sidebar-menu">
                     <li class="active">

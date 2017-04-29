@@ -15,8 +15,8 @@
             <div class="logo-body">
                 <h2>Вітаємо на проекті <br />"Моя Україна"!</h2>
             </div>
-            <form class="login-form" runat="server">
-                <input type="text" placeholder="Логін" runat="server" id="log_box"/>
+            <form class="login-form" runat="server" onsubmit="return formValidation();">
+                <input type="text" placeholder="Пошта" runat="server" id="log_box"/>
                 <input type="password" placeholder="Пароль" runat="server" id="pass_box" />
                 <asp:Button runat="server" class="button" onclick="LoginButton_Click" Text="Увійти"></asp:Button>
             </form>
@@ -35,4 +35,21 @@
         </div>
     </div>
 </body>
+    <script type="text/javascript">
+        function formValidation() {
+            var valid = true;
+            if (document.getElementById('pass_box').value == '') {
+                valid = false;
+                document.getElementById('pass_box').style.border = '1px solid red';
+            }
+            else { document.getElementById('pass_box').style.border = ''; }
+            if (document.getElementById('log_box').value == '') {
+                valid = false;
+                document.getElementById('log_box').style.border = '1px solid red';
+            }
+            else { document.getElementById('log_box').style.border = ''; }
+
+            return valid;
+        };
+    </script>
 </html>
