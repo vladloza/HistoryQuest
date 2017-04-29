@@ -13,10 +13,10 @@
     <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/themes/blitzer/jquery-ui.css" rel="Stylesheet" type="text/css" />
     <script type="text/javascript">
         $(function () {
-        $("[id$=teachersBox]").autocomplete({
-            source: function (request, response) {
-                $.ajax({
-                    url: '<%=ResolveUrl("~/WebServices/WebService.asmx/GetTeachersByPrefix") %>',
+            $("[id$=teachersBox]").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '<%=ResolveUrl("~/WebServices/WebService.asmx/GetTeachersByPrefix") %>',
                     dataType: "json",
                     data: "{ 'prefix': '" + request.term + "'}",
                     type: "POST",
@@ -60,9 +60,9 @@
             </div>
             <form runat="server" class="views" onsubmit="return formValidation();">
                 <div id="pupil-view" style="display: none">
-                    <input type="text" placeholder="Прізвище" runat="server" id="sur_box" name="sur_box"/>
-                    <input type="text" placeholder="Ім'я" runat="server" id="name_box"/>
-                    <input type="text" placeholder="По батькові" runat="server" id="mid_box"/>
+                    <input type="text" placeholder="Прізвище" runat="server" id="sur_box" name="sur_box" />
+                    <input type="text" placeholder="Ім'я" runat="server" id="name_box" />
+                    <input type="text" placeholder="По батькові" runat="server" id="mid_box" />
                     <input type="text" placeholder="Пошта" runat="server" id="login_box" />
                     <input type="text" placeholder="Пароль" runat="server" id="pass_box" />
                     <asp:TextBox ID="teachersBox" placeholder="Вчитель (почніть вводити)" runat="server" />
@@ -79,6 +79,9 @@
                     </div>
                 </div>
             </form>
+            <div class="href-back">
+                <a href="Login.aspx" id="href-back">Назад</a>
+            </div>
         </div>
     </div>
     <script type="text/javascript">
@@ -96,6 +99,7 @@
                     teacherView.style.display = 'block';
                     break;
             }
+            document.getElementById('href-back').setAttribute('href', 'Registration.aspx');
         };
         function formValidation() {
             var valid = true;
@@ -123,11 +127,11 @@
                 document.getElementById('error_box').innerHTML = 'Заповніть обязкові поля!';
                 document.getElementById('error_box').style.color = "red";
             }
-            if (!validateEmail(document.getElementById('login_box').value)){
+            if (!validateEmail(document.getElementById('login_box').value)) {
                 valid = false;
                 document.getElementById('login_box').style.border = '1px solid red';
             }
-            else { document.getElementById('login_box').style.border = '';}
+            else { document.getElementById('login_box').style.border = ''; }
 
             return valid;
         };
