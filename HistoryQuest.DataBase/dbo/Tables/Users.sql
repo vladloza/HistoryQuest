@@ -5,7 +5,11 @@
     [Password]       NVARCHAR (256)   NOT NULL,
     [PasswordFormat] INT              CONSTRAINT [DF_Users_PasswordFormat] DEFAULT ((0)) NOT NULL,
     [PasswordSalt]   NVARCHAR (256)   NOT NULL,
+    [FaceGID]        UNIQUEIDENTIFIER NULL,
     CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED ([gid] ASC),
+    CONSTRAINT [FK_Users_Faces] FOREIGN KEY ([FaceGID]) REFERENCES [dbo].[Faces] ([gid]),
     CONSTRAINT [IX_Users_UserName] UNIQUE NONCLUSTERED ([UserName] ASC)
 );
+
+
 
