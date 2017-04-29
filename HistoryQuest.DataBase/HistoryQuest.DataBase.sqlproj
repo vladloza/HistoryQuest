@@ -59,6 +59,7 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
+    <Folder Include="Scripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\UsersInRoles.sql" />
@@ -74,5 +75,8 @@
     <Build Include="dbo\Tables\Faces.sql" />
     <Build Include="dbo\Tables\Comments.sql" />
     <Build Include="dbo\Tables\CheckPoints.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\PostDeployment.sql" />
   </ItemGroup>
 </Project>

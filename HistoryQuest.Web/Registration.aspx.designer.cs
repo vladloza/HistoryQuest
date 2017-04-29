@@ -58,22 +58,22 @@ namespace HistoryQuest {
         protected global::System.Web.UI.HtmlControls.HtmlInputText pass_box;
         
         /// <summary>
-        /// txtSearch control.
+        /// teachersBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSearch;
+        protected global::System.Web.UI.WebControls.TextBox teachersBox;
         
         /// <summary>
-        /// hfCustomerId control.
+        /// selectedTeacher control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfCustomerId;
+        protected global::System.Web.UI.WebControls.HiddenField selectedTeacher;
         
         /// <summary>
         /// error_box control.

@@ -22,7 +22,7 @@ namespace HistoryQuest.WebServices
         [WebMethod]
         public List<Face> GetTeachersByPrefix(string prefix)
         {
-            return Repository.CurrentDataContext.Faces.Where(f => f.IsTeacher && (f.LastName + " " + f.LastName[0]+"."+f.MiddleName[0]+". ("+f.id+")").Contains(prefix)).ToList();
+            return prefix.Length > 1 ? Repository.CurrentDataContext.Faces.Where(f => f.IsTeacher && (f.LastName + " " + f.LastName[0]+"."+f.MiddleName[0]+"."+f.id+"").Contains(prefix)).ToList() : null;
         }
     }
 }

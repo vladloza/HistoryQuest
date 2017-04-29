@@ -13,7 +13,7 @@
     <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/themes/blitzer/jquery-ui.css" rel="Stylesheet" type="text/css" />
     <script type="text/javascript">
         $(function () {
-        $("[id$=txtSearch]").autocomplete({
+        $("[id$=teachersBox]").autocomplete({
             source: function (request, response) {
                 $.ajax({
                     url: '<%=ResolveUrl("~/WebServices/WebService.asmx/GetTeachersByPrefix") %>',
@@ -38,7 +38,7 @@
                 });
             },
             select: function (e, i) {
-                $("[id$=hfCustomerId]").val(i.item.val);
+                $("[id$=selectedTeacher]").val(i.item.val);
             },
             minLength: 1
         });
@@ -65,8 +65,8 @@
                     <input type="text" placeholder="По батькові" runat="server" id="mid_box"/>
                     <input type="text" placeholder="Логін" runat="server" id="login_box" />
                     <input type="text" placeholder="Пароль" runat="server" id="pass_box" />
-                    <asp:TextBox ID="txtSearch" runat="server" />
-                    <asp:HiddenField ID="hfCustomerId" runat="server" />
+                    <asp:TextBox ID="teachersBox" runat="server" />
+                    <asp:HiddenField ID="selectedTeacher" runat="server" />
                     <div class="login-form">
                         <asp:Button runat="server" OnClick="RegisterButton_Click" Text="Зареєструватися"></asp:Button>
                     </div>

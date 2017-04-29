@@ -26,11 +26,11 @@ namespace HistoryQuest.Domain.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=VLADPC\\SQLEXPRESS;Initial Catalog=HistoryQuest;Integrated Security=Tr" +
-            "ue")]
-        public string HistoryQuestConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=VLADPC\\SQLEXPRESS;Initial Catalog=HistoryQuest.DataBase;Integrated Se" +
+            "curity=True")]
+        public string HistoryQuest_DataBaseConnectionString {
             get {
-                return ((string)(this["HistoryQuestConnectionString"]));
+                return ((string)(this["HistoryQuest_DataBaseConnectionString"]));
             }
         }
     }

@@ -21,7 +21,7 @@ namespace HistoryQuest
 
         protected void RegisterButton_Click(object sender, EventArgs e)
         {
-            User user = Repository.CurrentDataContext.GetUserByUserName(login_box.Value.ToString());
+            User user = Repository.CurrentDataContext.GetUserByUserName(login_box.Value);
             if (user == null)
             {
                 var salt = Defender.GenerateSalt();
@@ -31,14 +31,14 @@ namespace HistoryQuest
                     Face = new Face()
                     {
                         gid = Guid.NewGuid(),
-                        FirstName = name_box.Value.ToString(),
-                        LastName = sur_box.Value.ToString(),
+                        FirstName = name_box.Value,
+                        LastName = sur_box.Value,
                         IsTeacher = false,
-                        MiddleName = mid_box.Value.ToString()
+                        MiddleName = mid_box.Value
                     },
                     PasswordFormat = 1,
                     PasswordSalt = salt,
-                    Password = Defender.ComputeHash(pass_box.Value.ToString(), salt),
+                    Password = Defender.ComputeHash(pass_box.Value, salt),
                     UserName = login_box.Value.ToString(),
                     UsersInRoles = new System.Data.Linq.EntitySet<UsersInRole>()
                     {
@@ -50,6 +50,17 @@ namespace HistoryQuest
                         }
                     }
                 };
+
+                if (!string.IsNullOrEmpty(selectedTeacher.Value))
+                {
+                    var request = new PupilsToTeachersRequest()
+                    {
+                        PupilsGID = user.FaceGID.Value,
+                        TeacherGID = new Guid(selectedTeacher.Value)
+                    };
+
+                    Repository.CurrentDataContext.PupilsToTeachersRequests.InsertOnSubmit(request);
+                }
 
                 Repository.CurrentDataContext.Users.InsertOnSubmit(user);
                 Repository.CurrentDataContext.SubmitChanges();

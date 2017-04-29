@@ -22,7 +22,7 @@ namespace HistoryQuest.Domain
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="HistoryQuest")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="HistoryQuest.DataBase")]
 	public partial class HistoryQuestDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -33,9 +33,9 @@ namespace HistoryQuest.Domain
     partial void InsertCheckPoint(CheckPoint instance);
     partial void UpdateCheckPoint(CheckPoint instance);
     partial void DeleteCheckPoint(CheckPoint instance);
-    partial void InsertUser(User instance);
-    partial void UpdateUser(User instance);
-    partial void DeleteUser(User instance);
+    partial void InsertUsersInRole(UsersInRole instance);
+    partial void UpdateUsersInRole(UsersInRole instance);
+    partial void DeleteUsersInRole(UsersInRole instance);
     partial void InsertComment(Comment instance);
     partial void UpdateComment(Comment instance);
     partial void DeleteComment(Comment instance);
@@ -66,13 +66,13 @@ namespace HistoryQuest.Domain
     partial void InsertTry(Try instance);
     partial void UpdateTry(Try instance);
     partial void DeleteTry(Try instance);
-    partial void InsertUsersInRole(UsersInRole instance);
-    partial void UpdateUsersInRole(UsersInRole instance);
-    partial void DeleteUsersInRole(UsersInRole instance);
+    partial void InsertUser(User instance);
+    partial void UpdateUser(User instance);
+    partial void DeleteUser(User instance);
     #endregion
 		
 		public HistoryQuestDataContext() : 
-				base(global::HistoryQuest.Domain.Properties.Settings.Default.HistoryQuestConnectionString, mappingSource)
+				base(global::HistoryQuest.Domain.Properties.Settings.Default.HistoryQuest_DataBaseConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -109,11 +109,11 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		public System.Data.Linq.Table<User> Users
+		public System.Data.Linq.Table<UsersInRole> UsersInRoles
 		{
 			get
 			{
-				return this.GetTable<User>();
+				return this.GetTable<UsersInRole>();
 			}
 		}
 		
@@ -197,11 +197,11 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		public System.Data.Linq.Table<UsersInRole> UsersInRoles
+		public System.Data.Linq.Table<User> Users
 		{
 			get
 			{
-				return this.GetTable<UsersInRole>();
+				return this.GetTable<User>();
 			}
 		}
 	}
@@ -622,77 +622,47 @@ namespace HistoryQuest.Domain
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
-	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UsersInRoles")]
+	public partial class UsersInRole : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private long _id;
+		private int _id;
 		
 		private System.Guid _gid;
 		
-		private string _UserName;
+		private System.Guid _UserGID;
 		
-		private string _Password;
+		private System.Guid _RoleGID;
 		
-		private int _PasswordFormat;
+		private EntityRef<Role> _Role;
 		
-		private string _PasswordSalt;
-		
-		private System.Nullable<System.Guid> _FaceGID;
-		
-		private EntitySet<CheckPoint> _CheckPoints;
-		
-		private EntitySet<Like> _Likes;
-		
-		private EntitySet<Quest> _Quests;
-		
-		private EntitySet<Task> _Tasks;
-		
-		private EntitySet<TasksToTry> _TasksToTries;
-		
-		private EntitySet<Try> _Tries;
-		
-		private EntitySet<UsersInRole> _UsersInRoles;
-		
-		private EntityRef<Face> _Face;
+		private EntityRef<User> _User;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnidChanging(long value);
+    partial void OnidChanging(int value);
     partial void OnidChanged();
     partial void OngidChanging(System.Guid value);
     partial void OngidChanged();
-    partial void OnUserNameChanging(string value);
-    partial void OnUserNameChanged();
-    partial void OnPasswordChanging(string value);
-    partial void OnPasswordChanged();
-    partial void OnPasswordFormatChanging(int value);
-    partial void OnPasswordFormatChanged();
-    partial void OnPasswordSaltChanging(string value);
-    partial void OnPasswordSaltChanged();
-    partial void OnFaceGIDChanging(System.Nullable<System.Guid> value);
-    partial void OnFaceGIDChanged();
+    partial void OnUserGIDChanging(System.Guid value);
+    partial void OnUserGIDChanged();
+    partial void OnRoleGIDChanging(System.Guid value);
+    partial void OnRoleGIDChanged();
     #endregion
 		
-		public User()
+		public UsersInRole()
 		{
-			this._CheckPoints = new EntitySet<CheckPoint>(new Action<CheckPoint>(this.attach_CheckPoints), new Action<CheckPoint>(this.detach_CheckPoints));
-			this._Likes = new EntitySet<Like>(new Action<Like>(this.attach_Likes), new Action<Like>(this.detach_Likes));
-			this._Quests = new EntitySet<Quest>(new Action<Quest>(this.attach_Quests), new Action<Quest>(this.detach_Quests));
-			this._Tasks = new EntitySet<Task>(new Action<Task>(this.attach_Tasks), new Action<Task>(this.detach_Tasks));
-			this._TasksToTries = new EntitySet<TasksToTry>(new Action<TasksToTry>(this.attach_TasksToTries), new Action<TasksToTry>(this.detach_TasksToTries));
-			this._Tries = new EntitySet<Try>(new Action<Try>(this.attach_Tries), new Action<Try>(this.detach_Tries));
-			this._UsersInRoles = new EntitySet<UsersInRole>(new Action<UsersInRole>(this.attach_UsersInRoles), new Action<UsersInRole>(this.detach_UsersInRoles));
-			this._Face = default(EntityRef<Face>);
+			this._Role = default(EntityRef<Role>);
+			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="BigInt NOT NULL IDENTITY", IsDbGenerated=true)]
-		public long id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int id
 		{
 			get
 			{
@@ -731,231 +701,118 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
-		public string UserName
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserGID", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid UserGID
 		{
 			get
 			{
-				return this._UserName;
+				return this._UserGID;
 			}
 			set
 			{
-				if ((this._UserName != value))
+				if ((this._UserGID != value))
 				{
-					this.OnUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._UserName = value;
-					this.SendPropertyChanged("UserName");
-					this.OnUserNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
-		public string Password
-		{
-			get
-			{
-				return this._Password;
-			}
-			set
-			{
-				if ((this._Password != value))
-				{
-					this.OnPasswordChanging(value);
-					this.SendPropertyChanging();
-					this._Password = value;
-					this.SendPropertyChanged("Password");
-					this.OnPasswordChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordFormat", DbType="Int NOT NULL")]
-		public int PasswordFormat
-		{
-			get
-			{
-				return this._PasswordFormat;
-			}
-			set
-			{
-				if ((this._PasswordFormat != value))
-				{
-					this.OnPasswordFormatChanging(value);
-					this.SendPropertyChanging();
-					this._PasswordFormat = value;
-					this.SendPropertyChanged("PasswordFormat");
-					this.OnPasswordFormatChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordSalt", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
-		public string PasswordSalt
-		{
-			get
-			{
-				return this._PasswordSalt;
-			}
-			set
-			{
-				if ((this._PasswordSalt != value))
-				{
-					this.OnPasswordSaltChanging(value);
-					this.SendPropertyChanging();
-					this._PasswordSalt = value;
-					this.SendPropertyChanged("PasswordSalt");
-					this.OnPasswordSaltChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FaceGID", DbType="UniqueIdentifier")]
-		public System.Nullable<System.Guid> FaceGID
-		{
-			get
-			{
-				return this._FaceGID;
-			}
-			set
-			{
-				if ((this._FaceGID != value))
-				{
-					if (this._Face.HasLoadedOrAssignedValue)
+					if (this._User.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnFaceGIDChanging(value);
+					this.OnUserGIDChanging(value);
 					this.SendPropertyChanging();
-					this._FaceGID = value;
-					this.SendPropertyChanged("FaceGID");
-					this.OnFaceGIDChanged();
+					this._UserGID = value;
+					this.SendPropertyChanged("UserGID");
+					this.OnUserGIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_CheckPoint", Storage="_CheckPoints", ThisKey="gid", OtherKey="AuthorGID")]
-		public EntitySet<CheckPoint> CheckPoints
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleGID", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid RoleGID
 		{
 			get
 			{
-				return this._CheckPoints;
+				return this._RoleGID;
 			}
 			set
 			{
-				this._CheckPoints.Assign(value);
+				if ((this._RoleGID != value))
+				{
+					if (this._Role.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRoleGIDChanging(value);
+					this.SendPropertyChanging();
+					this._RoleGID = value;
+					this.SendPropertyChanged("RoleGID");
+					this.OnRoleGIDChanged();
+				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Like", Storage="_Likes", ThisKey="gid", OtherKey="UserGID")]
-		public EntitySet<Like> Likes
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_UsersInRole", Storage="_Role", ThisKey="RoleGID", OtherKey="gid", IsForeignKey=true)]
+		public Role Role
 		{
 			get
 			{
-				return this._Likes;
+				return this._Role.Entity;
 			}
 			set
 			{
-				this._Likes.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Quest", Storage="_Quests", ThisKey="gid", OtherKey="AuthorGID")]
-		public EntitySet<Quest> Quests
-		{
-			get
-			{
-				return this._Quests;
-			}
-			set
-			{
-				this._Quests.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Task", Storage="_Tasks", ThisKey="gid", OtherKey="AuthorGID")]
-		public EntitySet<Task> Tasks
-		{
-			get
-			{
-				return this._Tasks;
-			}
-			set
-			{
-				this._Tasks.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_TasksToTry", Storage="_TasksToTries", ThisKey="gid", OtherKey="UserGID")]
-		public EntitySet<TasksToTry> TasksToTries
-		{
-			get
-			{
-				return this._TasksToTries;
-			}
-			set
-			{
-				this._TasksToTries.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Try", Storage="_Tries", ThisKey="gid", OtherKey="UserGID")]
-		public EntitySet<Try> Tries
-		{
-			get
-			{
-				return this._Tries;
-			}
-			set
-			{
-				this._Tries.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UsersInRole", Storage="_UsersInRoles", ThisKey="gid", OtherKey="UserGID")]
-		public EntitySet<UsersInRole> UsersInRoles
-		{
-			get
-			{
-				return this._UsersInRoles;
-			}
-			set
-			{
-				this._UsersInRoles.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Face_User", Storage="_Face", ThisKey="FaceGID", OtherKey="gid", IsForeignKey=true)]
-		public Face Face
-		{
-			get
-			{
-				return this._Face.Entity;
-			}
-			set
-			{
-				Face previousValue = this._Face.Entity;
+				Role previousValue = this._Role.Entity;
 				if (((previousValue != value) 
-							|| (this._Face.HasLoadedOrAssignedValue == false)))
+							|| (this._Role.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Face.Entity = null;
-						previousValue.Users.Remove(this);
+						this._Role.Entity = null;
+						previousValue.UsersInRoles.Remove(this);
 					}
-					this._Face.Entity = value;
+					this._Role.Entity = value;
 					if ((value != null))
 					{
-						value.Users.Add(this);
-						this._FaceGID = value.gid;
+						value.UsersInRoles.Add(this);
+						this._RoleGID = value.gid;
 					}
 					else
 					{
-						this._FaceGID = default(Nullable<System.Guid>);
+						this._RoleGID = default(System.Guid);
 					}
-					this.SendPropertyChanged("Face");
+					this.SendPropertyChanged("Role");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UsersInRole", Storage="_User", ThisKey="UserGID", OtherKey="gid", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.UsersInRoles.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.UsersInRoles.Add(this);
+						this._UserGID = value.gid;
+					}
+					else
+					{
+						this._UserGID = default(System.Guid);
+					}
+					this.SendPropertyChanged("User");
 				}
 			}
 		}
@@ -978,90 +835,6 @@ namespace HistoryQuest.Domain
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_CheckPoints(CheckPoint entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_CheckPoints(CheckPoint entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
-		}
-		
-		private void attach_Likes(Like entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_Likes(Like entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
-		}
-		
-		private void attach_Quests(Quest entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_Quests(Quest entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
-		}
-		
-		private void attach_Tasks(Task entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_Tasks(Task entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
-		}
-		
-		private void attach_TasksToTries(TasksToTry entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_TasksToTries(TasksToTry entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
-		}
-		
-		private void attach_Tries(Try entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_Tries(Try entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
-		}
-		
-		private void attach_UsersInRoles(UsersInRole entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_UsersInRoles(UsersInRole entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
 		}
 	}
 	
@@ -1286,15 +1059,11 @@ namespace HistoryQuest.Domain
 		
 		private bool _IsTeacher;
 		
-		private EntitySet<User> _Users;
-		
-		private EntitySet<Face> _Faces;
-		
 		private EntitySet<PupilsToTeachersRequest> _PupilsToTeachersRequests;
 		
 		private EntitySet<PupilsToTeachersRequest> _PupilsToTeachersRequests1;
 		
-		private EntityRef<Face> _Face1;
+		private EntitySet<User> _Users;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1320,11 +1089,9 @@ namespace HistoryQuest.Domain
 		
 		public Face()
 		{
-			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
-			this._Faces = new EntitySet<Face>(new Action<Face>(this.attach_Faces), new Action<Face>(this.detach_Faces));
 			this._PupilsToTeachersRequests = new EntitySet<PupilsToTeachersRequest>(new Action<PupilsToTeachersRequest>(this.attach_PupilsToTeachersRequests), new Action<PupilsToTeachersRequest>(this.detach_PupilsToTeachersRequests));
 			this._PupilsToTeachersRequests1 = new EntitySet<PupilsToTeachersRequest>(new Action<PupilsToTeachersRequest>(this.attach_PupilsToTeachersRequests1), new Action<PupilsToTeachersRequest>(this.detach_PupilsToTeachersRequests1));
-			this._Face1 = default(EntityRef<Face>);
+			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
 			OnCreated();
 		}
 		
@@ -1439,10 +1206,6 @@ namespace HistoryQuest.Domain
 			{
 				if ((this._TeacherGID != value))
 				{
-					if (this._Face1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnTeacherGIDChanging(value);
 					this.SendPropertyChanging();
 					this._TeacherGID = value;
@@ -1492,32 +1255,6 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Face_User", Storage="_Users", ThisKey="gid", OtherKey="FaceGID")]
-		public EntitySet<User> Users
-		{
-			get
-			{
-				return this._Users;
-			}
-			set
-			{
-				this._Users.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Face_Face", Storage="_Faces", ThisKey="gid", OtherKey="TeacherGID")]
-		public EntitySet<Face> Faces
-		{
-			get
-			{
-				return this._Faces;
-			}
-			set
-			{
-				this._Faces.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Face_PupilsToTeachersRequest", Storage="_PupilsToTeachersRequests", ThisKey="gid", OtherKey="PupilsGID")]
 		public EntitySet<PupilsToTeachersRequest> PupilsToTeachersRequests
 		{
@@ -1544,37 +1281,16 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Face_Face", Storage="_Face1", ThisKey="TeacherGID", OtherKey="gid", IsForeignKey=true)]
-		public Face Face1
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Face_User", Storage="_Users", ThisKey="gid", OtherKey="FaceGID")]
+		public EntitySet<User> Users
 		{
 			get
 			{
-				return this._Face1.Entity;
+				return this._Users;
 			}
 			set
 			{
-				Face previousValue = this._Face1.Entity;
-				if (((previousValue != value) 
-							|| (this._Face1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Face1.Entity = null;
-						previousValue.Faces.Remove(this);
-					}
-					this._Face1.Entity = value;
-					if ((value != null))
-					{
-						value.Faces.Add(this);
-						this._TeacherGID = value.gid;
-					}
-					else
-					{
-						this._TeacherGID = default(Nullable<System.Guid>);
-					}
-					this.SendPropertyChanged("Face1");
-				}
+				this._Users.Assign(value);
 			}
 		}
 		
@@ -1596,30 +1312,6 @@ namespace HistoryQuest.Domain
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Users(User entity)
-		{
-			this.SendPropertyChanging();
-			entity.Face = this;
-		}
-		
-		private void detach_Users(User entity)
-		{
-			this.SendPropertyChanging();
-			entity.Face = null;
-		}
-		
-		private void attach_Faces(Face entity)
-		{
-			this.SendPropertyChanging();
-			entity.Face1 = this;
-		}
-		
-		private void detach_Faces(Face entity)
-		{
-			this.SendPropertyChanging();
-			entity.Face1 = null;
 		}
 		
 		private void attach_PupilsToTeachersRequests(PupilsToTeachersRequest entity)
@@ -1645,6 +1337,18 @@ namespace HistoryQuest.Domain
 			this.SendPropertyChanging();
 			entity.Face1 = null;
 		}
+		
+		private void attach_Users(User entity)
+		{
+			this.SendPropertyChanging();
+			entity.Face = this;
+		}
+		
+		private void detach_Users(User entity)
+		{
+			this.SendPropertyChanging();
+			entity.Face = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Likes")]
@@ -1661,9 +1365,9 @@ namespace HistoryQuest.Domain
 		
 		private System.Guid _TaskGID;
 		
-		private EntityRef<User> _User;
-		
 		private EntityRef<Task> _Task;
+		
+		private EntityRef<User> _User;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1681,8 +1385,8 @@ namespace HistoryQuest.Domain
 		
 		public Like()
 		{
-			this._User = default(EntityRef<User>);
 			this._Task = default(EntityRef<Task>);
+			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
 		
@@ -1774,40 +1478,6 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Like", Storage="_User", ThisKey="UserGID", OtherKey="gid", IsForeignKey=true)]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Likes.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Likes.Add(this);
-						this._UserGID = value.gid;
-					}
-					else
-					{
-						this._UserGID = default(System.Guid);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Task_Like", Storage="_Task", ThisKey="TaskGID", OtherKey="gid", IsForeignKey=true)]
 		public Task Task
 		{
@@ -1838,6 +1508,40 @@ namespace HistoryQuest.Domain
 						this._TaskGID = default(System.Guid);
 					}
 					this.SendPropertyChanged("Task");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Like", Storage="_User", ThisKey="UserGID", OtherKey="gid", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Likes.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Likes.Add(this);
+						this._UserGID = value.gid;
+					}
+					else
+					{
+						this._UserGID = default(System.Guid);
+					}
+					this.SendPropertyChanged("User");
 				}
 			}
 		}
@@ -2498,9 +2202,9 @@ namespace HistoryQuest.Domain
 		
 		private EntityRef<CheckPoint> _CheckPoint;
 		
-		private EntityRef<User> _User;
-		
 		private EntityRef<TaskType> _TaskType;
+		
+		private EntityRef<User> _User;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2528,8 +2232,8 @@ namespace HistoryQuest.Domain
 		{
 			this._Likes = new EntitySet<Like>(new Action<Like>(this.attach_Likes), new Action<Like>(this.detach_Likes));
 			this._CheckPoint = default(EntityRef<CheckPoint>);
-			this._User = default(EntityRef<User>);
 			this._TaskType = default(EntityRef<TaskType>);
+			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
 		
@@ -2752,40 +2456,6 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Task", Storage="_User", ThisKey="AuthorGID", OtherKey="gid", IsForeignKey=true)]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Tasks.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Tasks.Add(this);
-						this._AuthorGID = value.gid;
-					}
-					else
-					{
-						this._AuthorGID = default(Nullable<System.Guid>);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TaskType_Task", Storage="_TaskType", ThisKey="TaskTypeGID", OtherKey="gid", IsForeignKey=true)]
 		public TaskType TaskType
 		{
@@ -2816,6 +2486,40 @@ namespace HistoryQuest.Domain
 						this._TaskTypeGID = default(System.Guid);
 					}
 					this.SendPropertyChanged("TaskType");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Task", Storage="_User", ThisKey="AuthorGID", OtherKey="gid", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Tasks.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Tasks.Add(this);
+						this._AuthorGID = value.gid;
+					}
+					else
+					{
+						this._AuthorGID = default(Nullable<System.Guid>);
+					}
+					this.SendPropertyChanged("User");
 				}
 			}
 		}
@@ -2871,9 +2575,9 @@ namespace HistoryQuest.Domain
 		
 		private long _ElapsedTime;
 		
-		private EntityRef<User> _User;
-		
 		private EntityRef<Try> _Try;
+		
+		private EntityRef<User> _User;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2895,8 +2599,8 @@ namespace HistoryQuest.Domain
 		
 		public TasksToTry()
 		{
-			this._User = default(EntityRef<User>);
 			this._Try = default(EntityRef<Try>);
+			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
 		
@@ -3028,40 +2732,6 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_TasksToTry", Storage="_User", ThisKey="UserGID", OtherKey="gid", IsForeignKey=true)]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.TasksToTries.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.TasksToTries.Add(this);
-						this._UserGID = value.gid;
-					}
-					else
-					{
-						this._UserGID = default(System.Guid);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Try_TasksToTry", Storage="_Try", ThisKey="TryGID", OtherKey="gid", IsForeignKey=true)]
 		public Try Try
 		{
@@ -3092,6 +2762,40 @@ namespace HistoryQuest.Domain
 						this._TryGID = default(System.Guid);
 					}
 					this.SendPropertyChanged("Try");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_TasksToTry", Storage="_User", ThisKey="UserGID", OtherKey="gid", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.TasksToTries.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.TasksToTries.Add(this);
+						this._UserGID = value.gid;
+					}
+					else
+					{
+						this._UserGID = default(System.Guid);
+					}
+					this.SendPropertyChanged("User");
 				}
 			}
 		}
@@ -3523,47 +3227,77 @@ namespace HistoryQuest.Domain
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UsersInRoles")]
-	public partial class UsersInRole : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
+	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _id;
+		private long _id;
 		
 		private System.Guid _gid;
 		
-		private System.Guid _UserGID;
+		private string _UserName;
 		
-		private System.Guid _RoleGID;
+		private string _Password;
 		
-		private EntityRef<Role> _Role;
+		private int _PasswordFormat;
 		
-		private EntityRef<User> _User;
+		private string _PasswordSalt;
+		
+		private System.Nullable<System.Guid> _FaceGID;
+		
+		private EntitySet<CheckPoint> _CheckPoints;
+		
+		private EntitySet<UsersInRole> _UsersInRoles;
+		
+		private EntitySet<Like> _Likes;
+		
+		private EntitySet<Quest> _Quests;
+		
+		private EntitySet<Task> _Tasks;
+		
+		private EntitySet<TasksToTry> _TasksToTries;
+		
+		private EntitySet<Try> _Tries;
+		
+		private EntityRef<Face> _Face;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnidChanging(int value);
+    partial void OnidChanging(long value);
     partial void OnidChanged();
     partial void OngidChanging(System.Guid value);
     partial void OngidChanged();
-    partial void OnUserGIDChanging(System.Guid value);
-    partial void OnUserGIDChanged();
-    partial void OnRoleGIDChanging(System.Guid value);
-    partial void OnRoleGIDChanged();
+    partial void OnUserNameChanging(string value);
+    partial void OnUserNameChanged();
+    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanged();
+    partial void OnPasswordFormatChanging(int value);
+    partial void OnPasswordFormatChanged();
+    partial void OnPasswordSaltChanging(string value);
+    partial void OnPasswordSaltChanged();
+    partial void OnFaceGIDChanging(System.Nullable<System.Guid> value);
+    partial void OnFaceGIDChanged();
     #endregion
 		
-		public UsersInRole()
+		public User()
 		{
-			this._Role = default(EntityRef<Role>);
-			this._User = default(EntityRef<User>);
+			this._CheckPoints = new EntitySet<CheckPoint>(new Action<CheckPoint>(this.attach_CheckPoints), new Action<CheckPoint>(this.detach_CheckPoints));
+			this._UsersInRoles = new EntitySet<UsersInRole>(new Action<UsersInRole>(this.attach_UsersInRoles), new Action<UsersInRole>(this.detach_UsersInRoles));
+			this._Likes = new EntitySet<Like>(new Action<Like>(this.attach_Likes), new Action<Like>(this.detach_Likes));
+			this._Quests = new EntitySet<Quest>(new Action<Quest>(this.attach_Quests), new Action<Quest>(this.detach_Quests));
+			this._Tasks = new EntitySet<Task>(new Action<Task>(this.attach_Tasks), new Action<Task>(this.detach_Tasks));
+			this._TasksToTries = new EntitySet<TasksToTry>(new Action<TasksToTry>(this.attach_TasksToTries), new Action<TasksToTry>(this.detach_TasksToTries));
+			this._Tries = new EntitySet<Try>(new Action<Try>(this.attach_Tries), new Action<Try>(this.detach_Tries));
+			this._Face = default(EntityRef<Face>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
-		public int id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="BigInt NOT NULL IDENTITY", IsDbGenerated=true)]
+		public long id
 		{
 			get
 			{
@@ -3602,118 +3336,231 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserGID", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid UserGID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		public string UserName
 		{
 			get
 			{
-				return this._UserGID;
+				return this._UserName;
 			}
 			set
 			{
-				if ((this._UserGID != value))
+				if ((this._UserName != value))
 				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUserGIDChanging(value);
+					this.OnUserNameChanging(value);
 					this.SendPropertyChanging();
-					this._UserGID = value;
-					this.SendPropertyChanged("UserGID");
-					this.OnUserGIDChanged();
+					this._UserName = value;
+					this.SendPropertyChanged("UserName");
+					this.OnUserNameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleGID", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid RoleGID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		public string Password
 		{
 			get
 			{
-				return this._RoleGID;
+				return this._Password;
 			}
 			set
 			{
-				if ((this._RoleGID != value))
+				if ((this._Password != value))
 				{
-					if (this._Role.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnRoleGIDChanging(value);
+					this.OnPasswordChanging(value);
 					this.SendPropertyChanging();
-					this._RoleGID = value;
-					this.SendPropertyChanged("RoleGID");
-					this.OnRoleGIDChanged();
+					this._Password = value;
+					this.SendPropertyChanged("Password");
+					this.OnPasswordChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_UsersInRole", Storage="_Role", ThisKey="RoleGID", OtherKey="gid", IsForeignKey=true)]
-		public Role Role
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordFormat", DbType="Int NOT NULL")]
+		public int PasswordFormat
 		{
 			get
 			{
-				return this._Role.Entity;
+				return this._PasswordFormat;
 			}
 			set
 			{
-				Role previousValue = this._Role.Entity;
+				if ((this._PasswordFormat != value))
+				{
+					this.OnPasswordFormatChanging(value);
+					this.SendPropertyChanging();
+					this._PasswordFormat = value;
+					this.SendPropertyChanged("PasswordFormat");
+					this.OnPasswordFormatChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordSalt", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		public string PasswordSalt
+		{
+			get
+			{
+				return this._PasswordSalt;
+			}
+			set
+			{
+				if ((this._PasswordSalt != value))
+				{
+					this.OnPasswordSaltChanging(value);
+					this.SendPropertyChanging();
+					this._PasswordSalt = value;
+					this.SendPropertyChanged("PasswordSalt");
+					this.OnPasswordSaltChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FaceGID", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> FaceGID
+		{
+			get
+			{
+				return this._FaceGID;
+			}
+			set
+			{
+				if ((this._FaceGID != value))
+				{
+					if (this._Face.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFaceGIDChanging(value);
+					this.SendPropertyChanging();
+					this._FaceGID = value;
+					this.SendPropertyChanged("FaceGID");
+					this.OnFaceGIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_CheckPoint", Storage="_CheckPoints", ThisKey="gid", OtherKey="AuthorGID")]
+		public EntitySet<CheckPoint> CheckPoints
+		{
+			get
+			{
+				return this._CheckPoints;
+			}
+			set
+			{
+				this._CheckPoints.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UsersInRole", Storage="_UsersInRoles", ThisKey="gid", OtherKey="UserGID")]
+		public EntitySet<UsersInRole> UsersInRoles
+		{
+			get
+			{
+				return this._UsersInRoles;
+			}
+			set
+			{
+				this._UsersInRoles.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Like", Storage="_Likes", ThisKey="gid", OtherKey="UserGID")]
+		public EntitySet<Like> Likes
+		{
+			get
+			{
+				return this._Likes;
+			}
+			set
+			{
+				this._Likes.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Quest", Storage="_Quests", ThisKey="gid", OtherKey="AuthorGID")]
+		public EntitySet<Quest> Quests
+		{
+			get
+			{
+				return this._Quests;
+			}
+			set
+			{
+				this._Quests.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Task", Storage="_Tasks", ThisKey="gid", OtherKey="AuthorGID")]
+		public EntitySet<Task> Tasks
+		{
+			get
+			{
+				return this._Tasks;
+			}
+			set
+			{
+				this._Tasks.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_TasksToTry", Storage="_TasksToTries", ThisKey="gid", OtherKey="UserGID")]
+		public EntitySet<TasksToTry> TasksToTries
+		{
+			get
+			{
+				return this._TasksToTries;
+			}
+			set
+			{
+				this._TasksToTries.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Try", Storage="_Tries", ThisKey="gid", OtherKey="UserGID")]
+		public EntitySet<Try> Tries
+		{
+			get
+			{
+				return this._Tries;
+			}
+			set
+			{
+				this._Tries.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Face_User", Storage="_Face", ThisKey="FaceGID", OtherKey="gid", IsForeignKey=true, DeleteRule="CASCADE")]
+		public Face Face
+		{
+			get
+			{
+				return this._Face.Entity;
+			}
+			set
+			{
+				Face previousValue = this._Face.Entity;
 				if (((previousValue != value) 
-							|| (this._Role.HasLoadedOrAssignedValue == false)))
+							|| (this._Face.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Role.Entity = null;
-						previousValue.UsersInRoles.Remove(this);
+						this._Face.Entity = null;
+						previousValue.Users.Remove(this);
 					}
-					this._Role.Entity = value;
+					this._Face.Entity = value;
 					if ((value != null))
 					{
-						value.UsersInRoles.Add(this);
-						this._RoleGID = value.gid;
+						value.Users.Add(this);
+						this._FaceGID = value.gid;
 					}
 					else
 					{
-						this._RoleGID = default(System.Guid);
+						this._FaceGID = default(Nullable<System.Guid>);
 					}
-					this.SendPropertyChanged("Role");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UsersInRole", Storage="_User", ThisKey="UserGID", OtherKey="gid", IsForeignKey=true)]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.UsersInRoles.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.UsersInRoles.Add(this);
-						this._UserGID = value.gid;
-					}
-					else
-					{
-						this._UserGID = default(System.Guid);
-					}
-					this.SendPropertyChanged("User");
+					this.SendPropertyChanged("Face");
 				}
 			}
 		}
@@ -3736,6 +3583,90 @@ namespace HistoryQuest.Domain
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_CheckPoints(CheckPoint entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_CheckPoints(CheckPoint entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_UsersInRoles(UsersInRole entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_UsersInRoles(UsersInRole entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_Likes(Like entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Likes(Like entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_Quests(Quest entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Quests(Quest entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_Tasks(Task entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Tasks(Task entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_TasksToTries(TasksToTry entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_TasksToTries(TasksToTry entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_Tries(Try entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Tries(Try entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
 		}
 	}
 }
