@@ -58,7 +58,7 @@
                     <button onclick="showControl('pupil')">Учень</button>
                 </div>
             </div>
-            <form name="regForm" runat="server" class="views" onsubmit="return formValidation();">
+            <form runat="server" class="views" onsubmit="return formValidation();">
                 <div id="pupil-view" style="display: none">
                     <input type="text" placeholder="Прізвище" runat="server" id="sur_box" name="sur_box"/>
                     <input type="text" placeholder="Ім'я" runat="server" id="name_box"/>
