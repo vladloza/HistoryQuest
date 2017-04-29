@@ -103,6 +103,7 @@
     <Content Include="Quest\Quest.aspx" />
     <Content Include="Quest\Scripts\QuestMap.js" />
     <Content Include="Registration.aspx" />
+    <Content Include="StudentAccount.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +162,13 @@
     </Compile>
     <Compile Include="Registration.aspx.designer.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StudentAccount.aspx.cs">
+      <DependentUpon>StudentAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StudentAccount.aspx.designer.cs">
+      <DependentUpon>StudentAccount.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

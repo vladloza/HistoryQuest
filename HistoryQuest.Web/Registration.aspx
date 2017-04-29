@@ -42,11 +42,17 @@
                     </div>
                 </div>
             </form>
+            <div class="href-back">
+                            <a href="Login.aspx" id="href-back">
+                    Назад
+                </a>
+                </div>
         </div>
     </div>
     <script type="text/javascript">
         function showControl(who) {
             var chooseButtons = document.getElementById('chooseButtons');
+
             chooseButtons.style.display = 'none';
 
             switch (who) {
@@ -59,6 +65,7 @@
                     teacherView.style.display = 'block';
                     break;
             }
+            document.getElementById('href-back').setAttribute('href', 'Registration.aspx');
         }
     </script>
 </body>
