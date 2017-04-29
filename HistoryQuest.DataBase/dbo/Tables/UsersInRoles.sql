@@ -5,6 +5,8 @@
     [RoleGID] UNIQUEIDENTIFIER NOT NULL,
     CONSTRAINT [PK_UsersInRoles] PRIMARY KEY CLUSTERED ([gid] ASC),
     CONSTRAINT [FK_UsersInRoles_Roles] FOREIGN KEY ([RoleGID]) REFERENCES [dbo].[Roles] ([gid]),
-    CONSTRAINT [FK_UsersInRoles_Users] FOREIGN KEY ([UserGID]) REFERENCES [dbo].[Users] ([gid])
+    CONSTRAINT [FK_UsersInRoles_Users] FOREIGN KEY ([UserGID]) REFERENCES [dbo].[Users] ([gid]) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+
 

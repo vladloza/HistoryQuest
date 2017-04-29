@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="libs/css/main.css" />
 </head>
 <body>
+    <form id="MainForm" runat="server">
     <header class="site-header">
         <div class="navbar" role="navigation" style="margin: 0px;">
             <div class="quest-nav">
@@ -31,7 +32,7 @@
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
                         <li><a href="#">Особистий кабінет</a></li>
                         <li role="presentation" class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i>Вийти</a></li>
+                        <li><asp:LinkButton runat="server" OnClick="ExitButton_Click"><i class="fa fa-sign-out" aria-hidden="true"></i>Вийти</asp:LinkButton></li>
                     </ul>
                 </div>
                 <div class="nav-wrapper ">
@@ -47,7 +48,6 @@
             </div>
         </div>
     </header>
-    <form id="MainForm" runat="server">
         <div id="MainDiv">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server">
             </asp:ContentPlaceHolder>

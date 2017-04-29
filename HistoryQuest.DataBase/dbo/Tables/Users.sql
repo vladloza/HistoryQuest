@@ -7,9 +7,11 @@
     [PasswordSalt]   NVARCHAR (256)   NOT NULL,
     [FaceGID]        UNIQUEIDENTIFIER NULL,
     CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED ([gid] ASC),
-    CONSTRAINT [FK_Users_Faces] FOREIGN KEY ([FaceGID]) REFERENCES [dbo].[Faces] ([gid]),
+    CONSTRAINT [FK_Users_Faces] FOREIGN KEY ([FaceGID]) REFERENCES [dbo].[Faces] ([gid]) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT [IX_Users_UserName] UNIQUE NONCLUSTERED ([UserName] ASC)
 );
+
+
 
 
 
