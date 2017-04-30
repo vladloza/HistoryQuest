@@ -26,9 +26,7 @@
                        <a href="#"><img src="libs/img/gmail-icon.png" /></a>
                 </div>
                 <div class="icons-inside">
-                    <a href="https://oauth.vk.com/authorize?client_id=6009379&display=popup&redirect_uri=http://localhost:64356/Login.aspx&scope=email&response_type=code&v=5.63">
-                        <img src="libs/img/vk-icon.png" />
-                    </a>
+                    <a href="#"><img src="libs/img/vk-icon.png" /></a>
                 </div>
             </div>
             <div class="register-href">
