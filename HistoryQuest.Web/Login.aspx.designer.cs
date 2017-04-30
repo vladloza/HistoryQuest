@@ -13,6 +13,15 @@ namespace HistoryQuest {
     public partial class Login {
         
         /// <summary>
+        /// login_view control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm login_view;
+        
+        /// <summary>
         /// log_box control.
         /// </summary>
         /// <remarks>

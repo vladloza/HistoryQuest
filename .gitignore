@@ -9,3 +9,4 @@ HistoryQuest.Domain/connectionStrings.config
 HistoryQuest.DataBase/HistoryQuest.DataBase.dbmdl
 HistoryQuest.DataBase/HistoryQuest.DataBase.jfm
 *.suo
+.vs/config/applicationhost.config
