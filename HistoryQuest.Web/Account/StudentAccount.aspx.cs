@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace HistoryQuest
+namespace HistoryQuest.Account
 {
     public partial class StudentAccount : BasePage
     {

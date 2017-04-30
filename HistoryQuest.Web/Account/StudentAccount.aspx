@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeBehind="StudentAccount.aspx.cs" Inherits="HistoryQuest.StudentAccount" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeBehind="StudentAccount.aspx.cs" Inherits="HistoryQuest.Account.StudentAccount" %>
 <%@Import Namespace="HistoryQuest.Domain" %>
 <asp:Content runat="server" ContentPlaceHolderID="ContentPlaceHolder">
     <div id="page">
