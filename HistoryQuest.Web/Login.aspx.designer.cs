@@ -13,6 +13,15 @@ namespace HistoryQuest {
     public partial class Login {
         
         /// <summary>
+        /// login_view элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm login_view;
+        
+        /// <summary>
         /// log_box элемент управления.
         /// </summary>
         /// <remarks>
