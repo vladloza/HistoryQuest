@@ -1,4 +1,8 @@
-﻿body {
+﻿/*html, body, form, #MainDiv {
+    height:100%;
+}*/
+
+body {
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -8,21 +12,14 @@
     color: #1e1e1e;
     font-size: 14px;
     line-height: 1.42857143;
-    background-color: #fff;
-}
-#MainDiv {
+    background-color: #fbfbfb;
     height: 100%;
-    background: #f3f6f8;
+}
+#MainDiv{
+    position:relative;
 }
 #map {
     height: 100%;
-}
-html,
-body,
-form {
-    height: 100%;
-    margin: 0;
-    padding: 0;
 }
 @font-face {
     font-family: 'Roboto';
@@ -53,6 +50,9 @@ ul {
 img {
     max-width: 100%;
 }
+.wrapper {
+    padding-top:55px;
+}
 .clearfix:before,
 .clearfix:after {
     content: " ";
@@ -64,6 +64,7 @@ img {
 .href-back {
     margin-top: 15px;
 }
+.header-text::after,
 .register-href::before,
 .href-back::before {
     border-bottom: thin solid #cad4d8;
@@ -71,11 +72,35 @@ img {
     display: block;
     margin: 0 auto 10px auto;
 }
+.header-text::after {
+    width:30%;
+}
+.site-header {
+        display: flex;
+    height: 46px;
+    margin: 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 180;
+}
+.right {
+    float:right;
+}
+.site-header>div {
+    width:100%;
+}
+#page {
+     padding:52px 0px 0px 60px;
+     position:relative;
+}
 .login-page {
     width: 360px;
     padding: 8% 0 0;
     margin: auto;
 }
+
 .admin-form {
     position: relative;
     z-index: 1;
@@ -97,6 +122,17 @@ img {
     padding: 15px;
     box-sizing: border-box;
     font-size: 14px;
+}
+.small-control {
+    margin:0px 10px;
+    outline: 0;
+    border: 0;
+}
+a.small-control{
+    cursor:pointer;
+}
+input.small-control {
+    background: #f2f2f2;
 }
 .admin-form .button,
 .admin-form button,
@@ -258,14 +294,17 @@ img {
 }
 #primary {
     display: inline-block;
-    width: calc(100% - 60px);
+    width: 100%;
 }
 .statistics h2{
     text-align: center;
     margin: 0px;
 }
 #secondary {
-    height: 100vh;
+    position:fixed;
+    left:0;
+    bottom:0;
+    top:52px;
     background: #e9eff3;
     border-right: 1px solid #d9e3ea;
     float: left;
@@ -345,6 +384,82 @@ img {
  .fa-times {
      color:#cc1010;
  }
+ .header-text {
+     text-align:center;
+ }
+ .body-text p {
+    font-size: 16px;
+    text-align: center;
+ }
+ .item-box {
+         overflow: hidden;
+    margin: 16px 0;
+    width: 100%;
+    position: relative;
+ }
+ .block-content {
+    width: 100%;
+    display: block;
+    margin-bottom: 0;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+ }
+ .about-wrapper {
+    color: #403737;
+    box-shadow: 0 0 0 1px rgb(77, 96, 134), 0 1px 2px #080808;
+ }
+ #questBlock {
+     background:#5e76a8;
+ }
+ .questInner {
+     padding:10px;
+  }
+ .overlay {
+    background: rgba(0,0,0,0.7) !important;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    -o-transition: all 1s;
+    transition: all 1s;
+ }
+ .item-hover {
+    opacity: 0;
+    filter: alpha(opacity=0);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    text-align: center;
+    color: #fff;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;
+ }
+ .item-hover .inner {
+     position: absolute;
+    display: block;
+    left: 0;
+    right: 0;
+    top: 50%;
+    margin-top: -30px;
+    z-index: 100;
+ }
+.block-content:hover .item-hover {
+     opacity: 1;
+ }
+.block-desc {
+    padding: 2px 10px;
+}
+.block-desc h4 {
+        text-align: center;
+}
  .card-table tr:nth-child(even){background-color: #f2f2f2}
 @media (min-width: 768px) {
     .profile-name,
@@ -361,7 +476,10 @@ img {
     }
     #primary {
         display: inline-block;
-        width: calc(100% - 272px);
+        width: 100%;
+    }
+    #page {
+             padding:79px 0px 0px 304px;
     }
 }
 @media (min-width: 992px) {

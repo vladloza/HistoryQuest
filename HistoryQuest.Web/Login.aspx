@@ -7,6 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="libs/css/main.css" />
+    <script src="libs/js/validation.js"></script>
     <title>Моя Україна</title>
 </head>
 <body class="admin-body">
@@ -15,10 +16,10 @@
             <div class="logo-body">
                 <h2>Вітаємо на проекті <br />"Моя Україна"!</h2>
             </div>
-            <form class="login-form" runat="server" onsubmit="return formValidation();">
-                <input type="text" placeholder="Пошта" runat="server" id="log_box"/>
-                <input type="password" placeholder="Пароль" runat="server" id="pass_box" />
-                <asp:Button runat="server" class="button" onclick="LoginButton_Click" Text="Увійти"></asp:Button>
+            <form id="login_view" class="login-form" runat="server" onsubmit="return formValidation(['login_view']);">
+                <input type="text" placeholder="Пошта" runat="server" id="log_box" validation="text" />
+                <input type="password" placeholder="Пароль" runat="server" id="pass_box" validation="text" />
+                <asp:Button runat="server" class="button" OnClick="LoginButton_Click" Text="Увійти"></asp:Button>
             </form>
             <asp:Label runat="server" id="error_text"/>
             <div class="login-icons">
@@ -26,7 +27,9 @@
                        <a href="#"><img src="libs/img/gmail-icon.png" /></a>
                 </div>
                 <div class="icons-inside">
-                    <a href="#"><img src="libs/img/vk-icon.png" /></a>
+                    <a href="https://oauth.vk.com/authorize?client_id=6009379&display=popup&redirect_uri=http://localhost:64356/Login.aspx&scope=email&response_type=code&v=5.63">
+                        <img src="libs/img/vk-icon.png" />
+                    </a>
                 </div>
             </div>
             <div class="register-href">
@@ -35,21 +38,4 @@
         </div>
     </div>
 </body>
-    <script type="text/javascript">
-        function formValidation() {
-            var valid = true;
-            if (document.getElementById('pass_box').value == '') {
-                valid = false;
-                document.getElementById('pass_box').style.border = '1px solid red';
-            }
-            else { document.getElementById('pass_box').style.border = ''; }
-            if (document.getElementById('log_box').value == '') {
-                valid = false;
-                document.getElementById('log_box').style.border = '1px solid red';
-            }
-            else { document.getElementById('log_box').style.border = ''; }
-
-            return valid;
-        };
-    </script>
 </html>

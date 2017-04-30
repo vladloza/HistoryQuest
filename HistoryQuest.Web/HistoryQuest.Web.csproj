@@ -110,6 +110,7 @@
     <Content Include="libs\img\vk-icon.png" />
     <Content Include="libs\js\bootstrap.min.js" />
     <Content Include="libs\js\jquery-3.1.1.min.js" />
+    <Content Include="libs\js\validation.js" />
     <Content Include="Login.aspx" />
     <Content Include="packages.config" />
     <Content Include="Main.Master" />

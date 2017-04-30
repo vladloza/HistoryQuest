@@ -1,4 +1,5 @@
 ﻿using HistoryQuest.Domain;
+using HistoryQuest.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,10 @@ namespace HistoryQuest
             if (Repository.CurrentUser != null)
             {
                 Response.Redirect(FormsAuthentication.DefaultUrl);
+            }
+            if (Request.QueryString["code"] != null)
+            {
+                VKResponse response = new VKResponse("https://oauth.vk.com/access_token?client_id=6009379&client_secret=VgmVKtowqz71XXwwrC1p&redirect_uri=http://localhost:64356/Login.aspx&code="+ Request.QueryString["code"].ToString());
             }
         }
 

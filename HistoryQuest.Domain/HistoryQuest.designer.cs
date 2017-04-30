@@ -1124,10 +1124,6 @@ namespace HistoryQuest.Domain
 		
 		private bool _IsTeacher;
 		
-		private EntitySet<PupilsToTeachersRequest> _PupilsToTeachersRequests;
-		
-		private EntitySet<PupilsToTeachersRequest> _PupilsToTeachersRequests1;
-		
 		private EntitySet<User> _Users;
 		
     #region Extensibility Method Definitions
@@ -1154,8 +1150,6 @@ namespace HistoryQuest.Domain
 		
 		public Face()
 		{
-			this._PupilsToTeachersRequests = new EntitySet<PupilsToTeachersRequest>(new Action<PupilsToTeachersRequest>(this.attach_PupilsToTeachersRequests), new Action<PupilsToTeachersRequest>(this.detach_PupilsToTeachersRequests));
-			this._PupilsToTeachersRequests1 = new EntitySet<PupilsToTeachersRequest>(new Action<PupilsToTeachersRequest>(this.attach_PupilsToTeachersRequests1), new Action<PupilsToTeachersRequest>(this.detach_PupilsToTeachersRequests1));
 			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
 			OnCreated();
 		}
@@ -1240,7 +1234,7 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MiddleName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MiddleName", DbType="NVarChar(50)")]
 		public string MiddleName
 		{
 			get
@@ -1320,32 +1314,6 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Face_PupilsToTeachersRequest", Storage="_PupilsToTeachersRequests", ThisKey="gid", OtherKey="PupilsGID")]
-		public EntitySet<PupilsToTeachersRequest> PupilsToTeachersRequests
-		{
-			get
-			{
-				return this._PupilsToTeachersRequests;
-			}
-			set
-			{
-				this._PupilsToTeachersRequests.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Face_PupilsToTeachersRequest1", Storage="_PupilsToTeachersRequests1", ThisKey="gid", OtherKey="TeacherGID")]
-		public EntitySet<PupilsToTeachersRequest> PupilsToTeachersRequests1
-		{
-			get
-			{
-				return this._PupilsToTeachersRequests1;
-			}
-			set
-			{
-				this._PupilsToTeachersRequests1.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Face_User", Storage="_Users", ThisKey="gid", OtherKey="FaceGID")]
 		public EntitySet<User> Users
 		{
@@ -1377,30 +1345,6 @@ namespace HistoryQuest.Domain
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_PupilsToTeachersRequests(PupilsToTeachersRequest entity)
-		{
-			this.SendPropertyChanging();
-			entity.Face = this;
-		}
-		
-		private void detach_PupilsToTeachersRequests(PupilsToTeachersRequest entity)
-		{
-			this.SendPropertyChanging();
-			entity.Face = null;
-		}
-		
-		private void attach_PupilsToTeachersRequests1(PupilsToTeachersRequest entity)
-		{
-			this.SendPropertyChanging();
-			entity.Face1 = this;
-		}
-		
-		private void detach_PupilsToTeachersRequests1(PupilsToTeachersRequest entity)
-		{
-			this.SendPropertyChanging();
-			entity.Face1 = null;
 		}
 		
 		private void attach_Users(User entity)
@@ -1646,10 +1590,6 @@ namespace HistoryQuest.Domain
 		
 		private System.Guid _TeacherGID;
 		
-		private EntityRef<Face> _Face;
-		
-		private EntityRef<Face> _Face1;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1666,8 +1606,6 @@ namespace HistoryQuest.Domain
 		
 		public PupilsToTeachersRequest()
 		{
-			this._Face = default(EntityRef<Face>);
-			this._Face1 = default(EntityRef<Face>);
 			OnCreated();
 		}
 		
@@ -1722,10 +1660,6 @@ namespace HistoryQuest.Domain
 			{
 				if ((this._PupilsGID != value))
 				{
-					if (this._Face.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnPupilsGIDChanging(value);
 					this.SendPropertyChanging();
 					this._PupilsGID = value;
@@ -1746,83 +1680,11 @@ namespace HistoryQuest.Domain
 			{
 				if ((this._TeacherGID != value))
 				{
-					if (this._Face1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnTeacherGIDChanging(value);
 					this.SendPropertyChanging();
 					this._TeacherGID = value;
 					this.SendPropertyChanged("TeacherGID");
 					this.OnTeacherGIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Face_PupilsToTeachersRequest", Storage="_Face", ThisKey="PupilsGID", OtherKey="gid", IsForeignKey=true)]
-		public Face Face
-		{
-			get
-			{
-				return this._Face.Entity;
-			}
-			set
-			{
-				Face previousValue = this._Face.Entity;
-				if (((previousValue != value) 
-							|| (this._Face.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Face.Entity = null;
-						previousValue.PupilsToTeachersRequests.Remove(this);
-					}
-					this._Face.Entity = value;
-					if ((value != null))
-					{
-						value.PupilsToTeachersRequests.Add(this);
-						this._PupilsGID = value.gid;
-					}
-					else
-					{
-						this._PupilsGID = default(System.Guid);
-					}
-					this.SendPropertyChanged("Face");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Face_PupilsToTeachersRequest1", Storage="_Face1", ThisKey="TeacherGID", OtherKey="gid", IsForeignKey=true)]
-		public Face Face1
-		{
-			get
-			{
-				return this._Face1.Entity;
-			}
-			set
-			{
-				Face previousValue = this._Face1.Entity;
-				if (((previousValue != value) 
-							|| (this._Face1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Face1.Entity = null;
-						previousValue.PupilsToTeachersRequests1.Remove(this);
-					}
-					this._Face1.Entity = value;
-					if ((value != null))
-					{
-						value.PupilsToTeachersRequests1.Add(this);
-						this._TeacherGID = value.gid;
-					}
-					else
-					{
-						this._TeacherGID = default(System.Guid);
-					}
-					this.SendPropertyChanged("Face1");
 				}
 			}
 		}
@@ -3362,11 +3224,13 @@ namespace HistoryQuest.Domain
 		
 		private string _Password;
 		
-		private int _PasswordFormat;
+		private System.Nullable<int> _PasswordFormat;
 		
 		private string _PasswordSalt;
 		
 		private System.Nullable<System.Guid> _FaceGID;
+		
+		private bool _IsSocial;
 		
 		private EntitySet<CheckPoint> _CheckPoints;
 		
@@ -3394,12 +3258,14 @@ namespace HistoryQuest.Domain
     partial void OnUserNameChanged();
     partial void OnPasswordChanging(string value);
     partial void OnPasswordChanged();
-    partial void OnPasswordFormatChanging(int value);
+    partial void OnPasswordFormatChanging(System.Nullable<int> value);
     partial void OnPasswordFormatChanged();
     partial void OnPasswordSaltChanging(string value);
     partial void OnPasswordSaltChanged();
     partial void OnFaceGIDChanging(System.Nullable<System.Guid> value);
     partial void OnFaceGIDChanged();
+    partial void OnIsSocialChanging(bool value);
+    partial void OnIsSocialChanged();
     #endregion
 		
 		public User()
@@ -3474,7 +3340,7 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(256)")]
 		public string Password
 		{
 			get
@@ -3494,8 +3360,8 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordFormat", DbType="Int NOT NULL")]
-		public int PasswordFormat
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordFormat", DbType="Int")]
+		public System.Nullable<int> PasswordFormat
 		{
 			get
 			{
@@ -3514,7 +3380,7 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordSalt", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordSalt", DbType="NVarChar(256)")]
 		public string PasswordSalt
 		{
 			get
@@ -3554,6 +3420,26 @@ namespace HistoryQuest.Domain
 					this._FaceGID = value;
 					this.SendPropertyChanged("FaceGID");
 					this.OnFaceGIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSocial", DbType="Bit NOT NULL")]
+		public bool IsSocial
+		{
+			get
+			{
+				return this._IsSocial;
+			}
+			set
+			{
+				if ((this._IsSocial != value))
+				{
+					this.OnIsSocialChanging(value);
+					this.SendPropertyChanging();
+					this._IsSocial = value;
+					this.SendPropertyChanged("IsSocial");
+					this.OnIsSocialChanged();
 				}
 			}
 		}

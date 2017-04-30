@@ -1,5 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="HistoryQuest.Main" %>
-
+<%@Import Namespace="HistoryQuest.Domain" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -28,7 +28,7 @@
                 <div class="dropdown cabinet-wrapper">
                     <button class="cabinet dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-user-circle" aria-hidden="true"></i></button>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-                        <li><a href="#">Особистий кабінет</a></li>
+                        <li><a href="<%= Repository.CurrentUser.Face.IsTeacher ? "/Account/TeacherAccount.aspx" : "/Account/StudentAccount.aspx" %>">Особистий кабінет</a></li>
                         <li role="presentation" class="divider"></li>
                         <li><asp:LinkButton runat="server" OnClick="ExitButton_Click"><i class="fa fa-sign-out" aria-hidden="true"></i>Вийти</asp:LinkButton></li>
                     </ul>
@@ -55,6 +55,7 @@
             <Scripts>
                 <asp:ScriptReference Path="~/libs/js/jquery-3.1.1.min.js" />
                 <asp:ScriptReference Path="~/libs/js/bootstrap.min.js" />
+                <asp:ScriptReference Path="~/libs/js/Helper.js" />
                 <asp:ScriptReference Path="~/Scripts/WebService.js" />
                 <asp:ScriptReference Path="~/Quest/Scripts/QuestMap.js" />
             </Scripts>
