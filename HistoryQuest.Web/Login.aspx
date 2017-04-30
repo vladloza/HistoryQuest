@@ -14,20 +14,17 @@
     <div class="login-page">
         <div class="admin-form">
             <div class="logo-body">
-                <h2>Вітаємо на проекті
-                    <br />
-                    "Моя Україна"!</h2>
+                <h2>Вітаємо на проекті <br />"Моя Україна"!</h2>
             </div>
             <form id="login_view" class="login-form" runat="server" onsubmit="return formValidation(['login_view']);">
                 <input type="text" placeholder="Пошта" runat="server" id="log_box" validation="text" />
                 <input type="password" placeholder="Пароль" runat="server" id="pass_box" validation="text" />
                 <asp:Button runat="server" class="button" OnClick="LoginButton_Click" Text="Увійти"></asp:Button>
             </form>
-            <asp:Label runat="server" ID="error_text" />
+            <asp:Label runat="server" id="error_text"/>
             <div class="login-icons">
                 <div class="icons-inside">
-                    <a href="#">
-                        <img src="libs/img/gmail-icon.png" /></a>
+                       <a href="#"><img src="libs/img/gmail-icon.png" /></a>
                 </div>
                 <div class="icons-inside">
                     <a href="https://oauth.vk.com/authorize?client_id=6009379&display=popup&redirect_uri=http://localhost:64356/Login.aspx&scope=email&response_type=code&v=5.63">
