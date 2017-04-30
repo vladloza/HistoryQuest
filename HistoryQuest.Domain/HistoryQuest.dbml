@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="HistoryQuest.DataBase" Class="HistoryQuestDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=VLADPC\SQLEXPRESS;Initial Catalog=HistoryQuest.DataBase;Integrated Security=True" SettingsObjectName="HistoryQuest.Domain.Properties.Settings" SettingsPropertyName="HistoryQuest_DataBaseConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-RH7MHP2\SQLEXPRESS;Initial Catalog=HistoryQuest;Integrated Security=True" SettingsObjectName="HistoryQuest.Domain.Properties.Settings" SettingsPropertyName="HistoryQuest_DataBaseConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.CheckPoints" Member="CheckPoints">
     <Type Name="CheckPoint">
       <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
