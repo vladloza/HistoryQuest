@@ -1,183 +1,21 @@
-﻿QuestMap = {}
+﻿QuestMap = {
+    CenterOfUkraine: { lat: 49.0, lng: 32.0 },
+    MaxDistanceFromCenter: 700, //km
+    ReturnDelay: 1500, //ms
+    MarkersDropDelay: 1200 //ms
+};
 
 QuestMap.prototype = function () {
 
-}
+};
 
 QuestMap.InitializeMap = function () {
+    WebService.GetQuestCheckPoints('AC62EA9D-536C-4C92-B7B1-E3E3E375FDCF', QuestMap.OnLoadSuccess);
+};
+
+QuestMap.OnLoadSuccess = function (result) {
 
     var styles = {
-        default: null,
-        silver: [
-            {
-                elementType: 'geometry',
-                stylers: [{ color: '#f5f5f5' }]
-            },
-            {
-                elementType: 'labels.icon',
-                stylers: [{ visibility: 'off' }]
-            },
-            {
-                elementType: 'labels.text.fill',
-                stylers: [{ color: '#616161' }]
-            },
-            {
-                elementType: 'labels.text.stroke',
-                stylers: [{ color: '#f5f5f5' }]
-            },
-            {
-                featureType: 'administrative.land_parcel',
-                elementType: 'labels.text.fill',
-                stylers: [{ color: '#bdbdbd' }]
-            },
-            {
-                featureType: 'poi',
-                elementType: 'geometry',
-                stylers: [{ color: '#eeeeee' }]
-            },
-            {
-                featureType: 'poi',
-                elementType: 'labels.text.fill',
-                stylers: [{ color: '#757575' }]
-            },
-            {
-                featureType: 'poi.park',
-                elementType: 'geometry',
-                stylers: [{ color: '#e5e5e5' }]
-            },
-            {
-                featureType: 'poi.park',
-                elementType: 'labels.text.fill',
-                stylers: [{ color: '#9e9e9e' }]
-            },
-            {
-                featureType: 'road',
-                elementType: 'geometry',
-                stylers: [{ color: '#ffffff' }]
-            },
-            {
-                featureType: 'road.arterial',
-                elementType: 'labels.text.fill',
-                stylers: [{ color: '#757575' }]
-            },
-            {
-                featureType: 'road.highway',
-                elementType: 'geometry',
-                stylers: [{ color: '#dadada' }]
-            },
-            {
-                featureType: 'road.highway',
-                elementType: 'labels.text.fill',
-                stylers: [{ color: '#616161' }]
-            },
-            {
-                featureType: 'road.local',
-                elementType: 'labels.text.fill',
-                stylers: [{ color: '#9e9e9e' }]
-            },
-            {
-                featureType: 'transit.line',
-                elementType: 'geometry',
-                stylers: [{ color: '#e5e5e5' }]
-            },
-            {
-                featureType: 'transit.station',
-                elementType: 'geometry',
-                stylers: [{ color: '#eeeeee' }]
-            },
-            {
-                featureType: 'water',
-                elementType: 'geometry',
-                stylers: [{ color: '#c9c9c9' }]
-            },
-            {
-                featureType: 'water',
-                elementType: 'labels.text.fill',
-                stylers: [{ color: '#9e9e9e' }]
-            }
-        ],
-
-        night: [
-            { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
-            { elementType: 'labels.text.stroke', stylers: [{ color: '#242f3e' }] },
-            { elementType: 'labels.text.fill', stylers: [{ color: '#746855' }] },
-            {
-                featureType: 'administrative.locality',
-                elementType: 'labels.text.fill',
-                stylers: [{ color: '#d59563' }]
-            },
-            {
-                featureType: 'poi',
-                elementType: 'labels.text.fill',
-                stylers: [{ color: '#d59563' }]
-            },
-            {
-                featureType: 'poi.park',
-                elementType: 'geometry',
-                stylers: [{ color: '#263c3f' }]
-            },
-            {
-                featureType: 'poi.park',
-                elementType: 'labels.text.fill',
-                stylers: [{ color: '#6b9a76' }]
-            },
-            {
-                featureType: 'road',
-                elementType: 'geometry',
-                stylers: [{ color: '#38414e' }]
-            },
-            {
-                featureType: 'road',
-                elementType: 'geometry.stroke',
-                stylers: [{ color: '#212a37' }]
-            },
-            {
-                featureType: 'road',
-                elementType: 'labels.text.fill',
-                stylers: [{ color: '#9ca5b3' }]
-            },
-            {
-                featureType: 'road.highway',
-                elementType: 'geometry',
-                stylers: [{ color: '#746855' }]
-            },
-            {
-                featureType: 'road.highway',
-                elementType: 'geometry.stroke',
-                stylers: [{ color: '#1f2835' }]
-            },
-            {
-                featureType: 'road.highway',
-                elementType: 'labels.text.fill',
-                stylers: [{ color: '#f3d19c' }]
-            },
-            {
-                featureType: 'transit',
-                elementType: 'geometry',
-                stylers: [{ color: '#2f3948' }]
-            },
-            {
-                featureType: 'transit.station',
-                elementType: 'labels.text.fill',
-                stylers: [{ color: '#d59563' }]
-            },
-            {
-                featureType: 'water',
-                elementType: 'geometry',
-                stylers: [{ color: '#17263c' }]
-            },
-            {
-                featureType: 'water',
-                elementType: 'labels.text.fill',
-                stylers: [{ color: '#515c6d' }]
-            },
-            {
-                featureType: 'water',
-                elementType: 'labels.text.stroke',
-                stylers: [{ color: '#17263c' }]
-            }
-        ],
-
         retro: [
             { elementType: 'geometry', stylers: [{ color: '#ebe3cd' }] },
             { elementType: 'labels.text.fill', stylers: [{ color: '#523735' }] },
@@ -225,7 +63,7 @@ QuestMap.InitializeMap = function () {
             {
                 featureType: 'road',
                 elementType: 'geometry',
-                stylers: [{ color: '#f5f1e6' }, { visibility: 'off'}]
+                stylers: [{ color: '#f5f1e6' }, { visibility: 'off' }]
             },
             {
                 featureType: 'road',
@@ -251,52 +89,62 @@ QuestMap.InitializeMap = function () {
                 elementType: 'labels.text.fill',
                 stylers: [{ color: '#92998d' }]
             }
-        ],
-
-        hiding: [
-            {
-                featureType: 'poi.business',
-                stylers: [{ visibility: 'off' }]
-            },
-            {
-                featureType: 'transit',
-                elementType: 'labels.icon',
-                stylers: [{ visibility: 'off' }]
-            }
         ]
     };
 
-    var centerOfUkraine = { lat: 49.0, lng: 32.0 };
-
-    // Create the map with no initial style specified.
-    // It therefore has default styling.
-    var map = new google.maps.Map(document.getElementById('map'), {
-        center: centerOfUkraine,
+    QuestMap.Map = new google.maps.Map(document.getElementById('map'), {
+        center: QuestMap.CenterOfUkraine,
         zoom: 6,
         minZoom: 6,
         maxZoom: 12,
         disableDefaultUI: true,
         zoomControl: true
     });
-    
-    map.setOptions({ styles: styles["retro"] });
-    
-    var marker = new google.maps.Marker({
-        position: centerOfUkraine,
-        map: map,
-        title: 'Click to zoom'
+
+    QuestMap.Map.setOptions({ styles: styles["retro"] });
+
+    QuestMap.Map.addListener('center_changed', function () {
+        window.clearTimeout(QuestMap.InitializeMap.timeoutID);
+        if (QuestMap.IsCenterOutOfBorder()) {
+            QuestMap.InitializeMap.timeoutID = window.setTimeout(function () {
+                QuestMap.Map.panTo(QuestMap.CenterOfUkraine);
+            }, QuestMap.ReturnDelay);
+        }
     });
 
-    map.addListener('center_changed', function () {
-        // 3 seconds after the center of the map has changed, pan back to the
-        // marker.
+    if (result && result.CheckPoints) {
         window.setTimeout(function () {
-            map.panTo(centerOfUkraine);
-        }, 3000);
-    });
+            for (var i = 0; i < result.CheckPoints.length; i++) {
+                var coords = result.CheckPoints[i].GeoCoordinates.split(';');
+                var marker = new google.maps.Marker({
+                    position: { lat: Number(coords[0]), lng: Number(coords[1]) },
+                    map: QuestMap.Map,
+                    animation: google.maps.Animation.DROP,
+                    title: result.CheckPoints[i].Name
+                });
 
-    marker.addListener('click', function () {
-        map.setZoom(8);
-        map.setCenter(marker.getPosition());
-    });
-}
+                if (result.CheckPoints[i].IsCompleted === true) {
+                    marker.setIcon('/libs/img/checkpoint_completed.png');
+                } else {
+                    marker.setIcon('/libs/img/checkpoint_new.png');
+
+                    var createListener = function (checkPointNum) {
+                        return function () { window.location = "/Default.aspx?cpgid=" + result.CheckPoints[checkPointNum].gid; };
+                    };
+
+                    marker.addListener('click', createListener(i));
+                }
+            }
+        }, QuestMap.MarkersDropDelay);
+    }
+};
+
+//calculates distance between two points in km's
+QuestMap.CalculateDistance = function (p1, p2) {
+    return (google.maps.geometry.spherical.computeDistanceBetween(p1, p2) / 1000).toFixed(2);
+};
+
+QuestMap.IsCenterOutOfBorder = function () {
+    var center = new google.maps.LatLng(QuestMap.CenterOfUkraine.lat, QuestMap.CenterOfUkraine.lng);
+    return QuestMap.CalculateDistance(center, QuestMap.Map.center) > QuestMap.MaxDistanceFromCenter;
+};
