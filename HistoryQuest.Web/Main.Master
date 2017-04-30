@@ -56,6 +56,7 @@
                 <asp:ScriptReference Path="~/Quest/Scripts/QuestMap.js" />
                 <asp:ScriptReference Path="~/libs/js/jquery-3.1.1.min.js" />
                 <asp:ScriptReference Path="~/libs/js/bootstrap.min.js" />
+                <asp:ScriptReference Path="~/libs/js/Helper.js" />
             </Scripts>
         </asp:ScriptManager>
     </form>

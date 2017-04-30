@@ -11,6 +11,17 @@
                         <h4><%= Repository.CurrentUser.Face?.LastName + " " + Repository.CurrentUser.Face?.FirstName + " " + Repository.CurrentUser.Face?.MiddleName%></h4>
                     </div>
                     <div class="about-block">
+                        <h4>Вчитель:</h4>
+                        <h4>TeacherName</h4>
+                        <a class="small-control" id="choose" onclick="showControl('chooseTeacher', 'choose')">Обрати</a>
+                    </div>
+                </div>
+                <div class="card" id="chooseTeacher" style="display:none">
+                    <div class="about-block">
+                        <h4>Вчитель:</h4>
+                        <asp:TextBox ID="teachersBox" placeholder="(почніть вводити)" runat="server" CssClass="small-control" />
+                        <asp:HiddenField ID="selectedTeacher" runat="server" />
+                        <asp:Button runat="server" Text="Надіслати запит" CssClass="btn btn-info right"></asp:Button>
                         <h4>Вчитель: </h4>
                         <h4><%= Repository.CurrentUser.Face?.TeacherGID != null ? 
                                              Repository.CurrentDataContext.Faces.Where(f=>f.gid==Repository.CurrentUser.Face.TeacherGID).FirstOrDefault()?.FullName : "відсутній"%></h4>

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="libs/css/main.css" />
     <script src="libs/js/jquery-3.1.1.min.js"></script>
     <script src="libs/js/validation.js"></script>
+    <script src="libs/js/Helper.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.10.0.min.js" type="text/javascript"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/jquery-ui.min.js" type="text/javascript"></script>
     <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/themes/blitzer/jquery-ui.css" rel="Stylesheet" type="text/css" />
@@ -55,8 +56,8 @@
                     <h2>Зареєструватися як</h2>
                 </div>
                 <div class="login-form">
-                    <button onclick="showControl('teacher-view')">Вчитель</button>
-                    <button onclick="showControl('pupil-view')">Учень</button>
+                    <button onclick="showControl('teacher-view', 'chooseButtons')">Вчитель</button>
+                    <button onclick="showControl('pupil-view', 'chooseButtons')">Учень</button>
                 </div>
             </div>
             <form runat="server" class="views" onsubmit="return formValidation(['pupil-view', 'teacher-view']);">
@@ -85,13 +86,5 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        function showControl(who) {
-            document.getElementById('chooseButtons').style.display = 'none';
-            document.getElementById(who).style.display = 'block';
-
-            document.getElementById('href-back').setAttribute('href', 'Registration.aspx');
-        };  
-    </script>
 </body>
 </html>
