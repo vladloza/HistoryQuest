@@ -1234,7 +1234,7 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MiddleName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MiddleName", DbType="NVarChar(50)")]
 		public string MiddleName
 		{
 			get
@@ -3224,11 +3224,13 @@ namespace HistoryQuest.Domain
 		
 		private string _Password;
 		
-		private int _PasswordFormat;
+		private System.Nullable<int> _PasswordFormat;
 		
 		private string _PasswordSalt;
 		
 		private System.Nullable<System.Guid> _FaceGID;
+		
+		private bool _IsSocial;
 		
 		private EntitySet<CheckPoint> _CheckPoints;
 		
@@ -3256,12 +3258,14 @@ namespace HistoryQuest.Domain
     partial void OnUserNameChanged();
     partial void OnPasswordChanging(string value);
     partial void OnPasswordChanged();
-    partial void OnPasswordFormatChanging(int value);
+    partial void OnPasswordFormatChanging(System.Nullable<int> value);
     partial void OnPasswordFormatChanged();
     partial void OnPasswordSaltChanging(string value);
     partial void OnPasswordSaltChanged();
     partial void OnFaceGIDChanging(System.Nullable<System.Guid> value);
     partial void OnFaceGIDChanged();
+    partial void OnIsSocialChanging(bool value);
+    partial void OnIsSocialChanged();
     #endregion
 		
 		public User()
@@ -3336,7 +3340,7 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(256)")]
 		public string Password
 		{
 			get
@@ -3356,8 +3360,8 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordFormat", DbType="Int NOT NULL")]
-		public int PasswordFormat
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordFormat", DbType="Int")]
+		public System.Nullable<int> PasswordFormat
 		{
 			get
 			{
@@ -3376,7 +3380,7 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordSalt", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordSalt", DbType="NVarChar(256)")]
 		public string PasswordSalt
 		{
 			get
@@ -3416,6 +3420,26 @@ namespace HistoryQuest.Domain
 					this._FaceGID = value;
 					this.SendPropertyChanged("FaceGID");
 					this.OnFaceGIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSocial", DbType="Bit NOT NULL")]
+		public bool IsSocial
+		{
+			get
+			{
+				return this._IsSocial;
+			}
+			set
+			{
+				if ((this._IsSocial != value))
+				{
+					this.OnIsSocialChanging(value);
+					this.SendPropertyChanging();
+					this._IsSocial = value;
+					this.SendPropertyChanged("IsSocial");
+					this.OnIsSocialChanged();
 				}
 			}
 		}
