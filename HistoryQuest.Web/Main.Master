@@ -6,11 +6,9 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="libs/css/bootstrap.css">
+    <link rel="stylesheet" href="libs/css/bootstrap.css"/>
     <link rel="stylesheet" href="libs/css/main.css" />
     <link rel="stylesheet" href="libs/css/font-awesome.min.css" />
-    <script type="text/javascript" src="libs/js/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="libs/js/bootstrap.min.js"></script>
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
     <link rel="stylesheet" href="libs/css/main.css" />
@@ -56,6 +54,8 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server">
             <Scripts>
                 <asp:ScriptReference Path="~/Quest/Scripts/QuestMap.js" />
+                <asp:ScriptReference Path="~/libs/js/jquery-3.1.1.min.js" />
+                <asp:ScriptReference Path="~/libs/js/bootstrap.min.js" />
             </Scripts>
         </asp:ScriptManager>
     </form>

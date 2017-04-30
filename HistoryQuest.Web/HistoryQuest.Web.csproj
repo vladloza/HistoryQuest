@@ -96,6 +96,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Account\TeacherAccount.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="Global.asax" />
@@ -132,10 +133,17 @@
     <Content Include="Quest\Quest.aspx" />
     <Content Include="Quest\Scripts\QuestMap.js" />
     <Content Include="Registration.aspx" />
-    <Content Include="StudentAccount.aspx" />
+    <Content Include="Account\StudentAccount.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\TeacherAccount.aspx.cs">
+      <DependentUpon>TeacherAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\TeacherAccount.aspx.designer.cs">
+      <DependentUpon>TeacherAccount.aspx</DependentUpon>
+    </Compile>
     <Compile Include="BasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -196,11 +204,11 @@
       <DependentUpon>WebService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="StudentAccount.aspx.cs">
+    <Compile Include="Account\StudentAccount.aspx.cs">
       <DependentUpon>StudentAccount.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="StudentAccount.aspx.designer.cs">
+    <Compile Include="Account\StudentAccount.aspx.designer.cs">
       <DependentUpon>StudentAccount.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
