@@ -16,8 +16,6 @@ GO
 /*Pointer used for text / image updates. This might not be needed, but is declared here just in case*/
 DECLARE @pv binary(16)
 BEGIN TRANSACTION
-ALTER TABLE [dbo].[PupilsToTeachersRequests] DROP CONSTRAINT [FK_PupilsToTeachersRequests_Pupils]
-ALTER TABLE [dbo].[PupilsToTeachersRequests] DROP CONSTRAINT [FK_PupilsToTeachersRequests_Teachers]
 ALTER TABLE [dbo].[Likes] DROP CONSTRAINT [FK_Likes_Tasks]
 ALTER TABLE [dbo].[Likes] DROP CONSTRAINT [FK_Likes_Users]
 ALTER TABLE [dbo].[Tasks] DROP CONSTRAINT [FK_Tasks_CheckPoints]
@@ -30,7 +28,6 @@ ALTER TABLE [dbo].[Tries] DROP CONSTRAINT [FK_Tries_Users]
 ALTER TABLE [dbo].[Comments] DROP CONSTRAINT [FK_Comments_Quests]
 ALTER TABLE [dbo].[Quests] DROP CONSTRAINT [FK_Quests_Users]
 ALTER TABLE [dbo].[TasksToTries] DROP CONSTRAINT [FK_TasksToTries_Tries]
-ALTER TABLE [dbo].[TasksToTries] DROP CONSTRAINT [FK_TasksToTries_Users]
 SET IDENTITY_INSERT [dbo].[Roles] ON
 INSERT INTO [dbo].[Roles] ([gid], [id], [Name]) VALUES (N'024900db-2a68-4959-a0e9-10069608d923', 1, N'Student')
 INSERT INTO [dbo].[Roles] ([gid], [id], [Name]) VALUES (N'40f816d3-3bb4-4864-97c1-67803413389a', 3, N'Admin')
@@ -45,10 +42,6 @@ INSERT INTO [dbo].[Faces] ([gid], [id], [LastName], [FirstName], [MiddleName], [
 INSERT INTO [dbo].[Faces] ([gid], [id], [LastName], [FirstName], [MiddleName], [TeacherGID], [Info], [IsTeacher]) VALUES (N'c604631f-340a-4b93-9442-5fe18efe261e', 666, N'Зинченко', N'Артём', N'Юриевич', NULL, N'-_-', 1)
 INSERT INTO [dbo].[Faces] ([gid], [id], [LastName], [FirstName], [MiddleName], [TeacherGID], [Info], [IsTeacher]) VALUES (N'f7f34923-e4df-48a6-ad8d-414588f64304', 104, N'Поперешняк', N'Светлана', N'Владимировна', NULL, NULL, 1)
 SET IDENTITY_INSERT [dbo].[Faces] OFF
-ALTER TABLE [dbo].[PupilsToTeachersRequests]
-    ADD CONSTRAINT [FK_PupilsToTeachersRequests_Pupils] FOREIGN KEY ([PupilsGID]) REFERENCES [dbo].[Faces] ([gid])
-ALTER TABLE [dbo].[PupilsToTeachersRequests]
-    ADD CONSTRAINT [FK_PupilsToTeachersRequests_Teachers] FOREIGN KEY ([TeacherGID]) REFERENCES [dbo].[Faces] ([gid])
 ALTER TABLE [dbo].[Likes]
     ADD CONSTRAINT [FK_Likes_Tasks] FOREIGN KEY ([TaskGID]) REFERENCES [dbo].[Tasks] ([gid])
 ALTER TABLE [dbo].[Likes]
@@ -73,6 +66,4 @@ ALTER TABLE [dbo].[Quests]
     ADD CONSTRAINT [FK_Quests_Users] FOREIGN KEY ([AuthorGID]) REFERENCES [dbo].[Users] ([gid])
 ALTER TABLE [dbo].[TasksToTries]
     ADD CONSTRAINT [FK_TasksToTries_Tries] FOREIGN KEY ([TryGID]) REFERENCES [dbo].[Tries] ([gid])
-ALTER TABLE [dbo].[TasksToTries]
-    ADD CONSTRAINT [FK_TasksToTries_Users] FOREIGN KEY ([UserGID]) REFERENCES [dbo].[Users] ([gid])
 COMMIT TRANSACTION

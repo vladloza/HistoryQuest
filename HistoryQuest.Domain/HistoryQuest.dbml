@@ -50,8 +50,6 @@
       <Column Name="TeacherGID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Column Name="Info" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="IsTeacher" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="Face_PupilsToTeachersRequest" Member="PupilsToTeachersRequests" ThisKey="gid" OtherKey="PupilsGID" Type="PupilsToTeachersRequest" />
-      <Association Name="Face_PupilsToTeachersRequest1" Member="PupilsToTeachersRequests1" ThisKey="gid" OtherKey="TeacherGID" Type="PupilsToTeachersRequest" />
       <Association Name="Face_User" Member="Users" ThisKey="gid" OtherKey="FaceGID" Type="User" />
     </Type>
   </Table>
@@ -71,8 +69,6 @@
       <Column Name="gid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="PupilsGID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="TeacherGID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Association Name="Face_PupilsToTeachersRequest" Member="Face" ThisKey="PupilsGID" OtherKey="gid" Type="Face" IsForeignKey="true" />
-      <Association Name="Face_PupilsToTeachersRequest1" Member="Face1" ThisKey="TeacherGID" OtherKey="gid" Type="Face" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Quests" Member="Quests">
