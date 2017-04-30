@@ -216,6 +216,8 @@ namespace HistoryQuest.Domain
 		
 		private System.Guid _gid;
 		
+		private System.Guid _QuestGID;
+		
 		private string _Name;
 		
 		private string _GeoCoordinates;
@@ -238,6 +240,8 @@ namespace HistoryQuest.Domain
 		
 		private EntityRef<CheckPoint> _CheckPoint1;
 		
+		private EntityRef<Quest> _Quest;
+		
 		private EntityRef<User> _User;
 		
     #region Extensibility Method Definitions
@@ -248,6 +252,8 @@ namespace HistoryQuest.Domain
     partial void OnidChanged();
     partial void OngidChanging(System.Guid value);
     partial void OngidChanged();
+    partial void OnQuestGIDChanging(System.Guid value);
+    partial void OnQuestGIDChanged();
     partial void OnNameChanging(string value);
     partial void OnNameChanged();
     partial void OnGeoCoordinatesChanging(string value);
@@ -271,6 +277,7 @@ namespace HistoryQuest.Domain
 			this._CheckPoints = new EntitySet<CheckPoint>(new Action<CheckPoint>(this.attach_CheckPoints), new Action<CheckPoint>(this.detach_CheckPoints));
 			this._Tasks = new EntitySet<Task>(new Action<Task>(this.attach_Tasks), new Action<Task>(this.detach_Tasks));
 			this._CheckPoint1 = default(EntityRef<CheckPoint>);
+			this._Quest = default(EntityRef<Quest>);
 			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
@@ -311,6 +318,30 @@ namespace HistoryQuest.Domain
 					this._gid = value;
 					this.SendPropertyChanged("gid");
 					this.OngidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestGID", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid QuestGID
+		{
+			get
+			{
+				return this._QuestGID;
+			}
+			set
+			{
+				if ((this._QuestGID != value))
+				{
+					if (this._Quest.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnQuestGIDChanging(value);
+					this.SendPropertyChanging();
+					this._QuestGID = value;
+					this.SendPropertyChanged("QuestGID");
+					this.OnQuestGIDChanged();
 				}
 			}
 		}
@@ -539,6 +570,40 @@ namespace HistoryQuest.Domain
 						this._ParentGID = default(Nullable<System.Guid>);
 					}
 					this.SendPropertyChanged("CheckPoint1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Quest_CheckPoint", Storage="_Quest", ThisKey="QuestGID", OtherKey="gid", IsForeignKey=true)]
+		public Quest Quest
+		{
+			get
+			{
+				return this._Quest.Entity;
+			}
+			set
+			{
+				Quest previousValue = this._Quest.Entity;
+				if (((previousValue != value) 
+							|| (this._Quest.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Quest.Entity = null;
+						previousValue.CheckPoints.Remove(this);
+					}
+					this._Quest.Entity = value;
+					if ((value != null))
+					{
+						value.CheckPoints.Add(this);
+						this._QuestGID = value.gid;
+					}
+					else
+					{
+						this._QuestGID = default(System.Guid);
+					}
+					this.SendPropertyChanged("Quest");
 				}
 			}
 		}
@@ -1799,6 +1864,8 @@ namespace HistoryQuest.Domain
 		
 		private System.Nullable<System.Guid> _AuthorGID;
 		
+		private EntitySet<CheckPoint> _CheckPoints;
+		
 		private EntitySet<Comment> _Comments;
 		
 		private EntitySet<Try> _Tries;
@@ -1823,6 +1890,7 @@ namespace HistoryQuest.Domain
 		
 		public Quest()
 		{
+			this._CheckPoints = new EntitySet<CheckPoint>(new Action<CheckPoint>(this.attach_CheckPoints), new Action<CheckPoint>(this.detach_CheckPoints));
 			this._Comments = new EntitySet<Comment>(new Action<Comment>(this.attach_Comments), new Action<Comment>(this.detach_Comments));
 			this._Tries = new EntitySet<Try>(new Action<Try>(this.attach_Tries), new Action<Try>(this.detach_Tries));
 			this._User = default(EntityRef<User>);
@@ -1933,6 +2001,19 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Quest_CheckPoint", Storage="_CheckPoints", ThisKey="gid", OtherKey="QuestGID")]
+		public EntitySet<CheckPoint> CheckPoints
+		{
+			get
+			{
+				return this._CheckPoints;
+			}
+			set
+			{
+				this._CheckPoints.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Quest_Comment", Storage="_Comments", ThisKey="gid", OtherKey="QuestGID")]
 		public EntitySet<Comment> Comments
 		{
@@ -2011,6 +2092,18 @@ namespace HistoryQuest.Domain
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_CheckPoints(CheckPoint entity)
+		{
+			this.SendPropertyChanging();
+			entity.Quest = this;
+		}
+		
+		private void detach_CheckPoints(CheckPoint entity)
+		{
+			this.SendPropertyChanging();
+			entity.Quest = null;
 		}
 		
 		private void attach_Comments(Comment entity)
@@ -2200,6 +2293,8 @@ namespace HistoryQuest.Domain
 		
 		private EntitySet<Like> _Likes;
 		
+		private EntitySet<TasksToTry> _TasksToTries;
+		
 		private EntityRef<CheckPoint> _CheckPoint;
 		
 		private EntityRef<TaskType> _TaskType;
@@ -2231,6 +2326,7 @@ namespace HistoryQuest.Domain
 		public Task()
 		{
 			this._Likes = new EntitySet<Like>(new Action<Like>(this.attach_Likes), new Action<Like>(this.detach_Likes));
+			this._TasksToTries = new EntitySet<TasksToTry>(new Action<TasksToTry>(this.attach_TasksToTries), new Action<TasksToTry>(this.detach_TasksToTries));
 			this._CheckPoint = default(EntityRef<CheckPoint>);
 			this._TaskType = default(EntityRef<TaskType>);
 			this._User = default(EntityRef<User>);
@@ -2422,6 +2518,19 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Task_TasksToTry", Storage="_TasksToTries", ThisKey="gid", OtherKey="TaskGID")]
+		public EntitySet<TasksToTry> TasksToTries
+		{
+			get
+			{
+				return this._TasksToTries;
+			}
+			set
+			{
+				this._TasksToTries.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CheckPoint_Task", Storage="_CheckPoint", ThisKey="CheckPointGID", OtherKey="gid", IsForeignKey=true)]
 		public CheckPoint CheckPoint
 		{
@@ -2555,6 +2664,18 @@ namespace HistoryQuest.Domain
 			this.SendPropertyChanging();
 			entity.Task = null;
 		}
+		
+		private void attach_TasksToTries(TasksToTry entity)
+		{
+			this.SendPropertyChanging();
+			entity.Task = this;
+		}
+		
+		private void detach_TasksToTries(TasksToTry entity)
+		{
+			this.SendPropertyChanging();
+			entity.Task = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TasksToTries")]
@@ -2567,7 +2688,7 @@ namespace HistoryQuest.Domain
 		
 		private System.Guid _gid;
 		
-		private System.Guid _UserGID;
+		private System.Guid _TaskGID;
 		
 		private System.Guid _TryGID;
 		
@@ -2575,9 +2696,9 @@ namespace HistoryQuest.Domain
 		
 		private long _ElapsedTime;
 		
-		private EntityRef<Try> _Try;
+		private EntityRef<Task> _Task;
 		
-		private EntityRef<User> _User;
+		private EntityRef<Try> _Try;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2587,8 +2708,8 @@ namespace HistoryQuest.Domain
     partial void OnidChanged();
     partial void OngidChanging(System.Guid value);
     partial void OngidChanged();
-    partial void OnUserGIDChanging(System.Guid value);
-    partial void OnUserGIDChanged();
+    partial void OnTaskGIDChanging(System.Guid value);
+    partial void OnTaskGIDChanged();
     partial void OnTryGIDChanging(System.Guid value);
     partial void OnTryGIDChanged();
     partial void OnEarnedScoreChanging(int value);
@@ -2599,8 +2720,8 @@ namespace HistoryQuest.Domain
 		
 		public TasksToTry()
 		{
+			this._Task = default(EntityRef<Task>);
 			this._Try = default(EntityRef<Try>);
-			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
 		
@@ -2644,26 +2765,26 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserGID", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid UserGID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TaskGID", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid TaskGID
 		{
 			get
 			{
-				return this._UserGID;
+				return this._TaskGID;
 			}
 			set
 			{
-				if ((this._UserGID != value))
+				if ((this._TaskGID != value))
 				{
-					if (this._User.HasLoadedOrAssignedValue)
+					if (this._Task.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnUserGIDChanging(value);
+					this.OnTaskGIDChanging(value);
 					this.SendPropertyChanging();
-					this._UserGID = value;
-					this.SendPropertyChanged("UserGID");
-					this.OnUserGIDChanged();
+					this._TaskGID = value;
+					this.SendPropertyChanged("TaskGID");
+					this.OnTaskGIDChanged();
 				}
 			}
 		}
@@ -2732,6 +2853,40 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Task_TasksToTry", Storage="_Task", ThisKey="TaskGID", OtherKey="gid", IsForeignKey=true)]
+		public Task Task
+		{
+			get
+			{
+				return this._Task.Entity;
+			}
+			set
+			{
+				Task previousValue = this._Task.Entity;
+				if (((previousValue != value) 
+							|| (this._Task.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Task.Entity = null;
+						previousValue.TasksToTries.Remove(this);
+					}
+					this._Task.Entity = value;
+					if ((value != null))
+					{
+						value.TasksToTries.Add(this);
+						this._TaskGID = value.gid;
+					}
+					else
+					{
+						this._TaskGID = default(System.Guid);
+					}
+					this.SendPropertyChanged("Task");
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Try_TasksToTry", Storage="_Try", ThisKey="TryGID", OtherKey="gid", IsForeignKey=true)]
 		public Try Try
 		{
@@ -2762,40 +2917,6 @@ namespace HistoryQuest.Domain
 						this._TryGID = default(System.Guid);
 					}
 					this.SendPropertyChanged("Try");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_TasksToTry", Storage="_User", ThisKey="UserGID", OtherKey="gid", IsForeignKey=true)]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.TasksToTries.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.TasksToTries.Add(this);
-						this._UserGID = value.gid;
-					}
-					else
-					{
-						this._UserGID = default(System.Guid);
-					}
-					this.SendPropertyChanged("User");
 				}
 			}
 		}
@@ -3257,8 +3378,6 @@ namespace HistoryQuest.Domain
 		
 		private EntitySet<Task> _Tasks;
 		
-		private EntitySet<TasksToTry> _TasksToTries;
-		
 		private EntitySet<Try> _Tries;
 		
 		private EntityRef<Face> _Face;
@@ -3290,7 +3409,6 @@ namespace HistoryQuest.Domain
 			this._Likes = new EntitySet<Like>(new Action<Like>(this.attach_Likes), new Action<Like>(this.detach_Likes));
 			this._Quests = new EntitySet<Quest>(new Action<Quest>(this.attach_Quests), new Action<Quest>(this.detach_Quests));
 			this._Tasks = new EntitySet<Task>(new Action<Task>(this.attach_Tasks), new Action<Task>(this.detach_Tasks));
-			this._TasksToTries = new EntitySet<TasksToTry>(new Action<TasksToTry>(this.attach_TasksToTries), new Action<TasksToTry>(this.detach_TasksToTries));
 			this._Tries = new EntitySet<Try>(new Action<Try>(this.attach_Tries), new Action<Try>(this.detach_Tries));
 			this._Face = default(EntityRef<Face>);
 			OnCreated();
@@ -3505,19 +3623,6 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_TasksToTry", Storage="_TasksToTries", ThisKey="gid", OtherKey="UserGID")]
-		public EntitySet<TasksToTry> TasksToTries
-		{
-			get
-			{
-				return this._TasksToTries;
-			}
-			set
-			{
-				this._TasksToTries.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Try", Storage="_Tries", ThisKey="gid", OtherKey="UserGID")]
 		public EntitySet<Try> Tries
 		{
@@ -3640,18 +3745,6 @@ namespace HistoryQuest.Domain
 		}
 		
 		private void detach_Tasks(Task entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
-		}
-		
-		private void attach_TasksToTries(TasksToTry entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_TasksToTries(TasksToTry entity)
 		{
 			this.SendPropertyChanging();
 			entity.User = null;
