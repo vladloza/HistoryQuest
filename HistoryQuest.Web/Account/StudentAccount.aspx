@@ -12,6 +12,15 @@
                     <div class="about-block">
                         <h4>Вчитель:</h4>
                         <h4>TeacherName</h4>
+                        <a class="small-control" id="choose" onclick="showControl('chooseTeacher', 'choose')">Обрати</a>
+                    </div>
+                </div>
+                <div class="card" id="chooseTeacher" style="display:none">
+                    <div class="about-block">
+                        <h4>Вчитель:</h4>
+                        <asp:TextBox ID="teachersBox" placeholder="(почніть вводити)" runat="server" CssClass="small-control" />
+                        <asp:HiddenField ID="selectedTeacher" runat="server" />
+                        <asp:Button runat="server" Text="Надіслати запит" CssClass="btn btn-info right"></asp:Button>
                     </div>
                 </div>
                 <div class="card statistics">

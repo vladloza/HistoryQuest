@@ -1,7 +1,64 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="HistoryQuest.Default" %>
-<%@Import Namespace="HistoryQuest.Domain" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
-    <input type="text" name="Name" value="<%= Repository.CurrentUser?.Face.FirstName %>" />
+
+<%@ Import Namespace="HistoryQuest.Domain" %>
+<asp:Content runat="server" ContentPlaceHolderID="ContentPlaceHolder">
+    <div id="page">
+        <div class="wrapper">
+
+            <section>
+                <div class="container">
+                    <div class="header-text">
+                        <h2>Моя Україна</h2>
+                    </div>
+                    <div class="body-text">
+                        <p>Вітаємо Вас на проекті <strong>Моя Україна!</strong> Тут ви можете ознайомитися з житттєвими шляхами відомих українських діячів, таких як Петро Сагайдачний, Боглан Котляревський та інші. Почніть першу подорож просто зараз! </p>
+                    </div>
+                </div>
+            </section>
+            <section id="questBlock">
+                <div class="container">
+                    <div class="clearfix">
+                        <div class="col-sm-6 col-md-6 col-lg-6 questInner">
+                            <div class="about-wrapper">
+                                <div class="block-content">
+                                    <a class="item-hover" href="#">
+                                        <span class="overlay"></span>
+                                        <span class="inner">Какой-то скрытый текст</span>
+                                    </a>
+                                    <a href="#">
+                                        <div class="image-blck-wrapper">
+                                            <img src="libs/img/sagay.jpg" />
+                                        </div>
+                                    </a>
+                                </div>
+                                <%--<div class="block-desc">
+                                    <h4>Славетний шлях Петра Сагайдачного</h4>
+                                    <p>Петро Кононович Конашевич-Сагайдачний народився бл. 1582р. в селі Кульчиці в православній родині (тепер село Самбірського району Львівської області). </p>
+                                </div>--%>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6 questInner">
+                            <div class="about-wrapper">
+                                <div class="block-content">
+                                    <a class="item-hover" href="#">
+                                        <span class="overlay"></span>
+                                        <span class="inner">Какой-то скрытый текст</span>
+                                    </a>
+                                    <a href="#">
+                                        <div class="image-blck-wrapper">
+                                            <img src="libs/img/sagay.jpg" />
+                                        </div>
+                                    </a>
+                                </div>
+                                <%--<div class="block-desc">
+                                    <h4>Славетний шлях Петра Сагайдачного</h4>
+                                    <p>Петро Кононович Конашевич-Сагайдачний народився бл. 1582р. в селі Кульчиці в православній родині (тепер село Самбірського району Львівської області). </p>
+                                </div>--%>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
 </asp:Content>
