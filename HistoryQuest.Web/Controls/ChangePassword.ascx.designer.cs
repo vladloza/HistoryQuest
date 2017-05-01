@@ -7,27 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HistoryQuest.Account {
+namespace HistoryQuest.Controls {
     
     
-    public partial class TeacherAccount {
+    public partial class ChangePassword {
         
         /// <summary>
-        /// register control.
+        /// password control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HistoryQuest.Controls.Register register;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword password;
         
         /// <summary>
-        /// passChange control.
+        /// commit_password control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HistoryQuest.Controls.ChangePassword passChange;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword commit_password;
     }
 }

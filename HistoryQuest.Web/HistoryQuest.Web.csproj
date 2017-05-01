@@ -103,6 +103,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\TeacherAccount.aspx" />
+    <Content Include="Controls\ChangePassword.ascx" />
+    <Content Include="Controls\ChangeInfo.ascx" />
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="Global.asax" />
@@ -117,6 +119,8 @@
     <Content Include="libs\img\ua2.gif" />
     <Content Include="libs\img\vk-icon.png" />
     <Content Include="libs\js\bootstrap.min.js" />
+    <Content Include="libs\js\bindTeachers.js" />
+    <Content Include="libs\js\Helper.js" />
     <Content Include="libs\js\jquery-3.1.1.min.js" />
     <Content Include="libs\js\validation.js" />
     <Content Include="Login.aspx" />
@@ -173,6 +177,20 @@
     </Compile>
     <Compile Include="BasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ChangePassword.ascx.cs">
+      <DependentUpon>ChangePassword.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ChangePassword.ascx.designer.cs">
+      <DependentUpon>ChangePassword.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChangeInfo.ascx.cs">
+      <DependentUpon>ChangeInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ChangeInfo.ascx.designer.cs">
+      <DependentUpon>ChangeInfo.ascx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -248,7 +266,9 @@
       <Name>HistoryQuest.Domain</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

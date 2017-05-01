@@ -7,45 +7,45 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HistoryQuest.Account {
+namespace HistoryQuest.Controls {
     
     
-    public partial class StudentAccount {
+    public partial class Register {
         
         /// <summary>
-        /// teachersBox control.
+        /// first_name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox teachersBox;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText first_name;
         
         /// <summary>
-        /// selectedTeacher control.
+        /// last_name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField selectedTeacher;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText last_name;
         
         /// <summary>
-        /// register control.
+        /// father_name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HistoryQuest.Controls.Register register;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText father_name;
         
         /// <summary>
-        /// passChange control.
+        /// description control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HistoryQuest.Controls.ChangePassword passChange;
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea description;
     }
 }

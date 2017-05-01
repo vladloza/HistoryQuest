@@ -253,3 +253,5 @@ HistoryQuest.DataBase/HistoryQuest.DataBase.dbmdl
 HistoryQuest.DataBase/HistoryQuest.DataBase.jfm
 *.suo
 .vs/config/applicationhost.config
+/HistoryQuest.Domain/Properties/Settings.Designer.cs
+/HistoryQuest.Domain/Properties/Settings.settings
