@@ -130,6 +130,8 @@
     <Content Include="libs\fonts\Roboto-Regular.ttf" />
     <Content Include="libs\fonts\Roboto-Thin.ttf" />
     <Content Include="libs\fonts\fontawesome-webfont.ttf" />
+    <Content Include="libs\img\checkpoint_completed.png" />
+    <Content Include="libs\img\checkpoint_new.png" />
     <Content Include="Scripts\WebService.js" />
     <Content Include="WebServices\WebService.asmx" />
     <None Include="Web.Debug.config">
