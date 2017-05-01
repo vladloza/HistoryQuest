@@ -7,11 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace HistoryQuest
 {
-    public partial class Quest : System.Web.UI.Page
+    public partial class Quest : BasePage
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
