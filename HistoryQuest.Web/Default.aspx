@@ -19,14 +19,18 @@
                     <div class="col-sm-6 col-md-6 col-lg-6 questInner">
                         <div class="about-wrapper">
                             <div class="block-content">
-                                <a class="item-hover" href="#">
-                                    <span class="overlay"></span>
-                                    <span class="inner">Какой-то скрытый текст</span>
-                                </a>
                                 <a href="#">
                                     <div class="image-blck-wrapper">
                                         <img src="libs/img/sagay.jpg" />
                                     </div>
+                                    <div class="grid-middle">
+                                        <h4>Петро Сагайдачний</h4>
+                                        <p>Український квест</p>
+                                    </div>
+                                    <span class="quest-params">
+                                        <i class="fa fa-heart" aria-hidden="true"></i><span>250</span>
+                                        <i class="fa fa-comments" aria-hidden="true"></i><span>35</span>
+                                    </span>
                                 </a>
                             </div>
                             <%--<div class="block-desc">
@@ -37,15 +41,23 @@
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-6 questInner">
                         <div class="about-wrapper">
-                            <div class="block-content">
-                                <a class="item-hover" href="#">
-                                    <span class="overlay"></span>
-                                    <span class="inner">Какой-то скрытый текст</span>
-                                </a>
+                            <div class="block-content"> 
                                 <a href="#">
                                     <div class="image-blck-wrapper">
-                                        <img src="libs/img/sagay.jpg" />
+                                        <img src="libs/img/mazepa.jpg" />
                                     </div>
+                                    <div class="grid-middle">
+                                        <h4>Іван Мазепа</h4>
+                                        <p>Квест у розробці</p>
+                                    </div>
+                                    <span class="quest-params">
+                                        <i class="fa fa-heart" aria-hidden="true"></i><span>0</span>
+                                        <i class="fa fa-comments" aria-hidden="true"></i><span>0</span>
+                                    </span>
+                                </a>
+                                <a class="item-hover" href="#">
+                                    <span class="overlay"></span>
+                                    <span class="inner"><i class="fa fa-lock" aria-hidden="true"></i></span>
                                 </a>
                             </div>
                             <%--<div class="block-desc">

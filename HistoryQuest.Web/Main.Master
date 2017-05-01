@@ -36,9 +36,8 @@
                 <div class="nav-wrapper ">
                     <div class="collapse navbar-collapse">
                         <ul class="nav-menu">
-                            <li><a href="#">Головна</a></li>
-                            <li><a href="#">Довідка</a></li>
-                            <li><a href="#">Коментарі</a></li>
+                            <li><a href="Default.aspx">Головна</a></li>
+                            <li><a href="HistoricalInformation.aspx">Довідка</a></li>
                             <li><a href="#">FAQ</a></li>
                         </ul>
                     </div>

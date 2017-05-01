@@ -110,7 +110,9 @@
     <Content Include="libs\css\bootstrap.css" />
     <Content Include="libs\css\font-awesome.min.css" />
     <Content Include="libs\css\main.css" />
+    <Content Include="libs\img\wall.png" />
     <Content Include="libs\img\gmail-icon.png" />
+    <Content Include="libs\img\mazepa.jpg" />
     <Content Include="libs\img\sagay.jpg" />
     <Content Include="libs\img\ua2.gif" />
     <Content Include="libs\img\vk-icon.png" />
@@ -122,18 +124,29 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Main.Master" />
-    <Content Include="libs\fonts\Roboto-Bold.ttf" />
-    <Content Include="libs\fonts\Roboto-BoldItalic.ttf" />
-    <Content Include="libs\fonts\Roboto-Italic.ttf" />
-    <Content Include="libs\fonts\Roboto-Light.ttf" />
-    <Content Include="libs\fonts\Roboto-Medium.ttf" />
-    <Content Include="libs\fonts\Roboto-Regular.ttf" />
-    <Content Include="libs\fonts\Roboto-Thin.ttf" />
+    <Content Include="libs\fonts\Roboto\Roboto-Bold.ttf" />
+    <Content Include="libs\fonts\Roboto\Roboto-BoldItalic.ttf" />
+    <Content Include="libs\fonts\Roboto\Roboto-Italic.ttf" />
+    <Content Include="libs\fonts\Roboto\Roboto-Light.ttf" />
+    <Content Include="libs\fonts\Roboto\Roboto-Medium.ttf" />
+    <Content Include="libs\fonts\Roboto\Roboto-Regular.ttf" />
+    <Content Include="libs\fonts\Roboto\Roboto-Thin.ttf" />
     <Content Include="libs\fonts\fontawesome-webfont.ttf" />
     <Content Include="libs\img\checkpoint_completed.png" />
     <Content Include="libs\img\checkpoint_new.png" />
     <Content Include="Scripts\WebService.js" />
     <Content Include="WebServices\WebService.asmx" />
+    <Content Include="libs\fonts\Lato\LatoBold\LatoBold.eot" />
+    <Content Include="libs\fonts\Lato\LatoBold\LatoBold.ttf" />
+    <Content Include="libs\fonts\Lato\LatoBold\LatoBold.woff" />
+    <Content Include="libs\fonts\Lato\LatoRegular\LatoRegular.eot" />
+    <Content Include="libs\fonts\Lato\LatoRegular\LatoRegular.ttf" />
+    <Content Include="libs\fonts\Lato\LatoRegular\LatoRegular.woff" />
+    <Content Include="libs\fonts\Lato\LatoLight\LatoLight.eot" />
+    <Content Include="libs\fonts\Lato\LatoLight\LatoLight.ttf" />
+    <Content Include="libs\fonts\Lato\LatoLight\LatoLight.woff" />
+    <Content Include="libs\fonts\HelveticaNeue\helveticaneuecyr-bold.otf" />
+    <Content Include="libs\fonts\HelveticaNeue\helveticaneuecyr-thin.otf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -235,6 +248,7 @@
       <Name>HistoryQuest.Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
