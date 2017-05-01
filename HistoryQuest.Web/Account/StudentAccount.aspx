@@ -2,6 +2,10 @@
 <%@Import Namespace="HistoryQuest.Domain" %>
 <%@Import Namespace="System.Data.Linq" %>
 <asp:Content runat="server" ContentPlaceHolderID="ContentPlaceHolder">
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.10.0.min.js" type="text/javascript"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/jquery-ui.min.js" type="text/javascript"></script>
+    <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/themes/blitzer/jquery-ui.css" rel="Stylesheet" type="text/css" />
+    <script src="../libs/js/bindTeachers.js" type="text/javascript"></script>
     <div id="page">
         <div id="primary"><div class="tab-content">
             <div class="main tab-pane fade in active" id="account">
@@ -11,20 +15,19 @@
                         <h4><%= Repository.CurrentUser.Face?.LastName + " " + Repository.CurrentUser.Face?.FirstName + " " + Repository.CurrentUser.Face?.MiddleName%></h4>
                     </div>
                     <div class="about-block">
-                        <h4>Вчитель:</h4>
-                        <h4>TeacherName</h4>
-                        <a class="small-control" id="choose" onclick="showControl('chooseTeacher', 'choose')">Обрати</a>
+                        <h4>Вчитель: </h4>
+                        <h4><%= Repository.CurrentUser.Face?.TeacherGID != null ? 
+                                    Repository.CurrentDataContext.Faces.FirstOrDefault(f=>f.gid==Repository.CurrentUser.Face.TeacherGID)?.FullName : 
+                                    Repository.CurrentDataContext.PupilsToTeachersRequests.FirstOrDefault(ptr => ptr.PupilsGID == Repository.CurrentUser.FaceGID) != null ? 
+                                    "заявку відправлено" : "відсутній"%></h4>
+                        <a class="small-control" id="choose" style=<%= Repository.CurrentUser.Face?.TeacherGID != null ? "display:none":"display:block" %> onclick="showControl('chooseTeacher', 'choose')">Обрати</a>
                     </div>
                 </div>
                 <div class="card" id="chooseTeacher" style="display:none">
                     <div class="about-block">
-                        <h4>Вчитель:</h4>
-                        <asp:TextBox ID="teachersBox" placeholder="(почніть вводити)" runat="server" CssClass="small-control" />
-                        <asp:HiddenField ID="selectedTeacher" runat="server" />
-                        <asp:Button runat="server" Text="Надіслати запит" CssClass="btn btn-info right"></asp:Button>
-                        <h4>Вчитель: </h4>
-                        <h4><%= Repository.CurrentUser.Face?.TeacherGID != null ? 
-                                             Repository.CurrentDataContext.Faces.Where(f=>f.gid==Repository.CurrentUser.Face.TeacherGID).FirstOrDefault()?.FullName : "відсутній"%></h4>
+                    <asp:TextBox ID="teachersBox" placeholder="Вчитель (почніть вводити)" runat="server" />
+                    <asp:HiddenField ID="selectedTeacher" runat="server" />
+                        <asp:Button runat="server" Text="Надіслати запит" OnClick="AddResponseButton_Click" CssClass="btn btn-info right"></asp:Button>
                     </div>
                 </div>
                 <div class="card statistics">
