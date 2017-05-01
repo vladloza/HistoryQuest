@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using HistoryQuest.Domain.Utils;
 
 namespace HistoryQuest
 {
@@ -18,9 +19,11 @@ namespace HistoryQuest
             {
                 Response.Redirect(FormsAuthentication.DefaultUrl);
             }
+            //VK Authorithation
             if (Request.QueryString["code"] != null)
             {
-                VKResponse response = new VKResponse("https://oauth.vk.com/access_token?client_id=6009379&client_secret=VgmVKtowqz71XXwwrC1p&redirect_uri=http://localhost:64356/Login.aspx&code="+ Request.QueryString["code"].ToString());
+                VK.AuthoritheVKUser(Request.QueryString["code"].ToString());
+                Response.Redirect(FormsAuthentication.DefaultUrl);
             }
         }
 
