@@ -76,7 +76,7 @@
                 </div>
                 <div id="teacher-view" style="display: none">
                     <input type="text" placeholder="Ваш email" runat="server" validation="email" />
-                    <div class="login-form">
+                    <div class="login-form ">
                         <button>Надіслати запит</button>
                     </div>
                 </div>
