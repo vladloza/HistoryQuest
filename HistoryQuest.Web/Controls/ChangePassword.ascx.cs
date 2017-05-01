@@ -10,11 +10,6 @@ namespace HistoryQuest.Controls
 {
     public partial class ChangePassword : System.Web.UI.UserControl
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
-
         protected void ChangePasswordButton_Click(object sender, EventArgs e)
         {
             var user = Repository.CurrentDataContext.Users.Single(f => f.gid == Repository.CurrentUser.gid);

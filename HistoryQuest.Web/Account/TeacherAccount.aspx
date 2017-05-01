@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeBehind="TeacherAccount.aspx.cs" Inherits="HistoryQuest.Account.TeacherAccount" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeBehind="TeacherAccount.aspx.cs" Inherits="HistoryQuest.Account.TeacherAccount" EnableEventValidation="false"%>
 
 <%@ Register TagPrefix="rc" TagName="reg" Src="~/Controls/ChangeInfo.ascx" %>
 <%@ Register TagPrefix="cpc" TagName="changePass" Src="~/Controls/ChangePassword.ascx" %>
