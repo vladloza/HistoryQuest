@@ -55,7 +55,16 @@ namespace HistoryQuest {
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText pass_box;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword pass_box;
+        
+        /// <summary>
+        /// pass_commit элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword pass_commit;
         
         /// <summary>
         /// teachersBox элемент управления.

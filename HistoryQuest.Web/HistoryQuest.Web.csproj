@@ -102,6 +102,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Account\AdminAccount.aspx" />
     <Content Include="Account\TeacherAccount.aspx" />
     <Content Include="Controls\ChangePassword.ascx" />
     <Content Include="Controls\ChangeInfo.ascx" />
@@ -168,6 +169,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\AdminAccount.aspx.cs">
+      <DependentUpon>AdminAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\AdminAccount.aspx.designer.cs">
+      <DependentUpon>AdminAccount.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Account\TeacherAccount.aspx.cs">
       <DependentUpon>TeacherAccount.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

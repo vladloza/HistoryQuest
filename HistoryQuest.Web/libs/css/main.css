@@ -121,6 +121,7 @@ img {
 }
 .href-back {
     margin-top: 15px;
+    cursor:pointer;
 }
 .header-text::after,
 .register-href::before,

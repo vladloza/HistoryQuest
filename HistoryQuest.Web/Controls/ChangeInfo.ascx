@@ -1,25 +1,25 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ChangeInfo.ascx.cs" Inherits="HistoryQuest.Controls.Register" %>
 <%@ Import Namespace="HistoryQuest.Domain" %>
-<div class="card profile-settings">
+<div class="card profile-settings" >
     <form>
-        <div>
+        <div id="details-view">
             <fieldset class="form-fieldset">
                 <label for="first_name" class="form-label">Ім'я</label>
-                <input type="text" id="first_name" name="first_name" runat="server" class="form-input"/>
+                <input type="text" id="first_name" name="first_name" runat="server" class="form-input" validation="text" />
             </fieldset>
             <fieldset class="form-fieldset">
                 <label for="last_name" class="form-label">Прізвище</label>
-                <input type="text" id="last_name" name="last_name" runat="server" class="form-input"/>
+                <input type="text" id="last_name" name="last_name" runat="server" class="form-input" validation="text"/>
             </fieldset>
             <fieldset class="form-fieldset">
                 <label for="father_name" class="form-label">По батькові</label>
-                <input type="text" id="father_name" name="father_name" runat="server" class="form-input"/>
+                <input type="text" id="father_name" name="father_name" runat="server" class="form-input" validation="text"/>
             </fieldset>
             <fieldset class="form-fieldset">
                 <label for="description" class="form-label">Про мене</label>
                 <textarea id="description" name="description" runat="server" class="form-input"></textarea>
             </fieldset>
-            <asp:Button runat="server" class="btn btn-info center" OnClick="ChangeInfoButton_Click" Text="Зберегти"></asp:Button>
+            <asp:Button runat="server" class="btn btn-info center" OnClientClick="return formValidation(['details-view']);" OnClick="ChangeInfoButton_Click" Text="Зберегти"></asp:Button>
         </div>
     </form>
 </div>

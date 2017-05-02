@@ -1,4 +1,5 @@
-﻿function formValidation(containers) {
+﻿var pass;
+function formValidation(containers) {
     var conts = [];
     var valid = true;
     var errorBox = document.getElementById('error_box');
@@ -34,9 +35,23 @@ function validateControls(container, valid) {
 function validate(el) {
     var value = el.value;
     var attribute = el.getAttribute('validation');
+
     switch (attribute) {
         case 'email':
             return validateEmail(value);
+            break;
+        case 'password':
+            if (value != '') {
+                pass = value;
+                return true;
+            }
+            return false;
+            break;
+        case 'password-commit':
+            if (pass && value == pass) {
+                return true;
+            }
+            return false;
             break;
         case 'text':
         default:

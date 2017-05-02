@@ -19,22 +19,14 @@
 <body class="admin-body">
     <div class="login-page">
         <div class="admin-form">
-            <div id="chooseButtons">
-                <div class="logo-body">
-                    <h2>Зареєструватися як</h2>
-                </div>
-                <div class="login-form">
-                    <button onclick="showControl('teacher-view', 'chooseButtons')">Вчитель</button>
-                    <button onclick="showControl('pupil-view', 'chooseButtons')">Учень</button>
-                </div>
-            </div>
             <form runat="server" class="views" onsubmit="return formValidation(['pupil-view', 'teacher-view']);">
-                <div id="pupil-view" style="display: none">
+                <div id="pupil-view">
                     <input type="text" placeholder="Прізвище" runat="server" id="sur_box" name="sur_box" validation="text" />
                     <input type="text" placeholder="Ім'я" runat="server" id="name_box" validation="text" />
                     <input type="text" placeholder="По батькові" runat="server" id="mid_box" validation="text" />
                     <input type="text" placeholder="Пошта" runat="server" id="login_box" validation="email" />
-                    <input type="text" placeholder="Пароль" runat="server" id="pass_box" validation="text" />
+                    <input type="password" placeholder="Пароль" runat="server" id="pass_box" validation="password" />
+                    <input type="password" placeholder="Повторіть пароль" runat="server" id="pass_commit" validation="password-commit" />
                     <asp:TextBox ID="teachersBox" placeholder="Вчитель (почніть вводити)" runat="server" />
                     <asp:HiddenField ID="selectedTeacher" runat="server" />
                     <div class="login-form">
@@ -49,8 +41,8 @@
                     </div>
                 </div>
             </form>
-            <div class="href-back">
-                <a href="Login.aspx" id="href-back">Назад</a>
+            <div class="href-back" id="href-back">
+                <a onclick="showControl('teacher-view', ['href-back', 'pupil-view'])" >Ви вчитель?</a>
             </div>
         </div>
     </div>
