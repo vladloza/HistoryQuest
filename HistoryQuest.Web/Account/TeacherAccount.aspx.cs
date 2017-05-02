@@ -13,7 +13,7 @@ namespace HistoryQuest.Account
         protected void Page_Load(object sender, EventArgs e)
         {
             base.Page_Load(sender, e);
-            if (!Repository.CurrentUser.Face.IsTeacher) { Response.Redirect("~/Login.aspx"); }
+            if (!Repository.CurrentUser.Face.IsTeacher) { Response.Redirect("~/Account/StudentAccount.aspx"); }
         }
     }
 }

@@ -10,6 +10,12 @@ namespace HistoryQuest.Account
 {
     public partial class StudentAccount : BasePage
     {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            base.Page_Load(sender, e);
+            if (Repository.CurrentUser.Face.IsTeacher) { Response.Redirect("~/Account/TeacherAccount.aspx"); }
+        }
+
         protected void AddResponseButton_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(selectedTeacher.Value) && Repository.CurrentUser.Face.TeacherGID == null)
