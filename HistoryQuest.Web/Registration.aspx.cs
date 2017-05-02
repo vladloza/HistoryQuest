@@ -24,18 +24,12 @@ namespace HistoryQuest
             User user = Repository.CurrentDataContext.GetUserByUserName(login_box.Value);
             if (user == null)
             {
+                Guid faceGID = Guid.NewGuid();
                 var salt = Defender.GenerateSalt();
                 user = new User()
                 {
                     gid = Guid.NewGuid(),
-                    Face = new Face()
-                    {
-                        gid = Guid.NewGuid(),
-                        FirstName = name_box.Value,
-                        LastName = sur_box.Value,
-                        IsTeacher = false,
-                        MiddleName = mid_box.Value
-                    },
+                    FaceGID = faceGID,
                     PasswordFormat = 1,
                     PasswordSalt = salt,
                     Password = Defender.ComputeHash(pass_box.Value, salt),
@@ -51,6 +45,15 @@ namespace HistoryQuest
                     }
                 };
 
+                var face = new Face()
+                {
+                    gid = faceGID,
+                    FirstName = name_box.Value,
+                    LastName = sur_box.Value,
+                    IsTeacher = false,
+                    MiddleName = mid_box.Value
+                };
+
                 if (!string.IsNullOrEmpty(selectedTeacher.Value))
                 {
                     var request = new PupilsToTeachersRequest()
@@ -63,6 +66,7 @@ namespace HistoryQuest
                     Repository.CurrentDataContext.PupilsToTeachersRequests.InsertOnSubmit(request);
                 }
 
+                Repository.CurrentDataContext.Faces.InsertOnSubmit(face);
                 Repository.CurrentDataContext.Users.InsertOnSubmit(user);
                 Repository.CurrentDataContext.SubmitChanges();
                 Response.Redirect("~/Login.aspx");

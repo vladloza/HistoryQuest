@@ -18,6 +18,7 @@ namespace HistoryQuest.Domain
 	using System.Reflection;
 	using System.Linq;
 	using System.Linq.Expressions;
+	using System.Runtime.Serialization;
 	using System.ComponentModel;
 	using System;
 	
@@ -207,6 +208,7 @@ namespace HistoryQuest.Domain
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CheckPoints")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class CheckPoint : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -244,6 +246,8 @@ namespace HistoryQuest.Domain
 		
 		private EntityRef<User> _User;
 		
+		private bool serializing;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -274,15 +278,11 @@ namespace HistoryQuest.Domain
 		
 		public CheckPoint()
 		{
-			this._CheckPoints = new EntitySet<CheckPoint>(new Action<CheckPoint>(this.attach_CheckPoints), new Action<CheckPoint>(this.detach_CheckPoints));
-			this._Tasks = new EntitySet<Task>(new Action<Task>(this.attach_Tasks), new Action<Task>(this.detach_Tasks));
-			this._CheckPoint1 = default(EntityRef<CheckPoint>);
-			this._Quest = default(EntityRef<Quest>);
-			this._User = default(EntityRef<User>);
-			OnCreated();
+			this.Initialize();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="BigInt NOT NULL IDENTITY", IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public long id
 		{
 			get
@@ -303,6 +303,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gid", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public System.Guid gid
 		{
 			get
@@ -323,6 +324,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestGID", DbType="UniqueIdentifier NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public System.Guid QuestGID
 		{
 			get
@@ -347,6 +349,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(250) NOT NULL", CanBeNull=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public string Name
 		{
 			get
@@ -367,6 +370,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GeoCoordinates", DbType="NVarChar(250) NOT NULL", CanBeNull=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
 		public string GeoCoordinates
 		{
 			get
@@ -387,6 +391,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InfoFilePath", DbType="NVarChar(250) NOT NULL", CanBeNull=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6)]
 		public string InfoFilePath
 		{
 			get
@@ -407,6 +412,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TasksCount", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=7)]
 		public int TasksCount
 		{
 			get
@@ -427,6 +433,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderId", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=8)]
 		public int OrderId
 		{
 			get
@@ -447,6 +454,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsBonus", DbType="Bit NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=9)]
 		public bool IsBonus
 		{
 			get
@@ -467,6 +475,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ParentGID", DbType="UniqueIdentifier")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=10)]
 		public System.Nullable<System.Guid> ParentGID
 		{
 			get
@@ -491,6 +500,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AuthorGID", DbType="UniqueIdentifier")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=11)]
 		public System.Nullable<System.Guid> AuthorGID
 		{
 			get
@@ -515,10 +525,16 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CheckPoint_CheckPoint", Storage="_CheckPoints", ThisKey="gid", OtherKey="ParentGID")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=12, EmitDefaultValue=false)]
 		public EntitySet<CheckPoint> CheckPoints
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._CheckPoints.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._CheckPoints;
 			}
 			set
@@ -528,10 +544,16 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CheckPoint_Task", Storage="_Tasks", ThisKey="gid", OtherKey="CheckPointGID")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=13, EmitDefaultValue=false)]
 		public EntitySet<Task> Tasks
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._Tasks.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._Tasks;
 			}
 			set
@@ -685,9 +707,41 @@ namespace HistoryQuest.Domain
 			this.SendPropertyChanging();
 			entity.CheckPoint = null;
 		}
+		
+		private void Initialize()
+		{
+			this._CheckPoints = new EntitySet<CheckPoint>(new Action<CheckPoint>(this.attach_CheckPoints), new Action<CheckPoint>(this.detach_CheckPoints));
+			this._Tasks = new EntitySet<Task>(new Action<Task>(this.attach_Tasks), new Action<Task>(this.detach_Tasks));
+			this._CheckPoint1 = default(EntityRef<CheckPoint>);
+			this._Quest = default(EntityRef<Quest>);
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerializing(StreamingContext context)
+		{
+			this.serializing = true;
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializedAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerialized(StreamingContext context)
+		{
+			this.serializing = false;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UsersInRoles")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class UsersInRole : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -721,12 +775,11 @@ namespace HistoryQuest.Domain
 		
 		public UsersInRole()
 		{
-			this._Role = default(EntityRef<Role>);
-			this._User = default(EntityRef<User>);
-			OnCreated();
+			this.Initialize();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public int id
 		{
 			get
@@ -747,6 +800,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gid", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public System.Guid gid
 		{
 			get
@@ -767,6 +821,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserGID", DbType="UniqueIdentifier NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public System.Guid UserGID
 		{
 			get
@@ -791,6 +846,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleGID", DbType="UniqueIdentifier NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public System.Guid RoleGID
 		{
 			get
@@ -901,9 +957,24 @@ namespace HistoryQuest.Domain
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void Initialize()
+		{
+			this._Role = default(EntityRef<Role>);
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Comments")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class Comment : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -939,11 +1010,11 @@ namespace HistoryQuest.Domain
 		
 		public Comment()
 		{
-			this._Quest = default(EntityRef<Quest>);
-			OnCreated();
+			this.Initialize();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="BigInt NOT NULL IDENTITY", IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public long id
 		{
 			get
@@ -964,6 +1035,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gid", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public System.Guid gid
 		{
 			get
@@ -984,6 +1056,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestGID", DbType="UniqueIdentifier NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public System.Guid QuestGID
 		{
 			get
@@ -1008,6 +1081,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Text", DbType="NVarChar(500) NOT NULL", CanBeNull=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public string Text
 		{
 			get
@@ -1028,6 +1102,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="DateTime NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
 		public System.DateTime Date
 		{
 			get
@@ -1100,9 +1175,23 @@ namespace HistoryQuest.Domain
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void Initialize()
+		{
+			this._Quest = default(EntityRef<Quest>);
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Faces")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class Face : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -1123,8 +1212,6 @@ namespace HistoryQuest.Domain
 		private string _Info;
 		
 		private bool _IsTeacher;
-		
-		private EntitySet<User> _Users;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1150,11 +1237,11 @@ namespace HistoryQuest.Domain
 		
 		public Face()
 		{
-			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
-			OnCreated();
+			this.Initialize();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="BigInt NOT NULL IDENTITY", IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public long id
 		{
 			get
@@ -1175,6 +1262,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gid", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public System.Guid gid
 		{
 			get
@@ -1195,6 +1283,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public string FirstName
 		{
 			get
@@ -1215,6 +1304,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public string LastName
 		{
 			get
@@ -1235,6 +1325,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MiddleName", DbType="NVarChar(50)")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
 		public string MiddleName
 		{
 			get
@@ -1255,6 +1346,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TeacherGID", DbType="UniqueIdentifier")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6)]
 		public System.Nullable<System.Guid> TeacherGID
 		{
 			get
@@ -1275,6 +1367,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Info", DbType="NVarChar(500)")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=7)]
 		public string Info
 		{
 			get
@@ -1295,6 +1388,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsTeacher", DbType="Bit NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=8)]
 		public bool IsTeacher
 		{
 			get
@@ -1311,19 +1405,6 @@ namespace HistoryQuest.Domain
 					this.SendPropertyChanged("IsTeacher");
 					this.OnIsTeacherChanged();
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Face_User", Storage="_Users", ThisKey="gid", OtherKey="FaceGID")]
-		public EntitySet<User> Users
-		{
-			get
-			{
-				return this._Users;
-			}
-			set
-			{
-				this._Users.Assign(value);
 			}
 		}
 		
@@ -1347,20 +1428,21 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		private void attach_Users(User entity)
+		private void Initialize()
 		{
-			this.SendPropertyChanging();
-			entity.Face = this;
+			OnCreated();
 		}
 		
-		private void detach_Users(User entity)
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
 		{
-			this.SendPropertyChanging();
-			entity.Face = null;
+			this.Initialize();
 		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Likes")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class Like : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -1394,12 +1476,11 @@ namespace HistoryQuest.Domain
 		
 		public Like()
 		{
-			this._Task = default(EntityRef<Task>);
-			this._User = default(EntityRef<User>);
-			OnCreated();
+			this.Initialize();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="BigInt NOT NULL IDENTITY", IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public long id
 		{
 			get
@@ -1420,6 +1501,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gid", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public System.Guid gid
 		{
 			get
@@ -1440,6 +1522,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserGID", DbType="UniqueIdentifier NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public System.Guid UserGID
 		{
 			get
@@ -1464,6 +1547,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TaskGID", DbType="UniqueIdentifier NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public System.Guid TaskGID
 		{
 			get
@@ -1574,9 +1658,24 @@ namespace HistoryQuest.Domain
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void Initialize()
+		{
+			this._Task = default(EntityRef<Task>);
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PupilsToTeachersRequests")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class PupilsToTeachersRequest : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -1606,10 +1705,11 @@ namespace HistoryQuest.Domain
 		
 		public PupilsToTeachersRequest()
 		{
-			OnCreated();
+			this.Initialize();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="BigInt NOT NULL IDENTITY", IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public long id
 		{
 			get
@@ -1630,6 +1730,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gid", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public System.Guid gid
 		{
 			get
@@ -1650,6 +1751,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PupilsGID", DbType="UniqueIdentifier NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public System.Guid PupilsGID
 		{
 			get
@@ -1670,6 +1772,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TeacherGID", DbType="UniqueIdentifier NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public System.Guid TeacherGID
 		{
 			get
@@ -1708,9 +1811,22 @@ namespace HistoryQuest.Domain
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void Initialize()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Quests")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class Quest : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -1734,6 +1850,8 @@ namespace HistoryQuest.Domain
 		
 		private EntityRef<User> _User;
 		
+		private bool serializing;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1752,14 +1870,11 @@ namespace HistoryQuest.Domain
 		
 		public Quest()
 		{
-			this._CheckPoints = new EntitySet<CheckPoint>(new Action<CheckPoint>(this.attach_CheckPoints), new Action<CheckPoint>(this.detach_CheckPoints));
-			this._Comments = new EntitySet<Comment>(new Action<Comment>(this.attach_Comments), new Action<Comment>(this.detach_Comments));
-			this._Tries = new EntitySet<Try>(new Action<Try>(this.attach_Tries), new Action<Try>(this.detach_Tries));
-			this._User = default(EntityRef<User>);
-			OnCreated();
+			this.Initialize();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="BigInt NOT NULL IDENTITY", IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public long id
 		{
 			get
@@ -1780,6 +1895,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gid", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public System.Guid gid
 		{
 			get
@@ -1800,6 +1916,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(250) NOT NULL", CanBeNull=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public string Name
 		{
 			get
@@ -1820,6 +1937,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SourceFilePath", DbType="NVarChar(250) NOT NULL", CanBeNull=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public string SourceFilePath
 		{
 			get
@@ -1840,6 +1958,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AuthorGID", DbType="UniqueIdentifier")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
 		public System.Nullable<System.Guid> AuthorGID
 		{
 			get
@@ -1864,10 +1983,16 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Quest_CheckPoint", Storage="_CheckPoints", ThisKey="gid", OtherKey="QuestGID")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6, EmitDefaultValue=false)]
 		public EntitySet<CheckPoint> CheckPoints
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._CheckPoints.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._CheckPoints;
 			}
 			set
@@ -1877,10 +2002,16 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Quest_Comment", Storage="_Comments", ThisKey="gid", OtherKey="QuestGID")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=7, EmitDefaultValue=false)]
 		public EntitySet<Comment> Comments
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._Comments.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._Comments;
 			}
 			set
@@ -1890,10 +2021,16 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Quest_Try", Storage="_Tries", ThisKey="gid", OtherKey="QuestGID")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=8, EmitDefaultValue=false)]
 		public EntitySet<Try> Tries
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._Tries.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._Tries;
 			}
 			set
@@ -1991,9 +2128,40 @@ namespace HistoryQuest.Domain
 			this.SendPropertyChanging();
 			entity.Quest = null;
 		}
+		
+		private void Initialize()
+		{
+			this._CheckPoints = new EntitySet<CheckPoint>(new Action<CheckPoint>(this.attach_CheckPoints), new Action<CheckPoint>(this.detach_CheckPoints));
+			this._Comments = new EntitySet<Comment>(new Action<Comment>(this.attach_Comments), new Action<Comment>(this.detach_Comments));
+			this._Tries = new EntitySet<Try>(new Action<Try>(this.attach_Tries), new Action<Try>(this.detach_Tries));
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerializing(StreamingContext context)
+		{
+			this.serializing = true;
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializedAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerialized(StreamingContext context)
+		{
+			this.serializing = false;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Roles")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class Role : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -2006,6 +2174,8 @@ namespace HistoryQuest.Domain
 		private string _Name;
 		
 		private EntitySet<UsersInRole> _UsersInRoles;
+		
+		private bool serializing;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2021,11 +2191,11 @@ namespace HistoryQuest.Domain
 		
 		public Role()
 		{
-			this._UsersInRoles = new EntitySet<UsersInRole>(new Action<UsersInRole>(this.attach_UsersInRoles), new Action<UsersInRole>(this.detach_UsersInRoles));
-			OnCreated();
+			this.Initialize();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public int id
 		{
 			get
@@ -2046,6 +2216,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gid", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public System.Guid gid
 		{
 			get
@@ -2066,6 +2237,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public string Name
 		{
 			get
@@ -2086,10 +2258,16 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_UsersInRole", Storage="_UsersInRoles", ThisKey="gid", OtherKey="RoleGID")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4, EmitDefaultValue=false)]
 		public EntitySet<UsersInRole> UsersInRoles
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._UsersInRoles.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._UsersInRoles;
 			}
 			set
@@ -2129,9 +2307,37 @@ namespace HistoryQuest.Domain
 			this.SendPropertyChanging();
 			entity.Role = null;
 		}
+		
+		private void Initialize()
+		{
+			this._UsersInRoles = new EntitySet<UsersInRole>(new Action<UsersInRole>(this.attach_UsersInRoles), new Action<UsersInRole>(this.detach_UsersInRoles));
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerializing(StreamingContext context)
+		{
+			this.serializing = true;
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializedAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerialized(StreamingContext context)
+		{
+			this.serializing = false;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Tasks")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class Task : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -2163,6 +2369,8 @@ namespace HistoryQuest.Domain
 		
 		private EntityRef<User> _User;
 		
+		private bool serializing;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -2187,15 +2395,11 @@ namespace HistoryQuest.Domain
 		
 		public Task()
 		{
-			this._Likes = new EntitySet<Like>(new Action<Like>(this.attach_Likes), new Action<Like>(this.detach_Likes));
-			this._TasksToTries = new EntitySet<TasksToTry>(new Action<TasksToTry>(this.attach_TasksToTries), new Action<TasksToTry>(this.detach_TasksToTries));
-			this._CheckPoint = default(EntityRef<CheckPoint>);
-			this._TaskType = default(EntityRef<TaskType>);
-			this._User = default(EntityRef<User>);
-			OnCreated();
+			this.Initialize();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="BigInt NOT NULL IDENTITY", IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public long id
 		{
 			get
@@ -2216,6 +2420,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gid", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public System.Guid gid
 		{
 			get
@@ -2236,6 +2441,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(250) NOT NULL", CanBeNull=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public string Name
 		{
 			get
@@ -2256,6 +2462,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaxScore", DbType="BigInt NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public long MaxScore
 		{
 			get
@@ -2276,6 +2483,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TaskTypeGID", DbType="UniqueIdentifier NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
 		public System.Guid TaskTypeGID
 		{
 			get
@@ -2300,6 +2508,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckPointGID", DbType="UniqueIdentifier NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6)]
 		public System.Guid CheckPointGID
 		{
 			get
@@ -2324,6 +2533,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SourceFilePath", DbType="NVarChar(250) NOT NULL", CanBeNull=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=7)]
 		public string SourceFilePath
 		{
 			get
@@ -2344,6 +2554,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AuthorGID", DbType="UniqueIdentifier")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=8)]
 		public System.Nullable<System.Guid> AuthorGID
 		{
 			get
@@ -2368,10 +2579,16 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Task_Like", Storage="_Likes", ThisKey="gid", OtherKey="TaskGID")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=9, EmitDefaultValue=false)]
 		public EntitySet<Like> Likes
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._Likes.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._Likes;
 			}
 			set
@@ -2381,10 +2598,16 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Task_TasksToTry", Storage="_TasksToTries", ThisKey="gid", OtherKey="TaskGID")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=10, EmitDefaultValue=false)]
 		public EntitySet<TasksToTry> TasksToTries
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._TasksToTries.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._TasksToTries;
 			}
 			set
@@ -2538,9 +2761,41 @@ namespace HistoryQuest.Domain
 			this.SendPropertyChanging();
 			entity.Task = null;
 		}
+		
+		private void Initialize()
+		{
+			this._Likes = new EntitySet<Like>(new Action<Like>(this.attach_Likes), new Action<Like>(this.detach_Likes));
+			this._TasksToTries = new EntitySet<TasksToTry>(new Action<TasksToTry>(this.attach_TasksToTries), new Action<TasksToTry>(this.detach_TasksToTries));
+			this._CheckPoint = default(EntityRef<CheckPoint>);
+			this._TaskType = default(EntityRef<TaskType>);
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerializing(StreamingContext context)
+		{
+			this.serializing = true;
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializedAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerialized(StreamingContext context)
+		{
+			this.serializing = false;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TasksToTries")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class TasksToTry : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -2582,12 +2837,11 @@ namespace HistoryQuest.Domain
 		
 		public TasksToTry()
 		{
-			this._Task = default(EntityRef<Task>);
-			this._Try = default(EntityRef<Try>);
-			OnCreated();
+			this.Initialize();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="BigInt NOT NULL IDENTITY", IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public long id
 		{
 			get
@@ -2608,6 +2862,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gid", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public System.Guid gid
 		{
 			get
@@ -2628,6 +2883,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TaskGID", DbType="UniqueIdentifier NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public System.Guid TaskGID
 		{
 			get
@@ -2652,6 +2908,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TryGID", DbType="UniqueIdentifier NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public System.Guid TryGID
 		{
 			get
@@ -2676,6 +2933,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EarnedScore", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
 		public int EarnedScore
 		{
 			get
@@ -2696,6 +2954,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ElapsedTime", DbType="BigInt NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6)]
 		public long ElapsedTime
 		{
 			get
@@ -2802,9 +3061,24 @@ namespace HistoryQuest.Domain
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void Initialize()
+		{
+			this._Task = default(EntityRef<Task>);
+			this._Try = default(EntityRef<Try>);
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TaskTypes")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class TaskType : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -2817,6 +3091,8 @@ namespace HistoryQuest.Domain
 		private string _Name;
 		
 		private EntitySet<Task> _Tasks;
+		
+		private bool serializing;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2832,11 +3108,11 @@ namespace HistoryQuest.Domain
 		
 		public TaskType()
 		{
-			this._Tasks = new EntitySet<Task>(new Action<Task>(this.attach_Tasks), new Action<Task>(this.detach_Tasks));
-			OnCreated();
+			this.Initialize();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public int id
 		{
 			get
@@ -2857,6 +3133,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gid", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public System.Guid gid
 		{
 			get
@@ -2877,6 +3154,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public string Name
 		{
 			get
@@ -2897,10 +3175,16 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TaskType_Task", Storage="_Tasks", ThisKey="gid", OtherKey="TaskTypeGID")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4, EmitDefaultValue=false)]
 		public EntitySet<Task> Tasks
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._Tasks.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._Tasks;
 			}
 			set
@@ -2940,9 +3224,37 @@ namespace HistoryQuest.Domain
 			this.SendPropertyChanging();
 			entity.TaskType = null;
 		}
+		
+		private void Initialize()
+		{
+			this._Tasks = new EntitySet<Task>(new Action<Task>(this.attach_Tasks), new Action<Task>(this.detach_Tasks));
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerializing(StreamingContext context)
+		{
+			this.serializing = true;
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializedAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerialized(StreamingContext context)
+		{
+			this.serializing = false;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Tries")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class Try : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -2964,6 +3276,8 @@ namespace HistoryQuest.Domain
 		
 		private EntityRef<User> _User;
 		
+		private bool serializing;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -2982,13 +3296,11 @@ namespace HistoryQuest.Domain
 		
 		public Try()
 		{
-			this._TasksToTries = new EntitySet<TasksToTry>(new Action<TasksToTry>(this.attach_TasksToTries), new Action<TasksToTry>(this.detach_TasksToTries));
-			this._Quest = default(EntityRef<Quest>);
-			this._User = default(EntityRef<User>);
-			OnCreated();
+			this.Initialize();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="BigInt NOT NULL IDENTITY", IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public long id
 		{
 			get
@@ -3009,6 +3321,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gid", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public System.Guid gid
 		{
 			get
@@ -3029,6 +3342,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestGID", DbType="UniqueIdentifier NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public System.Guid QuestGID
 		{
 			get
@@ -3053,6 +3367,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserGID", DbType="UniqueIdentifier NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public System.Guid UserGID
 		{
 			get
@@ -3077,6 +3392,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSuccessful", DbType="Bit")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
 		public System.Nullable<bool> IsSuccessful
 		{
 			get
@@ -3097,10 +3413,16 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Try_TasksToTry", Storage="_TasksToTries", ThisKey="gid", OtherKey="TryGID")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6, EmitDefaultValue=false)]
 		public EntitySet<TasksToTry> TasksToTries
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._TasksToTries.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._TasksToTries;
 			}
 			set
@@ -3208,9 +3530,39 @@ namespace HistoryQuest.Domain
 			this.SendPropertyChanging();
 			entity.Try = null;
 		}
+		
+		private void Initialize()
+		{
+			this._TasksToTries = new EntitySet<TasksToTry>(new Action<TasksToTry>(this.attach_TasksToTries), new Action<TasksToTry>(this.detach_TasksToTries));
+			this._Quest = default(EntityRef<Quest>);
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerializing(StreamingContext context)
+		{
+			this.serializing = true;
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializedAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerialized(StreamingContext context)
+		{
+			this.serializing = false;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -3246,6 +3598,8 @@ namespace HistoryQuest.Domain
 		
 		private EntityRef<Face> _Face;
 		
+		private bool serializing;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -3270,17 +3624,11 @@ namespace HistoryQuest.Domain
 		
 		public User()
 		{
-			this._CheckPoints = new EntitySet<CheckPoint>(new Action<CheckPoint>(this.attach_CheckPoints), new Action<CheckPoint>(this.detach_CheckPoints));
-			this._UsersInRoles = new EntitySet<UsersInRole>(new Action<UsersInRole>(this.attach_UsersInRoles), new Action<UsersInRole>(this.detach_UsersInRoles));
-			this._Likes = new EntitySet<Like>(new Action<Like>(this.attach_Likes), new Action<Like>(this.detach_Likes));
-			this._Quests = new EntitySet<Quest>(new Action<Quest>(this.attach_Quests), new Action<Quest>(this.detach_Quests));
-			this._Tasks = new EntitySet<Task>(new Action<Task>(this.attach_Tasks), new Action<Task>(this.detach_Tasks));
-			this._Tries = new EntitySet<Try>(new Action<Try>(this.attach_Tries), new Action<Try>(this.detach_Tries));
-			this._Face = default(EntityRef<Face>);
-			OnCreated();
+			this.Initialize();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="BigInt NOT NULL IDENTITY", IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public long id
 		{
 			get
@@ -3301,6 +3649,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gid", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public System.Guid gid
 		{
 			get
@@ -3321,6 +3670,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public string UserName
 		{
 			get
@@ -3341,6 +3691,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(256)")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public string Password
 		{
 			get
@@ -3361,6 +3712,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordFormat", DbType="Int")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
 		public System.Nullable<int> PasswordFormat
 		{
 			get
@@ -3381,6 +3733,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordSalt", DbType="NVarChar(256)")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6)]
 		public string PasswordSalt
 		{
 			get
@@ -3401,6 +3754,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FaceGID", DbType="UniqueIdentifier")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=7)]
 		public System.Nullable<System.Guid> FaceGID
 		{
 			get
@@ -3425,6 +3779,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSocial", DbType="Bit NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=8)]
 		public bool IsSocial
 		{
 			get
@@ -3445,10 +3800,16 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_CheckPoint", Storage="_CheckPoints", ThisKey="gid", OtherKey="AuthorGID")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=9, EmitDefaultValue=false)]
 		public EntitySet<CheckPoint> CheckPoints
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._CheckPoints.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._CheckPoints;
 			}
 			set
@@ -3458,10 +3819,16 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UsersInRole", Storage="_UsersInRoles", ThisKey="gid", OtherKey="UserGID")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=10, EmitDefaultValue=false)]
 		public EntitySet<UsersInRole> UsersInRoles
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._UsersInRoles.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._UsersInRoles;
 			}
 			set
@@ -3471,10 +3838,16 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Like", Storage="_Likes", ThisKey="gid", OtherKey="UserGID")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=11, EmitDefaultValue=false)]
 		public EntitySet<Like> Likes
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._Likes.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._Likes;
 			}
 			set
@@ -3484,10 +3857,16 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Quest", Storage="_Quests", ThisKey="gid", OtherKey="AuthorGID")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=12, EmitDefaultValue=false)]
 		public EntitySet<Quest> Quests
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._Quests.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._Quests;
 			}
 			set
@@ -3497,10 +3876,16 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Task", Storage="_Tasks", ThisKey="gid", OtherKey="AuthorGID")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=13, EmitDefaultValue=false)]
 		public EntitySet<Task> Tasks
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._Tasks.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._Tasks;
 			}
 			set
@@ -3510,10 +3895,16 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Try", Storage="_Tries", ThisKey="gid", OtherKey="UserGID")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=14, EmitDefaultValue=false)]
 		public EntitySet<Try> Tries
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._Tries.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
 				return this._Tries;
 			}
 			set
@@ -3523,34 +3914,24 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Face_User", Storage="_Face", ThisKey="FaceGID", OtherKey="gid", IsForeignKey=true, DeleteRule="CASCADE")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=15, EmitDefaultValue=false)]
 		public Face Face
 		{
 			get
 			{
+				if ((this.serializing 
+							&& (this._Face.HasLoadedOrAssignedValue == false)))
+				{
+					return null;
+				}
 				return this._Face.Entity;
 			}
 			set
 			{
-				Face previousValue = this._Face.Entity;
-				if (((previousValue != value) 
-							|| (this._Face.HasLoadedOrAssignedValue == false)))
+				if ((this._Face.Entity != value))
 				{
 					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Face.Entity = null;
-						previousValue.Users.Remove(this);
-					}
 					this._Face.Entity = value;
-					if ((value != null))
-					{
-						value.Users.Add(this);
-						this._FaceGID = value.gid;
-					}
-					else
-					{
-						this._FaceGID = default(Nullable<System.Guid>);
-					}
 					this.SendPropertyChanged("Face");
 				}
 			}
@@ -3646,6 +4027,39 @@ namespace HistoryQuest.Domain
 		{
 			this.SendPropertyChanging();
 			entity.User = null;
+		}
+		
+		private void Initialize()
+		{
+			this._CheckPoints = new EntitySet<CheckPoint>(new Action<CheckPoint>(this.attach_CheckPoints), new Action<CheckPoint>(this.detach_CheckPoints));
+			this._UsersInRoles = new EntitySet<UsersInRole>(new Action<UsersInRole>(this.attach_UsersInRoles), new Action<UsersInRole>(this.detach_UsersInRoles));
+			this._Likes = new EntitySet<Like>(new Action<Like>(this.attach_Likes), new Action<Like>(this.detach_Likes));
+			this._Quests = new EntitySet<Quest>(new Action<Quest>(this.attach_Quests), new Action<Quest>(this.detach_Quests));
+			this._Tasks = new EntitySet<Task>(new Action<Task>(this.attach_Tasks), new Action<Task>(this.detach_Tasks));
+			this._Tries = new EntitySet<Try>(new Action<Try>(this.attach_Tries), new Action<Try>(this.detach_Tries));
+			this._Face = default(EntityRef<Face>);
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerializing(StreamingContext context)
+		{
+			this.serializing = true;
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializedAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerialized(StreamingContext context)
+		{
+			this.serializing = false;
 		}
 	}
 }

@@ -27,6 +27,41 @@ namespace HistoryQuest.WebServices
         }
 
         [WebMethod]
+        public List<Face> GetTeacherRequests()
+        {
+            var requests = (from ptr in Repository.CurrentDataContext.PupilsToTeachersRequests
+                            join fP in Repository.CurrentDataContext.Faces on ptr.PupilsGID equals fP.gid
+                            where ptr.TeacherGID == Repository.CurrentUser.FaceGID
+                            select fP).ToList();
+
+            return requests;
+        }
+
+        [WebMethod]
+        public void AddStudent(Guid studentGID)
+        {
+            var request = Repository.CurrentDataContext.PupilsToTeachersRequests.SingleOrDefault(ptr => ptr.PupilsGID == studentGID && ptr.TeacherGID == Repository.CurrentUser.FaceGID);
+
+            if (request != null)
+            {
+                Repository.CurrentDataContext.Faces.Where(f => f.gid == studentGID).Single().TeacherGID = Repository.CurrentUser.FaceGID;
+                Repository.CurrentDataContext.PupilsToTeachersRequests.DeleteOnSubmit(request);
+                Repository.CurrentDataContext.SubmitChanges();
+            }
+        }
+
+        [WebMethod]
+        public void DeleteStudent(Guid studentGID)
+        {
+            var request = Repository.CurrentDataContext.PupilsToTeachersRequests.SingleOrDefault(ptr => ptr.PupilsGID == studentGID && ptr.TeacherGID == Repository.CurrentUser.FaceGID);
+            if (request != null)
+            {
+                Repository.CurrentDataContext.PupilsToTeachersRequests.DeleteOnSubmit(request);
+                Repository.CurrentDataContext.SubmitChanges();
+            }
+        }
+
+        [WebMethod]
         public object GetQuestCheckPoints(Guid questGID)
         {
             Dictionary<string, object> result = new Dictionary<string, object>();

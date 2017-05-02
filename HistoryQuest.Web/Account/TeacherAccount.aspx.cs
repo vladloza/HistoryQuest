@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HistoryQuest.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,5 +10,10 @@ namespace HistoryQuest.Account
 {
     public partial class TeacherAccount : BasePage
     {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            base.Page_Load(sender, e);
+            if (!Repository.CurrentUser.Face.IsTeacher) { Response.Redirect("~/Login.aspx"); }
+        }
     }
 }

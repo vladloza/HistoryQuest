@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeBehind="TeacherAccount.aspx.cs" Inherits="HistoryQuest.Account.TeacherAccount" EnableEventValidation="false"%>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeBehind="TeacherAccount.aspx.cs" Inherits="HistoryQuest.Account.TeacherAccount" EnableEventValidation="false" %>
 
 <%@ Register TagPrefix="rc" TagName="reg" Src="~/Controls/ChangeInfo.ascx" %>
 <%@ Register TagPrefix="cpc" TagName="changePass" Src="~/Controls/ChangePassword.ascx" %>
@@ -11,7 +11,7 @@
                     <div class="card card header-settings clearfix">
                         <div class="about-block">
                             <h4>ПІБ:</h4>
-                            <h4>Прізвище Імя По батькові</h4>
+                            <h4><%= Repository.CurrentUser.Face?.LastName + " " + Repository.CurrentUser.Face?.FirstName + " " + Repository.CurrentUser.Face?.MiddleName%></h4>
                         </div>
                     </div>
                     <div class="card income">
@@ -20,7 +20,7 @@
                             <h2>Запити</h2>
                         </div>
                         <div class="card-table">
-                            <table>
+                            <table id="requestsTable">
                                 <tbody>
                                     <tr>
                                         <th>ID</th>
@@ -28,36 +28,6 @@
                                         <th>Імя</th>
                                         <th>По батькові</th>
                                         <th>Дії</th>
-                                    </tr>
-                                    <tr>
-                                        <td>105</td>
-                                        <td>Трофименко</td>
-                                        <td>Маргарита</td>
-                                        <td>Юріївна</td>
-                                        <td>
-                                            <a><i class="fa fa-check" aria-hidden="true"></i></a>
-                                            <a><i class="fa fa-times" aria-hidden="true"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>105</td>
-                                        <td>Трофименко</td>
-                                        <td>Маргарита</td>
-                                        <td>Юріївна</td>
-                                        <td>
-                                            <a><i class="fa fa-check" aria-hidden="true"></i></a>
-                                            <a><i class="fa fa-times" aria-hidden="true"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>105</td>
-                                        <td>Трофименко</td>
-                                        <td>Маргарита</td>
-                                        <td>Юріївна</td>
-                                        <td>
-                                            <a><i class="fa fa-check" aria-hidden="true"></i></a>
-                                            <a><i class="fa fa-times" aria-hidden="true"></i></a>
-                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -84,7 +54,7 @@
         <div id="secondary">
             <div class="">
                 <div class="profile-name">
-                    <h2><%= Repository.CurrentUser?.Face.FirstName %></h2>
+                    <h2><%= Repository.CurrentUser?.Face.FullName %></h2>
                 </div>
                 <ul class="sidebar-menu">
                     <li class="active">
@@ -101,4 +71,19 @@
             </div>
         </div>
     </div>
+    <script>
+        window.onload = WebService.GetTeacherRequests();
+    </script>
+    <script>
+        function AddStudent(btn, gid) {
+            WebService.AddStudent(gid);
+            var row = btn.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        };
+        function DeleteStudent(btn, gid) {
+            WebService.DeleteStudent(gid);
+            var row = btn.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        };
+    </script>
 </asp:Content>
