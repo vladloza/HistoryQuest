@@ -8,9 +8,12 @@ namespace HistoryQuest
 {
     public class BasePage : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected virtual void Page_Load(object sender, EventArgs e)
         {
-            if (Repository.CurrentUser == null) { Response.Redirect("~/Login.aspx"); }
+            if (Repository.CurrentUser == null)
+            {
+                Response.Redirect("~/Login.aspx");
+            }
         }
     }
 }

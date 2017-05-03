@@ -10,10 +10,10 @@ namespace HistoryQuest.Account
 {
     public partial class AdminAccount : BasePage
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected override void Page_Load(object sender, EventArgs e)
         {
             base.Page_Load(sender, e);
-            if (Repository.CurrentUser.UsersInRoles.FirstOrDefault(uir => uir.RoleGID == new Guid(Constants.AdminRoleGID) && uir.UserGID == Repository.CurrentUser.gid) == null)
+            if (Repository.CurrentUser.UsersInRoles.FirstOrDefault(uir => uir.RoleGID == new Guid(Constants.AdminRoleGID)) == null)
             {
                 Response.Redirect("~/Login.aspx");
             }

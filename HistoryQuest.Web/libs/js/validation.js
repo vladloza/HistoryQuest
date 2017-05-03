@@ -39,24 +39,20 @@ function validate(el) {
     switch (attribute) {
         case 'email':
             return validateEmail(value);
-            break;
         case 'password':
             if (value != '') {
                 pass = value;
                 return true;
             }
             return false;
-            break;
         case 'password-commit':
             if (pass && value == pass) {
                 return true;
             }
             return false;
-            break;
         case 'text':
         default:
             return value != '';
-            break;
     }
 
 }

@@ -57,7 +57,7 @@
                 <asp:ScriptReference Path="~/libs/js/validation.js" />
                 <asp:ScriptReference Path="~/libs/js/Helper.js" />
                 <asp:ScriptReference Path="~/Scripts/WebService.js" />
-                <asp:ScriptReference Path="~/Quest/Scripts/QuestMap.js" />
+                <asp:ScriptReference Path="~/Quests/Scripts/QuestMap.js" />
             </Scripts>
         </asp:ScriptManager>
     </form>

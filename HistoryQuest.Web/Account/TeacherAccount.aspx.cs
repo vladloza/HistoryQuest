@@ -10,10 +10,13 @@ namespace HistoryQuest.Account
 {
     public partial class TeacherAccount : BasePage
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected override void Page_Load(object sender, EventArgs e)
         {
             base.Page_Load(sender, e);
-            if (!Repository.CurrentUser.Face.IsTeacher) { Response.Redirect("~/Account/StudentAccount.aspx"); }
+            if (!Repository.CurrentUser.Face.IsTeacher)
+            {
+                Response.Redirect("~/Account/StudentAccount.aspx");
+            }
         }
     }
 }

@@ -21,26 +21,33 @@ namespace HistoryQuest.WebServices
     public class WebService : System.Web.Services.WebService
     {
         [WebMethod]
-        public List<Face> GetTeachersByPrefix(string prefix)
+        public object GetTeachersByPrefix(string prefix)
         {
-            return prefix.Length > 1 ? Repository.CurrentDataContext.Faces.Where(f => f.IsTeacher && (f.LastName + " " + f.LastName[0] + "." + f.MiddleName[0] + "." + f.id + "").Contains(prefix)).ToList() : null;
+            if (prefix.Length > 1)
+            {
+                return (from f in Repository.CurrentDataContext.Faces
+                        where f.IsTeacher && (f.LastName + " " + f.LastName[0] + "." + f.MiddleName[0] + "." + f.id + "").Contains(prefix)
+                        select new { f.gid, f.id, f.LastName, f.FirstName, f.MiddleName }).ToList();
+            }
+
+            return null;
         }
 
         [WebMethod]
-        public List<Face> GetTeacherRequests()
+        public object GetTeacherRequests()
         {
             var requests = (from ptr in Repository.CurrentDataContext.PupilsToTeachersRequests
-                            join fP in Repository.CurrentDataContext.Faces on ptr.PupilsGID equals fP.gid
+                            join fp in Repository.CurrentDataContext.Faces on ptr.PupilGID equals fp.gid
                             where ptr.TeacherGID == Repository.CurrentUser.FaceGID
-                            select fP).ToList();
+                            select new { fp.gid, fp.id, fp.LastName, fp.FirstName, fp.MiddleName }).ToList();
 
             return requests;
         }
-
+        
         [WebMethod]
         public void AddStudent(Guid studentGID)
         {
-            var request = Repository.CurrentDataContext.PupilsToTeachersRequests.SingleOrDefault(ptr => ptr.PupilsGID == studentGID && ptr.TeacherGID == Repository.CurrentUser.FaceGID);
+            var request = Repository.CurrentDataContext.PupilsToTeachersRequests.SingleOrDefault(ptr => ptr.PupilGID == studentGID && ptr.TeacherGID == Repository.CurrentUser.FaceGID);
 
             if (request != null)
             {
@@ -53,7 +60,7 @@ namespace HistoryQuest.WebServices
         [WebMethod]
         public void DeleteStudent(Guid studentGID)
         {
-            var request = Repository.CurrentDataContext.PupilsToTeachersRequests.SingleOrDefault(ptr => ptr.PupilsGID == studentGID && ptr.TeacherGID == Repository.CurrentUser.FaceGID);
+            var request = Repository.CurrentDataContext.PupilsToTeachersRequests.SingleOrDefault(ptr => ptr.PupilGID == studentGID && ptr.TeacherGID == Repository.CurrentUser.FaceGID);
             if (request != null)
             {
                 Repository.CurrentDataContext.PupilsToTeachersRequests.DeleteOnSubmit(request);
@@ -77,9 +84,8 @@ namespace HistoryQuest.WebServices
                 if (quest != null)
                 {
                     completedCheckPoints = (from cp in Repository.CurrentDataContext.CheckPoints
-                                 join t in Repository.CurrentDataContext.Tasks on cp.gid equals t.CheckPointGID
-                                 join ttt in Repository.CurrentDataContext.TasksToTries on t.gid equals ttt.TaskGID
-                                 where ttt.TryGID == userTry.gid
+                                 join cpt in Repository.CurrentDataContext.CheckPointsToTries on cp.gid equals cpt.CheckPointGID
+                                 where cpt.TryGID == userTry.gid && !cpt.IsFailed
                                  select cp).Distinct().ToList();
                 }
                 else
@@ -114,7 +120,7 @@ namespace HistoryQuest.WebServices
                 //HandleError
             }
 
-            return new JavaScriptSerializer().Serialize(result);
+            return result;
         }
 
         [WebMethod]

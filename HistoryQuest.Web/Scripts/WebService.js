@@ -10,7 +10,7 @@ WebService.GetQuestCheckPoints = function (questGID, onSuccess) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (r) {
-            QuestMap.OnLoadSuccess(JSON.parse(r.d));
+            QuestMap.OnLoadSuccess(r.d);
         },
         error: function (r) {
             alert(r.responseText);
