@@ -31,6 +31,15 @@ namespace HistoryQuest {
         protected global::System.Web.UI.HtmlControls.HtmlForm MainForm;
         
         /// <summary>
+        /// MainMenuHistoricalInfoButton элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        public global::System.Web.UI.HtmlControls.HtmlGenericControl MainMenuHistoricalInfoButton;
+        
+        /// <summary>
         /// ContentPlaceHolder элемент управления.
         /// </summary>
         /// <remarks>

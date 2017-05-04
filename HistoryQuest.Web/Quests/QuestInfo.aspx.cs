@@ -9,8 +9,19 @@ namespace HistoryQuest.Quests
 {
     public partial class QuestInfo : BasePage
     {
+        protected Guid QuestGID;
+
         protected override void Page_Load(object sender, EventArgs e)
         {
+            if (Session["CurrentQuestGID"] != null)
+            {
+                QuestGID = new Guid(Session["CurrentQuestGID"].ToString());
+            }
+            else
+            {
+                Response.Redirect("~/Default.aspx");
+            }
+
             base.Page_Load(sender, e);
         }
     }

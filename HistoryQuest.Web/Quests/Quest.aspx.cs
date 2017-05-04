@@ -14,6 +14,8 @@ namespace HistoryQuest
         {
             base.Page_Load(sender, e);
 
+            (Master as HistoryQuest.Main).MainMenuHistoricalInfoButton.Attributes["style"] = "";
+
             Guid queryGID = Guid.Empty;
             if (Guid.TryParse(Session["CurrentQuestGID"].ToString(), out queryGID))
             {
