@@ -13,16 +13,12 @@ namespace HistoryQuest.Quests
 
         protected override void Page_Load(object sender, EventArgs e)
         {
-            if (Session["CurrentQuestGID"] != null)
-            {
-                QuestGID = new Guid(Session["CurrentQuestGID"].ToString());
-            }
-            else
+            base.Page_Load(sender, e);
+
+            if (Session == null || Session["CurrentQuestGID"] == null || !Guid.TryParse(Session["CurrentQuestGID"].ToString(), out QuestGID))
             {
                 Response.Redirect("~/Default.aspx");
             }
-
-            base.Page_Load(sender, e);
         }
     }
 }

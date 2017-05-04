@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div class="info-button">
-                        <button class="btn btn-info">Розпочати квест</button>
+                        <button class="btn btn-info"  onclick="WebService.OpenQuestPage('<%= QuestGID %>')">Розпочати квест</button>
                     </div>
                 </section>
             </div>

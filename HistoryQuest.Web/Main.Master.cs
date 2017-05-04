@@ -15,6 +15,7 @@ namespace HistoryQuest
         protected void ExitButton_Click(object sender, EventArgs e)
         {
             Repository.CurrentUser = null;
+            Session.Clear();
             Response.Redirect("~/Login.aspx");
         }
 
