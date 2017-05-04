@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace HistoryQuest
+namespace HistoryQuest.Quests
 {
-    public partial class HistoricalInformation : BasePage
+    public partial class QuestInfo : BasePage
     {
         protected override void Page_Load(object sender, EventArgs e)
         {

@@ -59,7 +59,7 @@ namespace HistoryQuest
                     var request = new PupilsToTeachersRequest()
                     {
                         gid = Guid.NewGuid(),
-                        PupilsGID = user.FaceGID.Value,
+                        PupilGID = user.FaceGID.Value,
                         TeacherGID = new Guid(selectedTeacher.Value)
                     };
 

@@ -21,9 +21,9 @@
                             <h4>Вчитель: </h4>
                             <h4><%= Repository.CurrentUser.Face?.TeacherGID != null ? 
                                     Repository.CurrentDataContext.Faces.FirstOrDefault(f=>f.gid==Repository.CurrentUser.Face.TeacherGID)?.FullName : 
-                                    Repository.CurrentDataContext.PupilsToTeachersRequests.FirstOrDefault(ptr => ptr.PupilsGID == Repository.CurrentUser.FaceGID) != null ? 
+                                    Repository.CurrentDataContext.PupilsToTeachersRequests.FirstOrDefault(ptr => ptr.PupilGID == Repository.CurrentUser.FaceGID) != null ? 
                                     "заявку відправлено" : "відсутній"%></h4>
-                            <a class="small-control" id="choose" style=<%= Repository.CurrentUser.Face?.TeacherGID != null ? "display:none": "display:inline-block" %> onclick="showControl('chooseTeacher', 'choose')">Обрати</a>
+                            <a class="small-control" id="choose" style=<%= Repository.CurrentUser.Face?.TeacherGID != null ? "display:none": "display:inline-block" %> onclick="showControl('chooseTeacher', ['choose'])">Обрати</a>
                         </div>
                     </div>
                     <div class="card" id="chooseTeacher" style="display: none">

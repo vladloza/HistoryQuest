@@ -1,6 +1,6 @@
-﻿WebService = { };
+﻿WebService = function () { };
 
-WebService.prototype = function () { };
+WebService.prototype = { };
 
 WebService.GetQuestCheckPoints = function (questGID, onSuccess) {
     $.ajax({
@@ -10,7 +10,9 @@ WebService.GetQuestCheckPoints = function (questGID, onSuccess) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (r) {
-            QuestMap.OnLoadSuccess(JSON.parse(r.d));
+            if (onSuccess) {
+                onSuccess(r.d);
+            }
         },
         error: function (r) {
             alert(r.responseText);
@@ -67,6 +69,7 @@ WebService.AddStudent = function (gid) {
         }
     });
 };
+
 WebService.DeleteStudent = function (gid) {
     $.ajax({
         type: "POST",
@@ -74,6 +77,25 @@ WebService.DeleteStudent = function (gid) {
         url: "../WebServices/WebService.asmx/DeleteStudent",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        error: function (r) {
+            alert(r.responseText);
+        },
+        failure: function (r) {
+            alert(r.responseText);
+        }
+    });
+};
+
+WebService.OpenQuestPage = function (questGID) {
+    $.ajax({
+        type: "POST",
+        data: "{ questGID: '" + questGID + "' }",
+        url: "../WebServices/WebService.asmx/OpenQuestPage",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (r) {
+            window.location = r.d;
+        },
         error: function (r) {
             alert(r.responseText);
         },

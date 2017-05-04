@@ -21,26 +21,33 @@ namespace HistoryQuest.WebServices
     public class WebService : System.Web.Services.WebService
     {
         [WebMethod]
-        public List<Face> GetTeachersByPrefix(string prefix)
+        public object GetTeachersByPrefix(string prefix)
         {
-            return prefix.Length > 1 ? Repository.CurrentDataContext.Faces.Where(f => f.IsTeacher && (f.LastName + " " + f.LastName[0] + "." + f.MiddleName[0] + "." + f.id + "").Contains(prefix)).ToList() : null;
+            if (prefix.Length > 1)
+            {
+                return (from f in Repository.CurrentDataContext.Faces
+                        where f.IsTeacher && (f.LastName + " " + f.LastName[0] + "." + f.MiddleName[0] + "." + f.id + "").Contains(prefix)
+                        select new { f.gid, f.id, f.LastName, f.FirstName, f.MiddleName }).ToList();
+            }
+
+            return null;
         }
 
         [WebMethod]
-        public List<Face> GetTeacherRequests()
+        public object GetTeacherRequests()
         {
             var requests = (from ptr in Repository.CurrentDataContext.PupilsToTeachersRequests
-                            join fP in Repository.CurrentDataContext.Faces on ptr.PupilsGID equals fP.gid
+                            join fp in Repository.CurrentDataContext.Faces on ptr.PupilGID equals fp.gid
                             where ptr.TeacherGID == Repository.CurrentUser.FaceGID
-                            select fP).ToList();
+                            select new { fp.gid, fp.id, fp.LastName, fp.FirstName, fp.MiddleName }).ToList();
 
             return requests;
         }
-
+        
         [WebMethod]
         public void AddStudent(Guid studentGID)
         {
-            var request = Repository.CurrentDataContext.PupilsToTeachersRequests.SingleOrDefault(ptr => ptr.PupilsGID == studentGID && ptr.TeacherGID == Repository.CurrentUser.FaceGID);
+            var request = Repository.CurrentDataContext.PupilsToTeachersRequests.SingleOrDefault(ptr => ptr.PupilGID == studentGID && ptr.TeacherGID == Repository.CurrentUser.FaceGID);
 
             if (request != null)
             {
@@ -53,12 +60,25 @@ namespace HistoryQuest.WebServices
         [WebMethod]
         public void DeleteStudent(Guid studentGID)
         {
-            var request = Repository.CurrentDataContext.PupilsToTeachersRequests.SingleOrDefault(ptr => ptr.PupilsGID == studentGID && ptr.TeacherGID == Repository.CurrentUser.FaceGID);
+            var request = Repository.CurrentDataContext.PupilsToTeachersRequests.SingleOrDefault(ptr => ptr.PupilGID == studentGID && ptr.TeacherGID == Repository.CurrentUser.FaceGID);
             if (request != null)
             {
                 Repository.CurrentDataContext.PupilsToTeachersRequests.DeleteOnSubmit(request);
                 Repository.CurrentDataContext.SubmitChanges();
             }
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string OpenQuestPage(Guid questGID)
+        {
+            Session["CurrentQuestGID"] = questGID;
+
+            if (Repository.CurrentUser.Tries.Any(t => t.QuestGID == questGID && !t.IsSuccessful.HasValue))
+            {
+                return "/Quests/Quest.aspx";
+            }
+
+            return "/Quests/QuestInfo.aspx";
         }
 
         [WebMethod]
@@ -71,29 +91,29 @@ namespace HistoryQuest.WebServices
                 HistoryQuest.Domain.Try userTry = Repository.CurrentUser.Tries.SingleOrDefault(t => t.QuestGID == questGID && !t.IsSuccessful.HasValue);
                 HistoryQuest.Domain.Quest quest = userTry != null ? userTry.Quest : null;
 
-                List<CheckPoint> completedCheckPoints = new List<CheckPoint>();
+                List<Guid> completedCheckPoints = new List<Guid>();
                 List<CheckPoint> allCheckPoints = new List<CheckPoint>();
 
                 if (quest != null)
                 {
                     completedCheckPoints = (from cp in Repository.CurrentDataContext.CheckPoints
-                                 join t in Repository.CurrentDataContext.Tasks on cp.gid equals t.CheckPointGID
-                                 join ttt in Repository.CurrentDataContext.TasksToTries on t.gid equals ttt.TaskGID
-                                 where ttt.TryGID == userTry.gid
-                                 select cp).Distinct().ToList();
+                                 join cpt in Repository.CurrentDataContext.CheckPointsToTries on cp.gid equals cpt.CheckPointGID
+                                 where cpt.TryGID == userTry.gid && !cpt.IsFailed
+                                 select cp.gid).Distinct().ToList();
                 }
                 else
                 {
                     quest = Repository.CurrentDataContext.Quests.SingleOrDefault(q => q.gid == questGID);
                 }
 
-                allCheckPoints = quest.CheckPoints.ToList();
-
                 if (quest != null)
                 {
+                    allCheckPoints = quest.CheckPoints.ToList();
+
                     List<Dictionary<string, object>> checkPointsList = new List<Dictionary<string, object>>();
                     foreach (var checkPoint in allCheckPoints)
                     {
+                        bool isCompleted = completedCheckPoints.Contains(checkPoint.gid);
                         Dictionary<string, object> checkPointData = new Dictionary<string, object>
                         {
                             { "id", checkPoint.id },
@@ -102,7 +122,8 @@ namespace HistoryQuest.WebServices
                             { "IsBonus", checkPoint.IsBonus },
                             { "OrderId", checkPoint.OrderId },
                             { "GeoCoordinates", checkPoint.GeoCoordinates },
-                            { "IsCompleted", completedCheckPoints.Any(cp => cp.gid == checkPoint.gid) }
+                            { "IsCompleted", isCompleted },
+                            { "IsCurrent", !isCompleted && (!checkPoint.ParentGID.HasValue || completedCheckPoints.Contains(checkPoint.ParentGID.Value)) }
                         };
                         checkPointsList.Add(checkPointData);
                     }
@@ -114,7 +135,7 @@ namespace HistoryQuest.WebServices
                 //HandleError
             }
 
-            return new JavaScriptSerializer().Serialize(result);
+            return result;
         }
 
         [WebMethod]

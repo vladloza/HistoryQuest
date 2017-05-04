@@ -45,7 +45,7 @@
             </div>
         </div>
     </header>
-        <div id="MainDiv">
+        <div id="MainDiv" style="height: 700px">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server">
             </asp:ContentPlaceHolder>
         </div>
@@ -57,7 +57,7 @@
                 <asp:ScriptReference Path="~/libs/js/validation.js" />
                 <asp:ScriptReference Path="~/libs/js/Helper.js" />
                 <asp:ScriptReference Path="~/Scripts/WebService.js" />
-                <asp:ScriptReference Path="~/Quest/Scripts/QuestMap.js" />
+                <asp:ScriptReference Path="~/Quests/Scripts/QuestMap.js" />
             </Scripts>
         </asp:ScriptManager>
     </form>
