@@ -140,6 +140,7 @@
     <Content Include="libs\img\checkpoint_completed.png" />
     <Content Include="libs\img\checkpoint_new.png" />
     <Content Include="Scripts\WebService.js" />
+    <Content Include="Task\Task.aspx" />
     <Content Include="WebServices\WebService.asmx" />
     <Content Include="libs\fonts\Lato\LatoBold\LatoBold.eot" />
     <Content Include="libs\fonts\Lato\LatoBold\LatoBold.ttf" />
@@ -252,6 +253,13 @@
     </Compile>
     <Compile Include="Registration.aspx.designer.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Task\Task.aspx.cs">
+      <DependentUpon>Task.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Task\Task.aspx.designer.cs">
+      <DependentUpon>Task.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebServices\WebService.asmx.cs">
       <DependentUpon>WebService.asmx</DependentUpon>
