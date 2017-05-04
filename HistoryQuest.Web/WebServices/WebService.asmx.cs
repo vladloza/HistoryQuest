@@ -43,7 +43,7 @@ namespace HistoryQuest.WebServices
 
             return requests;
         }
-        
+
         [WebMethod]
         public void AddStudent(Guid studentGID)
         {
@@ -71,14 +71,17 @@ namespace HistoryQuest.WebServices
         [WebMethod(EnableSession = true)]
         public string OpenQuestPage(Guid questGID)
         {
-            Session["CurrentQuestGID"] = questGID;
-
-            if (Repository.CurrentUser.Tries.Any(t => t.QuestGID == questGID && !t.IsSuccessful.HasValue))
+            string url = "/Quests/QuestInfo.aspx";
+            
+            if ((Session["CurrentQuestGID"] != null && Guid.Parse(Session["CurrentQuestGID"].ToString()) == questGID)|| 
+                Repository.CurrentUser.Tries.Any(t => t.QuestGID == questGID && !t.IsSuccessful.HasValue))
             {
-                return "/Quests/Quest.aspx";
+                url = "/Quests/Quest.aspx";
             }
 
-            return "/Quests/QuestInfo.aspx";
+            Session["CurrentQuestGID"] = questGID;
+
+            return url;
         }
 
         [WebMethod]
