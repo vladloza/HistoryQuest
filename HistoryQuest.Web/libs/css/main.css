@@ -581,6 +581,9 @@ input.small-control {
     position: relative;
     text-align: center;
  }
+ .block-content a {
+     cursor:pointer;
+  }
  .block-content .fa-lock {
      font-size:3em;
      color:rgba(251, 251, 251, 0.73);

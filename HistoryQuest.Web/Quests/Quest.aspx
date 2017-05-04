@@ -9,9 +9,9 @@
         <div class="arrows">
             <button class="arrow" id="menu-toggle"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
         </div>
-        <div id="quest-info">
+        <div id="quest-info" class="active">
             <div>
-                <div id="quest-inner" class="active">
+                <div id="quest-inner">
                     <div class="chekpoint-name">
                         <h2>Название чекпоинта</h2>
                     </div>

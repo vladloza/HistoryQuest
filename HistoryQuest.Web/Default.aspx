@@ -20,7 +20,7 @@
                         <div class="col-sm-6 col-md-6 col-lg-6 questInner">
                             <div class="about-wrapper">
                                 <div class="block-content">
-                                    <a href="#" onclick="WebService.OpenQuestPage('<%= quest.gid %>')">
+                                    <a onclick="WebService.OpenQuestPage('<%= quest.gid %>')">
                                         <div class="image-blck-wrapper">
                                             <img src="libs/img/sagay.jpg" />
                                         </div>
