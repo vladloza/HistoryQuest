@@ -68,6 +68,19 @@ namespace HistoryQuest.WebServices
             }
         }
 
+        [WebMethod(EnableSession = true)]
+        public string OpenQuestPage(Guid questGID)
+        {
+            Session["CurrentQuestGID"] = questGID;
+
+            if (Repository.CurrentUser.Tries.Any(t => t.QuestGID == questGID && !t.IsSuccessful.HasValue))
+            {
+                return "/Quests/Quest.aspx";
+            }
+
+            return "/Quests/QuestInfo.aspx";
+        }
+
         [WebMethod]
         public object GetQuestCheckPoints(Guid questGID)
         {
@@ -78,7 +91,7 @@ namespace HistoryQuest.WebServices
                 HistoryQuest.Domain.Try userTry = Repository.CurrentUser.Tries.SingleOrDefault(t => t.QuestGID == questGID && !t.IsSuccessful.HasValue);
                 HistoryQuest.Domain.Quest quest = userTry != null ? userTry.Quest : null;
 
-                List<CheckPoint> completedCheckPoints = new List<CheckPoint>();
+                List<Guid> completedCheckPoints = new List<Guid>();
                 List<CheckPoint> allCheckPoints = new List<CheckPoint>();
 
                 if (quest != null)
@@ -86,20 +99,21 @@ namespace HistoryQuest.WebServices
                     completedCheckPoints = (from cp in Repository.CurrentDataContext.CheckPoints
                                  join cpt in Repository.CurrentDataContext.CheckPointsToTries on cp.gid equals cpt.CheckPointGID
                                  where cpt.TryGID == userTry.gid && !cpt.IsFailed
-                                 select cp).Distinct().ToList();
+                                 select cp.gid).Distinct().ToList();
                 }
                 else
                 {
                     quest = Repository.CurrentDataContext.Quests.SingleOrDefault(q => q.gid == questGID);
                 }
 
-                allCheckPoints = quest.CheckPoints.ToList();
-
                 if (quest != null)
                 {
+                    allCheckPoints = quest.CheckPoints.ToList();
+
                     List<Dictionary<string, object>> checkPointsList = new List<Dictionary<string, object>>();
                     foreach (var checkPoint in allCheckPoints)
                     {
+                        bool isCompleted = completedCheckPoints.Contains(checkPoint.gid);
                         Dictionary<string, object> checkPointData = new Dictionary<string, object>
                         {
                             { "id", checkPoint.id },
@@ -108,7 +122,8 @@ namespace HistoryQuest.WebServices
                             { "IsBonus", checkPoint.IsBonus },
                             { "OrderId", checkPoint.OrderId },
                             { "GeoCoordinates", checkPoint.GeoCoordinates },
-                            { "IsCompleted", completedCheckPoints.Any(cp => cp.gid == checkPoint.gid) }
+                            { "IsCompleted", isCompleted },
+                            { "IsCurrent", !isCompleted && (!checkPoint.ParentGID.HasValue || completedCheckPoints.Contains(checkPoint.ParentGID.Value)) }
                         };
                         checkPointsList.Add(checkPointData);
                     }

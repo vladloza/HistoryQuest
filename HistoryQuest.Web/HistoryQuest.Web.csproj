@@ -113,6 +113,7 @@
     <Content Include="libs\css\bootstrap.css" />
     <Content Include="libs\css\font-awesome.min.css" />
     <Content Include="libs\css\main.css" />
+    <Content Include="libs\img\checkpoint_locked.png" />
     <Content Include="libs\img\wall.png" />
     <Content Include="libs\img\gmail-icon.png" />
     <Content Include="libs\img\mazepa.jpg" />
@@ -138,7 +139,8 @@
     <Content Include="libs\fonts\Roboto\Roboto-Thin.ttf" />
     <Content Include="libs\fonts\fontawesome-webfont.ttf" />
     <Content Include="libs\img\checkpoint_completed.png" />
-    <Content Include="libs\img\checkpoint_new.png" />
+    <Content Include="libs\img\checkpoint_current.png" />
+    <Content Include="Quests\QuestInfo.aspx" />
     <Content Include="Scripts\WebService.js" />
     <Content Include="WebServices\WebService.asmx" />
     <Content Include="libs\fonts\Lato\LatoBold\LatoBold.eot" />
@@ -246,6 +248,13 @@
     <Compile Include="Quests\Quest.aspx.designer.cs">
       <DependentUpon>Quest.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Quests\QuestInfo.aspx.cs">
+      <DependentUpon>QuestInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quests\QuestInfo.aspx.designer.cs">
+      <DependentUpon>QuestInfo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Registration.aspx.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -253,6 +262,7 @@
     <Compile Include="Registration.aspx.designer.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\DataManager.cs" />
     <Compile Include="WebServices\WebService.asmx.cs">
       <DependentUpon>WebService.asmx</DependentUpon>
       <SubType>Component</SubType>
