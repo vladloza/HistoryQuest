@@ -73,6 +73,7 @@ body {
     background-color: #fbfbfb;
     height: 100%;
 }
+button:focus {outline:0;}
 h2 {
     text-align:center;
     font-family:RobotoBold;
@@ -87,6 +88,9 @@ section {
 }
 #MainDiv{
     position:relative;
+}
+.map-wrapper {
+    height:100vh;
 }
 #map {
     height: 100%;
@@ -389,6 +393,50 @@ input.small-control {
     text-align: center;
     margin: 0px;
 }
+#quest-info {
+    position:fixed;
+    right:0;
+    bottom:0;
+    top:52px;
+    background: #fff;
+    border-left: 1px solid #d9e3ea;
+    float: right;
+    width: 0px;
+    -moz-transition: width .2s linear;
+    -webkit-transition: width .2s linear;
+    -o-transition: width .2s linear;
+    transition: width .2s linear;
+}
+#quest-info.active {
+    width:350px;
+}
+.arrow {
+    height:100vh;
+    border: 0;
+    background: #f9f9f9;
+    display: inline;
+    margin: 0;
+    padding: 0px 6px;
+    cursor: pointer;
+}
+.arrows {
+    position:fixed;
+    right:0;
+    bottom:0;
+    top:55px;
+    float:right;
+    z-index:160;
+}
+.arrow:hover {
+    background: #f2f1f1;
+}
+.arrow i {
+    font-size:22px;
+}
+
+.chekpoint-name h2 {
+    font-size:20px;
+}
 #secondary {
     position:fixed;
     left:0;
@@ -398,6 +446,9 @@ input.small-control {
     border-right: 1px solid #d9e3ea;
     float: left;
     width: 60px;
+}
+.sidebar {
+    padding:0px 12px;
 }
 .sidebar-menu span {
     visibility: collapse;

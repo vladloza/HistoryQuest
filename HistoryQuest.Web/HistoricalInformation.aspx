@@ -29,7 +29,7 @@
             <section class="transparent">
                 <div class="comments">
                     <div class="info-comments">
-                        <h2><i class="fa fa-comments" aria-hidden="true"></i>Коментарі до квесту</h2>
+                        <h2>Коментарі до квесту</h2>
                     </div>
                     <div class="small-card card clearfix">
                         <fieldset class="form-fieldset">
