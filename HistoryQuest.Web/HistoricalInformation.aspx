@@ -19,5 +19,32 @@
                 </section>
             </div>
         </div>
+        <div class="container">
+            <section class="transparent">
+                <div class="comments">
+                    <div class="info-comments">
+                        <h2><i class="fa fa-comments" aria-hidden="true"></i>Коментарі до квесту</h2>
+                    </div>
+                    <div class="small-card card clearfix">
+                        <fieldset class="form-fieldset">
+                                <label for="description" class="form-label">Залиште коментар</label>
+                                <textarea id="description" name="description" class="form-input"></textarea>
+                        </fieldset>
+                        <button class="btn btn-info right">Відправити</button>
+                    </div>
+                    <div class="small-card card">
+                        <h4>Трофименко Маргарита</h4>
+                        <p>Какой обалденный квест! Разработчикам респект!</p>
+                        <div class="time">21.15 01.05.2017</div>
+                    </div>
+                    <div class="small-card card">
+                        <h4>Лоза Владислав</h4>
+                        <p>И правда ребята постарались!</p>
+                        <div class="time">21.15 01.05.2017</div>
+                    </div>
+                </div>
+            </section>
+            <div class="hr-invisible-small"></div>
+        </div>
     </div>
 </asp:Content>
