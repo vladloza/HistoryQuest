@@ -6,6 +6,7 @@
     [GeoCoordinates] NVARCHAR (250)   NOT NULL,
     [InfoFilePath]   NVARCHAR (250)   NOT NULL,
     [TasksCount]     INT              NOT NULL,
+    [ThresholdScore] INT              NULL,
     [OrderId]        INT              NOT NULL,
     [IsBonus]        BIT              CONSTRAINT [DF_CheckPoints_IsBonus] DEFAULT ((0)) NOT NULL,
     [ParentGID]      UNIQUEIDENTIFIER NULL,
@@ -15,6 +16,8 @@
     CONSTRAINT [FK_CheckPoints_Quests] FOREIGN KEY ([QuestGID]) REFERENCES [dbo].[Quests] ([gid]),
     CONSTRAINT [FK_CheckPoints_Users] FOREIGN KEY ([AuthorGID]) REFERENCES [dbo].[Users] ([gid])
 );
+
+
 
 
 

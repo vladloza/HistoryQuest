@@ -75,6 +75,7 @@
     <Build Include="dbo\Tables\Faces.sql" />
     <Build Include="dbo\Tables\Comments.sql" />
     <Build Include="dbo\Tables\CheckPoints.sql" />
+    <Build Include="dbo\Tables\CheckPointsToTries.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\PostDeployment.sql" />
