@@ -15,15 +15,5 @@ namespace HistoryQuest
                 Response.Redirect("~/Login.aspx");
             }
         }
-
-        protected void ShowInfoButton(bool show = true)
-        {
-            HistoryQuest.Main master = (Master as HistoryQuest.Main);
-
-            if (master != null)
-            {
-                master.MainMenuHistoricalInfoButton.Attributes["style"] = show ? "" : "display: none";
-            }
-        }
     }
 }

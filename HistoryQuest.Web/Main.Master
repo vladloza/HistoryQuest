@@ -38,6 +38,7 @@
                         <ul class="nav-menu">
                             <li><a href="../Default.aspx">Головна</a></li>
                             <li id="MainMenuHistoricalInfoButton" runat="server" style="display: none"><a href="../HistoricalInformation.aspx">Довідка</a></li>
+                            <li id="QuestInfoButton" runat="server" style="display: none"><a href="../Quests/QuestInfo.aspx">Інформація про квест</a></li>
                             <li><a href="#">FAQ</a></li>
                         </ul>
                     </div>
@@ -61,5 +62,7 @@
             </Scripts>
         </asp:ScriptManager>
     </form>
+    <asp:ContentPlaceHolder ID="noForm" runat="server">
+            </asp:ContentPlaceHolder>
 </body>
 </html>

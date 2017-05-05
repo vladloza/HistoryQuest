@@ -40,9 +40,6 @@ namespace HistoryQuest.Domain
     partial void InsertCheckPointsToTry(CheckPointsToTry instance);
     partial void UpdateCheckPointsToTry(CheckPointsToTry instance);
     partial void DeleteCheckPointsToTry(CheckPointsToTry instance);
-    partial void InsertComment(Comment instance);
-    partial void UpdateComment(Comment instance);
-    partial void DeleteComment(Comment instance);
     partial void InsertFace(Face instance);
     partial void UpdateFace(Face instance);
     partial void DeleteFace(Face instance);
@@ -73,6 +70,9 @@ namespace HistoryQuest.Domain
     partial void InsertUser(User instance);
     partial void UpdateUser(User instance);
     partial void DeleteUser(User instance);
+    partial void InsertComments(Comments instance);
+    partial void UpdateComments(Comments instance);
+    partial void DeleteComments(Comments instance);
     #endregion
 		
 		public HistoryQuestDataContext() : 
@@ -126,14 +126,6 @@ namespace HistoryQuest.Domain
 			get
 			{
 				return this.GetTable<CheckPointsToTry>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Comment> Comments
-		{
-			get
-			{
-				return this.GetTable<Comment>();
 			}
 		}
 		
@@ -214,6 +206,14 @@ namespace HistoryQuest.Domain
 			get
 			{
 				return this.GetTable<User>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Comments> Comments
+		{
+			get
+			{
+				return this.GetTable<Comments>();
 			}
 		}
 	}
@@ -1351,223 +1351,6 @@ namespace HistoryQuest.Domain
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Comments")]
-	[global::System.Runtime.Serialization.DataContractAttribute()]
-	public partial class Comment : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private long _id;
-		
-		private System.Guid _gid;
-		
-		private System.Guid _QuestGID;
-		
-		private string _Text;
-		
-		private System.DateTime _Date;
-		
-		private EntityRef<Quest> _Quest;
-		
-    #region Определения метода расширяемости
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(long value);
-    partial void OnidChanged();
-    partial void OngidChanging(System.Guid value);
-    partial void OngidChanged();
-    partial void OnQuestGIDChanging(System.Guid value);
-    partial void OnQuestGIDChanged();
-    partial void OnTextChanging(string value);
-    partial void OnTextChanged();
-    partial void OnDateChanging(System.DateTime value);
-    partial void OnDateChanged();
-    #endregion
-		
-		public Comment()
-		{
-			this.Initialize();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="BigInt NOT NULL IDENTITY", IsDbGenerated=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-		public long id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gid", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
-		public System.Guid gid
-		{
-			get
-			{
-				return this._gid;
-			}
-			set
-			{
-				if ((this._gid != value))
-				{
-					this.OngidChanging(value);
-					this.SendPropertyChanging();
-					this._gid = value;
-					this.SendPropertyChanged("gid");
-					this.OngidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestGID", DbType="UniqueIdentifier NOT NULL")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-		public System.Guid QuestGID
-		{
-			get
-			{
-				return this._QuestGID;
-			}
-			set
-			{
-				if ((this._QuestGID != value))
-				{
-					if (this._Quest.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnQuestGIDChanging(value);
-					this.SendPropertyChanging();
-					this._QuestGID = value;
-					this.SendPropertyChanged("QuestGID");
-					this.OnQuestGIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Text", DbType="NVarChar(500) NOT NULL", CanBeNull=false)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
-		public string Text
-		{
-			get
-			{
-				return this._Text;
-			}
-			set
-			{
-				if ((this._Text != value))
-				{
-					this.OnTextChanging(value);
-					this.SendPropertyChanging();
-					this._Text = value;
-					this.SendPropertyChanged("Text");
-					this.OnTextChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="DateTime NOT NULL")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
-		public System.DateTime Date
-		{
-			get
-			{
-				return this._Date;
-			}
-			set
-			{
-				if ((this._Date != value))
-				{
-					this.OnDateChanging(value);
-					this.SendPropertyChanging();
-					this._Date = value;
-					this.SendPropertyChanged("Date");
-					this.OnDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Quest_Comment", Storage="_Quest", ThisKey="QuestGID", OtherKey="gid", IsForeignKey=true)]
-		public Quest Quest
-		{
-			get
-			{
-				return this._Quest.Entity;
-			}
-			set
-			{
-				Quest previousValue = this._Quest.Entity;
-				if (((previousValue != value) 
-							|| (this._Quest.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Quest.Entity = null;
-						previousValue.Comments.Remove(this);
-					}
-					this._Quest.Entity = value;
-					if ((value != null))
-					{
-						value.Comments.Add(this);
-						this._QuestGID = value.gid;
-					}
-					else
-					{
-						this._QuestGID = default(System.Guid);
-					}
-					this.SendPropertyChanged("Quest");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void Initialize()
-		{
-			this._Quest = default(EntityRef<Quest>);
-			OnCreated();
-		}
-		
-		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnDeserializing(StreamingContext context)
-		{
-			this.Initialize();
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Faces")]
 	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class Face : INotifyPropertyChanging, INotifyPropertyChanged
@@ -2422,9 +2205,9 @@ namespace HistoryQuest.Domain
 		
 		private EntitySet<CheckPoint> _CheckPoints;
 		
-		private EntitySet<Comment> _Comments;
-		
 		private EntitySet<Try> _Tries;
+		
+		private EntitySet<Comments> _Comments;
 		
 		private EntityRef<User> _User;
 		
@@ -2579,27 +2362,8 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Quest_Comment", Storage="_Comments", ThisKey="gid", OtherKey="QuestGID")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=7, EmitDefaultValue=false)]
-		public EntitySet<Comment> Comments
-		{
-			get
-			{
-				if ((this.serializing 
-							&& (this._Comments.HasLoadedOrAssignedValues == false)))
-				{
-					return null;
-				}
-				return this._Comments;
-			}
-			set
-			{
-				this._Comments.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Quest_Try", Storage="_Tries", ThisKey="gid", OtherKey="QuestGID")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=8, EmitDefaultValue=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=7, EmitDefaultValue=false)]
 		public EntitySet<Try> Tries
 		{
 			get
@@ -2614,6 +2378,25 @@ namespace HistoryQuest.Domain
 			set
 			{
 				this._Tries.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Quest_Comments", Storage="_Comments", ThisKey="gid", OtherKey="QuestGID")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=8, EmitDefaultValue=false)]
+		public EntitySet<Comments> Comments
+		{
+			get
+			{
+				if ((this.serializing 
+							&& (this._Comments.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
+				return this._Comments;
+			}
+			set
+			{
+				this._Comments.Assign(value);
 			}
 		}
 		
@@ -2683,18 +2466,6 @@ namespace HistoryQuest.Domain
 			entity.Quest = null;
 		}
 		
-		private void attach_Comments(Comment entity)
-		{
-			this.SendPropertyChanging();
-			entity.Quest = this;
-		}
-		
-		private void detach_Comments(Comment entity)
-		{
-			this.SendPropertyChanging();
-			entity.Quest = null;
-		}
-		
 		private void attach_Tries(Try entity)
 		{
 			this.SendPropertyChanging();
@@ -2707,11 +2478,23 @@ namespace HistoryQuest.Domain
 			entity.Quest = null;
 		}
 		
+		private void attach_Comments(Comments entity)
+		{
+			this.SendPropertyChanging();
+			entity.Quest = this;
+		}
+		
+		private void detach_Comments(Comments entity)
+		{
+			this.SendPropertyChanging();
+			entity.Quest = null;
+		}
+		
 		private void Initialize()
 		{
 			this._CheckPoints = new EntitySet<CheckPoint>(new Action<CheckPoint>(this.attach_CheckPoints), new Action<CheckPoint>(this.detach_CheckPoints));
-			this._Comments = new EntitySet<Comment>(new Action<Comment>(this.attach_Comments), new Action<Comment>(this.detach_Comments));
 			this._Tries = new EntitySet<Try>(new Action<Try>(this.attach_Tries), new Action<Try>(this.detach_Tries));
+			this._Comments = new EntitySet<Comments>(new Action<Comments>(this.attach_Comments), new Action<Comments>(this.detach_Comments));
 			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
@@ -4648,6 +4431,248 @@ namespace HistoryQuest.Domain
 		public void OnSerialized(StreamingContext context)
 		{
 			this.serializing = false;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Comments")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
+	public partial class Comments : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _id;
+		
+		private System.Guid _gid;
+		
+		private System.Guid _QuestGID;
+		
+		private string _Text;
+		
+		private System.DateTime _Date;
+		
+		private System.Guid _AuthorGid;
+		
+		private EntityRef<Quest> _Quest;
+		
+    #region Определения метода расширяемости
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(long value);
+    partial void OnidChanged();
+    partial void OngidChanging(System.Guid value);
+    partial void OngidChanged();
+    partial void OnQuestGIDChanging(System.Guid value);
+    partial void OnQuestGIDChanged();
+    partial void OnTextChanging(string value);
+    partial void OnTextChanged();
+    partial void OnDateChanging(System.DateTime value);
+    partial void OnDateChanged();
+    partial void OnAuthorGidChanging(System.Guid value);
+    partial void OnAuthorGidChanged();
+    #endregion
+		
+		public Comments()
+		{
+			this.Initialize();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="BigInt NOT NULL IDENTITY", IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+		public long id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gid", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+		public System.Guid gid
+		{
+			get
+			{
+				return this._gid;
+			}
+			set
+			{
+				if ((this._gid != value))
+				{
+					this.OngidChanging(value);
+					this.SendPropertyChanging();
+					this._gid = value;
+					this.SendPropertyChanged("gid");
+					this.OngidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestGID", DbType="UniqueIdentifier NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+		public System.Guid QuestGID
+		{
+			get
+			{
+				return this._QuestGID;
+			}
+			set
+			{
+				if ((this._QuestGID != value))
+				{
+					if (this._Quest.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnQuestGIDChanging(value);
+					this.SendPropertyChanging();
+					this._QuestGID = value;
+					this.SendPropertyChanged("QuestGID");
+					this.OnQuestGIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Text", DbType="NVarChar(500) NOT NULL", CanBeNull=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
+		public string Text
+		{
+			get
+			{
+				return this._Text;
+			}
+			set
+			{
+				if ((this._Text != value))
+				{
+					this.OnTextChanging(value);
+					this.SendPropertyChanging();
+					this._Text = value;
+					this.SendPropertyChanged("Text");
+					this.OnTextChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="DateTime NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
+		public System.DateTime Date
+		{
+			get
+			{
+				return this._Date;
+			}
+			set
+			{
+				if ((this._Date != value))
+				{
+					this.OnDateChanging(value);
+					this.SendPropertyChanging();
+					this._Date = value;
+					this.SendPropertyChanged("Date");
+					this.OnDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AuthorGid", DbType="UniqueIdentifier NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6)]
+		public System.Guid AuthorGid
+		{
+			get
+			{
+				return this._AuthorGid;
+			}
+			set
+			{
+				if ((this._AuthorGid != value))
+				{
+					this.OnAuthorGidChanging(value);
+					this.SendPropertyChanging();
+					this._AuthorGid = value;
+					this.SendPropertyChanged("AuthorGid");
+					this.OnAuthorGidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Quest_Comments", Storage="_Quest", ThisKey="QuestGID", OtherKey="gid", IsForeignKey=true)]
+		public Quest Quest
+		{
+			get
+			{
+				return this._Quest.Entity;
+			}
+			set
+			{
+				Quest previousValue = this._Quest.Entity;
+				if (((previousValue != value) 
+							|| (this._Quest.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Quest.Entity = null;
+						previousValue.Comments.Remove(this);
+					}
+					this._Quest.Entity = value;
+					if ((value != null))
+					{
+						value.Comments.Add(this);
+						this._QuestGID = value.gid;
+					}
+					else
+					{
+						this._QuestGID = default(System.Guid);
+					}
+					this.SendPropertyChanged("Quest");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void Initialize()
+		{
+			this._Quest = default(EntityRef<Quest>);
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
 		}
 	}
 }

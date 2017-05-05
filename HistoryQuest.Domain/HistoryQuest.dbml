@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="HistoryQuest.DataBase" Class="HistoryQuestDataContext" Serialization="Unidirectional" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=SERGEY-PC\SQLEXPRESS;Initial Catalog=HistoryQuest.DataBase;Integrated Security=True" SettingsObjectName="HistoryQuest.Domain.Properties.Settings" SettingsPropertyName="HistoryQuest_DataBaseConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-RH7MHP2\SQLEXPRESS;Initial Catalog=HistoryQuest.DataBase;Integrated Security=True" SettingsObjectName="HistoryQuest.Domain.Properties.Settings" SettingsPropertyName="HistoryQuest_DataBaseConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.CheckPoints" Member="CheckPoints">
     <Type Name="CheckPoint">
       <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
@@ -42,16 +42,6 @@
       <Association Name="CheckPointsToTry_TasksToTry" Member="TasksToTries" ThisKey="gid" OtherKey="CheckPointToTryGID" Type="TasksToTry" />
       <Association Name="CheckPoint_CheckPointsToTry" Member="CheckPoint" ThisKey="CheckPointGID" OtherKey="gid" Type="CheckPoint" IsForeignKey="true" />
       <Association Name="Try_CheckPointsToTry" Member="Try" ThisKey="TryGID" OtherKey="gid" Type="Try" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Comments" Member="Comments">
-    <Type Name="Comment">
-      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="gid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="QuestGID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Column Name="Text" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
-      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="Quest_Comment" Member="Quest" ThisKey="QuestGID" OtherKey="gid" Type="Quest" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Faces" Member="Faces">
@@ -97,8 +87,8 @@
       <Column Name="SourceFilePath" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="AuthorGID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Association Name="Quest_CheckPoint" Member="CheckPoints" ThisKey="gid" OtherKey="QuestGID" Type="CheckPoint" />
-      <Association Name="Quest_Comment" Member="Comments" ThisKey="gid" OtherKey="QuestGID" Type="Comment" />
       <Association Name="Quest_Try" Member="Tries" ThisKey="gid" OtherKey="QuestGID" Type="Try" />
+      <Association Name="Quest_Comments" Member="Comments" ThisKey="gid" OtherKey="QuestGID" Type="Comments" />
       <Association Name="User_Quest" Member="User" ThisKey="AuthorGID" OtherKey="gid" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
@@ -176,6 +166,17 @@
       <Association Name="User_Task" Member="Tasks" ThisKey="gid" OtherKey="AuthorGID" Type="Task" />
       <Association Name="User_Try" Member="Tries" ThisKey="gid" OtherKey="UserGID" Type="Try" />
       <Association Name="Face_User" Member="Face" ThisKey="FaceGID" OtherKey="gid" Type="Face" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Comments" Member="Comments">
+    <Type Name="Comments">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="gid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="QuestGID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Text" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="AuthorGid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="Quest_Comments" Member="Quest" ThisKey="QuestGID" OtherKey="gid" Type="Quest" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
