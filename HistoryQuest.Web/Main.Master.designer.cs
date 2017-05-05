@@ -40,6 +40,15 @@ namespace HistoryQuest {
         public global::System.Web.UI.HtmlControls.HtmlGenericControl MainMenuHistoricalInfoButton;
         
         /// <summary>
+        /// QuestInfoButton элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        public global::System.Web.UI.HtmlControls.HtmlGenericControl QuestInfoButton;
+        
+        /// <summary>
         /// ContentPlaceHolder элемент управления.
         /// </summary>
         /// <remarks>
@@ -56,5 +65,14 @@ namespace HistoryQuest {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager ScriptManager1;
+        
+        /// <summary>
+        /// noForm элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder noForm;
     }
 }

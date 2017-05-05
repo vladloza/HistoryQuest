@@ -45,6 +45,35 @@ namespace HistoryQuest.WebServices
         }
 
         [WebMethod]
+        public object GetComments(Guid questGuid, int startFrom)
+        {
+            var requests = (from c in Repository.CurrentDataContext.Comments
+                            join u in Repository.CurrentDataContext.Users on c.AuthorGid equals u.gid
+                            join f in Repository.CurrentDataContext.Faces on u.FaceGID equals f.gid
+                            where c.QuestGID == questGuid 
+                            select new { c.id, f.FullName, c.Text, c.Date }).OrderByDescending(com => com.id).Skip(startFrom).Take(5).ToList();
+
+            return requests;
+
+
+        }
+
+        [WebMethod]
+        public void AddComment(Guid questGuid, string text)
+        {
+            var comment = new Comments()
+            {
+                gid = Guid.NewGuid(),
+                QuestGID = questGuid,
+                Text = text,
+                Date = DateTime.Now,
+                AuthorGid = Repository.CurrentUser.gid
+            };
+            Repository.CurrentDataContext.Comments.InsertOnSubmit(comment);
+            Repository.CurrentDataContext.SubmitChanges();
+        }
+
+        [WebMethod]
         public void AddStudent(Guid studentGID)
         {
             var request = Repository.CurrentDataContext.PupilsToTeachersRequests.SingleOrDefault(ptr => ptr.PupilGID == studentGID && ptr.TeacherGID == Repository.CurrentUser.FaceGID);
@@ -72,8 +101,8 @@ namespace HistoryQuest.WebServices
         public string OpenQuestPage(Guid questGID)
         {
             string url = "/Quests/QuestInfo.aspx";
-            
-            if ((Session["CurrentQuestGID"] != null && Guid.Parse(Session["CurrentQuestGID"].ToString()) == questGID)|| 
+
+            if ((Session["CurrentQuestGID"] != null && Guid.Parse(Session["CurrentQuestGID"].ToString()) == questGID) ||
                 Repository.CurrentUser.Tries.Any(t => t.QuestGID == questGID && !t.IsSuccessful.HasValue))
             {
                 url = "/Quests/Quest.aspx";

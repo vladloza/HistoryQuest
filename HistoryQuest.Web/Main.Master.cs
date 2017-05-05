@@ -28,5 +28,13 @@ namespace HistoryQuest
                 Page.Header.Controls.AddAt(6, metaDataScript);
             }
         }
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if(Session != null && Session["CurrentQuestGID"] != null)
+            {
+                MainMenuHistoricalInfoButton.Attributes["style"] = "";
+                QuestInfoButton.Attributes["style"] = "" ;
+            }
+        }
     }
 }

@@ -1,6 +1,56 @@
 ﻿WebService = function () { };
 
-WebService.prototype = { };
+WebService.prototype =
+    {};
+
+var startFrom = 0;
+
+WebService.GetComments =  function (guid) {
+    var inProgress = false;
+    $.ajax({
+        type: 'POST',
+        url: '../WebServices/WebService.asmx/GetComments',
+        data: "{ startFrom:'" + startFrom + "', questGuid:'" + guid + "' }",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        beforeSend: function () {
+            inProgress = true;
+        },
+        success: function (data) {
+            if (data.d.length > 0) {
+                $.each(data.d, function (a, item) {
+                    var sec = parseInt(item.Date.replace(/[^0-9]/g, ''));
+                    var date = new Date(sec);
+                    
+                    var news = "<div class='small-card card'>" +
+                    "<h4>" + item.FullName + "</h4>" +
+                    "<p>"+ item.Text +"</p>" +
+                    "<div class='time'>" + date.toLocaleString() + "</div>" +
+                    "</div>";
+                    $("#comments").append(news);
+                });
+                inProgress = false;
+                startFrom += 5;
+            }
+        }
+    });
+};
+
+WebService.AddComment = function (questGuid, text) {
+    var inProgress = false;
+    $.ajax({
+        type: 'POST',
+        url: '../WebServices/WebService.asmx/AddComment',
+        data: "{ questGuid:'" + questGuid + "', text:'" + text + "' }",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function () {
+            startFrom = 0;
+            document.getElementById('comments').innerHTML = '';
+            WebService.GetComments(questGuid);
+        }
+    });
+};
 
 WebService.GetQuestCheckPoints = function (questGID, onSuccess) {
     $.ajax({

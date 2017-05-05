@@ -3242,6 +3242,20 @@ fieldset[disabled] .btn-success.focus {
     background:#253f69;
     box-shadow: 0 4px 10px rgba(0,0,0,.3)!important;
 }
+.btn-light {
+    width:100%;
+    display:block;
+    color: #55677d;
+    background: #f0f2f5;
+    line-height: 32px;
+    text-align: center;
+    outline:0;
+}
+.btn-light:hover,
+.btn-light:active {
+    outline:0;
+    background:#e0e1e2;
+}
 .btn-info {
   color: #fff;
   background-color: #369bb9;

@@ -14,8 +14,6 @@ namespace HistoryQuest
         {
             base.Page_Load(sender, e);
 
-            ShowInfoButton();
-
             Guid queryGID = Guid.Empty;
             if (Session != null && Session["CurrentQuestGID"] != null && Guid.TryParse(Session["CurrentQuestGID"].ToString(), out queryGID))
             {
