@@ -158,7 +158,7 @@ QuestMap.prototype = {
     fixMapCenter: function () {
         window.clearTimeout(this.centerChangedTimeoutID);
         if (this.isCenterOutOfBorder()) {
-            this.centerChangedTimeoutID.timeoutID = window.setTimeout(Function.createDelegate(this, function () {
+            this.centerChangedTimeoutID = window.setTimeout(Function.createDelegate(this, function () {
                 this.googleMap.panTo(this.CenterOfUkraine);
             }), this.ReturnDelay);
         }
@@ -166,7 +166,7 @@ QuestMap.prototype = {
 
     isCenterOutOfBorder: function () {
         var center = new google.maps.LatLng(this.CenterOfUkraine.lat, this.CenterOfUkraine.lng);
-        return QuestMap.CalculateDistance(center, this.googleMap.center) > QuestMap.MaxDistanceFromCenter;
+        return QuestMap.CalculateDistance(center, this.googleMap.center) > this.MaxDistanceFromCenter;
     }
 };
 
