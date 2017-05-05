@@ -113,10 +113,18 @@ QuestMap.prototype = {
         this.googleMap.addListener('center_changed', Function.createDelegate(this, this.fixMapCenter));
 
         if (result && result.CheckPoints) {
-
-            if (result.CheckPoints.length > 0) {
-                $("#menu-toggle").attr("style", "");
-            }
+            var createListener = function (checkPointNum) {
+                return function () {
+                    $("#CheckPointName").text(result.CheckPoints[checkPointNum].Name);
+                    if (result.CheckPoints[checkPointNum].IsCurrent) {
+                        $("#StartCheckPoint").attr("checkPointGID", result.CheckPoints[checkPointNum].gid);
+                        $("#StartCheckPoint").attr("style", "");
+                    } else {
+                        $("#StartCheckPoint").attr("style", "display: none");
+                    }
+                    $("#quest-info").toggleClass("active", true);
+                };
+            };
 
             window.setTimeout(Function.createDelegate(this, function () {
                 for (var i = 0; i < result.CheckPoints.length; i++) {
@@ -136,22 +144,19 @@ QuestMap.prototype = {
                         marker.setIcon('/libs/img/checkpoint_locked.png');
                     }
 
-                    var createListener = function (checkPointNum) {
-                        return function () {
-                            $("#CheckPointName").text(result.CheckPoints[checkPointNum].Name);
-                            if (result.CheckPoints[checkPointNum].IsCurrent) {
-                                $("#StartCheckPoint").attr("checkPointGID", result.CheckPoints[checkPointNum].gid);
-                                $("#StartCheckPoint").attr("style", "");
-                            } else {
-                                $("#StartCheckPoint").attr("style", "display: none");
-                            }
-                            $("#quest-info").toggleClass("active", true);
-                        };
-                    };
-
                     marker.addListener('click', createListener(i));
                 }
             }), this.MarkersDropDelay);
+
+            $("#menu-toggle").attr("style", "display: none");
+            $("#quest-info").toggleClass("active", false);
+
+            var currentCheckPointId = result.CheckPoints.findIndex(function (item) { return item.IsCurrent; });
+
+            if (currentCheckPointId > -1) {
+                $("#menu-toggle").attr("style", "");
+                createListener(currentCheckPointId)();
+            }
         }
     },
 

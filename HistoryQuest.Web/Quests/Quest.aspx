@@ -9,7 +9,7 @@
         <div class="arrows">
             <button class="arrow" id="menu-toggle" style="display: none"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
         </div>
-        <div id="quest-info" class="active">
+        <div id="quest-info">
             <div>
                 <div id="quest-inner">
                     <div class="chekpoint-name">
