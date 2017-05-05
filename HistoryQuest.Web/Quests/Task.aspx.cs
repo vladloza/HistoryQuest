@@ -9,8 +9,9 @@ namespace HistoryQuest.Task
 {
     public partial class Task : BasePage
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected override void Page_Load(object sender, EventArgs e)
         {
+            base.Page_Load(sender, e);
 
         }
     }

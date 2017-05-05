@@ -84,6 +84,16 @@ namespace HistoryQuest.WebServices
             return url;
         }
 
+        [WebMethod(EnableSession = true)]
+        public string StartCheckPoint(Guid checkPointGID)
+        {
+            string url = "/Quests/Task.aspx";
+            
+            Session["CurrentCheckPointGID"] = checkPointGID;
+
+            return url;
+        }
+
         [WebMethod]
         public object GetQuestCheckPoints(Guid questGID)
         {

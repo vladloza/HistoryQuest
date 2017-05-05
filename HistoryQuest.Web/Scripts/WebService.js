@@ -104,3 +104,22 @@ WebService.OpenQuestPage = function (questGID) {
         }
     });
 };
+
+WebService.StartCheckPoint = function (checkPointGID) {
+    $.ajax({
+        type: "POST",
+        data: "{ checkPointGID: '" + checkPointGID + "' }",
+        url: "../WebServices/WebService.asmx/StartCheckPoint",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (r) {
+            window.location = r.d;
+        },
+        error: function (r) {
+            alert(r.responseText);
+        },
+        failure: function (r) {
+            alert(r.responseText);
+        }
+    });
+};

@@ -7,7 +7,7 @@
     this.MarkersDropDelay = 1200; //ms
 
     this.googleMap = null;
-    this.centerChangedTimeoutID = null;
+    this.checkPointsLis = null;
 };
 
 QuestMap.prototype = {
@@ -113,6 +113,11 @@ QuestMap.prototype = {
         this.googleMap.addListener('center_changed', Function.createDelegate(this, this.fixMapCenter));
 
         if (result && result.CheckPoints) {
+
+            if (result.CheckPoints.length > 0) {
+                $("#menu-toggle").attr("style", "");
+            }
+
             window.setTimeout(Function.createDelegate(this, function () {
                 for (var i = 0; i < result.CheckPoints.length; i++) {
                     var coords = result.CheckPoints[i].GeoCoordinates.split(';');
@@ -127,15 +132,24 @@ QuestMap.prototype = {
                         marker.setIcon('/libs/img/checkpoint_completed.png');
                     } else if (result.CheckPoints[i].IsCurrent === true) {
                         marker.setIcon('/libs/img/checkpoint_current.png');
-
-                        var createListener = function (checkPointNum) {
-                            return function () { window.location = "/Default.aspx?cpgid=" + result.CheckPoints[checkPointNum].gid; };
-                        };
-
-                        marker.addListener('click', createListener(i));
                     } else {
                         marker.setIcon('/libs/img/checkpoint_locked.png');
                     }
+
+                    var createListener = function (checkPointNum) {
+                        return function () {
+                            $("#CheckPointName").text(result.CheckPoints[checkPointNum].Name);
+                            if (result.CheckPoints[checkPointNum].IsCurrent) {
+                                $("#StartCheckPoint").attr("checkPointGID", result.CheckPoints[checkPointNum].gid);
+                                $("#StartCheckPoint").attr("style", "");
+                            } else {
+                                $("#StartCheckPoint").attr("style", "display: none");
+                            }
+                            $("#quest-info").toggleClass("active", true);
+                        };
+                    };
+
+                    marker.addListener('click', createListener(i));
                 }
             }), this.MarkersDropDelay);
         }
