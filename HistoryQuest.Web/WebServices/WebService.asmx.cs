@@ -45,13 +45,13 @@ namespace HistoryQuest.WebServices
         }
 
         [WebMethod]
-        public object GetComments(Guid questGuid, int startFrom)
+        public object GetComments(Guid questGuid, int startFrom, int countToTake = 5)
         {
             var requests = (from c in Repository.CurrentDataContext.Comments
                             join u in Repository.CurrentDataContext.Users on c.AuthorGID equals u.gid
                             join f in Repository.CurrentDataContext.Faces on u.FaceGID equals f.gid
                             where c.QuestGID == questGuid 
-                            select new { c.id, f.FullName, c.Text, c.Date }).OrderByDescending(com => com.id).Skip(startFrom).Take(5).ToList();
+                            select new { c.id, f.FullName, c.Text, c.Date }).OrderByDescending(com => com.id).Skip(startFrom).Take(countToTake).ToList();
 
             return requests;
         }
@@ -59,7 +59,7 @@ namespace HistoryQuest.WebServices
         [WebMethod]
         public void AddComment(Guid questGuid, string text)
         {
-            var comment = new Comment()
+            Comment comment = new Comment()
             {
                 gid = Guid.NewGuid(),
                 QuestGID = questGuid,
