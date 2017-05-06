@@ -255,3 +255,4 @@ HistoryQuest.DataBase/HistoryQuest.DataBase.jfm
 .vs/config/applicationhost.config
 /HistoryQuest.Domain/Properties/Settings.Designer.cs
 /HistoryQuest.Domain/Properties/Settings.settings
+/HistoryQuest.Web/connectionStrings.config
