@@ -21,7 +21,7 @@ namespace HistoryQuest
             }
             else
             {
-                Response.Redirect("~/Default.aspx");
+                Response.Redirect("/Default.aspx");
             }
         }
     }

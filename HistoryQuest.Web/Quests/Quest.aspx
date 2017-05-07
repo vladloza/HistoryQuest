@@ -4,7 +4,7 @@
     <div class="wrapper map-wrapper">
         <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGaJ_hdTjIj5HSIH4qyVrMf379w6k_vtg&libraries=geometry&callback=QuestMap.InitializeMap">
-    </script>
+        </script>
         <div id="map"></div>
         <div class="arrows">
             <button class="arrow" id="menu-toggle" style="display: none"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
@@ -37,10 +37,10 @@
     <script type="text/javascript" language="javascript">
         Sys.Application.add_init(function () {
             $create(QuestMap,
-            {
-                "id": "QuestMap"
-            });
+                {
+                    "id": "QuestMap"
+                });
         });
-</script>
+    </script>
 </asp:Content>
 

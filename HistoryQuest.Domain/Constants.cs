@@ -11,5 +11,16 @@ namespace HistoryQuest.Domain
         public static string TeacherRoleGID = "40f816d3-3bb4-4864-97c1-67803413389a";
         public static string StudentRoleGID = "024900db-2a68-4959-a0e9-10069608d923";
         public static string AdminRoleGID = "4492ed1d-052a-491a-8897-9bbc8d8633ff";
+
+        public static readonly Guid TestTaskTypeGID = new Guid("6D1E2691-3EAB-41A7-90C4-8BD9EC7B1FD8");
+        public static readonly Guid MapTaskTypeGID = new Guid("09DAFF50-996E-4077-9BE0-3C0BF516E56C");
+        public static readonly Guid ConformityTaskTypeGID = new Guid("9F3A9B8B-6B56-473E-B88A-DDD33C337396");
+
+        public static readonly Dictionary<Guid, string> TaskTypesPages = new Dictionary<Guid, string>
+        {
+            { TestTaskTypeGID, "/Quests/TestTask.aspx" },
+            { MapTaskTypeGID, "/Quests/MapTask.aspx" },
+            { ConformityTaskTypeGID, "/Quests/ConformityTask.aspx" }
+        };
     }
 }

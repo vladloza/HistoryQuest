@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeBehind="Task.aspx.cs" Inherits="HistoryQuest.Task.Task" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeBehind="Task.aspx.cs" Inherits="HistoryQuest.Quests.Task" %>
 
 <%@ Import Namespace="HistoryQuest.Domain" %>
 
@@ -9,7 +9,7 @@
                 <div class="task">
                     <div class="page-title"> <%--Название стоит только для первого блока для удобства.--%>
                         <div>
-                            <h2>Название квеста. Название чекпоинта</h2>
+                            <h2 id="TaskHeader" runat="server">Название квеста. Название чекпоинта</h2>
                             <div class="b-progress-bar">
                                 <div class="progress-bar" style="width: 25%"></div>  <%--Длина полоски регулируется стилем. Сейчас стоит 1/4 длины.--%>
                             </div>
@@ -18,9 +18,9 @@
                     <div class="page-content card">
                         <div class="question-total">4 из 5</div>
                         <div class="question-text">
-                            <p>На службу в роту Почетного караула набирают юношей с законченным средним образованием, высокими моральными качествами, отменным здоровьем и ростом от 182 см до 188 см. Укажите число, которое не может равняться среднему росту служащего роты Почетного караула.</p>
+                            <p id="QuestionText" runat="server">На службу в роту Почетного караула набирают юношей с законченным средним образованием, высокими моральными качествами, отменным здоровьем и ростом от 182 см до 188 см. Укажите число, которое не может равняться среднему росту служащего роты Почетного караула.</p>
                         </div>
-                        <div class=" question-choises">
+                        <div class="question-choises">
                             <div class="variant">
                                 <label class="question-form">
                                     <input name="taskName" value="taskId" type="radio" />
@@ -52,8 +52,8 @@
                         </div>
                     </div>
                     <div class="card">
-                        <button class="btn btn-primary">Дальше</button>
-                        <button class="btn btn-default right">Сдаться</button>
+                        <button id="NextButton" runat="server" onclick="OnNextButtonClick" class="btn btn-primary">Дальше</button>
+                        <button id="GiveUpButton" runat="server" class="btn btn-default right">Сдаться</button>
                     </div>
                 </div>
                 <%--Задача (текст) с одним правильным ответом--%>

@@ -141,6 +141,8 @@
     <Content Include="libs\img\checkpoint_completed.png" />
     <Content Include="libs\img\checkpoint_current.png" />
     <Content Include="Quests\QuestInfo.aspx" />
+    <Content Include="Quests\Scripts\TasksController.js" />
+    <Content Include="Quests\TestTask.aspx" />
     <Content Include="Scripts\WebService.js" />
     <Content Include="Quests\Task.aspx" />
     <Content Include="WebServices\WebService.asmx" />
@@ -155,6 +157,7 @@
     <Content Include="libs\fonts\Lato\LatoLight\LatoLight.woff" />
     <Content Include="libs\fonts\HelveticaNeue\helveticaneuecyr-bold.otf" />
     <Content Include="libs\fonts\HelveticaNeue\helveticaneuecyr-thin.otf" />
+    <Content Include="Quests\Tasks.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -242,6 +245,16 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Quests\BaseTaskPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quests\Tasks.Master.cs">
+      <DependentUpon>Tasks.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quests\Tasks.Master.designer.cs">
+      <DependentUpon>Tasks.Master</DependentUpon>
+    </Compile>
     <Compile Include="Quests\Quest.aspx.cs">
       <DependentUpon>Quest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -255,6 +268,13 @@
     </Compile>
     <Compile Include="Quests\QuestInfo.aspx.designer.cs">
       <DependentUpon>QuestInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Quests\TestTask.aspx.cs">
+      <DependentUpon>TestTask.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quests\TestTask.aspx.designer.cs">
+      <DependentUpon>TestTask.aspx</DependentUpon>
     </Compile>
     <Compile Include="Registration.aspx.cs">
       <DependentUpon>Registration.aspx</DependentUpon>

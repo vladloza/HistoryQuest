@@ -17,7 +17,7 @@ namespace HistoryQuest.Quests
 
             if (Session == null || Session["CurrentQuestGID"] == null || !Guid.TryParse(Session["CurrentQuestGID"].ToString(), out QuestGID))
             {
-                Response.Redirect("~/Default.aspx");
+                Response.Redirect("/Default.aspx");
             }
         }
     }

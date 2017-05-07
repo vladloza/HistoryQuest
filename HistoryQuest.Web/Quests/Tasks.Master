@@ -1,0 +1,76 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Tasks.Master.cs" Inherits="HistoryQuest.Quests.Tasks" %>
+
+<%@ Import Namespace="HistoryQuest.Domain" %>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/libs/css/bootstrap.css" />
+    <link rel="stylesheet" href="/libs/css/main.css" />
+    <link rel="stylesheet" href="/libs/css/font-awesome.min.css" />
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="MainForm" runat="server">
+
+        <div class="wrapper">
+            <div class="info">
+                <div class="container clearfix">
+                    <div id="TaskDiv" runat="server" class="task">
+                        <div class="page-title">
+                            <div>
+                                <h2 id="TaskHeader" runat="server">Название квеста. Название чекпоинта</h2>
+                                <div class="b-progress-bar">
+                                    <div class="progress-bar" style="width: 25%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page-content card">
+                            <div class="question-total">4 из 5</div>
+                            <div class="question-text">
+                                <p id="QuestionText" runat="server">На службу в роту Почетного караула набирают юношей с законченным средним образованием, высокими моральными качествами, отменным здоровьем и ростом от 182 см до 188 см. Укажите число, которое не может равняться среднему росту служащего роты Почетного караула.</p>
+                            </div>
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </div>
+                        <div class="card">
+                            <button id="NextButton" runat="server" class="btn btn-primary">Дальше</button>
+                            <button id="GiveUpButton" runat="server" class="btn btn-default right">Сдаться</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+            <Scripts>
+                <asp:ScriptReference Path="~/libs/js/jquery-3.1.1.min.js" />
+                <asp:ScriptReference Path="~/libs/js/bootstrap.min.js" />
+                <asp:ScriptReference Path="~/libs/js/validation.js" />
+                <asp:ScriptReference Path="~/libs/js/Helper.js" />
+                <asp:ScriptReference Path="~/Scripts/WebService.js" />
+                <asp:ScriptReference Path="~/Quests/Scripts/QuestMap.js" />
+                <asp:ScriptReference Path="~/Quests/Scripts/TasksController.js" />
+            </Scripts>
+        </asp:ScriptManager>
+
+        <script>
+            $("#NextButton").click(function (e) {
+                e.preventDefault();
+                var tasktype = $("#TaskDiv")[0].attributes.tasktypegid.value;
+                WebService.OnNextButtonPressed(TasksController.ReadAnswer(tasktype), 121);
+            });
+            $("#GiveUpButton").click(function (e) {
+                e.preventDefault();
+
+            });
+        </script>
+
+    </form>
+    <asp:ContentPlaceHolder ID="noForm" runat="server">
+    </asp:ContentPlaceHolder>
+</body>
+</html>

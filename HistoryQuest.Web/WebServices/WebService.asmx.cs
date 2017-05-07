@@ -1,4 +1,5 @@
 ﻿using HistoryQuest.Domain;
+using HistoryQuest.Domain.TasksValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -111,16 +112,6 @@ namespace HistoryQuest.WebServices
             return url;
         }
 
-        [WebMethod(EnableSession = true)]
-        public string StartCheckPoint(Guid checkPointGID)
-        {
-            string url = "/Quests/Task.aspx";
-            
-            Session["CurrentCheckPointGID"] = checkPointGID;
-
-            return url;
-        }
-
         [WebMethod]
         public object GetQuestCheckPoints(Guid questGID)
         {
@@ -178,52 +169,148 @@ namespace HistoryQuest.WebServices
             return result;
         }
 
-        [WebMethod]
-        public object TestGetQuestCheckPoints(Guid questGID)
+        [WebMethod(EnableSession = true)]
+        public string StartCheckPoint(Guid checkPointGID)
         {
-            Dictionary<string, object> result = new Dictionary<string, object>();
+            string url = "/Default.aspx";
 
-            List<CheckPoint> checkPoints = new List<CheckPoint>()
-                        {
-                            new CheckPoint()
-                            {
-                                gid = Guid.NewGuid(),
-                                Name = "First CP",
-                                IsBonus = false,
-                                OrderId = 1,
-                                GeoCoordinates = "49.0;32.0"
-                            },
-                            new CheckPoint()
-                            {
-                                gid = Guid.NewGuid(),
-                                Name = "Second CP",
-                                IsBonus = false,
-                                OrderId = 2,
-                                GeoCoordinates = "49.5;32.5"
-                            }
-                        };
-
-            checkPoints[1].ParentGID = checkPoints[0].gid;
-
-            List<Dictionary<string, object>> checkPointsList = new List<Dictionary<string, object>>();
-            foreach (var checkPoint in checkPoints)
+            if (Session != null)
             {
-                Dictionary<string, object> checkPointData = new Dictionary<string, object>
-                            {
-                                { "id", checkPoint.id },
-                                { "gid", checkPoint.gid },
-                                { "Name", checkPoint.Name },
-                                { "IsBonus", checkPoint.IsBonus },
-                                { "OrderId", checkPoint.OrderId },
-                                { "GeoCoordinates", checkPoint.GeoCoordinates },
-                                { "ParentId", checkPoint.ParentGID },
-                                { "IsCompleted", true }
-                            };
-                checkPointsList.Add(checkPointData);
-            }
-            result.Add("CheckPoints", checkPointsList);
+                CheckPoint checkPoint = Repository.CurrentDataContext.CheckPoints.SingleOrDefault(cp => cp.gid == checkPointGID);
+                if (checkPoint != null && checkPoint.Tasks != null)
+                {
+                    List<Task> tasks = checkPoint.Tasks.Take(checkPoint.TasksCount).ToList();
 
-            return result;
+                    Session["CurrentTasksList"] = tasks.Select(t => t.gid).ToList();
+                    Session["CurrentTaskId"] = 0;
+
+                    Guid key = tasks.Count > 0 ? tasks[0].TaskTypeGID : Guid.Empty;
+
+                    if (Constants.TaskTypesPages.ContainsKey(key))
+                    {
+                        url = Constants.TaskTypesPages[key];
+                    }
+                }
+            }
+
+            return url;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string OnNextButtonPressed(string userAnswer, long elapsedTime)
+        {
+            string url = "/Defaul.aspx";
+
+            int currentTaskId;
+            List<Guid> tasksList;
+            if (!LoadTasksFromSession(out tasksList, out currentTaskId))
+            {
+                return url;
+            }
+
+            HistoryQuest.Domain.Task task = Repository.CurrentDataContext.Tasks.SingleOrDefault(t => t.gid == tasksList[currentTaskId]);
+
+            HistoryQuest.Domain.Try completeQuestTry = Repository.CurrentDataContext.Tries.SingleOrDefault(t => t.QuestGID == task.CheckPoint.QuestGID &&
+                   t.UserGID == Repository.CurrentUser.gid && !t.IsSuccessful.HasValue);
+
+            if (completeQuestTry == null)
+            {
+                completeQuestTry = new HistoryQuest.Domain.Try()
+                {
+                    gid = Guid.NewGuid(),
+                    QuestGID = task.CheckPoint.QuestGID,
+                    UserGID = Repository.CurrentUser.gid,
+                    CheckPointsToTries = new System.Data.Linq.EntitySet<CheckPointsToTry>()
+                };
+                Repository.CurrentDataContext.Tries.InsertOnSubmit(completeQuestTry);
+            }
+
+            HistoryQuest.Domain.CheckPointsToTry checkPointToTry = HttpContext.Current.Session["CurrentCheckPointTryGID"] != null ?
+                completeQuestTry.CheckPointsToTries.FirstOrDefault(cpt => cpt.gid == new Guid(HttpContext.Current.Session["CurrentCheckPointTryGID"].ToString())) : null;
+
+            if (checkPointToTry == null)
+            {
+                checkPointToTry = new HistoryQuest.Domain.CheckPointsToTry()
+                {
+                    gid = Guid.NewGuid(),
+                    CheckPointGID = task.CheckPointGID,
+                    TryGID = completeQuestTry.gid,
+                    IsFailed = true,
+                    TasksToTries = new System.Data.Linq.EntitySet<TasksToTry>()
+                };
+                completeQuestTry.CheckPointsToTries.Add(checkPointToTry);
+
+                HttpContext.Current.Session["CurrentCheckPointTryGID"] = checkPointToTry.gid;
+            }
+
+            int score = TasksValidatorsFactory.GetTaskValidator(task.TaskTypeGID, (int)task.MaxScore).Validate(userAnswer, HttpContext.Current.Session["RightAnswer"]);
+
+            HistoryQuest.Domain.TasksToTry taskToTry = new HistoryQuest.Domain.TasksToTry()
+            {
+                gid = Guid.NewGuid(),
+                TaskGID = task.gid,
+                CheckPointToTryGID = checkPointToTry.gid,
+                EarnedScore = score,
+                ElapsedTime = elapsedTime
+            };
+            checkPointToTry.TasksToTries.Add(taskToTry);
+
+            if (currentTaskId == task.CheckPoint.TasksCount - 1)
+            {
+                if (task.CheckPoint.ThresholdScore == null ||
+                    task.CheckPoint.ThresholdScore <= checkPointToTry.TasksToTries.Sum(t => t.EarnedScore))
+                {
+                    checkPointToTry.IsFailed = false;
+                }
+
+                url = "/Quests/Results.aspx";
+
+                CleanCheckPointSession();
+            }
+            else
+            {
+                HttpContext.Current.Session["CurrentTaskId"] = currentTaskId + 1;
+
+                HistoryQuest.Domain.Task nextTask = Repository.CurrentDataContext.Tasks.SingleOrDefault(t => t.gid == tasksList[currentTaskId + 1]);
+                Guid key = nextTask != null ? nextTask.TaskTypeGID : Guid.Empty;
+
+                if (Constants.TaskTypesPages.ContainsKey(key))
+                {
+                    url = Constants.TaskTypesPages[key];
+                }
+            }
+
+            Repository.CurrentDataContext.SubmitChanges();
+
+            return url;
+        }
+
+        public static bool LoadTasksFromSession(out List<Guid> tasksList, out int currentTaskId)
+        {
+            tasksList = new List<Guid>();
+            currentTaskId = -1;
+
+            if (HttpContext.Current.Session != null && HttpContext.Current.Session["CurrentTaskId"] != null && HttpContext.Current.Session["CurrentTasksList"] != null)
+            {
+                tasksList = HttpContext.Current.Session["CurrentTasksList"] as List<Guid>;
+                if (int.TryParse(HttpContext.Current.Session["CurrentTaskId"].ToString(), out currentTaskId) && tasksList != null)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        protected static void CleanCheckPointSession()
+        {
+            if (HttpContext.Current.Session != null)
+            {
+                HttpContext.Current.Session["CurrentCheckPointTryGID"] = null;
+                HttpContext.Current.Session["CurrentTasksList"] = null;
+                HttpContext.Current.Session["CurrentTaskId"] = null;
+                HttpContext.Current.Session["RightAnswer"] = null;
+            }
         }
     }
 }

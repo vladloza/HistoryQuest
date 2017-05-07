@@ -173,3 +173,22 @@ WebService.StartCheckPoint = function (checkPointGID) {
         }
     });
 };
+
+WebService.OnNextButtonPressed = function (userAnswer, elapsedTime) {
+    $.ajax({
+        type: "POST",
+        url: "../WebServices/WebService.asmx/OnNextButtonPressed",
+        data: "{ userAnswer: '" + userAnswer + "', elapsedTime: '" + elapsedTime + "' }",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (r) {
+            window.location = r.d;
+        },
+        error: function (r) {
+            alert(r.responseText);
+        },
+        failure: function (r) {
+            alert(r.responseText);
+        }
+    });
+};
