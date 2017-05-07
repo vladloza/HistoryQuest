@@ -1,36 +1,50 @@
 ﻿WebService = function () { };
 
 WebService.prototype =
-    {};
+    {
+        
+    };
 
 var startFrom = 0;
 
-WebService.GetComments =  function (guid) {
-    var inProgress = false;
+WebService.GetComments = function (guid, countToTake) {
+    var start = countToTake ? 0 : startFrom;
+    countToTake = countToTake || 5;
+
     $.ajax({
         type: 'POST',
         url: '../WebServices/WebService.asmx/GetComments',
-        data: "{ startFrom:'" + startFrom + "', questGuid:'" + guid + "' }",
+        data: "{ startFrom:'" + start + "', questGuid:'" + guid + "', countToTake:'" + countToTake + "' }",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        beforeSend: function () {
-            inProgress = true;
-        },
         success: function (data) {
             if (data.d.length > 0) {
                 $.each(data.d, function (a, item) {
                     var sec = parseInt(item.Date.replace(/[^0-9]/g, ''));
                     var date = new Date(sec);
-                    
-                    var news = "<div class='small-card card'>" +
-                    "<h4>" + item.FullName + "</h4>" +
-                    "<p>"+ item.Text +"</p>" +
-                    "<div class='time'>" + date.toLocaleString() + "</div>" +
-                    "</div>";
-                    $("#comments").append(news);
+                    if(data.d.length == 1){
+                        var commentEl = document.getElementById('comments');
+
+                        var news = document.createElement('div');
+                        news.className = 'small-card card';
+                        news.innerHTML = "<h4>" + item.FullName + "</h4>" +
+                                            "<p>" + item.Text + "</p>" +
+                                            "<div class='time'>" + date.toLocaleString() + "</div>";
+
+                        commentEl.insertBefore(news, commentEl.firstChild);
+                    }
+                    else {
+                        var comments = $("#comments");
+                        var news = "<div class='small-card card'>" +
+                                    "<h4>" + item.FullName + "</h4>" +
+                                    "<p>" + item.Text + "</p>" +
+                                    "<div class='time'>" + date.toLocaleString() + "</div>" +
+                                    "</div>";
+                        comments.append(news);
+                    }
+                        
                 });
-                inProgress = false;
-                startFrom += 5;
+                startFrom += countToTake;
             }
         }
     });
@@ -45,9 +59,46 @@ WebService.AddComment = function (questGuid, text) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function () {
-            startFrom = 0;
-            document.getElementById('comments').innerHTML = '';
-            WebService.GetComments(questGuid);
+            WebService.GetComments(questGuid, 1);
+        }
+    });
+};
+WebService.GetCheckPointLikesCount = function (checkPointGID) {
+    $.ajax({
+        type: "POST",
+        url: "../WebServices/WebService.asmx/GetCheckPointLikesCount",
+        data: "{ checkPointGID: '" + checkPointGID + "' }",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            WebService.BindLikesToControl(data.d.count, data.d.liked);
+        },
+        error: function (r) {
+            alert(r.responseText);
+        },
+        failure: function (r) {
+            alert(r.responseText);
+        }
+    });
+};
+WebService.BindLikesToControl = function (count, liked) {
+    $("#likes-count")[0].innerText = count;
+    if (!liked) {
+        document.getElementById('i-like').classList.remove('liked');
+    }
+    else {
+        document.getElementById('i-like').classList.add('liked');
+    }
+};
+WebService.UpdateCheckPointLikesCount = function (checkPointGID) {
+    $.ajax({
+        type: "POST",
+        url: "../WebServices/WebService.asmx/UpdateCheckPointLikesCount",
+        data: "{ checkPointGID: '" + checkPointGID + "' }",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function () {
+            WebService.GetCheckPointLikesCount(checkPointGID);
         }
     });
 };

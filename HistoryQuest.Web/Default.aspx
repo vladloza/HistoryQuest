@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="HistoryQuest.Default" %>
 
 <%@ Import Namespace="HistoryQuest.Domain" %>
+<%@ Import Namespace="HistoryQuest.WebServices" %>
+
 <asp:Content runat="server" ContentPlaceHolderID="ContentPlaceHolder">
     <div class="wrapper">
         <section>
@@ -29,15 +31,11 @@
                                             <p>Український квест</p>
                                         </div>
                                         <span class="quest-params">
-                                            <i class="fa fa-heart" aria-hidden="true"></i><span>250</span>
-                                            <i class="fa fa-comments" aria-hidden="true"></i><span>35</span>
+                                            <i class="fa fa-heart" aria-hidden="true"></i><span id="likesCount"><%= DataService.GetQuestLikesCount(quest.gid) %></span>
+                                            <i class="fa fa-comments" aria-hidden="true"></i><span id="commentsCount"><%= DataService.GetQuestCommentsCount(quest.gid) %></span>
                                         </span>
                                     </a>
                                 </div>
-                                <%--<div class="block-desc">
-                                        <h4>Славетний шлях Петра Сагайдачного</h4>
-                                        <p>Петро Кононович Конашевич-Сагайдачний народився бл. 1582р. в селі Кульчиці в православній родині (тепер село Самбірського району Львівської області). </p>
-                                    </div>--%>
                             </div>
                         </div>
                     <% } %>
@@ -62,10 +60,6 @@
                                     <span class="inner"><i class="fa fa-lock" aria-hidden="true"></i></span>
                                 </a>
                             </div>
-                            <%--<div class="block-desc">
-                                    <h4>Славетний шлях Петра Сагайдачного</h4>
-                                    <p>Петро Кононович Конашевич-Сагайдачний народився бл. 1582р. в селі Кульчиці в православній родині (тепер село Самбірського району Львівської області). </p>
-                                </div>--%>
                         </div>
                     </div>
                 </div>

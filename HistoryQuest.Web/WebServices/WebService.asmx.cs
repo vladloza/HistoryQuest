@@ -46,13 +46,13 @@ namespace HistoryQuest.WebServices
         }
 
         [WebMethod]
-        public object GetComments(Guid questGuid, int startFrom)
+        public object GetComments(Guid questGuid, int startFrom, int countToTake = 5)
         {
             var requests = (from c in Repository.CurrentDataContext.Comments
                             join u in Repository.CurrentDataContext.Users on c.AuthorGID equals u.gid
                             join f in Repository.CurrentDataContext.Faces on u.FaceGID equals f.gid
                             where c.QuestGID == questGuid 
-                            select new { c.id, f.FullName, c.Text, c.Date }).OrderByDescending(com => com.id).Skip(startFrom).Take(5).ToList();
+                            select new { c.id, f.FullName, c.Text, c.Date }).OrderByDescending(com => com.id).Skip(startFrom).Take(countToTake).ToList();
 
             return requests;
         }
@@ -60,7 +60,7 @@ namespace HistoryQuest.WebServices
         [WebMethod]
         public void AddComment(Guid questGuid, string text)
         {
-            var comment = new Comment()
+            Comment comment = new Comment()
             {
                 gid = Guid.NewGuid(),
                 QuestGID = questGuid,
@@ -311,6 +311,39 @@ namespace HistoryQuest.WebServices
                 HttpContext.Current.Session["CurrentTaskId"] = null;
                 HttpContext.Current.Session["RightAnswer"] = null;
             }
+        }
+
+        [WebMethod]
+        public object GetCheckPointLikesCount(Guid checkPointGID)
+        {
+            int count = Repository.CurrentDataContext.Likes.Where(l => l.CheckPointGID == checkPointGID).Count();
+            bool liked = Repository.CurrentDataContext.Likes
+                .SingleOrDefault(l => l.CheckPointGID == checkPointGID && l.UserGID == Repository.CurrentUser.gid) != null;
+
+            return new { count, liked };
+        }
+
+        [WebMethod]
+        public void UpdateCheckPointLikesCount(Guid checkPointGID)
+        {
+            var request = Repository.CurrentDataContext.Likes
+                .SingleOrDefault(l=> l.CheckPointGID == checkPointGID && l.UserGID == Repository.CurrentUser.gid);
+
+            if(request != null)
+            {
+                Repository.CurrentDataContext.Likes.DeleteOnSubmit(request);
+            }
+            else
+            {
+                Likes like = new Likes()
+                {
+                    gid = Guid.NewGuid(),
+                    CheckPointGID = checkPointGID,
+                    UserGID = Repository.CurrentUser.gid
+                };
+                Repository.CurrentDataContext.Likes.InsertOnSubmit(like);
+            }
+            Repository.CurrentDataContext.SubmitChanges();
         }
     }
 }

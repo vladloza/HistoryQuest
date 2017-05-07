@@ -39,6 +39,32 @@
                             <h2>Статистика</h2>
                         </div>
                     </div>
+                    <div class="card statistic">
+                        <div class="small-header clearfix">
+                            <i class="fa fa-clipboard" aria-hidden="true"></i>
+                            <h2>Звіти</h2>
+                        </div>
+
+                        <div class="card-table">
+                            <table id="reportTable">
+                                <tbody>
+                                    <tr>
+                                        <th>Назва</th>
+                                        <th>Дія</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Всі студенти</td>
+                                        <td><a href="../Reports/AllStudents.aspx">Перейти</a></td>
+                                    </tr>
+                                     <tr>
+                                        <td>Успішніть студентів</td>
+                                        <td><a href="../Reports/StudentsMarks.aspx">Перейти</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
                 </div>
                 <div class="main tab-pane fade" id="edit">
                     <div class="card header-settings clearfix">
