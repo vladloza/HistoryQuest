@@ -49,6 +49,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
@@ -141,6 +142,7 @@
     <Content Include="libs\img\checkpoint_completed.png" />
     <Content Include="libs\img\checkpoint_current.png" />
     <Content Include="Quests\QuestInfo.aspx" />
+    <Content Include="Reports\AllStudents.aspx" />
     <Content Include="Scripts\WebService.js" />
     <Content Include="Quests\Task.aspx" />
     <Content Include="WebServices\WebService.asmx" />
@@ -155,6 +157,17 @@
     <Content Include="libs\fonts\Lato\LatoLight\LatoLight.woff" />
     <Content Include="libs\fonts\HelveticaNeue\helveticaneuecyr-bold.otf" />
     <Content Include="libs\fonts\HelveticaNeue\helveticaneuecyr-thin.otf" />
+    <Content Include="DataSets\AllStudentsDataSet.xsc">
+      <DependentUpon>AllStudentsDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\AllStudentsDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AllStudentsDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\AllStudentsDataSet.xss">
+      <DependentUpon>AllStudentsDataSet.xsd</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -202,6 +215,11 @@
     </Compile>
     <Compile Include="Controls\ChangeInfo.ascx.designer.cs">
       <DependentUpon>ChangeInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\AllStudentsDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllStudentsDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -270,6 +288,13 @@
     <Compile Include="Quests\Task.aspx.designer.cs">
       <DependentUpon>Task.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\AllStudents.aspx.cs">
+      <DependentUpon>AllStudents.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\AllStudents.aspx.designer.cs">
+      <DependentUpon>AllStudents.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Utils\DataManager.cs" />
     <Compile Include="WebServices\DataService.cs" />
     <Compile Include="WebServices\WebService.asmx.cs">
@@ -295,6 +320,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\AllStudents.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
