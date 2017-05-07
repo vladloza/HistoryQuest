@@ -49,6 +49,24 @@ namespace HistoryQuest.Quests {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl TaskHeader;
         
         /// <summary>
+        /// ProgressBar элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ProgressBar;
+        
+        /// <summary>
+        /// TaskNumber элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl TaskNumber;
+        
+        /// <summary>
         /// QuestionText элемент управления.
         /// </summary>
         /// <remarks>

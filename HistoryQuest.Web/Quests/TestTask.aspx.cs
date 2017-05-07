@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml;
 
 namespace HistoryQuest.Quests
 {
@@ -16,9 +17,22 @@ namespace HistoryQuest.Quests
         {
             base.Page_Load(sender, e);
             
-            //Load Xml file with task sources
-            answers = new List<string>() { "Answer1", "Answer2", "Answer3", "Answer4" };
-            rightAnswerId = 2;
+            answers = new List<string>();
+            using (XmlReader reader = XmlReader.Create(HttpRuntime.AppDomainAppPath + "/Content/Tasks/task1.xml"))//task.SourceFilePath))
+            {
+                reader.ReadToFollowing("answers");
+                if (reader.ReadToDescendant("answer"))
+                {
+                    do
+                    {
+                        reader.MoveToFirstAttribute();
+                        answers.Add(reader.Value);
+                    } while (reader.ReadToNextSibling("answer"));
+                }
+                reader.ReadToFollowing("rightanswer");
+                reader.MoveToFirstAttribute();
+                rightAnswerId = int.Parse(reader.Value);
+            }
 
             if (Session != null)
             {

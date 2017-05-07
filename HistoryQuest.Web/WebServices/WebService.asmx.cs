@@ -261,6 +261,10 @@ namespace HistoryQuest.WebServices
                     task.CheckPoint.ThresholdScore <= checkPointToTry.TasksToTries.Sum(t => t.EarnedScore))
                 {
                     checkPointToTry.IsFailed = false;
+                    if (completeQuestTry.CheckPointsToTries.Where(cpt => !cpt.IsFailed).Count() == task.CheckPoint.Quest.CheckPoints.Count())
+                    {
+                        completeQuestTry.IsSuccessful = true;
+                    }
                 }
 
                 url = "/Quests/Results.aspx";

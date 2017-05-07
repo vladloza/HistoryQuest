@@ -35,5 +35,21 @@ namespace HistoryQuest.Quests
                 return TaskDiv;
             }
         }
+
+        public HtmlGenericControl TaskNumberControl
+        {
+            get
+            {
+                return TaskNumber;
+            }
+        }
+        
+        public HtmlGenericControl ProgressBarControl
+        {
+            get
+            {
+                return ProgressBar;
+            }
+        }
     }
 }

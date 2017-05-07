@@ -105,6 +105,7 @@
   <ItemGroup>
     <Content Include="Account\AdminAccount.aspx" />
     <Content Include="Account\TeacherAccount.aspx" />
+    <Content Include="Content\Tasks\task1.xml" />
     <Content Include="Controls\ChangePassword.ascx" />
     <Content Include="Controls\ChangeInfo.ascx" />
     <Content Include="Default.aspx" />
