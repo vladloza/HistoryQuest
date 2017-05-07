@@ -182,6 +182,7 @@
     <Content Include="DataSets\StudentsMarksDataSet.xss">
       <DependentUpon>StudentsMarksDataSet.xsd</DependentUpon>
     </Content>
+    <Content Include="Quests\Tasks.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
