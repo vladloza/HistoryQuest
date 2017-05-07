@@ -143,6 +143,7 @@
     <Content Include="libs\img\checkpoint_current.png" />
     <Content Include="Quests\QuestInfo.aspx" />
     <Content Include="Reports\AllStudents.aspx" />
+    <Content Include="Reports\StudentsMarks.aspx" />
     <Content Include="Scripts\WebService.js" />
     <Content Include="Quests\Task.aspx" />
     <Content Include="WebServices\WebService.asmx" />
@@ -167,6 +168,17 @@
     </None>
     <Content Include="DataSets\AllStudentsDataSet.xss">
       <DependentUpon>AllStudentsDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSets\StudentsMarksDataSet.xsc">
+      <DependentUpon>StudentsMarksDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\StudentsMarksDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>StudentsMarksDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\StudentsMarksDataSet.xss">
+      <DependentUpon>StudentsMarksDataSet.xsd</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -220,6 +232,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AllStudentsDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\StudentsMarksDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StudentsMarksDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -295,6 +312,13 @@
     <Compile Include="Reports\AllStudents.aspx.designer.cs">
       <DependentUpon>AllStudents.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\StudentsMarks.aspx.cs">
+      <DependentUpon>StudentsMarks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\StudentsMarks.aspx.designer.cs">
+      <DependentUpon>StudentsMarks.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Utils\DataManager.cs" />
     <Compile Include="WebServices\DataService.cs" />
     <Compile Include="WebServices\WebService.asmx.cs">
@@ -323,6 +347,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Reports\AllStudents.rdlc" />
+    <EmbeddedResource Include="Reports\StudentsMarks.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
