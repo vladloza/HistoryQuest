@@ -271,6 +271,7 @@
       <DependentUpon>Task.aspx</DependentUpon>
     </Compile>
     <Compile Include="Utils\DataManager.cs" />
+    <Compile Include="WebServices\DataService.cs" />
     <Compile Include="WebServices\WebService.asmx.cs">
       <DependentUpon>WebService.asmx</DependentUpon>
       <SubType>Component</SubType>

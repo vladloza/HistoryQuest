@@ -225,5 +225,38 @@ namespace HistoryQuest.WebServices
 
             return result;
         }
+
+        [WebMethod]
+        public object GetCheckPointLikesCount(Guid checkPointGID)
+        {
+            int count = Repository.CurrentDataContext.Likes.Where(l => l.CheckPointGID == checkPointGID).Count();
+            bool liked = Repository.CurrentDataContext.Likes
+                .SingleOrDefault(l => l.CheckPointGID == checkPointGID && l.UserGID == Repository.CurrentUser.gid) != null;
+
+            return new { count, liked };
+        }
+
+        [WebMethod]
+        public void UpdateCheckPointLikesCount(Guid checkPointGID)
+        {
+            var request = Repository.CurrentDataContext.Likes
+                .SingleOrDefault(l=> l.CheckPointGID == checkPointGID && l.UserGID == Repository.CurrentUser.gid);
+
+            if(request != null)
+            {
+                Repository.CurrentDataContext.Likes.DeleteOnSubmit(request);
+            }
+            else
+            {
+                Likes like = new Likes()
+                {
+                    gid = Guid.NewGuid(),
+                    CheckPointGID = checkPointGID,
+                    UserGID = Repository.CurrentUser.gid
+                };
+                Repository.CurrentDataContext.Likes.InsertOnSubmit(like);
+            }
+            Repository.CurrentDataContext.SubmitChanges();
+        }
     }
 }

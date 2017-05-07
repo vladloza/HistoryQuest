@@ -20,7 +20,6 @@ QuestMap.prototype = {
             WebService.GetQuestCheckPoints(window.CurrentQuestGID, Function.createDelegate(this, this.onLoadSuccess));
         }
     },
-
     onLoadSuccess: function (result) {
         var styles = {
             retro: [
@@ -115,7 +114,11 @@ QuestMap.prototype = {
         if (result && result.CheckPoints) {
             var createListener = function (checkPointNum) {
                 return function () {
+                    document.currentCheckPointGid = result.CheckPoints[checkPointNum].gid;
+
+                    WebService.GetCheckPointLikesCount(document.currentCheckPointGid);
                     $("#CheckPointName").text(result.CheckPoints[checkPointNum].Name);
+
                     if (result.CheckPoints[checkPointNum].IsCurrent) {
                         $("#StartCheckPoint").attr("checkPointGID", result.CheckPoints[checkPointNum].gid);
                         $("#StartCheckPoint").attr("style", "");

@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeBehind="Quest.aspx.cs" Inherits="HistoryQuest.Quest" %>
 
-<asp:Content runat="server" ContentPlaceHolderID="ContentPlaceHolder">
+<asp:Content runat="server" ContentPlaceHolderID="noForm">
     <div class="wrapper map-wrapper">
         <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGaJ_hdTjIj5HSIH4qyVrMf379w6k_vtg&libraries=geometry&callback=QuestMap.InitializeMap">
@@ -19,6 +19,12 @@
                         <p>Петро Кононович Конашевич-Сагайдачний народився бл. 1582р. в селі Кульчиці в православній родині (тепер село Самбірського району Львівської області).</p>
                         <hr />
                         <button id="StartCheckPoint" class="btn btn-info">Начать</button>
+                        <div class="right like-wrapper">
+                            <button class="like" id="Like">
+                                <i class="fa fa-heart" aria-hidden="true" id="i-like"></i>
+                                <span id="likes-count"></span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -32,6 +38,10 @@
         $("#StartCheckPoint").click(function (e) {
             e.preventDefault();
             WebService.StartCheckPoint($("#StartCheckPoint")[0].attributes.checkPointGID.value);
+        });
+        $("#Like").click(function (e) {
+            e.preventDefault();
+            WebService.UpdateCheckPointLikesCount(document.currentCheckPointGid);
         });
     </script>
     <script type="text/javascript" language="javascript">

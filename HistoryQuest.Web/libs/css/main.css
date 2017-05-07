@@ -261,13 +261,33 @@ input.small-control {
     line-height: 1.42857143;
     width: auto;
 }
+.like-wrapper span {
+    font-weight:500;
+}
+#i-like {
+    color:#fa6a6a;
+}
+#i-like.liked {
+    color:#d31a1a;
+}
+.like-wrapper {
+    margin:0px 25px;
+    padding: 2px 5px 2px 3px;
+    cursor:pointer;
+}
+.like-wrapper:hover{
+    background:#f8f8f8;
+}
+.like, 
 .cabinet {
     border: 0;
     background: none;
     display: inline;
     margin: 0;
-    padding: 4px 18px 4px 6px;
     cursor: pointer;
+}
+.cabinet {
+    padding: 4px 18px 4px 6px;
 }
 .cabinet-wrapper {
     margin: 10px 0px;

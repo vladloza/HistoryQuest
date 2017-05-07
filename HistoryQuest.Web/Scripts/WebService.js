@@ -1,7 +1,9 @@
 ﻿WebService = function () { };
 
 WebService.prototype =
-    {};
+    {
+        
+    };
 
 var startFrom = 0;
 
@@ -58,6 +60,45 @@ WebService.AddComment = function (questGuid, text) {
         dataType: "json",
         success: function () {
             WebService.GetComments(questGuid, 1);
+        }
+    });
+};
+WebService.GetCheckPointLikesCount = function (checkPointGID) {
+    $.ajax({
+        type: "POST",
+        url: "../WebServices/WebService.asmx/GetCheckPointLikesCount",
+        data: "{ checkPointGID: '" + checkPointGID + "' }",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            WebService.BindLikesToControl(data.d.count, data.d.liked);
+        },
+        error: function (r) {
+            alert(r.responseText);
+        },
+        failure: function (r) {
+            alert(r.responseText);
+        }
+    });
+};
+WebService.BindLikesToControl = function (count, liked) {
+    $("#likes-count")[0].innerText = count;
+    if (!liked) {
+        document.getElementById('i-like').classList.remove('liked');
+    }
+    else {
+        document.getElementById('i-like').classList.add('liked');
+    }
+};
+WebService.UpdateCheckPointLikesCount = function (checkPointGID) {
+    $.ajax({
+        type: "POST",
+        url: "../WebServices/WebService.asmx/UpdateCheckPointLikesCount",
+        data: "{ checkPointGID: '" + checkPointGID + "' }",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function () {
+            WebService.GetCheckPointLikesCount(checkPointGID);
         }
     });
 };
