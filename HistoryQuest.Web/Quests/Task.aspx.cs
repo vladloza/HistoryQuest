@@ -8,17 +8,11 @@ using System.Web.UI.WebControls;
 
 namespace HistoryQuest.Quests
 {
-    public partial class Task : BaseTaskPage
+    public partial class Task : BasePage
     {
         protected override void Page_Load(object sender, EventArgs e)
         {
             base.Page_Load(sender, e);
-            
-            TaskHeader.InnerText = string.Format("{0}. {1}", task.CheckPoint.Quest.Name, task.CheckPoint.Name);
-            QuestionText.InnerText = task.Name;
-
-            //Load Xml file with task sources
-            List<string> answers = new List<string>() { "Answer1", "Answer2", "Answer3", "Answer4" };
         }
     }
 }

@@ -112,7 +112,7 @@
                         <div class="question-map">
                             <div id="map"></div>
                             <script async defer
-                                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGaJ_hdTjIj5HSIH4qyVrMf379w6k_vtg&libraries=geometry&callback=QuestMap.InitializeMap">
+                                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGaJ_hdTjIj5HSIH4qyVrMf379w6k_vtg&libraries=geometry&callback=QuestMap.InitializeTaskMap">
                             </script>
                         </div>
                     </div>

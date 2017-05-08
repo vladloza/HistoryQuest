@@ -255,7 +255,7 @@ namespace HistoryQuest.WebServices
             };
             checkPointToTry.TasksToTries.Add(taskToTry);
 
-            if (currentTaskId == task.CheckPoint.TasksCount - 1)
+            if (currentTaskId == Math.Min(tasksList.Count, task.CheckPoint.TasksCount) - 1)
             {
                 if (task.CheckPoint.ThresholdScore == null ||
                     task.CheckPoint.ThresholdScore <= checkPointToTry.TasksToTries.Sum(t => t.EarnedScore))
@@ -339,7 +339,7 @@ namespace HistoryQuest.WebServices
             }
             else
             {
-                Likes like = new Likes()
+                Like like = new Like()
                 {
                     gid = Guid.NewGuid(),
                     CheckPointGID = checkPointGID,

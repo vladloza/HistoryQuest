@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="HistoryQuest.DataBase" Class="HistoryQuestDataContext" Serialization="Unidirectional" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-RH7MHP2\SQLEXPRESS;Initial Catalog=HistoryQuest.DataBase;Integrated Security=True" SettingsObjectName="HistoryQuest.Domain.Properties.Settings" SettingsPropertyName="HistoryQuest_DataBaseConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=SERGEY-PC\SQLEXPRESS;Initial Catalog=HistoryQuest.DataBase;Integrated Security=True" SettingsObjectName="HistoryQuest.Domain.Properties.Settings" SettingsPropertyName="HistoryQuest_DataBaseConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.CheckPoints" Member="CheckPoints">
     <Type Name="CheckPoint">
       <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
@@ -16,8 +16,8 @@
       <Column Name="AuthorGID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Association Name="CheckPoint_CheckPoint" Member="CheckPoints" ThisKey="gid" OtherKey="ParentGID" Type="CheckPoint" />
       <Association Name="CheckPoint_CheckPointsToTry" Member="CheckPointsToTries" ThisKey="gid" OtherKey="CheckPointGID" Type="CheckPointsToTry" />
+      <Association Name="CheckPoint_Like" Member="Likes" ThisKey="gid" OtherKey="CheckPointGID" Type="Like" />
       <Association Name="CheckPoint_Task" Member="Tasks" ThisKey="gid" OtherKey="CheckPointGID" Type="Task" />
-      <Association Name="CheckPoint_Likes" Member="Likes" ThisKey="gid" OtherKey="CheckPointGID" Type="Likes" />
       <Association Name="CheckPoint_CheckPoint" Member="CheckPoint1" ThisKey="ParentGID" OtherKey="gid" Type="CheckPoint" IsForeignKey="true" />
       <Association Name="Quest_CheckPoint" Member="Quest" ThisKey="QuestGID" OtherKey="gid" Type="Quest" IsForeignKey="true" />
       <Association Name="User_CheckPoint" Member="User" ThisKey="AuthorGID" OtherKey="gid" Type="User" IsForeignKey="true" />
@@ -71,6 +71,16 @@
       <Association Name="Face_User" Member="Users" ThisKey="gid" OtherKey="FaceGID" Type="User" />
     </Type>
   </Table>
+  <Table Name="dbo.Likes" Member="Likes">
+    <Type Name="Like">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="gid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserGID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="CheckPointGID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="CheckPoint_Like" Member="CheckPoint" ThisKey="CheckPointGID" OtherKey="gid" Type="CheckPoint" IsForeignKey="true" />
+      <Association Name="User_Like" Member="User" ThisKey="UserGID" OtherKey="gid" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.PupilsToTeachersRequests" Member="PupilsToTeachersRequests">
     <Type Name="PupilsToTeachersRequest">
       <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
@@ -106,7 +116,7 @@
     <Type Name="Task">
       <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="gid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="Text" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="MaxScore" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="TaskTypeGID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="CheckPointGID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
@@ -162,21 +172,11 @@
       <Column Name="IsSocial" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="User_CheckPoint" Member="CheckPoints" ThisKey="gid" OtherKey="AuthorGID" Type="CheckPoint" />
       <Association Name="User_UsersInRole" Member="UsersInRoles" ThisKey="gid" OtherKey="UserGID" Type="UsersInRole" />
+      <Association Name="User_Like" Member="Likes" ThisKey="gid" OtherKey="UserGID" Type="Like" />
       <Association Name="User_Quest" Member="Quests" ThisKey="gid" OtherKey="AuthorGID" Type="Quest" />
       <Association Name="User_Task" Member="Tasks" ThisKey="gid" OtherKey="AuthorGID" Type="Task" />
       <Association Name="User_Try" Member="Tries" ThisKey="gid" OtherKey="UserGID" Type="Try" />
-      <Association Name="User_Likes" Member="Likes" ThisKey="gid" OtherKey="UserGID" Type="Likes" />
       <Association Name="Face_User" Member="Face" ThisKey="FaceGID" OtherKey="gid" Type="Face" IsForeignKey="true" DeleteRule="CASCADE" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Likes" Member="Likes">
-    <Type Name="Likes">
-      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="gid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="UserGID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Column Name="CheckPointGID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Association Name="CheckPoint_Likes" Member="CheckPoint" ThisKey="CheckPointGID" OtherKey="gid" Type="CheckPoint" IsForeignKey="true" />
-      <Association Name="User_Likes" Member="User" ThisKey="UserGID" OtherKey="gid" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

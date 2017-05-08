@@ -8,35 +8,29 @@ using System.Xml;
 
 namespace HistoryQuest.Quests
 {
-    public partial class TestTask : BaseTaskPage
-    {
-        public List<string> Answers;
-        protected int rightAnswerId;
-
+    public partial class WritingTask : BaseTaskPage
+    { 
         protected override void Page_Load(object sender, EventArgs e)
         {
             base.Page_Load(sender, e);
 
-            Answers = new List<string>();
+            List<string> rightAnswers = new List<string>();
             using (XmlReader reader = XmlReader.Create(HttpRuntime.AppDomainAppPath + task.SourceFilePath))
             {
-                reader.ReadToFollowing("answers");
-                if (reader.ReadToDescendant("answer"))
+                reader.ReadToFollowing("rightanswers");
+                if (reader.ReadToDescendant("rightanswer"))
                 {
                     do
                     {
                         reader.MoveToFirstAttribute();
-                        Answers.Add(reader.Value);
-                    } while (reader.ReadToNextSibling("answer"));
+                        rightAnswers.Add(reader.Value);
+                    } while (reader.ReadToNextSibling("rightanswer"));
                 }
-                reader.ReadToFollowing("rightanswer");
-                reader.MoveToFirstAttribute();
-                rightAnswerId = int.Parse(reader.Value);
             }
 
             if (Session != null)
             {
-                Session["RightAnswer"] = Answers[rightAnswerId];
+                Session["RightAnswera"] = rightAnswers;
             }
         }
     }

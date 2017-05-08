@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Tasks] (
     [id]             BIGINT           IDENTITY (1, 1) NOT NULL,
     [gid]            UNIQUEIDENTIFIER NOT NULL,
-    [Name]           NVARCHAR (250)   NOT NULL,
+    [Text]           TEXT             NOT NULL,
     [MaxScore]       BIGINT           NOT NULL,
     [TaskTypeGID]    UNIQUEIDENTIFIER NOT NULL,
     [CheckPointGID]  UNIQUEIDENTIFIER NOT NULL,
@@ -12,4 +12,6 @@
     CONSTRAINT [FK_Tasks_TaskTypes] FOREIGN KEY ([TaskTypeGID]) REFERENCES [dbo].[TaskTypes] ([gid]),
     CONSTRAINT [FK_Tasks_Users] FOREIGN KEY ([AuthorGID]) REFERENCES [dbo].[Users] ([gid])
 );
+
+
 

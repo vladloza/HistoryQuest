@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Device.Location;
 
 namespace HistoryQuest.Domain.TasksValidation
 {
@@ -13,14 +14,19 @@ namespace HistoryQuest.Domain.TasksValidation
 
         public override int Validate(string userAnswer, object rightAnswer)
         {
-            int distance, maxDistance;
+            string[] userAnswerParts = userAnswer.Substring(1, userAnswer.Length - 2).Replace(" ", "").Split(',');
+            double userLat = double.Parse(userAnswerParts[0].Replace(".", ","));
+            double userLng = double.Parse(userAnswerParts[1].Replace(".", ","));
+            
+            string[] rightAnswerParts = rightAnswer.ToString().Replace("(", "").Replace(")", "").Replace(" ", "").Split(',');
+            double rightLat = double.Parse(rightAnswerParts[0].Replace(".", ","));
+            double rightLng = double.Parse(rightAnswerParts[1].Replace(".", ","));
+            double maxDistance = double.Parse(rightAnswerParts[2].Replace(".", ","));
 
-            if (!int.TryParse(userAnswer, out distance) || !int.TryParse(rightAnswer.ToString(), out maxDistance))
-            {
-                return 0;
-            }
+            var userCoord = new GeoCoordinate(userLat, userLng);
+            var rightCoord = new GeoCoordinate(rightLat, rightLng);
 
-            return distance <= maxDistance ? MaxScore : 0;
+            return userCoord.GetDistanceTo(rightCoord) / 1000d <= maxDistance ? MaxScore : 0;
         }
     }
 }

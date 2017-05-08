@@ -105,6 +105,10 @@
   <ItemGroup>
     <Content Include="Account\AdminAccount.aspx" />
     <Content Include="Account\TeacherAccount.aspx" />
+    <Content Include="Content\Images\sagay.jpg" />
+    <Content Include="Content\Tasks\task4.xml" />
+    <Content Include="Content\Tasks\task3.xml" />
+    <Content Include="Content\Tasks\task2.xml" />
     <Content Include="Content\Tasks\task1.xml" />
     <Content Include="Controls\ChangePassword.ascx" />
     <Content Include="Controls\ChangeInfo.ascx" />
@@ -142,9 +146,12 @@
     <Content Include="libs\fonts\fontawesome-webfont.ttf" />
     <Content Include="libs\img\checkpoint_completed.png" />
     <Content Include="libs\img\checkpoint_current.png" />
+    <Content Include="Quests\MapTask.aspx" />
     <Content Include="Quests\QuestInfo.aspx" />
     <Content Include="Quests\Scripts\TasksController.js" />
     <Content Include="Quests\TestTask.aspx" />
+    <Content Include="Quests\TestWithImageTask.aspx" />
+    <Content Include="Quests\WritingTask.aspx" />
     <Content Include="Reports\AllStudents.aspx" />
     <Content Include="Reports\StudentsMarks.aspx" />
     <Content Include="Scripts\WebService.js" />
@@ -284,6 +291,13 @@
     <Compile Include="Quests\BaseTaskPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Quests\MapTask.aspx.cs">
+      <DependentUpon>MapTask.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quests\MapTask.aspx.designer.cs">
+      <DependentUpon>MapTask.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Quests\Tasks.Master.cs">
       <DependentUpon>Tasks.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -311,6 +325,20 @@
     </Compile>
     <Compile Include="Quests\TestTask.aspx.designer.cs">
       <DependentUpon>TestTask.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Quests\TestWithImageTask.aspx.cs">
+      <DependentUpon>TestWithImageTask.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quests\TestWithImageTask.aspx.designer.cs">
+      <DependentUpon>TestWithImageTask.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Quests\WritingTask.aspx.cs">
+      <DependentUpon>WritingTask.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quests\WritingTask.aspx.designer.cs">
+      <DependentUpon>WritingTask.aspx</DependentUpon>
     </Compile>
     <Compile Include="Registration.aspx.cs">
       <DependentUpon>Registration.aspx</DependentUpon>

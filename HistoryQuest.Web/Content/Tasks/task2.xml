@@ -1,0 +1,10 @@
+﻿<TestTask>
+  <answers>
+    <answer text="Sagaydachniy" />
+    <answer text="Test Answer 2" />
+    <answer text="Test Answer 3" />
+    <answer text="Test Answer 4" />
+  </answers>
+  <rightanswer value="0" />
+  <image path="/Content/Images/sagay.jpg" />
+</TestTask>

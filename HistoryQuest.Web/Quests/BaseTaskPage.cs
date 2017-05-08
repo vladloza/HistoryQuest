@@ -26,7 +26,7 @@ namespace HistoryQuest.Quests
                 if (tasksMaster != null)
                 {
                     tasksMaster.TaskHeaderControl.InnerText = string.Format("{0}. {1}", task.CheckPoint.Quest.Name, task.CheckPoint.Name);
-                    tasksMaster.QuestionTextControl.InnerText = task.Name;
+                    tasksMaster.QuestionTextControl.InnerText = task.Text;
                     tasksMaster.TaskDivControl.Attributes["TaskTypeGID"] = task.TaskTypeGID.ToString();
                     tasksMaster.TaskNumberControl.InnerText = string.Format("{0} из {1}", currentTaskId + 1, tasksList.Count);
                     tasksMaster.ProgressBarControl.Attributes["style"] = string.Format("width: {0}%", 100 * (currentTaskId) / (float)tasksList.Count);

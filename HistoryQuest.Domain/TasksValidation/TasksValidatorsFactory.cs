@@ -12,9 +12,13 @@ namespace HistoryQuest.Domain.TasksValidation
         {
             BaseTaskValidator validator = null;
             
-            if (taskTypeGID == Constants.TestTaskTypeGID)
+            if (taskTypeGID == Constants.TestTaskTypeGID || taskTypeGID == Constants.TestWithImageTaskTypeGID)
             {
                 validator = new BaseTaskValidator(maxScore);
+            }
+            else if (taskTypeGID == Constants.WritingTaskTypeGID)
+            {
+                validator = new WritingTaskValidator(maxScore);
             }
             else if (taskTypeGID == Constants.MapTaskTypeGID)
             {

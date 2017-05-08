@@ -46,6 +46,9 @@ namespace HistoryQuest.Domain
     partial void InsertFace(Face instance);
     partial void UpdateFace(Face instance);
     partial void DeleteFace(Face instance);
+    partial void InsertLike(Like instance);
+    partial void UpdateLike(Like instance);
+    partial void DeleteLike(Like instance);
     partial void InsertPupilsToTeachersRequest(PupilsToTeachersRequest instance);
     partial void UpdatePupilsToTeachersRequest(PupilsToTeachersRequest instance);
     partial void DeletePupilsToTeachersRequest(PupilsToTeachersRequest instance);
@@ -70,9 +73,6 @@ namespace HistoryQuest.Domain
     partial void InsertUser(User instance);
     partial void UpdateUser(User instance);
     partial void DeleteUser(User instance);
-    partial void InsertLikes(Likes instance);
-    partial void UpdateLikes(Likes instance);
-    partial void DeleteLikes(Likes instance);
     #endregion
 		
 		public HistoryQuestDataContext() : 
@@ -145,6 +145,14 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
+		public System.Data.Linq.Table<Like> Likes
+		{
+			get
+			{
+				return this.GetTable<Like>();
+			}
+		}
+		
 		public System.Data.Linq.Table<PupilsToTeachersRequest> PupilsToTeachersRequests
 		{
 			get
@@ -208,14 +216,6 @@ namespace HistoryQuest.Domain
 				return this.GetTable<User>();
 			}
 		}
-		
-		public System.Data.Linq.Table<Likes> Likes
-		{
-			get
-			{
-				return this.GetTable<Likes>();
-			}
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CheckPoints")]
@@ -253,9 +253,9 @@ namespace HistoryQuest.Domain
 		
 		private EntitySet<CheckPointsToTry> _CheckPointsToTries;
 		
-		private EntitySet<Task> _Tasks;
+		private EntitySet<Like> _Likes;
 		
-		private EntitySet<Likes> _Likes;
+		private EntitySet<Task> _Tasks;
 		
 		private EntityRef<CheckPoint> _CheckPoint1;
 		
@@ -602,8 +602,27 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CheckPoint_Task", Storage="_Tasks", ThisKey="gid", OtherKey="CheckPointGID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CheckPoint_Like", Storage="_Likes", ThisKey="gid", OtherKey="CheckPointGID")]
 		[global::System.Runtime.Serialization.DataMemberAttribute(Order=15, EmitDefaultValue=false)]
+		public EntitySet<Like> Likes
+		{
+			get
+			{
+				if ((this.serializing 
+							&& (this._Likes.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
+				return this._Likes;
+			}
+			set
+			{
+				this._Likes.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CheckPoint_Task", Storage="_Tasks", ThisKey="gid", OtherKey="CheckPointGID")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=16, EmitDefaultValue=false)]
 		public EntitySet<Task> Tasks
 		{
 			get
@@ -618,25 +637,6 @@ namespace HistoryQuest.Domain
 			set
 			{
 				this._Tasks.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CheckPoint_Likes", Storage="_Likes", ThisKey="gid", OtherKey="CheckPointGID")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=16, EmitDefaultValue=false)]
-		public EntitySet<Likes> Likes
-		{
-			get
-			{
-				if ((this.serializing 
-							&& (this._Likes.HasLoadedOrAssignedValues == false)))
-				{
-					return null;
-				}
-				return this._Likes;
-			}
-			set
-			{
-				this._Likes.Assign(value);
 			}
 		}
 		
@@ -786,6 +786,18 @@ namespace HistoryQuest.Domain
 			entity.CheckPoint = null;
 		}
 		
+		private void attach_Likes(Like entity)
+		{
+			this.SendPropertyChanging();
+			entity.CheckPoint = this;
+		}
+		
+		private void detach_Likes(Like entity)
+		{
+			this.SendPropertyChanging();
+			entity.CheckPoint = null;
+		}
+		
 		private void attach_Tasks(Task entity)
 		{
 			this.SendPropertyChanging();
@@ -798,24 +810,12 @@ namespace HistoryQuest.Domain
 			entity.CheckPoint = null;
 		}
 		
-		private void attach_Likes(Likes entity)
-		{
-			this.SendPropertyChanging();
-			entity.CheckPoint = this;
-		}
-		
-		private void detach_Likes(Likes entity)
-		{
-			this.SendPropertyChanging();
-			entity.CheckPoint = null;
-		}
-		
 		private void Initialize()
 		{
 			this._CheckPoints = new EntitySet<CheckPoint>(new Action<CheckPoint>(this.attach_CheckPoints), new Action<CheckPoint>(this.detach_CheckPoints));
 			this._CheckPointsToTries = new EntitySet<CheckPointsToTry>(new Action<CheckPointsToTry>(this.attach_CheckPointsToTries), new Action<CheckPointsToTry>(this.detach_CheckPointsToTries));
+			this._Likes = new EntitySet<Like>(new Action<Like>(this.attach_Likes), new Action<Like>(this.detach_Likes));
 			this._Tasks = new EntitySet<Task>(new Action<Task>(this.attach_Tasks), new Action<Task>(this.detach_Tasks));
-			this._Likes = new EntitySet<Likes>(new Action<Likes>(this.attach_Likes), new Action<Likes>(this.detach_Likes));
 			this._CheckPoint1 = default(EntityRef<CheckPoint>);
 			this._Quest = default(EntityRef<Quest>);
 			this._User = default(EntityRef<User>);
@@ -1996,6 +1996,239 @@ namespace HistoryQuest.Domain
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Likes")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
+	public partial class Like : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _id;
+		
+		private System.Guid _gid;
+		
+		private System.Guid _UserGID;
+		
+		private System.Guid _CheckPointGID;
+		
+		private EntityRef<CheckPoint> _CheckPoint;
+		
+		private EntityRef<User> _User;
+		
+    #region Определения метода расширяемости
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(long value);
+    partial void OnidChanged();
+    partial void OngidChanging(System.Guid value);
+    partial void OngidChanged();
+    partial void OnUserGIDChanging(System.Guid value);
+    partial void OnUserGIDChanged();
+    partial void OnCheckPointGIDChanging(System.Guid value);
+    partial void OnCheckPointGIDChanged();
+    #endregion
+		
+		public Like()
+		{
+			this.Initialize();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="BigInt NOT NULL IDENTITY", IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+		public long id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gid", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+		public System.Guid gid
+		{
+			get
+			{
+				return this._gid;
+			}
+			set
+			{
+				if ((this._gid != value))
+				{
+					this.OngidChanging(value);
+					this.SendPropertyChanging();
+					this._gid = value;
+					this.SendPropertyChanged("gid");
+					this.OngidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserGID", DbType="UniqueIdentifier NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+		public System.Guid UserGID
+		{
+			get
+			{
+				return this._UserGID;
+			}
+			set
+			{
+				if ((this._UserGID != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserGIDChanging(value);
+					this.SendPropertyChanging();
+					this._UserGID = value;
+					this.SendPropertyChanged("UserGID");
+					this.OnUserGIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckPointGID", DbType="UniqueIdentifier NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
+		public System.Guid CheckPointGID
+		{
+			get
+			{
+				return this._CheckPointGID;
+			}
+			set
+			{
+				if ((this._CheckPointGID != value))
+				{
+					if (this._CheckPoint.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCheckPointGIDChanging(value);
+					this.SendPropertyChanging();
+					this._CheckPointGID = value;
+					this.SendPropertyChanged("CheckPointGID");
+					this.OnCheckPointGIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CheckPoint_Like", Storage="_CheckPoint", ThisKey="CheckPointGID", OtherKey="gid", IsForeignKey=true)]
+		public CheckPoint CheckPoint
+		{
+			get
+			{
+				return this._CheckPoint.Entity;
+			}
+			set
+			{
+				CheckPoint previousValue = this._CheckPoint.Entity;
+				if (((previousValue != value) 
+							|| (this._CheckPoint.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CheckPoint.Entity = null;
+						previousValue.Likes.Remove(this);
+					}
+					this._CheckPoint.Entity = value;
+					if ((value != null))
+					{
+						value.Likes.Add(this);
+						this._CheckPointGID = value.gid;
+					}
+					else
+					{
+						this._CheckPointGID = default(System.Guid);
+					}
+					this.SendPropertyChanged("CheckPoint");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Like", Storage="_User", ThisKey="UserGID", OtherKey="gid", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Likes.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Likes.Add(this);
+						this._UserGID = value.gid;
+					}
+					else
+					{
+						this._UserGID = default(System.Guid);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void Initialize()
+		{
+			this._CheckPoint = default(EntityRef<CheckPoint>);
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PupilsToTeachersRequests")]
 	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class PupilsToTeachersRequest : INotifyPropertyChanging, INotifyPropertyChanged
@@ -2751,7 +2984,7 @@ namespace HistoryQuest.Domain
 		
 		private System.Guid _gid;
 		
-		private string _Name;
+		private string _Text;
 		
 		private long _MaxScore;
 		
@@ -2781,8 +3014,8 @@ namespace HistoryQuest.Domain
     partial void OnidChanged();
     partial void OngidChanging(System.Guid value);
     partial void OngidChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
+    partial void OnTextChanging(string value);
+    partial void OnTextChanged();
     partial void OnMaxScoreChanging(long value);
     partial void OnMaxScoreChanged();
     partial void OnTaskTypeGIDChanging(System.Guid value);
@@ -2842,23 +3075,23 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(250) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Text", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-		public string Name
+		public string Text
 		{
 			get
 			{
-				return this._Name;
+				return this._Text;
 			}
 			set
 			{
-				if ((this._Name != value))
+				if ((this._Text != value))
 				{
-					this.OnNameChanging(value);
+					this.OnTextChanging(value);
 					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
+					this._Text = value;
+					this.SendPropertyChanged("Text");
+					this.OnTextChanged();
 				}
 			}
 		}
@@ -3958,13 +4191,13 @@ namespace HistoryQuest.Domain
 		
 		private EntitySet<UsersInRole> _UsersInRoles;
 		
+		private EntitySet<Like> _Likes;
+		
 		private EntitySet<Quest> _Quests;
 		
 		private EntitySet<Task> _Tasks;
 		
 		private EntitySet<Try> _Tries;
-		
-		private EntitySet<Likes> _Likes;
 		
 		private EntityRef<Face> _Face;
 		
@@ -4207,8 +4440,27 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Quest", Storage="_Quests", ThisKey="gid", OtherKey="AuthorGID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Like", Storage="_Likes", ThisKey="gid", OtherKey="UserGID")]
 		[global::System.Runtime.Serialization.DataMemberAttribute(Order=11, EmitDefaultValue=false)]
+		public EntitySet<Like> Likes
+		{
+			get
+			{
+				if ((this.serializing 
+							&& (this._Likes.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
+				return this._Likes;
+			}
+			set
+			{
+				this._Likes.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Quest", Storage="_Quests", ThisKey="gid", OtherKey="AuthorGID")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=12, EmitDefaultValue=false)]
 		public EntitySet<Quest> Quests
 		{
 			get
@@ -4227,7 +4479,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Task", Storage="_Tasks", ThisKey="gid", OtherKey="AuthorGID")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=12, EmitDefaultValue=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=13, EmitDefaultValue=false)]
 		public EntitySet<Task> Tasks
 		{
 			get
@@ -4246,7 +4498,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Try", Storage="_Tries", ThisKey="gid", OtherKey="UserGID")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=13, EmitDefaultValue=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=14, EmitDefaultValue=false)]
 		public EntitySet<Try> Tries
 		{
 			get
@@ -4261,25 +4513,6 @@ namespace HistoryQuest.Domain
 			set
 			{
 				this._Tries.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Likes", Storage="_Likes", ThisKey="gid", OtherKey="UserGID")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=14, EmitDefaultValue=false)]
-		public EntitySet<Likes> Likes
-		{
-			get
-			{
-				if ((this.serializing 
-							&& (this._Likes.HasLoadedOrAssignedValues == false)))
-				{
-					return null;
-				}
-				return this._Likes;
-			}
-			set
-			{
-				this._Likes.Assign(value);
 			}
 		}
 		
@@ -4361,6 +4594,18 @@ namespace HistoryQuest.Domain
 			entity.User = null;
 		}
 		
+		private void attach_Likes(Like entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Likes(Like entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
 		private void attach_Quests(Quest entity)
 		{
 			this.SendPropertyChanging();
@@ -4397,26 +4642,14 @@ namespace HistoryQuest.Domain
 			entity.User = null;
 		}
 		
-		private void attach_Likes(Likes entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_Likes(Likes entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
-		}
-		
 		private void Initialize()
 		{
 			this._CheckPoints = new EntitySet<CheckPoint>(new Action<CheckPoint>(this.attach_CheckPoints), new Action<CheckPoint>(this.detach_CheckPoints));
 			this._UsersInRoles = new EntitySet<UsersInRole>(new Action<UsersInRole>(this.attach_UsersInRoles), new Action<UsersInRole>(this.detach_UsersInRoles));
+			this._Likes = new EntitySet<Like>(new Action<Like>(this.attach_Likes), new Action<Like>(this.detach_Likes));
 			this._Quests = new EntitySet<Quest>(new Action<Quest>(this.attach_Quests), new Action<Quest>(this.detach_Quests));
 			this._Tasks = new EntitySet<Task>(new Action<Task>(this.attach_Tasks), new Action<Task>(this.detach_Tasks));
 			this._Tries = new EntitySet<Try>(new Action<Try>(this.attach_Tries), new Action<Try>(this.detach_Tries));
-			this._Likes = new EntitySet<Likes>(new Action<Likes>(this.attach_Likes), new Action<Likes>(this.detach_Likes));
 			this._Face = default(EntityRef<Face>);
 			OnCreated();
 		}
@@ -4440,239 +4673,6 @@ namespace HistoryQuest.Domain
 		public void OnSerialized(StreamingContext context)
 		{
 			this.serializing = false;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Likes")]
-	[global::System.Runtime.Serialization.DataContractAttribute()]
-	public partial class Likes : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private long _id;
-		
-		private System.Guid _gid;
-		
-		private System.Guid _UserGID;
-		
-		private System.Guid _CheckPointGID;
-		
-		private EntityRef<CheckPoint> _CheckPoint;
-		
-		private EntityRef<User> _User;
-		
-    #region Определения метода расширяемости
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(long value);
-    partial void OnidChanged();
-    partial void OngidChanging(System.Guid value);
-    partial void OngidChanged();
-    partial void OnUserGIDChanging(System.Guid value);
-    partial void OnUserGIDChanged();
-    partial void OnCheckPointGIDChanging(System.Guid value);
-    partial void OnCheckPointGIDChanged();
-    #endregion
-		
-		public Likes()
-		{
-			this.Initialize();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="BigInt NOT NULL IDENTITY", IsDbGenerated=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-		public long id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gid", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
-		public System.Guid gid
-		{
-			get
-			{
-				return this._gid;
-			}
-			set
-			{
-				if ((this._gid != value))
-				{
-					this.OngidChanging(value);
-					this.SendPropertyChanging();
-					this._gid = value;
-					this.SendPropertyChanged("gid");
-					this.OngidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserGID", DbType="UniqueIdentifier NOT NULL")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-		public System.Guid UserGID
-		{
-			get
-			{
-				return this._UserGID;
-			}
-			set
-			{
-				if ((this._UserGID != value))
-				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUserGIDChanging(value);
-					this.SendPropertyChanging();
-					this._UserGID = value;
-					this.SendPropertyChanged("UserGID");
-					this.OnUserGIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckPointGID", DbType="UniqueIdentifier NOT NULL")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
-		public System.Guid CheckPointGID
-		{
-			get
-			{
-				return this._CheckPointGID;
-			}
-			set
-			{
-				if ((this._CheckPointGID != value))
-				{
-					if (this._CheckPoint.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCheckPointGIDChanging(value);
-					this.SendPropertyChanging();
-					this._CheckPointGID = value;
-					this.SendPropertyChanged("CheckPointGID");
-					this.OnCheckPointGIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CheckPoint_Likes", Storage="_CheckPoint", ThisKey="CheckPointGID", OtherKey="gid", IsForeignKey=true)]
-		public CheckPoint CheckPoint
-		{
-			get
-			{
-				return this._CheckPoint.Entity;
-			}
-			set
-			{
-				CheckPoint previousValue = this._CheckPoint.Entity;
-				if (((previousValue != value) 
-							|| (this._CheckPoint.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._CheckPoint.Entity = null;
-						previousValue.Likes.Remove(this);
-					}
-					this._CheckPoint.Entity = value;
-					if ((value != null))
-					{
-						value.Likes.Add(this);
-						this._CheckPointGID = value.gid;
-					}
-					else
-					{
-						this._CheckPointGID = default(System.Guid);
-					}
-					this.SendPropertyChanged("CheckPoint");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Likes", Storage="_User", ThisKey="UserGID", OtherKey="gid", IsForeignKey=true)]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Likes.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Likes.Add(this);
-						this._UserGID = value.gid;
-					}
-					else
-					{
-						this._UserGID = default(System.Guid);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void Initialize()
-		{
-			this._CheckPoint = default(EntityRef<CheckPoint>);
-			this._User = default(EntityRef<User>);
-			OnCreated();
-		}
-		
-		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnDeserializing(StreamingContext context)
-		{
-			this.Initialize();
 		}
 	}
 }
