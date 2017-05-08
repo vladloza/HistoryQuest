@@ -1,0 +1,21 @@
+﻿<TestTask>
+  <questions>
+    <question code="1" text="Фраза 1" />
+    <question code="2" text="Фраза 2" />
+    <question code="3" text="Фраза 3" />
+    <question code="4" text="Фраза 4" />
+  </questions>
+  <answers>
+    <answer code="А" text="Ответ 1" />
+    <answer code="Б" text="Ответ 2" />
+    <answer code="В" text="Ответ 3" />
+    <answer code="Г" text="Ответ 4" />
+    <answer code="Д" text="Ответ 5" />
+  </answers>
+  <rightanswers>
+    <rightanswer value="1-Б" />
+    <rightanswer value="2-В" />
+    <rightanswer value="3-А" />
+    <rightanswer value="4-Г" />
+  </rightanswers>
+</TestTask>

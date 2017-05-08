@@ -13,9 +13,20 @@ namespace HistoryQuest.Domain.TasksValidation
 
         public override int Validate(string userAnswer, object rightAnswer)
         {
-            
+            List<string> rightAnswers = rightAnswer as List<string>;
+            string[] userAnswers = userAnswer.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
+            double scorePerQuestion = MaxScore / (double)rightAnswers.Count;
+            double totalScore = 0;
 
-            return base.Validate(userAnswer, rightAnswer);
+            for (int i = 0; i < userAnswers.Length; i++)
+            {
+                if (rightAnswers.Contains(userAnswers[i]))
+                {
+                    totalScore += scorePerQuestion;
+                }
+            }
+
+            return (int)totalScore;
         }
     }
 }
