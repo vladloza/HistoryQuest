@@ -58,10 +58,13 @@
         </asp:ScriptManager>
 
         <script>
+            $(document).ready(function () {
+                window.StartTime = new Date().getTime();
+            });
             $("#NextButton").click(function (e) {
                 e.preventDefault();
                 var tasktype = $("#TaskDiv")[0].attributes.tasktypegid.value;
-                WebService.OnNextButtonPressed(TasksController.ReadAnswer(tasktype), 121);
+                WebService.OnNextButtonPressed(TasksController.ReadAnswer(tasktype), new Date().getTime() - window.StartTime);
             });
             $("#GiveUpButton").click(function (e) {
                 e.preventDefault();
