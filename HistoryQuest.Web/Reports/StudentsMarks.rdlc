@@ -12,7 +12,7 @@
               <Width>6.38938cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.02917cm</Width>
+              <Width>3.53189cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -28,7 +28,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>id</Value>
+                              <Value>ID</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -66,7 +66,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Student Name</Value>
+                              <Value>ПІБ</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -104,7 +104,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Total Score</Value>
+                              <Value>Загальний бал</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -266,7 +266,7 @@
         </TablixRowHierarchy>
         <DataSetName>StudentsMarks</DataSetName>
         <Height>1.2cm</Height>
-        <Width>11.57459cm</Width>
+        <Width>12.07731cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -277,7 +277,7 @@
     <Height>0.47244in</Height>
     <Style />
   </Body>
-  <Width>4.55693in</Width>
+  <Width>4.75485in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>

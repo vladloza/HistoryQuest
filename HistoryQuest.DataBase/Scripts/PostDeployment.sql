@@ -16,7 +16,6 @@ GO
 /*Для обновления текста/изображения использовался указатель. Это может не потребоваться, но на всякий случай это указано здесь.*/
 DECLARE @pv binary(16)
 BEGIN TRANSACTION
-ALTER TABLE [dbo].[Likes] DROP CONSTRAINT [FK_Likes_Tasks]
 ALTER TABLE [dbo].[Likes] DROP CONSTRAINT [FK_Likes_Users]
 ALTER TABLE [dbo].[TasksToTries] DROP CONSTRAINT [FK_TasksToTries_CheckpointsToTries]
 ALTER TABLE [dbo].[TasksToTries] DROP CONSTRAINT [FK_TasksToTries_Tasks]
@@ -91,8 +90,6 @@ INSERT INTO [dbo].[Roles] ([gid], [id], [Name]) VALUES (N'024900db-2a68-4959-a0e
 INSERT INTO [dbo].[Roles] ([gid], [id], [Name]) VALUES (N'40f816d3-3bb4-4864-97c1-67803413389a', 3, N'Admin')
 INSERT INTO [dbo].[Roles] ([gid], [id], [Name]) VALUES (N'4492ed1d-052a-491a-8897-9bbc8d8633ff', 2, N'Teacher')
 SET IDENTITY_INSERT [dbo].[Roles] OFF
-ALTER TABLE [dbo].[Likes]
-    ADD CONSTRAINT [FK_Likes_Tasks] FOREIGN KEY ([TaskGID]) REFERENCES [dbo].[Tasks] ([gid])
 ALTER TABLE [dbo].[Likes]
     ADD CONSTRAINT [FK_Likes_Users] FOREIGN KEY ([UserGID]) REFERENCES [dbo].[Users] ([gid])
 ALTER TABLE [dbo].[TasksToTries]
