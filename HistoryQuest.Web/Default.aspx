@@ -27,7 +27,7 @@
                                             <img src="libs/img/sagay.jpg" />
                                         </div>
                                         <div class="grid-middle">
-                                            <h4>Петро Сагайдачний</h4>
+                                            <h4><%= quest.Name %></h4>
                                             <p>Український квест</p>
                                         </div>
                                         <span class="quest-params">

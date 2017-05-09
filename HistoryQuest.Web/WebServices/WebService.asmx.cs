@@ -243,7 +243,7 @@ namespace HistoryQuest.WebServices
                 HttpContext.Current.Session["CurrentCheckPointTryGID"] = checkPointToTry.gid;
             }
 
-            int score = TasksValidatorsFactory.GetTaskValidator(task.TaskTypeGID, (int)task.MaxScore).Validate(userAnswer, HttpContext.Current.Session["RightAnswer"]);
+            int score = TasksValidatorsFactory.GetTaskValidator(task.TaskTypeGID, task.MaxScore).Validate(userAnswer, HttpContext.Current.Session["RightAnswer"]);
 
             HistoryQuest.Domain.TasksToTry taskToTry = new HistoryQuest.Domain.TasksToTry()
             {

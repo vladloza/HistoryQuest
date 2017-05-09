@@ -2986,7 +2986,7 @@ namespace HistoryQuest.Domain
 		
 		private string _Text;
 		
-		private long _MaxScore;
+		private int _MaxScore;
 		
 		private System.Guid _TaskTypeGID;
 		
@@ -3016,7 +3016,7 @@ namespace HistoryQuest.Domain
     partial void OngidChanged();
     partial void OnTextChanging(string value);
     partial void OnTextChanged();
-    partial void OnMaxScoreChanging(long value);
+    partial void OnMaxScoreChanging(int value);
     partial void OnMaxScoreChanged();
     partial void OnTaskTypeGIDChanging(System.Guid value);
     partial void OnTaskTypeGIDChanged();
@@ -3096,9 +3096,9 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaxScore", DbType="BigInt NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaxScore", DbType="Int NOT NULL")]
 		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
-		public long MaxScore
+		public int MaxScore
 		{
 			get
 			{
