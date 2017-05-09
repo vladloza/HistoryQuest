@@ -265,7 +265,6 @@ input.small-control {
     margin-top: 10px;
 }
 .icons-inside {
-    width: 15%;
     padding: 0.5em;
     display: inline-block;
 }
@@ -403,10 +402,18 @@ input.small-control {
      color: #b1aea9;
     margin-top: 7px;
 }
+.result-info,
 .header-settings,
 .password-settings
 {
     margin-top: 20px;
+}
+.result-info {
+    text-align:center;
+}
+.login-icons img,
+.result-info img {
+    width:40px;
 }
 .form-label {
     padding: 0px 5px;
@@ -690,7 +697,7 @@ input.small-control {
 .hr-invisible-small {
     float: left;
     width: 100%;
-    margin: 20px 0px;
+    margin: 10px 0px;
     display: block;
     clear: both;
  }
@@ -815,6 +822,18 @@ input.small-control {
 .task {
     margin-bottom:20px;
 }
+/*---------circles------*/
+
+.result-progress {
+    padding: 15px 0px;
+    display:block;
+    text-align:center;
+    margin: 0 auto;
+}
+.radialBar {
+    padding: 0px 10px;
+}
+
 @media (min-width: 768px) {
     .question-choises-50{
     display:inline-block;

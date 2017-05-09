@@ -132,6 +132,7 @@
     <Content Include="libs\js\bootstrap.min.js" />
     <Content Include="libs\js\bindTeachers.js" />
     <Content Include="libs\js\Helper.js" />
+    <Content Include="libs\js\radialBar.js" />
     <Content Include="libs\js\jquery-1.9.1.min.js" />
     <Content Include="libs\js\preLoader.js" />
     <Content Include="libs\js\validation.js" />
@@ -153,6 +154,7 @@
     <Content Include="Quests\ConformityTask.aspx" />
     <Content Include="Quests\MapTask.aspx" />
     <Content Include="Quests\QuestInfo.aspx" />
+    <Content Include="Quests\Scripts\RadialBarScript.js" />
     <Content Include="Quests\Scripts\TasksController.js" />
     <Content Include="Quests\TestResult.aspx" />
     <Content Include="Quests\TestTask.aspx" />
