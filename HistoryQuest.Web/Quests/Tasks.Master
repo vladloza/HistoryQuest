@@ -9,15 +9,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/libs/css/bootstrap.css" />
     <link rel="stylesheet" href="/libs/css/main.css" />
-    <link rel="stylesheet" href="/libs/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../libs/css/font-awesome.min.css" />
+    <script src="../libs/js/jquery-1.9.1.min.js"></script>
+    <script src="../libs/js/preLoader.js"></script>
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
 </head>
-<body>
+<body class="taskBody">
     <form id="MainForm" runat="server">
 
         <div class="wrapper">
-            <div class="info">
+            <div class="">
                 <div class="container clearfix">
                     <div id="TaskDiv" runat="server" class="task">
                         <div class="page-title">
@@ -44,10 +46,8 @@
                 </div>
             </div>
         </div>
-
         <asp:ScriptManager ID="ScriptManager1" runat="server">
             <Scripts>
-                <asp:ScriptReference Path="~/libs/js/jquery-3.1.1.min.js" />
                 <asp:ScriptReference Path="~/libs/js/bootstrap.min.js" />
                 <asp:ScriptReference Path="~/libs/js/validation.js" />
                 <asp:ScriptReference Path="~/libs/js/Helper.js" />
@@ -77,4 +77,5 @@
     <asp:ContentPlaceHolder ID="noForm" runat="server">
     </asp:ContentPlaceHolder>
 </body>
+    <div class="se-pre-con"></div>
 </html>

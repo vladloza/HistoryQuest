@@ -1,59 +1,61 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="HistoryQuest.Main" %>
-<%@Import Namespace="HistoryQuest.Domain" %>
+
+<%@ Import Namespace="HistoryQuest.Domain" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="libs/css/bootstrap.css"/>
+    <link rel="stylesheet" href="libs/css/bootstrap.css" />
     <link rel="stylesheet" href="libs/css/main.css" />
     <link rel="stylesheet" href="libs/css/font-awesome.min.css" />
+    <script src="../libs/js/jquery-1.9.1.min.js"></script>
+    <script src="../libs/js/preLoader.js"></script>
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
     <link rel="stylesheet" href="libs/css/main.css" />
 </head>
 <body>
     <form id="MainForm" runat="server">
-    <header class="site-header">
-        <div class="navbar" role="navigation" style="margin: 0px;">
-            <div class="quest-nav">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="dropdown cabinet-wrapper">
-                    <button class="cabinet dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-user-circle" aria-hidden="true"></i></button>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-                        <li><a href="<%= Repository.CurrentUser.Face.IsTeacher ? "/Account/TeacherAccount.aspx" : "/Account/StudentAccount.aspx" %>">Особистий кабінет</a></li>
-                        <li role="presentation" class="divider"></li>
-                        <li><asp:LinkButton runat="server" OnClick="ExitButton_Click"><i class="fa fa-sign-out" aria-hidden="true"></i>Вийти</asp:LinkButton></li>
-                    </ul>
-                </div>
-                <div class="nav-wrapper ">
-                    <div class="collapse navbar-collapse">
-                        <ul class="nav-menu">
-                            <li><a href="../Default.aspx">Головна</a></li>
-                            <li id="MainMenuHistoricalInfoButton" runat="server" style="display: none"><a href="../HistoricalInformation.aspx">Довідка</a></li>
-                            <li id="QuestInfoButton" runat="server" style="display: none"><a href="../Quests/QuestInfo.aspx">Інформація про квест</a></li>
-                            <li><a href="#">FAQ</a></li>
+        <header class="site-header">
+            <div class="navbar" role="navigation" style="margin: 0px;">
+                <div class="quest-nav">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="dropdown cabinet-wrapper">
+                        <button class="cabinet dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-user-circle" aria-hidden="true"></i></button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                            <li><a href="<%= Repository.CurrentUser.Face.IsTeacher ? "/Account/TeacherAccount.aspx" : "/Account/StudentAccount.aspx" %>">Особистий кабінет</a></li>
+                            <li role="presentation" class="divider"></li>
+                            <li>
+                                <asp:LinkButton runat="server" OnClick="ExitButton_Click"><i class="fa fa-sign-out" aria-hidden="true"></i>Вийти</asp:LinkButton></li>
                         </ul>
+                    </div>
+                    <div class="nav-wrapper ">
+                        <div class="collapse navbar-collapse">
+                            <ul class="nav-menu">
+                                <li><a href="../Default.aspx">Головна</a></li>
+                                <li id="MainMenuHistoricalInfoButton" runat="server" style="display: none"><a href="../HistoricalInformation.aspx">Довідка</a></li>
+                                <li id="QuestInfoButton" runat="server" style="display: none"><a href="../Quests/QuestInfo.aspx">Інформація про квест</a></li>
+                                <li><a href="#">FAQ</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </header>
-        <div id="MainDiv">
+        </header>
+        <div id="MainDiv" class="show">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server">
             </asp:ContentPlaceHolder>
         </div>
-
         <asp:ScriptManager ID="ScriptManager1" runat="server">
             <Scripts>
-                <asp:ScriptReference Path="~/libs/js/jquery-3.1.1.min.js" />
                 <asp:ScriptReference Path="~/libs/js/bootstrap.min.js" />
                 <asp:ScriptReference Path="~/libs/js/validation.js" />
                 <asp:ScriptReference Path="~/libs/js/Helper.js" />
@@ -63,6 +65,11 @@
         </asp:ScriptManager>
     </form>
     <asp:ContentPlaceHolder ID="noForm" runat="server">
-            </asp:ContentPlaceHolder>
+    </asp:ContentPlaceHolder>
+    <hr />
+    <footer class="center-text">
+        <p>© Факультет інформаційних технологій КНУ імені Тараса Шевченка, 2017</p>
+      </footer>
 </body>
+<div class="se-pre-con"></div>
 </html>

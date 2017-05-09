@@ -118,9 +118,11 @@
     <Content Include="Global.asax" />
     <Content Include="HistoricalInformation.aspx" />
     <Content Include="libs\css\bootstrap.css" />
+    <Content Include="libs\css\error.css" />
     <Content Include="libs\css\font-awesome.min.css" />
     <Content Include="libs\css\main.css" />
     <Content Include="libs\img\checkpoint_locked.png" />
+    <Content Include="libs\img\Preloader_10.gif" />
     <Content Include="libs\img\wall.png" />
     <Content Include="libs\img\gmail-icon.png" />
     <Content Include="libs\img\mazepa.jpg" />
@@ -130,7 +132,8 @@
     <Content Include="libs\js\bootstrap.min.js" />
     <Content Include="libs\js\bindTeachers.js" />
     <Content Include="libs\js\Helper.js" />
-    <Content Include="libs\js\jquery-3.1.1.min.js" />
+    <Content Include="libs\js\jquery-1.9.1.min.js" />
+    <Content Include="libs\js\preLoader.js" />
     <Content Include="libs\js\validation.js" />
     <Content Include="Login.aspx" />
     <Content Include="packages.config">
@@ -151,6 +154,7 @@
     <Content Include="Quests\MapTask.aspx" />
     <Content Include="Quests\QuestInfo.aspx" />
     <Content Include="Quests\Scripts\TasksController.js" />
+    <Content Include="Quests\TestResult.aspx" />
     <Content Include="Quests\TestTask.aspx" />
     <Content Include="Quests\TestWithImageTask.aspx" />
     <Content Include="Quests\WritingTask.aspx" />
@@ -193,6 +197,8 @@
       <DependentUpon>StudentsMarksDataSet.xsd</DependentUpon>
     </Content>
     <Content Include="Quests\Tasks.Master" />
+    <Content Include="libs\fonts\fontawesome-webfont.woff" />
+    <Content Include="libs\fonts\fontawesome-webfont.woff2" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -327,6 +333,13 @@
     </Compile>
     <Compile Include="Quests\QuestInfo.aspx.designer.cs">
       <DependentUpon>QuestInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Quests\TestResult.aspx.cs">
+      <DependentUpon>TestResult.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quests\TestResult.aspx.designer.cs">
+      <DependentUpon>TestResult.aspx</DependentUpon>
     </Compile>
     <Compile Include="Quests\TestTask.aspx.cs">
       <DependentUpon>TestTask.aspx</DependentUpon>

@@ -4,13 +4,16 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <link href='http://fonts.googleapis.com/css?family=Monoton' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="libs/css/error.css" />
     <title></title>
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
-        Sorry, something went wrong. Try to refresh page later or write on our e-mail: historyquest_help@gmail.com
-    </div>
+        <div>
+            <p id="error">E<span>r</span>ror</p>
+            <p id="code">4<span>0</span><span>4</span></p>
+        </div>
     </form>
 </body>
 </html>

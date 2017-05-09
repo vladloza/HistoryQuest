@@ -10,11 +10,12 @@
     <script src="libs/js/jquery-3.1.1.min.js"></script>
     <script src="libs/js/validation.js"></script>
     <script src="libs/js/Helper.js"></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.10.0.min.js" type="text/javascript"></script>
+    <script src="libs/js/jquery-1.9.1.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/jquery-ui.min.js" type="text/javascript"></script>
     <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/themes/blitzer/jquery-ui.css" rel="Stylesheet" type="text/css" />
     <script src="libs/js/bindTeachers.js"></script>
-    <title></title>
+    <script src="libs/js/preLoader.js"></script>
+    <title>Реєстрація</title>
 </head>
 <body class="admin-body">
     <div class="login-page">
@@ -42,9 +43,10 @@
                 </div>
             </form>
             <div class="href-back" id="href-back">
-                <a onclick="showControl('teacher-view', ['href-back', 'pupil-view'])" >Ви вчитель?</a>
+                <a onclick="showControl('teacher-view', ['href-back', 'pupil-view'])">Ви вчитель?</a>
             </div>
         </div>
     </div>
 </body>
+<div class="se-pre-con"></div>
 </html>
