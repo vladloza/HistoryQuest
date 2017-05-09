@@ -63,8 +63,9 @@
             });
             $("#NextButton").click(function (e) {
                 e.preventDefault();
+                var task = $("#TaskDiv")[0].attributes.taskgid.value;
                 var tasktype = $("#TaskDiv")[0].attributes.tasktypegid.value;
-                WebService.OnNextButtonPressed(TasksController.ReadAnswer(tasktype), new Date().getTime() - window.StartTime);
+                WebService.OnNextButtonPressed(task, TasksController.ReadAnswer(tasktype), new Date().getTime() - window.StartTime);
             });
             $("#GiveUpButton").click(function (e) {
                 e.preventDefault();

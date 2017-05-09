@@ -225,11 +225,11 @@ WebService.StartCheckPoint = function (checkPointGID) {
     });
 };
 
-WebService.OnNextButtonPressed = function (userAnswer, elapsedTime) {
+WebService.OnNextButtonPressed = function (taskGID, userAnswer, elapsedTime) {
     $.ajax({
         type: "POST",
         url: "../WebServices/WebService.asmx/OnNextButtonPressed",
-        data: "{ userAnswer: '" + userAnswer + "', elapsedTime: '" + elapsedTime + "' }",
+        data: "{ taskGID: '" + taskGID + "', userAnswer: '" + userAnswer + "', elapsedTime: '" + elapsedTime + "' }",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (r) {

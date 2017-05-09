@@ -179,7 +179,7 @@ namespace HistoryQuest.WebServices
                 CheckPoint checkPoint = Repository.CurrentDataContext.CheckPoints.SingleOrDefault(cp => cp.gid == checkPointGID);
                 if (checkPoint != null && checkPoint.Tasks != null)
                 {
-                    List<Task> tasks = checkPoint.Tasks.Take(checkPoint.TasksCount).ToList();
+                    List<Task> tasks = checkPoint.Tasks.OrderBy(t => Guid.NewGuid()).Take(checkPoint.TasksCount).ToList();
 
                     Session["CurrentTasksList"] = tasks.Select(t => t.gid).ToList();
                     Session["CurrentTaskId"] = 0;
@@ -197,13 +197,13 @@ namespace HistoryQuest.WebServices
         }
 
         [WebMethod(EnableSession = true)]
-        public string OnNextButtonPressed(string userAnswer, long elapsedTime)
+        public string OnNextButtonPressed(Guid taskGID, string userAnswer, long elapsedTime)
         {
-            string url = "/Defaul.aspx";
+            string url = "/Default.aspx";
 
             int currentTaskId;
             List<Guid> tasksList;
-            if (!LoadTasksFromSession(out tasksList, out currentTaskId))
+            if (!LoadTasksFromSession(out tasksList, out currentTaskId) || tasksList[currentTaskId] != taskGID)
             {
                 return url;
             }
@@ -306,7 +306,7 @@ namespace HistoryQuest.WebServices
             return false;
         }
 
-        protected static void CleanCheckPointSession()
+        public static void CleanCheckPointSession()
         {
             if (HttpContext.Current.Session != null)
             {
