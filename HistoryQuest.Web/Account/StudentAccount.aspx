@@ -70,4 +70,5 @@
             </div>
         </div>
     </div>
+        <script src="../libs/js/background.js"></script>
 </asp:Content>

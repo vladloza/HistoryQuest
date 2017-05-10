@@ -29,7 +29,7 @@
 </asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="noForm">
         <div class="container">
-            <section class="transparent">
+            <section>
                 <div class="comments">
                     <div class="info-comments">
                         <h2>Коментарі до квесту</h2>

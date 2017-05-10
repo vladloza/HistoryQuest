@@ -67,10 +67,6 @@
     </form>
     <asp:ContentPlaceHolder ID="noForm" runat="server">
     </asp:ContentPlaceHolder>
-    <hr />
-    <footer class="center-text">
-        <p>© Факультет інформаційних технологій КНУ імені Тараса Шевченка, 2017</p>
-      </footer>
 </body>
 <div class="se-pre-con"></div>
 </html>
