@@ -7,4 +7,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="AuthorGID" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="2bceeacb-f562-4394-9696-ccc5a8ae548b" ChangeDateTime="05/10/2017 19:00:36">
+    <Property Name="ElementName" Value="[dbo].[Quests].[SourceFilePath]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Quests]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FullInfo" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="775ff5af-9bfd-4bc0-b8c6-762171b66e13" ChangeDateTime="05/10/2017 19:01:48">
+    <Property Name="ElementName" Value="[dbo].[CheckPoints].[InfoFilePath]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CheckPoints]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Info" />
+  </Operation>
 </Operations>

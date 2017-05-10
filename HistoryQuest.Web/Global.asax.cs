@@ -37,10 +37,13 @@ namespace HistoryQuest
             {
                 Exception LastError = Server.GetLastError();
 
-                if (LastError != null && LastError.InnerException != null)
-                {
-                    LastError = LastError.InnerException;
-                }
+                Repository.CurrentDataContext.Errors.InsertOnSubmit(new Domain.Error() {
+                    ErrorText = LastError.Message,
+                    InnerErrorText = LastError.InnerException?.Message,
+                    DateTime = DateTime.Now
+                });
+
+                Repository.CurrentDataContext.SubmitChanges();
 
                 Response.Redirect("~/Error.aspx", false);
             }

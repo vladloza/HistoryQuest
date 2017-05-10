@@ -4,7 +4,7 @@
     [QuestGID]       UNIQUEIDENTIFIER NOT NULL,
     [Name]           NVARCHAR (250)   NOT NULL,
     [GeoCoordinates] NVARCHAR (250)   NOT NULL,
-    [InfoFilePath]   NVARCHAR (250)   NOT NULL,
+    [Info]   NVARCHAR (MAX)   NOT NULL,
     [TasksCount]     INT              NOT NULL,
     [ThresholdScore] INT              NULL,
     [OrderId]        INT              NOT NULL,

@@ -98,7 +98,7 @@
         </div>
     </div>
     <script>
-        window.onload = WebService.GetTeacherRequests();
+        window.onload = WebService.GetPupilsToTeacherRequests();
     </script>
         <script src="../libs/js/background.js"></script>
     <script>

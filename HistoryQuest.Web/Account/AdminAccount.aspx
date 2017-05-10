@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true"  MasterPageFile="~/Main.master"  CodeBehind="AdminAccount.aspx.cs" Inherits="HistoryQuest.Account.AdminAccount" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeBehind="AdminAccount.aspx.cs" Inherits="HistoryQuest.Account.AdminAccount" EnableEventValidation="false" %>
 
 <%@ Register TagPrefix="rc" TagName="reg" Src="~/Controls/ChangeInfo.ascx" %>
 <%@ Register TagPrefix="cpc" TagName="changePass" Src="~/Controls/ChangePassword.ascx" %>
@@ -14,7 +14,7 @@
                             <h2>Запити</h2>
                         </div>
                         <div class="card-table">
-                            <table>
+                            <table id="requestsTable">
                                 <tbody>
                                     <tr>
                                         <th>ID</th>
@@ -23,43 +23,9 @@
                                         <th>По батькові</th>
                                         <th>Місто</th>
                                         <th>Школа</th>
+                                        <th>Телефон</th>
+                                        <th>E-Mail</th>
                                         <th>Дії</th>
-                                    </tr>
-                                    <tr>
-                                        <td>105</td>
-                                        <td>Трофименко</td>
-                                        <td>Маргарита</td>
-                                        <td>Юріївна</td>
-                                        <td>Українка</td>
-                                        <td>ЗОШ №1 I-III ступенів</td>
-                                        <td>
-                                            <a><i class="fa fa-check" aria-hidden="true"></i></a>
-                                            <a><i class="fa fa-times" aria-hidden="true"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>105</td>
-                                        <td>Трофименко</td>
-                                        <td>Маргарита</td>
-                                        <td>Юріївна</td>
-                                        <td>Українка</td>
-                                        <td>ЗОШ №1 I-III ступенів</td>
-                                        <td>
-                                            <a><i class="fa fa-check" aria-hidden="true"></i></a>
-                                            <a><i class="fa fa-times" aria-hidden="true"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>105</td>
-                                        <td>Трофименко</td>
-                                        <td>Маргарита</td>
-                                        <td>Юріївна</td>
-                                         <td>Українка</td>
-                                        <td>ЗОШ №1 I-III ступенів</td>
-                                        <td>
-                                            <a><i class="fa fa-check" aria-hidden="true"></i></a>
-                                            <a><i class="fa fa-times" aria-hidden="true"></i></a>
-                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -97,5 +63,20 @@
             </div>
         </div>
     </div>
-        <script src="../libs/js/background.js"></script>
+    <script>
+        window.onload = WebService.GetTeacherRequests();
+    </script>
+    <script>
+        function AddTeacher(btn, gid) {
+            WebService.AddTeacher(gid);
+            var row = btn.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        };
+        function DeleteTeacher(btn, gid) {
+            WebService.DeleteTeacher(gid);
+            var row = btn.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        };
+    </script>
+    <script src="../libs/js/background.js"></script>
 </asp:Content>
