@@ -1,9 +1,8 @@
 ﻿WebService = function () { };
 
 WebService.prototype =
-    {
-        
-    };
+{
+};
 
 var startFrom = 0;
 
@@ -63,6 +62,7 @@ WebService.AddComment = function (questGuid, text) {
         }
     });
 };
+
 WebService.GetCheckPointLikesCount = function (checkPointGID) {
     $.ajax({
         type: "POST",
@@ -81,6 +81,7 @@ WebService.GetCheckPointLikesCount = function (checkPointGID) {
         }
     });
 };
+
 WebService.BindLikesToControl = function (count, liked) {
     $("#likes-count")[0].innerText = count;
     if (!liked) {
@@ -90,6 +91,7 @@ WebService.BindLikesToControl = function (count, liked) {
         document.getElementById('i-like').classList.add('liked');
     }
 };
+
 WebService.UpdateCheckPointLikesCount = function (checkPointGID) {
     $.ajax({
         type: "POST",
@@ -124,10 +126,10 @@ WebService.GetQuestCheckPoints = function (questGID, onSuccess) {
     });
 };
 
-WebService.GetTeacherRequests = function () {
+WebService.GetPupilsToTeacherRequests = function () {
     $.ajax({
         type: "POST",
-        url: "../WebServices/WebService.asmx/GetTeacherRequests",
+        url: "../WebServices/WebService.asmx/GetPupilsToTeacherRequests",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (r) {
@@ -144,6 +146,45 @@ WebService.GetTeacherRequests = function () {
                 newCellFirst.appendChild(document.createTextNode(item.FirstName));
                 newCellFather.appendChild(document.createTextNode(item.MiddleName ? item.MiddleName : ""));
                 newCellButtons.innerHTML = '<a onclick="AddStudent(this, \'' + item.gid + '\')"><i class="fa fa-check" aria-hidden="true"></i></a><a onclick="DeleteStudent(this, \'' + item.gid + '\')"><i class="fa fa-times" aria-hidden="true"></i></a>';
+            });
+        },
+        error: function (r) {
+            alert(r.responseText);
+        },
+        failure: function (r) {
+            alert(r.responseText);
+        }
+    });
+};
+
+WebService.GetTeacherRequests = function () {
+    $.ajax({
+        type: "POST",
+        url: "../WebServices/WebService.asmx/GetTeacherRequests",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (r) {
+            var table = document.getElementById("requestsTable").getElementsByTagName('tbody')[0];
+            $.each(r.d, function (a, item) {
+                var newRow = table.insertRow(table.rows.length);
+                var newCellId = newRow.insertCell(0);
+                var newCellLast = newRow.insertCell(1);
+                var newCellFirst = newRow.insertCell(2);
+                var newCellFather = newRow.insertCell(3);
+                var newCellCity = newRow.insertCell(4);
+                var newCellSchool = newRow.insertCell(5);
+                var newCellTelephone = newRow.insertCell(6);
+                var newCellEmail = newRow.insertCell(7);
+                var newCellButtons = newRow.insertCell(8);
+                newCellId.appendChild(document.createTextNode(item.id));
+                newCellLast.appendChild(document.createTextNode(item.LastName));
+                newCellFirst.appendChild(document.createTextNode(item.FirstName));
+                newCellFather.appendChild(document.createTextNode(item.MiddleName));
+                newCellCity.appendChild(document.createTextNode(item.City));
+                newCellSchool.appendChild(document.createTextNode(item.Institution));
+                newCellTelephone.appendChild(document.createTextNode(item.Telephone));
+                newCellEmail.appendChild(document.createTextNode(item.E_Mail));
+                newCellButtons.innerHTML = '<a onclick="AddTeacher(this, \'' + item.gid + '\')"><i class="fa fa-check" aria-hidden="true"></i></a><a onclick="DeleteTeacher(this, \'' + item.gid + '\')"><i class="fa fa-times" aria-hidden="true"></i></a>';
             });
         },
         error: function (r) {
@@ -176,6 +217,38 @@ WebService.DeleteStudent = function (gid) {
         type: "POST",
         data: "{ studentGID: '" + gid + "' }",
         url: "../WebServices/WebService.asmx/DeleteStudent",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        error: function (r) {
+            alert(r.responseText);
+        },
+        failure: function (r) {
+            alert(r.responseText);
+        }
+    });
+};
+
+WebService.AddTeacher = function (gid) {
+    $.ajax({
+        type: "POST",
+        data: "{ teacherGID: '" + gid + "' }",
+        url: "../WebServices/WebService.asmx/AddTeacher",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        error: function (r) {
+            alert(r.responseText);
+        },
+        failure: function (r) {
+            alert(r.responseText);
+        }
+    });
+};
+
+WebService.DeleteTeacher = function (gid) {
+    $.ajax({
+        type: "POST",
+        data: "{ teacherGID: '" + gid + "' }",
+        url: "../WebServices/WebService.asmx/DeleteTeacher",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         error: function (r) {

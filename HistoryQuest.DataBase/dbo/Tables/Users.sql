@@ -9,8 +9,10 @@
     [IsSocial]       BIT              CONSTRAINT [DF_Users_IsSocial] DEFAULT ((0)) NOT NULL,
     CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED ([gid] ASC),
     CONSTRAINT [FK_Users_Faces] FOREIGN KEY ([FaceGID]) REFERENCES [dbo].[Faces] ([gid]) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT [IX_Users_UserName] UNIQUE NONCLUSTERED ([UserName] ASC)
+    CONSTRAINT [IX_Users_UserName] UNIQUE NONCLUSTERED ([UserName] ASC, [IsSocial] ASC)
 );
+
+
 
 
 

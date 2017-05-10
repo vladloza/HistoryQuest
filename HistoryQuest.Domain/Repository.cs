@@ -40,5 +40,23 @@ namespace HistoryQuest.Domain
             _DataContext = null;
             _DataContext = CreateNewDataContext();
         }
+
+        public static string GetAccountHtml(Guid roleGID)
+        {
+            switch (roleGID.ToString())
+            {
+                case Constants.TeacherRoleGID:
+                    return "/Account/TeacherAccount.aspx";
+
+                case Constants.StudentRoleGID:
+                    return "/Account/StudentAccount.aspx";
+
+                case Constants.AdminRoleGID:
+                    return "/Account/AdminAccount.aspx";
+
+                default:
+                    return "/";
+            }
+        }
     }
 }

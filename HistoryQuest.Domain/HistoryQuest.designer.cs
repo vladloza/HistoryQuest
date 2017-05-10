@@ -43,6 +43,9 @@ namespace HistoryQuest.Domain
     partial void InsertComment(Comment instance);
     partial void UpdateComment(Comment instance);
     partial void DeleteComment(Comment instance);
+    partial void InsertError(Error instance);
+    partial void UpdateError(Error instance);
+    partial void DeleteError(Error instance);
     partial void InsertFace(Face instance);
     partial void UpdateFace(Face instance);
     partial void DeleteFace(Face instance);
@@ -137,6 +140,14 @@ namespace HistoryQuest.Domain
 			get
 			{
 				return this.GetTable<Comment>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Error> Errors
+		{
+			get
+			{
+				return this.GetTable<Error>();
 			}
 		}
 		
@@ -1627,6 +1638,157 @@ namespace HistoryQuest.Domain
 		private void Initialize()
 		{
 			this._Quest = default(EntityRef<Quest>);
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Errors")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
+	public partial class Error : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _ErrorText;
+		
+		private string _InnerErrorText;
+		
+		private System.DateTime _DateTime;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnErrorTextChanging(string value);
+    partial void OnErrorTextChanged();
+    partial void OnInnerErrorTextChanging(string value);
+    partial void OnInnerErrorTextChanged();
+    partial void OnDateTimeChanging(System.DateTime value);
+    partial void OnDateTimeChanged();
+    #endregion
+		
+		public Error()
+		{
+			this.Initialize();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ErrorText", DbType="NVarChar(MAX)")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+		public string ErrorText
+		{
+			get
+			{
+				return this._ErrorText;
+			}
+			set
+			{
+				if ((this._ErrorText != value))
+				{
+					this.OnErrorTextChanging(value);
+					this.SendPropertyChanging();
+					this._ErrorText = value;
+					this.SendPropertyChanged("ErrorText");
+					this.OnErrorTextChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InnerErrorText", DbType="NVarChar(MAX)")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+		public string InnerErrorText
+		{
+			get
+			{
+				return this._InnerErrorText;
+			}
+			set
+			{
+				if ((this._InnerErrorText != value))
+				{
+					this.OnInnerErrorTextChanging(value);
+					this.SendPropertyChanging();
+					this._InnerErrorText = value;
+					this.SendPropertyChanged("InnerErrorText");
+					this.OnInnerErrorTextChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateTime", DbType="DateTime NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
+		public System.DateTime DateTime
+		{
+			get
+			{
+				return this._DateTime;
+			}
+			set
+			{
+				if ((this._DateTime != value))
+				{
+					this.OnDateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._DateTime = value;
+					this.SendPropertyChanged("DateTime");
+					this.OnDateTimeChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void Initialize()
+		{
 			OnCreated();
 		}
 		

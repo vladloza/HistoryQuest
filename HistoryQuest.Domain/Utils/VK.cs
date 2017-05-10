@@ -67,7 +67,7 @@ namespace HistoryQuest.Domain.Utils
         public static void AuthoritheVKUser(string token)
         {
             VKResponse response = GetVKResponse(token);
-            User user = Repository.CurrentDataContext.Users.FirstOrDefault(u => u.UserName == response.email);
+            User user = Repository.CurrentDataContext.Users.FirstOrDefault(u => u.UserName == response.email && u.IsSocial == true);
             if (user == null)
             {
                 user = RegisterVKUser(response);

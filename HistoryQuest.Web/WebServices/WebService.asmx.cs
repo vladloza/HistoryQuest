@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
+using System.Web.Security;
 using System.Web.Script.Serialization;
 using System.Web.Services;
 
@@ -35,7 +35,7 @@ namespace HistoryQuest.WebServices
         }
 
         [WebMethod]
-        public object GetTeacherRequests()
+        public object GetPupilsToTeacherRequests()
         {
             var requests = (from ptr in Repository.CurrentDataContext.PupilsToTeachersRequests
                             join fp in Repository.CurrentDataContext.Faces on ptr.PupilGID equals fp.gid
@@ -43,6 +43,12 @@ namespace HistoryQuest.WebServices
                             select new { fp.gid, fp.id, fp.LastName, fp.FirstName, fp.MiddleName }).ToList();
 
             return requests;
+        }
+
+        [WebMethod]
+        public object GetTeacherRequests()
+        {
+            return Repository.CurrentDataContext.TeacherRequests.ToList();
         }
 
         [WebMethod]
@@ -92,6 +98,69 @@ namespace HistoryQuest.WebServices
             if (request != null)
             {
                 Repository.CurrentDataContext.PupilsToTeachersRequests.DeleteOnSubmit(request);
+                Repository.CurrentDataContext.SubmitChanges();
+            }
+        }
+
+        [WebMethod]
+        public void AddTeacher(Guid teacherGID)
+        {
+            var request = Repository.CurrentDataContext.TeacherRequests.SingleOrDefault(tr => tr.gid == teacherGID);
+
+            if (request != null)
+            {
+                User user = Repository.CurrentDataContext.GetUserByUserName(request.E_Mail);
+                string pass = Membership.GeneratePassword(8, 0);
+                if (user == null)
+                {
+                    Guid faceGID = Guid.NewGuid();
+                    var salt = Defender.GenerateSalt();
+                    user = new User()
+                    {
+                        gid = Guid.NewGuid(),
+                        FaceGID = faceGID,
+                        PasswordFormat = 1,
+                        PasswordSalt = salt,
+                        Password = Defender.ComputeHash(pass, salt),
+                        UserName = request.E_Mail.ToString(),
+                        UsersInRoles = new System.Data.Linq.EntitySet<UsersInRole>()
+                        {
+                            new UsersInRole
+                            {
+                                gid = Guid.NewGuid(),
+                                User = user,
+                                RoleGID = new Guid(Constants.TeacherRoleGID)
+                            }
+                        }
+                    };
+
+                    var face = new Face()
+                    {
+                        gid = faceGID,
+                        FirstName = request.FirstName,
+                        LastName = request.LastName,
+                        IsTeacher = true,
+                        Info = request.Institution,
+                        MiddleName = request.MiddleName
+                    };
+
+                    Repository.CurrentDataContext.Faces.InsertOnSubmit(face);
+                    Repository.CurrentDataContext.Users.InsertOnSubmit(user);
+                }
+                Repository.CurrentDataContext.TeacherRequests.DeleteOnSubmit(request);
+                Repository.CurrentDataContext.SubmitChanges();
+
+                DataService.SendResponceToTeacher(request.E_Mail, pass);
+            }
+        }
+
+        [WebMethod]
+        public void DeleteTeacher(Guid teacherGID)
+        {
+            var request = Repository.CurrentDataContext.TeacherRequests.SingleOrDefault(tr => tr.gid == teacherGID);
+            if (request != null)
+            {
+                Repository.CurrentDataContext.TeacherRequests.DeleteOnSubmit(request);
                 Repository.CurrentDataContext.SubmitChanges();
             }
         }

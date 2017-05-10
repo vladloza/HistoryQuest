@@ -80,7 +80,7 @@ namespace HistoryQuest
         protected void TeacherButton_Click(object sender, EventArgs e)
         {
             TeacherRequest request = Repository.CurrentDataContext.TeacherRequests.FirstOrDefault(tr => tr.E_Mail == email.Value && tr.City == city.Value && 
-                tr.FirstName == t_first.Value && tr.LastName == t_last.Value && tr.MiddleName == t_mid.Value);
+                tr.FirstName == t_first.Value && tr.LastName == t_last.Value && tr.MiddleName == t_mid.Value && tr.Telephone == tel.Value && tr.Institution == zaklName.Value);
             if (request == null)
             {
                 request = new TeacherRequest()
@@ -97,12 +97,7 @@ namespace HistoryQuest
 
                 Repository.CurrentDataContext.TeacherRequests.InsertOnSubmit(request);
                 Repository.CurrentDataContext.SubmitChanges();
-                Response.Write("<script>alert('Заява буде розглянута!');</script>");
                 Response.Redirect("~/Login.aspx");
-            }
-            else
-            {
-                Response.Write("<script>alert('Заява вже подана!');</script>");
             }
         }
     }

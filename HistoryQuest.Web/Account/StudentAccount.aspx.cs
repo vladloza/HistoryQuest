@@ -13,9 +13,9 @@ namespace HistoryQuest.Account
         protected override void Page_Load(object sender, EventArgs e)
         {
             base.Page_Load(sender, e);
-            if (Repository.CurrentUser.Face.IsTeacher)
+            if (Repository.CurrentUser.UsersInRoles.FirstOrDefault(uir => uir.RoleGID == new Guid(Constants.StudentRoleGID)) == null)
             {
-                Response.Redirect("~/Account/TeacherAccount.aspx");
+                Response.Redirect("~/Login.aspx");
             }
         }
 

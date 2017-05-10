@@ -56,6 +56,14 @@
       <Association Name="Quest_Comment" Member="Quest" ThisKey="QuestGID" OtherKey="gid" Type="Quest" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Errors" Member="Errors">
+    <Type Name="Error">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ErrorText" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="InnerErrorText" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="DateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
   <Table Name="dbo.Faces" Member="Faces">
     <Type Name="Face">
       <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />

@@ -32,7 +32,7 @@
                     <div class="dropdown cabinet-wrapper">
                         <button class="cabinet dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-user-circle" aria-hidden="true"></i></button>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-                            <li><a href="<%= Repository.CurrentUser.Face.IsTeacher ? "/Account/TeacherAccount.aspx" : "/Account/StudentAccount.aspx" %>">Особистий кабінет</a></li>
+                            <li><a href="<%= Repository.GetAccountHtml(Repository.CurrentUser.UsersInRoles.FirstOrDefault().RoleGID) %>">Особистий кабінет</a></li>
                             <li role="presentation" class="divider"></li>
                             <li>
                                 <asp:LinkButton runat="server" OnClick="ExitButton_Click"><i class="fa fa-sign-out" aria-hidden="true"></i>Вийти</asp:LinkButton></li>
