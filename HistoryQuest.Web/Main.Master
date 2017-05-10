@@ -44,7 +44,7 @@
                                 <li><a href="../Default.aspx">Головна</a></li>
                                 <li id="MainMenuHistoricalInfoButton" runat="server" style="display: none"><a href="../HistoricalInformation.aspx">Довідка</a></li>
                                 <li id="QuestInfoButton" runat="server" style="display: none"><a href="../Quests/QuestInfo.aspx">Інформація про квест</a></li>
-                                <li><a href="#">FAQ</a></li>
+                                <li><a href="../FAQ.aspx">FAQ</a></li>
                             </ul>
                         </div>
                     </div>
@@ -59,6 +59,7 @@
             <Scripts>
                 <asp:ScriptReference Path="~/libs/js/bootstrap.min.js" />
                 <asp:ScriptReference Path="~/libs/js/validation.js" />
+                <asp:ScriptReference Path="~/libs/js/headerActive.js" />
                 <asp:ScriptReference Path="~/libs/js/Helper.js" />
                 <asp:ScriptReference Path="~/Scripts/WebService.js" />
                 <asp:ScriptReference Path="~/Quests/Scripts/QuestMap.js" />

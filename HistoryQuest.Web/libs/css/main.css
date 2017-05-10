@@ -1,9 +1,15 @@
-﻿/*html, body, form, #MainDiv {
+﻿/*html, #MainForm, #MainDiv, #page {
     height:100%;
 }*/
 @font-face {
     font-family: 'Roboto';
     src: url(../fonts/Roboto/Roboto-Regular.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'RobotoLight';
+    src: url(../fonts/Roboto/Roboto-Light.ttf) format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -104,6 +110,11 @@ p {
 section {
     margin-top:20px;
 }
+.faq-section {
+    background:#fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
+    padding:0px 15px;
+}
 #MainDiv{
     position:relative;
 }
@@ -112,6 +123,7 @@ section {
 }
 #map {
     height: 100%;
+    margin-right: 19px;
 }
 a {
     outline: none;
@@ -135,7 +147,7 @@ img {
     background-image:url(../img/wall.png);
 }
 .wrapper {
-    padding-top:55px;
+    padding-top:50px;
 }
 .clearfix:before,
 .clearfix:after {
@@ -301,9 +313,21 @@ input.small-control {
 }
 .nav-menu li {
     display: inline-block;
-    padding: 18px 10px;
-    line-height: 1.42857143;
+    padding: 15px 10px;
+    line-height: 1.41;
     width: auto;
+}
+.nav-menu li a {
+    outline: none;
+    color: #2e4453;
+    font-family: Roboto;
+    font-size: 14px;
+    transition: all .2s ease 0s;
+}
+.nav-menu li.active>a,
+.nav-menu li a:hover {
+    color: #ef4438;
+    border-bottom:1px solid #ef4438;
 }
 .like-wrapper span {
     font-weight:500;
@@ -443,6 +467,7 @@ input.small-control {
     font-weight: 600;
     margin-bottom: 5px;
 }
+.form-input-small,
 .form-input {
     margin: 0;
     padding: 7px 14px;
@@ -453,6 +478,10 @@ input.small-control {
     border: 1px solid #c8d7e1;
     background-color: white;
     transition: all .15s ease-in-out;
+}
+.form-input-small {
+    display:inline-block;
+    width:70%;
 }
 .center {
     display: block;
@@ -470,7 +499,7 @@ input.small-control {
     position:fixed;
     right:0;
     bottom:0;
-    top:52px;
+    top:50px;
     background: #fff;
     border-left: 1px solid #d9e3ea;
     float: right;
@@ -496,7 +525,7 @@ input.small-control {
     position:fixed;
     right:0;
     bottom:0;
-    top:55px;
+    top:50px;
     float:right;
     z-index:160;
 }
@@ -514,7 +543,7 @@ input.small-control {
     position:fixed;
     left:0;
     bottom:0;
-    top:52px;
+    top:50px;
     background: #e9eff3;
     border-right: 1px solid #d9e3ea;
     float: left;
@@ -853,7 +882,30 @@ input.small-control {
 .radialBar {
     padding: 0px 10px;
 }
-
+/*----------------------collapse-----------------------------*/
+.faq-section h2 {
+    font-family:RobotoLight, sans-serif;
+    font-size:40px;
+    font-weight:300;
+    color:#ef4438;
+}
+.panel-title > a {
+    padding:10px;
+    display:block;
+    transition: .3s ease 0s;
+}
+.panel-title > a:hover,
+.panel-title > a:focus {
+    background:#E8E8E8;
+    color:#333;
+}
+.panel-title a[aria-expanded="true"]{
+    background: #ef4438;
+    color: #fff;
+}
+.panel-heading {
+    padding:0px;
+}
 @media (min-width: 768px) {
     .question-choises-50{
     display:inline-block;

@@ -8,6 +8,7 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/jquery-ui.min.js" type="text/javascript"></script>
     <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/themes/blitzer/jquery-ui.css" rel="Stylesheet" type="text/css" />
     <script src="../libs/js/bindTeachers.js" type="text/javascript"></script>
+            <script src="../libs/js/background.js"></script>
     <div id="page">
         <div id="primary">
             <div class="tab-content">
@@ -28,7 +29,7 @@
                     </div>
                     <div class="card" id="chooseTeacher" style="display: none">
                         <div class="about-block">
-                            <asp:TextBox ID="teachersBox" placeholder="Вчитель (почніть вводити)" runat="server" />
+                            <asp:TextBox ID="teachersBox" placeholder="Вчитель (почніть вводити)" runat="server" CssClass="form-input-small" />
                             <asp:HiddenField ID="selectedTeacher" runat="server" />
                             <asp:Button runat="server" Text="Надіслати запит" OnClick="AddResponseButton_Click" CssClass="btn btn-info right"></asp:Button>
                         </div>
@@ -70,5 +71,4 @@
             </div>
         </div>
     </div>
-        <script src="../libs/js/background.js"></script>
 </asp:Content>

@@ -115,6 +115,7 @@
     <Content Include="Controls\ChangeInfo.ascx" />
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
+    <Content Include="FAQ.aspx" />
     <Content Include="Global.asax" />
     <Content Include="HistoricalInformation.aspx" />
     <Content Include="libs\css\bootstrap.css" />
@@ -131,6 +132,7 @@
     <Content Include="libs\img\vk-icon.png" />
     <Content Include="libs\js\bootstrap.min.js" />
     <Content Include="libs\js\bindTeachers.js" />
+    <Content Include="libs\js\headerActive.js" />
     <Content Include="libs\js\Helper.js" />
     <Content Include="libs\js\radialBar.js" />
     <Content Include="libs\js\jquery-1.9.1.min.js" />
@@ -272,6 +274,13 @@
     </Compile>
     <Compile Include="Error.aspx.designer.cs">
       <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FAQ.aspx.cs">
+      <DependentUpon>FAQ.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FAQ.aspx.designer.cs">
+      <DependentUpon>FAQ.aspx</DependentUpon>
     </Compile>
     <Compile Include="HistoricalInformation.aspx.cs">
       <DependentUpon>HistoricalInformation.aspx</DependentUpon>
