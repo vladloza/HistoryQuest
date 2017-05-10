@@ -76,5 +76,34 @@ namespace HistoryQuest
                 error_box.Text = "Вибачте, користувач з таким Логіном вже існує";
             }
         }
+
+        protected void TeacherButton_Click(object sender, EventArgs e)
+        {
+            TeacherRequest request = Repository.CurrentDataContext.TeacherRequests.FirstOrDefault(tr => tr.E_Mail == email.Value && tr.City == city.Value && 
+                tr.FirstName == t_first.Value && tr.LastName == t_last.Value && tr.MiddleName == t_mid.Value);
+            if (request == null)
+            {
+                request = new TeacherRequest()
+                {
+                    gid = Guid.NewGuid(),
+                    FirstName = t_first.Value,
+                    LastName = t_last.Value,
+                    MiddleName = t_mid.Value,
+                    City = city.Value,
+                    E_Mail = email.Value,
+                    Telephone = tel.Value,
+                    Institution = zaklName.Value
+                };
+
+                Repository.CurrentDataContext.TeacherRequests.InsertOnSubmit(request);
+                Repository.CurrentDataContext.SubmitChanges();
+                Response.Write("<script>alert('Заява буде розглянута!');</script>");
+                Response.Redirect("~/Login.aspx");
+            }
+            else
+            {
+                Response.Write("<script>alert('Заява вже подана!');</script>");
+            }
+        }
     }
 }

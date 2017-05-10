@@ -77,8 +77,12 @@
     <Build Include="dbo\Tables\Comments.sql" />
     <Build Include="dbo\Tables\CheckPoints.sql" />
     <Build Include="dbo\Tables\CheckPointsToTries.sql" />
+    <Build Include="dbo\Tables\TeacherRequests.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="HistoryQuest.DataBase.refactorlog" />
   </ItemGroup>
 </Project>

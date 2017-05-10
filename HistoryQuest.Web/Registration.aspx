@@ -11,10 +11,16 @@
     <script src="libs/js/validation.js"></script>
     <script src="libs/js/Helper.js"></script>
     <script src="libs/js/jquery-1.9.1.min.js"></script>
+    <script src="libs/js/maskinput.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/jquery-ui.min.js" type="text/javascript"></script>
     <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/themes/blitzer/jquery-ui.css" rel="Stylesheet" type="text/css" />
     <script src="libs/js/bindTeachers.js"></script>
     <script src="libs/js/preLoader.js"></script>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $("#tel").mask("+38(999) 999-9999");
+        });
+    </script>
     <title>Реєстрація</title>
 </head>
 <body class="admin-body">
@@ -36,9 +42,15 @@
                     <asp:Label runat="server" ID="error_box" />
                 </div>
                 <div id="teacher-view" style="display: none">
-                    <input type="text" placeholder="Ваш email" runat="server" validation="email" />
-                    <div class="login-form ">
-                        <button>Надіслати запит</button>
+                    <input type="text" placeholder="Прізвище" runat="server" id="t_last" name="sur_box" validation="text" />
+                    <input type="text" placeholder="Ім'я" runat="server" id="t_first" validation="text" />
+                    <input type="text" placeholder="По батькові" runat="server" id="t_mid" validation="text" />
+                    <input type="text" placeholder="Місто" runat="server" id="city" validation="text" />
+                    <input type="text" placeholder="Назва закладу" runat="server" id="zaklName" validation="text" />
+                    <input type="text" placeholder="Ваш email" runat="server" validation="email" id="email" />
+                    <input type="text" placeholder="Телефон" runat="server" id="tel" />
+                    <div class="login-form">
+                        <asp:Button runat="server" OnClick="TeacherButton_Click" Text="Подати заяву"></asp:Button>
                     </div>
                 </div>
             </form>
