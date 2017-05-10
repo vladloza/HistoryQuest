@@ -70,8 +70,9 @@ body {
     color: #1e1e1e;
     font-size: 14px;
     line-height: 1.42857143;
-    background-color: #fbfbfb;
     height: 100%;
+    background: #fafbfb;
+    background-image:url(../img/wall.png);
 }
 .no-js #loader { display: none;  }
 .js #loader { display: block; position: absolute; left: 100px; top: 0; }
@@ -169,13 +170,25 @@ img {
     width: 100%;
     z-index: 180;
 }
+.checkWrapper {
+    margin-right:45%;
+    display:inline-block;
+}
 .right {
     float:right;
 }
-.center-text p{
+footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+footer p{
     text-align:center;
     font-family: "LatoLight";
     margin-bottom:10px;
+    background: #e9eff3;
+    color: #2e4453;
+    margin: 0px;
 }
 .site-header>div {
     width:100%;
@@ -211,7 +224,17 @@ img {
     padding: 15px;
     box-sizing: border-box;
     font-size: 14px;
+    transition: .3s ease 0s;
 }
+
+.admin-form input[type="text"]:focus,
+.admin-form input[type="password"]:focus { 
+    background: #e5e5e5;
+    -webkit-box-shadow: 2px 2px 7px #E8E8E8 inset;
+    -moz-box-shadow: 2px 2px 7px #E8E8E8 inset;
+    box-shadow: 2px 2px 7px #cecece inset;
+} 
+
 .small-control {
     margin:0px 10px;
     outline: 0;
@@ -239,16 +262,12 @@ input.small-control {
     transition: .3s ease 0s;
     cursor: pointer;
 }
-.admin-form button:nth-child(2) {
-    margin-top: 10px;
-    background: #e4df12;
-}
-.admin-form button:nth-child(2):hover {
-    background: #d4cf15;
-}
 .admin-form button:hover,
 .admin-form button:active,
-.admin-form button:focus {
+.admin-form button:focus,
+.admin-form input[type="submit"]:hover,
+.admin-form input[type="submit"]:active,
+.admin-form input[type="submit"]:focus {
     background: #147fa9;
 }
 .admin-body {
@@ -296,7 +315,8 @@ input.small-control {
     color:#d31a1a;
 }
 .like-wrapper {
-    margin:0px 25px;
+        float: right;
+    margin:0px 7%;
     padding: 2px 5px 2px 3px;
     cursor:pointer;
 }
@@ -352,8 +372,8 @@ input.small-control {
     padding-bottom: 15px;
     background: #fafbfb;
     background-image:url(../img/wall.png);
-    box-shadow: 0 0 0 1px rgb(233, 234, 234), 0 1px 2px #eff0f0;
-    border: 1px #f1f1f1 solid;
+    /*box-shadow: 0 0 0 1px rgb(233, 234, 234), 0 1px 2px #eff0f0;
+    border: 1px #f1f1f1 solid;*/
 }
 .info-image {
     float: none;

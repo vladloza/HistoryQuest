@@ -78,4 +78,5 @@
             row.parentNode.removeChild(row);
         };
     </script>
+    <script src="../libs/js/background.js"></script>
 </asp:Content>

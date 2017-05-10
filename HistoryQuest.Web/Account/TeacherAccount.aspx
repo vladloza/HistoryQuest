@@ -100,6 +100,7 @@
     <script>
         window.onload = WebService.GetPupilsToTeacherRequests();
     </script>
+        <script src="../libs/js/background.js"></script>
     <script>
         function AddStudent(btn, gid) {
             WebService.AddStudent(gid);
