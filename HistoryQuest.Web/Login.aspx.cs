@@ -19,10 +19,9 @@ namespace HistoryQuest
             {
                 Response.Redirect(FormsAuthentication.DefaultUrl);
             }
-            //VK Authorithation
-            if (Request.QueryString["code"] != null)
+            if (Request.QueryString["state"] != null)
             {
-                VK.AuthoritheVKUser(Request.QueryString["code"].ToString());
+                Socials.AuthoritheSocialUser(Request.QueryString);
                 Response.Redirect(FormsAuthentication.DefaultUrl);
             }
         }

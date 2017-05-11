@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using VkNet;
@@ -12,15 +13,16 @@ namespace HistoryQuest.Domain.Utils
 {
     public class VK
     {
-        static string url = "https://oauth.vk.com/access_token?client_id=6009379&client_secret=VgmVKtowqz71XXwwrC1p&redirect_uri=http://localhost:64356/Login.aspx&code=";
+        static string url = "https://oauth.vk.com/access_token?client_id="+Socials.vkID+"&client_secret="+Socials.vkSecret+"&redirect_uri="+Socials.redirect_uri+"&code=";
+        static WebClient client = new WebClient();
 
-        static User GetUserFromVKResponse(VKResponse response)
+        static User GetUserFromResponse(VKResponse response)
         {
             VkApi api = new VkApi();
             ApiAuthParams @params = new ApiAuthParams()
             {
                 AccessToken = response.access_token,
-                ApplicationId = 6009379,
+                ApplicationId = Convert.ToUInt64(Socials.vkID),
                 UserId = response.user_id,
                 TokenExpireTime = response.expires_in
             };
@@ -38,7 +40,7 @@ namespace HistoryQuest.Domain.Utils
                     Info = info.About,
                     IsTeacher = false
                 },
-                IsSocial = true,
+                SocialName = "vk",
                 UserName = response.email,
                 UsersInRoles = new System.Data.Linq.EntitySet<UsersInRole>()
                 {
@@ -52,32 +54,21 @@ namespace HistoryQuest.Domain.Utils
             };
         }
 
-        static VKResponse GetVKResponse(string token)
+        public static void AuthoritheUser(string token)
         {
-            System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
-            System.Net.WebRequest reqGET = System.Net.WebRequest.Create(url+token);
-            System.Net.WebResponse resp = reqGET.GetResponse();
-            System.IO.Stream stream = resp.GetResponseStream();
-            System.IO.StreamReader sr = new System.IO.StreamReader(stream);
-            string html = sr.ReadToEnd();
-            string parsed = JObject.Parse(html).ToString();
-            return JsonConvert.DeserializeObject<VKResponse>(parsed);
-        }
+            VKResponse response = Socials.GetResponse<VKResponse>(token, url);
 
-        public static void AuthoritheVKUser(string token)
-        {
-            VKResponse response = GetVKResponse(token);
-            User user = Repository.CurrentDataContext.Users.FirstOrDefault(u => u.UserName == response.email && u.IsSocial == true);
+            User user = Repository.CurrentDataContext.Users.FirstOrDefault(u => u.UserName == response.email && u.SocialName == "vk");
             if (user == null)
             {
-                user = RegisterVKUser(response);
+                user = RegisterUser(response);
             }
             Repository.CurrentUser = user;
         }
 
-        static User RegisterVKUser(VKResponse response)
+        static User RegisterUser(VKResponse response)
         {
-            User user = GetUserFromVKResponse(response);
+            User user = GetUserFromResponse(response);
 
             Repository.CurrentDataContext.Users.InsertOnSubmit(user);
             Repository.CurrentDataContext.SubmitChanges();
