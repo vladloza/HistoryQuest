@@ -191,7 +191,7 @@
       <Column Name="PasswordFormat" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="PasswordSalt" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
       <Column Name="FaceGID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
-      <Column Name="IsSocial" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="SocialName" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
       <Association Name="User_CheckPoint" Member="CheckPoints" ThisKey="gid" OtherKey="AuthorGID" Type="CheckPoint" />
       <Association Name="User_UsersInRole" Member="UsersInRoles" ThisKey="gid" OtherKey="UserGID" Type="UsersInRole" />
       <Association Name="User_Like" Member="Likes" ThisKey="gid" OtherKey="UserGID" Type="Like" />

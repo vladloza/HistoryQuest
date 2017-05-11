@@ -62,7 +62,7 @@
                             <i class="fa fa-user"></i><span>Мій профіль</span>
                         </a>
                     </li>
-                    <li style='<%= Repository.CurrentUser.IsSocial ? "display:none": "display:block"%>'>
+                    <li style='<%= !string.IsNullOrEmpty(Repository.CurrentUser.SocialName) ? "display:none": "display:block"%>'>
                         <a href="#edit" data-toggle="pill">
                             <i class="fa fa-cog" aria-hidden="true"></i><span>Редагувати профіль</span>
                         </a>

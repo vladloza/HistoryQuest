@@ -4659,7 +4659,7 @@ namespace HistoryQuest.Domain
 		
 		private System.Nullable<System.Guid> _FaceGID;
 		
-		private bool _IsSocial;
+		private string _SocialName;
 		
 		private EntitySet<CheckPoint> _CheckPoints;
 		
@@ -4695,8 +4695,8 @@ namespace HistoryQuest.Domain
     partial void OnPasswordSaltChanged();
     partial void OnFaceGIDChanging(System.Nullable<System.Guid> value);
     partial void OnFaceGIDChanged();
-    partial void OnIsSocialChanging(bool value);
-    partial void OnIsSocialChanged();
+    partial void OnSocialNameChanging(string value);
+    partial void OnSocialNameChanged();
     #endregion
 		
 		public User()
@@ -4855,23 +4855,23 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSocial", DbType="Bit NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SocialName", DbType="NVarChar(256)")]
 		[global::System.Runtime.Serialization.DataMemberAttribute(Order=8)]
-		public bool IsSocial
+		public string SocialName
 		{
 			get
 			{
-				return this._IsSocial;
+				return this._SocialName;
 			}
 			set
 			{
-				if ((this._IsSocial != value))
+				if ((this._SocialName != value))
 				{
-					this.OnIsSocialChanging(value);
+					this.OnSocialNameChanging(value);
 					this.SendPropertyChanging();
-					this._IsSocial = value;
-					this.SendPropertyChanged("IsSocial");
-					this.OnIsSocialChanged();
+					this._SocialName = value;
+					this.SendPropertyChanged("SocialName");
+					this.OnSocialNameChanged();
 				}
 			}
 		}

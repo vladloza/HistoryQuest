@@ -28,11 +28,11 @@
             <asp:Label runat="server" ID="error_text" />
             <div class="login-icons">
                 <div class="icons-inside">
-                    <a href="#">
-                        <img src="libs/img/gmail-icon.png" /></a>
+                    <a href="<%= HistoryQuest.Domain.Socials.fbUrl %>">
+                        <img src="libs/img/facebook-icon.png" /></a>
                 </div>
                 <div class="icons-inside">
-                    <a href="https://oauth.vk.com/authorize?client_id=6009379&display=page&redirect_uri=http://localhost:64356/Login.aspx&scope=email&response_type=code&v=5.63">
+                    <a href="<%= HistoryQuest.Domain.Socials.vkUrl %>">
                         <img src="libs/img/vk-icon.png" />
                     </a>
                 </div>
