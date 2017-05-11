@@ -1,0 +1,9 @@
+﻿<TestTask>
+  <answers>
+    <answer text="Добруджа" />
+    <answer text="Київ" />
+    <answer text="Варна" />
+    <answer text="Хотин" />
+  </answers>
+  <rightanswer value="0" />
+</TestTask>

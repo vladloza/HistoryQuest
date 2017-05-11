@@ -1,0 +1,21 @@
+<TestTask>
+  <questions>
+    <question code="1" text="Швеція" />
+    <question code="2" text="Річ Посполита" />
+    <question code="3" text="Козацьке військо 1601р." />
+    <question code="4" text="Козацьке військо 1602р." />
+  </questions>
+  <answers>
+    <answer code="А" text="Самійло Кішка" />
+    <answer code="Б" text="Герцог Нассауський" />
+    <answer code="В" text="Гаврило Крутневич" />
+    <answer code="Г" text="Петро Конашевич-Сагайдачний" />
+    <answer code="Д" text="Ян Замойський" />
+  </answers>
+  <rightanswers>
+    <rightanswer value="1-Б" />
+    <rightanswer value="2-Д" />
+    <rightanswer value="3-А" />
+    <rightanswer value="4-В" />
+  </rightanswers>
+</TestTask>

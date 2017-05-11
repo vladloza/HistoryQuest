@@ -1,0 +1,9 @@
+﻿<TestTask>
+  <answers>
+    <answer text="Зима" />
+    <answer text="Весна" />
+    <answer text="Літо" />
+    <answer text="Осінь" />
+  </answers>
+  <rightanswer value="2" />
+</TestTask>

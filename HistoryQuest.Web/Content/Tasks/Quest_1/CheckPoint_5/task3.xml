@@ -1,0 +1,9 @@
+﻿<TestTask>
+  <answers>
+    <answer text="40 млн. доларів" />
+    <answer text="40 млн. злотих" />
+    <answer text="5 млн. злотих" />
+    <answer text="100 тис. злотих" />
+  </answers>
+  <rightanswer value="1" />
+</TestTask>

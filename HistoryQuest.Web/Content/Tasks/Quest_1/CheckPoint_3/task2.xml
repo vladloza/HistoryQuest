@@ -1,0 +1,9 @@
+﻿<TestTask>
+  <answers>
+    <answer text="8" />
+    <answer text="10" />
+    <answer text="12" />
+    <answer text="16" />
+  </answers>
+  <rightanswer value="1" />
+</TestTask>

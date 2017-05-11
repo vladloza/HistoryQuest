@@ -1,0 +1,9 @@
+﻿<TestTask>
+  <answers>
+    <answer text="1 000" />
+    <answer text="180 000" />
+    <answer text="500 000" />
+    <answer text="80 000" />
+  </answers>
+  <rightanswer value="1" />
+</TestTask>

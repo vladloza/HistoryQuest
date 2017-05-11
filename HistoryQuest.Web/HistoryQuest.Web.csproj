@@ -106,11 +106,6 @@
     <Content Include="Account\AdminAccount.aspx" />
     <Content Include="Account\TeacherAccount.aspx" />
     <Content Include="Content\Images\sagay.jpg" />
-    <Content Include="Content\Tasks\task5.xml" />
-    <Content Include="Content\Tasks\task4.xml" />
-    <Content Include="Content\Tasks\task3.xml" />
-    <Content Include="Content\Tasks\task2.xml" />
-    <Content Include="Content\Tasks\task1.xml" />
     <Content Include="Controls\ChangePassword.ascx" />
     <Content Include="Controls\ChangeInfo.ascx" />
     <Content Include="Default.aspx" />
@@ -426,6 +421,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Tasks\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Reports\AllStudents.rdlc" />

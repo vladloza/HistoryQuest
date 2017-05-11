@@ -1,0 +1,9 @@
+<TestTask>
+  <answers>
+    <answer text="Самійло Кішка" />
+    <answer text="Богдан Хмельницький" />
+    <answer text="Петро Конашевич-Сагайдачний" />
+    <answer text="Гаврило Крутневич" />
+  </answers>
+  <rightanswer value="3" />
+</TestTask>

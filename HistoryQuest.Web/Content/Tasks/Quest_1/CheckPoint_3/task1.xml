@@ -1,0 +1,9 @@
+﻿<TestTask>
+  <answers>
+    <answer text="Султанська Туреччина" />
+    <answer text="Московське царство" />
+    <answer text="Литовське князівство" />
+    <answer text="Фашистська Німеччина" />
+  </answers>
+  <rightanswer value="0" />
+</TestTask>

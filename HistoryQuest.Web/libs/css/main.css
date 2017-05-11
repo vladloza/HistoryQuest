@@ -860,6 +860,11 @@ input.small-control {
 .caption {
     display:table-cell;
     vertical-align:middle;
+    font-weight: 500;
+}
+.question-text p {
+    font-family: "Open Sans", sans-serif;
+    font-weight:500;
 }
 .input-answer {
     border: 0;

@@ -1,0 +1,9 @@
+﻿<TestTask>
+  <answers>
+    <answer text="Чайка" />
+    <answer text="Тетерів" />
+    <answer text="Трирема" />
+    <answer text="Галера" />
+  </answers>
+  <rightanswer value="0" />
+</TestTask>

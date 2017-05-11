@@ -1,0 +1,9 @@
+﻿<TestTask>
+  <answers>
+    <answer text="Річ Посполита" />
+    <answer text="Османська імперія" />
+    <answer text="Кримське ханство" />
+    <answer text="Московія" />
+  </answers>
+  <rightanswer value="1" />
+</TestTask>

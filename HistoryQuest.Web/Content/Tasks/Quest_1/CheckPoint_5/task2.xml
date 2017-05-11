@@ -1,0 +1,9 @@
+﻿<TestTask>
+  <answers>
+    <answer text="Колишні полонені" />
+    <answer text="Поляки" />
+    <answer text="Кримські татари" />
+    <answer text="Ніхто" />
+  </answers>
+  <rightanswer value="0" />
+</TestTask>

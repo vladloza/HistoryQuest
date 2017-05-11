@@ -1,0 +1,9 @@
+<TestTask>
+  <answers>
+    <answer text="Україна" />
+    <answer text="Балтійське узбережжя (Естонія)" />
+    <answer text="Литовське князівство" />
+    <answer text="Московське царство" />
+  </answers>
+  <rightanswer value="1" />
+</TestTask>

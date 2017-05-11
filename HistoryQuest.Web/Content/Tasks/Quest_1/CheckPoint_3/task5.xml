@@ -1,0 +1,21 @@
+﻿<TestTask>
+  <questions>
+    <question code="1" text="Битва Турецького флоту у Чорному морі з козаками" />
+    <question code="2" text="Здобуття Перекопу" />
+    <question code="3" text="Розграблення Очакова" />
+    <question code="4" text="Захоплення Варни" />
+  </questions>
+  <answers>
+    <answer code="А" text="жовтень 1607" />
+    <answer code="Б" text="березень 1607" />
+    <answer code="В" text="1607" />
+    <answer code="Г" text="1606" />
+    <answer code="Д" text="1609" />
+  </answers>
+  <rightanswers>
+    <rightanswer value="1-Б" />
+    <rightanswer value="2-А" />
+    <rightanswer value="3-В" />
+    <rightanswer value="4-Г" />
+  </rightanswers>
+</TestTask>

@@ -1,0 +1,9 @@
+﻿<TestTask>
+  <answers>
+    <answer text="Він був братом Сагайдачного" />
+    <answer text="Він зрадив султана" />
+    <answer text="Він залицявся до дружини султана" />
+    <answer text="Він намагався переконати султана, що османці пермогли" />
+  </answers>
+  <rightanswer value="3" />
+</TestTask>
