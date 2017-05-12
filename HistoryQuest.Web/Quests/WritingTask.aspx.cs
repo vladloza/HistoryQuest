@@ -15,7 +15,7 @@ namespace HistoryQuest.Quests
             base.Page_Load(sender, e);
 
             List<string> rightAnswers = new List<string>();
-            using (XmlReader reader = XmlReader.Create(HttpRuntime.AppDomainAppPath + task.SourceFilePath))
+            using (XmlReader reader = task.SourceFile.CreateReader())
             {
                 reader.ReadToFollowing("rightanswers");
                 if (reader.ReadToDescendant("rightanswer"))

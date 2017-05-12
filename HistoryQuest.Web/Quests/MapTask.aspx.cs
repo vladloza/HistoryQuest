@@ -13,8 +13,8 @@ namespace HistoryQuest.Quests
         protected override void Page_Load(object sender, EventArgs e)
         {
             base.Page_Load(sender, e);
-            
-            using (XmlReader reader = XmlReader.Create(HttpRuntime.AppDomainAppPath + task.SourceFilePath))
+
+            using (XmlReader reader = task.SourceFile.CreateReader())
             {
                 reader.ReadToFollowing("rightanswer");
                 reader.MoveToFirstAttribute();

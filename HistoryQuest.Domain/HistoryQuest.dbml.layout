@@ -1,248 +1,248 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 19.75, 17" name="HistoryQuest">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 19.75, 17.75" name="HistoryQuest">
   <DataContextMoniker Name="/HistoryQuestDataContext" />
   <nestedChildShapes>
-    <classShape Id="148b3382-f46e-41ea-981b-7524b143ccb7" absoluteBounds="12, 10.625, 2, 2.9324365234374987">
+    <classShape Id="a153d837-1583-41c2-b449-b246a6968a10" absoluteBounds="12, 11.125, 2, 3.1170068359375023">
       <DataClassMoniker Name="/HistoryQuestDataContext/CheckPoint" />
       <nestedChildShapes>
-        <elementListCompartment Id="a75cda47-a5bf-4c04-9532-0faf5686593e" absoluteBounds="12.015, 11.085, 1.9700000000000002, 2.3724365234375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="db6cf4b5-f188-4973-b577-bc4cf27f0c0d" absoluteBounds="12.015, 11.585, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="9f38eace-6f77-4cf7-9558-f029b5a366a2" absoluteBounds="6.25, 9.375, 2, 1.5034000651041666">
+    <classShape Id="777b42ea-2876-483f-81b3-2bc7a25fca33" absoluteBounds="6.25, 9.75, 2, 1.5785953776041666">
       <DataClassMoniker Name="/HistoryQuestDataContext/UsersInRole" />
       <nestedChildShapes>
-        <elementListCompartment Id="82899e60-d675-49dc-b250-2f9e9c1629ee" absoluteBounds="6.265, 9.835, 1.9700000000000002, 0.94340006510416674" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="b0cefaa2-48fb-4405-8e1d-afa2ff1bcf16" absoluteBounds="6.265, 10.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="7921f0f5-972c-4ea6-b4b4-a74354ee7d86" absoluteBounds="14.75, 13.25, 2, 1.6820296223958344">
+    <classShape Id="238a4469-a84f-48b7-b720-cf3ae13992e5" absoluteBounds="14.75, 8.75, 2, 1.7708968098958344">
       <DataClassMoniker Name="/HistoryQuestDataContext/CheckPointsToTry" />
       <nestedChildShapes>
-        <elementListCompartment Id="37a59d01-e53e-4aba-a7b6-4893c05e63ce" absoluteBounds="14.765, 13.71, 1.9700000000000002, 1.1220296223958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="9eca48b7-c100-4e15-ba5f-ad0a5901b265" absoluteBounds="14.765, 9.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="64264af9-149d-4742-9e80-e39c0b2a4384" absoluteBounds="9, 14.875, 2, 1.8606591796874987">
+    <classShape Id="91ecf930-033e-414c-ba50-fb789d69c1d8" absoluteBounds="9, 15.5, 2, 1.9631982421875005">
       <DataClassMoniker Name="/HistoryQuestDataContext/Comment" />
       <nestedChildShapes>
-        <elementListCompartment Id="e7d7f96a-6751-4258-b861-53dea79211a3" absoluteBounds="9.015, 15.335, 1.9700000000000002, 1.3006591796875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="d3891ac4-5285-4730-9e9f-e4ece033e14b" absoluteBounds="9.015, 15.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="b9f68f41-94e4-4eea-ace5-eca36533c865" absoluteBounds="0.75, 0.75, 2, 1.5034000651041666">
+    <classShape Id="14f73581-3163-4cbe-a158-9472e436b5e1" absoluteBounds="0.75, 0.75, 2, 1.5785953776041666">
       <DataClassMoniker Name="/HistoryQuestDataContext/Error" />
       <nestedChildShapes>
-        <elementListCompartment Id="c5002a8d-7d79-4bb3-960c-3b24d2477b89" absoluteBounds="0.765, 1.21, 1.9700000000000002, 0.94340006510416674" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="7c5bc3eb-5719-4fce-bfe5-c6316f72486f" absoluteBounds="0.765, 1.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="c744f6c7-5098-46ea-8e9e-cd9149fdb3fe" absoluteBounds="0.75, 8.875, 2, 2.2179182942708344">
+    <classShape Id="f6c10ca4-1d40-46a4-ba45-5998262fe27f" absoluteBounds="0.75, 9.25, 2, 2.3478011067708344">
       <DataClassMoniker Name="/HistoryQuestDataContext/Face" />
       <nestedChildShapes>
-        <elementListCompartment Id="397f1820-90a3-40f6-a655-6302fbd3364f" absoluteBounds="0.765, 9.335, 1.9700000000000002, 1.6579182942708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="d54dbc01-4789-4250-bb8f-d37e403a8c2c" absoluteBounds="0.765, 9.71, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="2274a4ac-0e32-4aeb-baea-906df7dbcbde" absoluteBounds="14.75, 11, 2, 1.5034000651041666">
+    <classShape Id="60df4708-9780-4ad1-be06-124b016682cc" absoluteBounds="14.75, 11.5, 2, 1.5785953776041666">
       <DataClassMoniker Name="/HistoryQuestDataContext/Like" />
       <nestedChildShapes>
-        <elementListCompartment Id="22e8f900-4171-4643-b98a-6715b2c373cc" absoluteBounds="14.765, 11.46, 1.9700000000000002, 0.94340006510416674" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="efc6b118-b43f-4e1a-a996-5124e4ba713c" absoluteBounds="14.765, 11.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="c4fc8318-9030-4eaf-ad8b-f41385288d98" absoluteBounds="3.5, 7.75, 2, 1.5034000651041666">
+    <classShape Id="ac215aff-a0e9-4751-88cd-f59d3be72960" absoluteBounds="3.5, 8.125, 2, 1.5785953776041666">
       <DataClassMoniker Name="/HistoryQuestDataContext/PupilsToTeachersRequest" />
       <nestedChildShapes>
-        <elementListCompartment Id="bc9721f4-9617-46bf-9cc4-8ba9183324b2" absoluteBounds="3.515, 8.21, 1.9700000000000002, 0.94340006510416674" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="0ec60381-c9a7-4e23-b22f-b84727317853" absoluteBounds="3.515, 8.585, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="5be974eb-708b-464b-8588-8623a967e1e4" absoluteBounds="6.25, 12.375, 2, 1.8606591796874987">
+    <classShape Id="eeee37cd-026b-4814-8326-61d86dab1d39" absoluteBounds="6.25, 13, 2, 1.9631982421874987">
       <DataClassMoniker Name="/HistoryQuestDataContext/Quest" />
       <nestedChildShapes>
-        <elementListCompartment Id="3f4d8fe9-f85c-4f77-b60b-4a619f85bac1" absoluteBounds="6.265, 12.835, 1.9700000000000002, 1.3006591796875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="b1d18314-89f7-42ed-ac63-f1513ad28409" absoluteBounds="6.265, 13.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="2f5f255f-9b95-4b7b-b3a2-152fb8daa217" absoluteBounds="3.5, 5.375, 2, 1.3247705078125005">
+    <classShape Id="0b1a9c88-40c0-4cd1-816c-b185c20224cc" absoluteBounds="3.5, 5.875, 2, 1.3862939453125005">
       <DataClassMoniker Name="/HistoryQuestDataContext/Role" />
       <nestedChildShapes>
-        <elementListCompartment Id="0c2bbeb6-24c6-46eb-bc47-7f0f793c6849" absoluteBounds="3.515, 5.835, 1.9700000000000002, 0.7647705078125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="bdb2611f-224d-4126-9844-487c6fc03b1e" absoluteBounds="3.515, 6.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="aeec4603-cb97-431c-bb42-66797a942acb" absoluteBounds="14.75, 7.625, 2, 2.2179182942708344">
+    <classShape Id="191e8525-6db3-4808-93dc-f40abbc1acae" absoluteBounds="14.75, 14.125, 2, 2.3478011067708326">
       <DataClassMoniker Name="/HistoryQuestDataContext/Task" />
       <nestedChildShapes>
-        <elementListCompartment Id="bf3e1e21-e2e1-416f-b072-48454e1d103a" absoluteBounds="14.765, 8.085, 1.9700000000000002, 1.6579182942708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="83f35547-89b5-4292-a544-d93259e1b22c" absoluteBounds="14.765, 14.585, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="332fd328-4f74-4709-9619-283914d902d1" absoluteBounds="17.5, 10.375, 2, 1.8606591796874987">
+    <classShape Id="2a02953f-0b0f-4f2a-9e2b-b18f21efa391" absoluteBounds="17.5, 11.625, 2, 2.1554996744791666">
       <DataClassMoniker Name="/HistoryQuestDataContext/TasksToTry" />
       <nestedChildShapes>
-        <elementListCompartment Id="97317361-e2bb-4742-a956-a99406f1d59b" absoluteBounds="17.515, 10.835, 1.9700000000000002, 1.3006591796875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="6983000e-efff-4f35-b765-c37b07c814b1" absoluteBounds="17.515, 12.085, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="b7ba3caa-5cb8-4704-aec8-4bc6164edaf1" absoluteBounds="12, 8.125, 2, 1.3247705078124987">
+    <classShape Id="6cecb353-bd94-4202-b4f9-223043c1b210" absoluteBounds="12, 15.625, 2, 1.3862939453125005">
       <DataClassMoniker Name="/HistoryQuestDataContext/TaskType" />
       <nestedChildShapes>
-        <elementListCompartment Id="3f69bc31-61e2-40f5-833d-d5ddab0dfc54" absoluteBounds="12.015, 8.585, 1.9700000000000002, 0.7647705078125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="277edbc5-f4a6-4829-b3e6-0be93962dd3d" absoluteBounds="12.015, 16.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="3c1944c0-4aab-48f9-b448-e5822aee8297" absoluteBounds="3.75, 0.75, 2, 2.3965478515625">
+    <classShape Id="3ec64324-a654-49ae-a39a-49ae6d145ff8" absoluteBounds="3.75, 0.75, 2, 2.5401025390625005">
       <DataClassMoniker Name="/HistoryQuestDataContext/TeacherRequest" />
       <nestedChildShapes>
-        <elementListCompartment Id="a57e8426-1422-4b48-8510-e9356fc51d1f" absoluteBounds="3.765, 1.21, 1.9700000000000002, 1.8365478515625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="35071ae3-b2db-4745-95c8-70f05f52bbb1" absoluteBounds="3.765, 1.21, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="4438d128-69cb-481c-a729-c46cb197653c" absoluteBounds="9, 11.25, 2, 1.6820296223958344">
+    <classShape Id="4331a60f-f4ea-4698-9d21-99dc18d5091e" absoluteBounds="9, 11.75, 2, 1.7708968098958344">
       <DataClassMoniker Name="/HistoryQuestDataContext/Try" />
       <nestedChildShapes>
-        <elementListCompartment Id="7f2601f0-2333-4f9c-be21-f4b8caf8debe" absoluteBounds="9.015, 11.71, 1.9700000000000002, 1.1220296223958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="6a466017-9d18-4efe-9930-b38909fc963a" absoluteBounds="9.015, 12.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="9246b242-979f-42dc-8035-b5a17e03416a" absoluteBounds="3.5, 10, 2, 2.2179182942708344">
+    <classShape Id="4ece282d-b8b4-47ad-a936-1554e52fc65d" absoluteBounds="3.5, 10.375, 2, 2.3478011067708344">
       <DataClassMoniker Name="/HistoryQuestDataContext/User" />
       <nestedChildShapes>
-        <elementListCompartment Id="4d2cd05d-041f-452f-afb6-2ca35b20e691" absoluteBounds="3.515, 10.46, 1.9700000000000002, 1.6579182942708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="444ae5c7-ab82-42e1-b793-fc1106a721b3" absoluteBounds="3.515, 10.835, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(12.7092307692308 : 13.5574365234375); (12.7092307692308 : 13.8074365234375); (13.3046153846154 : 13.8074365234375); (13.3046153846154 : 13.5574365234375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(12.7092307692308 : 14.2420068359375); (12.7092307692308 : 14.4920068359375); (13.3046153846154 : 14.4920068359375); (13.3046153846154 : 14.2420068359375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/HistoryQuestDataContext/CheckPoint/CheckPoint_CheckPoint" />
       <nodes>
-        <classShapeMoniker Id="148b3382-f46e-41ea-981b-7524b143ccb7" />
-        <classShapeMoniker Id="148b3382-f46e-41ea-981b-7524b143ccb7" />
+        <classShapeMoniker Id="a153d837-1583-41c2-b449-b246a6968a10" />
+        <classShapeMoniker Id="a153d837-1583-41c2-b449-b246a6968a10" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(12.3233628846154 : 13.5574365234375); (12.3233628846154 : 14.3697330729167); (14.75 : 14.3697330729167)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(13 : 11.125); (13 : 9.63544840494792); (14.75 : 9.63544840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/HistoryQuestDataContext/CheckPoint/CheckPoint_CheckPointsToTry" />
       <nodes>
-        <classShapeMoniker Id="148b3382-f46e-41ea-981b-7524b143ccb7" />
-        <classShapeMoniker Id="7921f0f5-972c-4ea6-b4b4-a74354ee7d86" />
+        <classShapeMoniker Id="a153d837-1583-41c2-b449-b246a6968a10" />
+        <classShapeMoniker Id="238a4469-a84f-48b7-b720-cf3ae13992e5" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(14 : 11.7517000325521); (14.75 : 11.7517000325521)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(14 : 12.2892976888021); (14.75 : 12.2892976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/HistoryQuestDataContext/CheckPoint/CheckPoint_Like" />
       <nodes>
-        <classShapeMoniker Id="148b3382-f46e-41ea-981b-7524b143ccb7" />
-        <classShapeMoniker Id="2274a4ac-0e32-4aeb-baea-906df7dbcbde" />
+        <classShapeMoniker Id="a153d837-1583-41c2-b449-b246a6968a10" />
+        <classShapeMoniker Id="60df4708-9780-4ad1-be06-124b016682cc" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 9.06420003255208); (3.5 : 9.06420003255208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 9.47679768880208); (3.5 : 9.47679768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/HistoryQuestDataContext/Face/Face_PupilsToTeachersRequest" />
       <nodes>
-        <classShapeMoniker Id="c744f6c7-5098-46ea-8e9e-cd9149fdb3fe" />
-        <classShapeMoniker Id="c4fc8318-9030-4eaf-ad8b-f41385288d98" />
+        <classShapeMoniker Id="f6c10ca4-1d40-46a4-ba45-5998262fe27f" />
+        <classShapeMoniker Id="ac215aff-a0e9-4751-88cd-f59d3be72960" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 8.90710001627604); (3.5 : 8.90710001627604)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 9.30089884440104); (3.5 : 9.30089884440104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/HistoryQuestDataContext/Face/Face_PupilsToTeachersRequest1" />
       <nodes>
-        <classShapeMoniker Id="c744f6c7-5098-46ea-8e9e-cd9149fdb3fe" />
-        <classShapeMoniker Id="c4fc8318-9030-4eaf-ad8b-f41385288d98" />
+        <classShapeMoniker Id="f6c10ca4-1d40-46a4-ba45-5998262fe27f" />
+        <classShapeMoniker Id="ac215aff-a0e9-4751-88cd-f59d3be72960" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.25 : 13.2759830729167); (9.91666666666667 : 13.2759830729167 : JumpStart); (10.0833333333333 : 13.2759830729167 : JumpEnd); (12 : 13.2759830729167)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.25 : 13.9127018229167); (12 : 13.9127018229167)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/HistoryQuestDataContext/Quest/Quest_CheckPoint" />
       <nodes>
-        <classShapeMoniker Id="5be974eb-708b-464b-8588-8623a967e1e4" />
-        <classShapeMoniker Id="148b3382-f46e-41ea-981b-7524b143ccb7" />
+        <classShapeMoniker Id="eeee37cd-026b-4814-8326-61d86dab1d39" />
+        <classShapeMoniker Id="a153d837-1583-41c2-b449-b246a6968a10" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(7.25 : 14.2356591796875); (7.25 : 15.8053295898437); (9 : 15.8053295898437)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(7.25 : 14.9631982421875); (7.25 : 16.4815991210938); (9 : 16.4815991210938)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/HistoryQuestDataContext/Quest/Quest_Comment" />
       <nodes>
-        <classShapeMoniker Id="5be974eb-708b-464b-8588-8623a967e1e4" />
-        <classShapeMoniker Id="64264af9-149d-4742-9e80-e39c0b2a4384" />
+        <classShapeMoniker Id="eeee37cd-026b-4814-8326-61d86dab1d39" />
+        <classShapeMoniker Id="91ecf930-033e-414c-ba50-fb789d69c1d8" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 6.03738525390625); (7.25 : 6.03738525390625); (7.25 : 9.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 6.56814697265625); (7.25 : 6.56814697265625); (7.25 : 9.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/HistoryQuestDataContext/Role/Role_UsersInRole" />
       <nodes>
-        <classShapeMoniker Id="2f5f255f-9b95-4b7b-b3a2-152fb8daa217" />
-        <classShapeMoniker Id="9f38eace-6f77-4cf7-9558-f029b5a366a2" />
+        <classShapeMoniker Id="0b1a9c88-40c0-4cd1-816c-b185c20224cc" />
+        <classShapeMoniker Id="777b42ea-2876-483f-81b3-2bc7a25fca33" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(14 : 10.625); (14.375 : 10.25); (14.375 : 8.73395914713542); (14.75 : 8.73395914713542)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(14 : 14.2420068359375); (14.375 : 14.6170068359375); (14.375 : 13.75); (14.75 : 14.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/HistoryQuestDataContext/CheckPoint/CheckPoint_Task" />
       <nodes>
-        <classShapeMoniker Id="148b3382-f46e-41ea-981b-7524b143ccb7" />
-        <classShapeMoniker Id="aeec4603-cb97-431c-bb42-66797a942acb" />
+        <classShapeMoniker Id="a153d837-1583-41c2-b449-b246a6968a10" />
+        <classShapeMoniker Id="191e8525-6db3-4808-93dc-f40abbc1acae" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(16.75 : 14.0910148111979); (18.5 : 14.0910148111979); (18.5 : 12.2356591796875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(16.75 : 9.63544840494792); (18.5 : 9.63544840494792); (18.5 : 11.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/HistoryQuestDataContext/CheckPointsToTry/CheckPointsToTry_TasksToTry" />
       <nodes>
-        <classShapeMoniker Id="7921f0f5-972c-4ea6-b4b4-a74354ee7d86" />
-        <classShapeMoniker Id="332fd328-4f74-4709-9619-283914d902d1" />
+        <classShapeMoniker Id="238a4469-a84f-48b7-b720-cf3ae13992e5" />
+        <classShapeMoniker Id="2a02953f-0b0f-4f2a-9e2b-b18f21efa391" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(16.75 : 8.73395914713542); (18.5 : 8.73395914713542); (18.5 : 10.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(16.75 : 15.2989005533854); (18.5 : 15.2989005533854); (18.5 : 13.7804996744792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/HistoryQuestDataContext/Task/Task_TasksToTry" />
       <nodes>
-        <classShapeMoniker Id="aeec4603-cb97-431c-bb42-66797a942acb" />
-        <classShapeMoniker Id="332fd328-4f74-4709-9619-283914d902d1" />
+        <classShapeMoniker Id="191e8525-6db3-4808-93dc-f40abbc1acae" />
+        <classShapeMoniker Id="2a02953f-0b0f-4f2a-9e2b-b18f21efa391" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(14 : 9.15436482747396); (14.2916666666667 : 9.15436482747396 : JumpStart); (14.4583333333333 : 9.15436482747396 : JumpEnd); (14.75 : 9.15436482747396)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(14 : 16.0489005533854); (14.75 : 16.0489005533854)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/HistoryQuestDataContext/TaskType/TaskType_Task" />
       <nodes>
-        <classShapeMoniker Id="b7ba3caa-5cb8-4704-aec8-4bc6164edaf1" />
-        <classShapeMoniker Id="aeec4603-cb97-431c-bb42-66797a942acb" />
+        <classShapeMoniker Id="6cecb353-bd94-4202-b4f9-223043c1b210" />
+        <classShapeMoniker Id="191e8525-6db3-4808-93dc-f40abbc1acae" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(10 : 12.9320296223958); (10 : 14.0573322981771); (12.2400295512821 : 14.0573322981771 : JumpStart); (12.4066962179487 : 14.0573322981771 : JumpEnd); (14.75 : 14.0573322981771)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(10 : 11.75); (10 : 10.1094251074219); (12.9166666666667 : 10.1094251074219 : JumpStart); (13.0833333333333 : 10.1094251074219 : JumpEnd); (14.75 : 10.1094251074219)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/HistoryQuestDataContext/Try/Try_CheckPointsToTry" />
       <nodes>
-        <classShapeMoniker Id="4438d128-69cb-481c-a729-c46cb197653c" />
-        <classShapeMoniker Id="7921f0f5-972c-4ea6-b4b4-a74354ee7d86" />
+        <classShapeMoniker Id="4331a60f-f4ea-4698-9d21-99dc18d5091e" />
+        <classShapeMoniker Id="238a4469-a84f-48b7-b720-cf3ae13992e5" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.25 : 12.6535148111979); (9 : 12.6535148111979)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.25 : 13.2604484049479); (9 : 13.2604484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/HistoryQuestDataContext/Quest/Quest_Try" />
       <nodes>
-        <classShapeMoniker Id="5be974eb-708b-464b-8588-8623a967e1e4" />
-        <classShapeMoniker Id="4438d128-69cb-481c-a729-c46cb197653c" />
+        <classShapeMoniker Id="eeee37cd-026b-4814-8326-61d86dab1d39" />
+        <classShapeMoniker Id="4331a60f-f4ea-4698-9d21-99dc18d5091e" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 11.0642000325521); (8.66666666666667 : 11.0642000325521 : JumpStart); (8.83333333333333 : 11.0642000325521 : JumpEnd); (12 : 11.0642000325521)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 11.5392976888021); (9.91666666666667 : 11.5392976888021 : JumpStart); (10.0833333333333 : 11.5392976888021 : JumpEnd); (11.6666666666667 : 11.5392976888021 : JumpStart); (11.8333333333333 : 11.5392976888021 : JumpEnd); (12 : 11.5392976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/HistoryQuestDataContext/User/User_CheckPoint" />
       <nodes>
-        <classShapeMoniker Id="9246b242-979f-42dc-8035-b5a17e03416a" />
-        <classShapeMoniker Id="148b3382-f46e-41ea-981b-7524b143ccb7" />
+        <classShapeMoniker Id="4ece282d-b8b4-47ad-a936-1554e52fc65d" />
+        <classShapeMoniker Id="a153d837-1583-41c2-b449-b246a6968a10" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 10.4392000325521); (6.25 : 10.4392000325521)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 10.8517976888021); (6.25 : 10.8517976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/HistoryQuestDataContext/User/User_UsersInRole" />
       <nodes>
-        <classShapeMoniker Id="9246b242-979f-42dc-8035-b5a17e03416a" />
-        <classShapeMoniker Id="9f38eace-6f77-4cf7-9558-f029b5a366a2" />
+        <classShapeMoniker Id="4ece282d-b8b4-47ad-a936-1554e52fc65d" />
+        <classShapeMoniker Id="777b42ea-2876-483f-81b3-2bc7a25fca33" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(4.5 : 12.2179182942708); (4.5 : 12.4679182942708); (4.94791916666667 : 12.4679182942708 : JumpStart); (5.11458583333333 : 12.4679182942708 : JumpEnd); (5.75 : 12.4679182942708); (5.75 : 11.7517000325521); (8.75 : 11.7517000325521); (8.75 : 10.375); (14.1666666666667 : 10.375 : JumpStart); (14.3333333333333 : 10.375 : JumpEnd); (14.5 : 10.375); (14.5 : 11.344598016276); (14.75 : 11.344598016276)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 11.644651344401); (9.91666666666667 : 11.644651344401 : JumpStart); (10.0833333333333 : 11.644651344401 : JumpEnd); (11.75 : 11.644651344401); (11.75 : 10.875); (12.9166666666667 : 10.875 : JumpStart); (13.0833333333333 : 10.875 : JumpEnd); (15.75 : 10.875); (15.75 : 11.5)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/HistoryQuestDataContext/User/User_Like" />
       <nodes>
-        <classShapeMoniker Id="9246b242-979f-42dc-8035-b5a17e03416a" />
-        <classShapeMoniker Id="2274a4ac-0e32-4aeb-baea-906df7dbcbde" />
+        <classShapeMoniker Id="4ece282d-b8b4-47ad-a936-1554e52fc65d" />
+        <classShapeMoniker Id="60df4708-9780-4ad1-be06-124b016682cc" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.0312525 : 12.2179182942708); (5.0312525 : 13.3517887369792); (6.25 : 13.3517887369792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(4.5 : 12.7228011067708); (4.5 : 13.9815991210937); (4.94791916666667 : 13.9815991210937 : JumpStart); (5.11458583333333 : 13.9815991210937 : JumpEnd); (6.25 : 13.9815991210937)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/HistoryQuestDataContext/User/User_Quest" />
       <nodes>
-        <classShapeMoniker Id="9246b242-979f-42dc-8035-b5a17e03416a" />
-        <classShapeMoniker Id="5be974eb-708b-464b-8588-8623a967e1e4" />
+        <classShapeMoniker Id="4ece282d-b8b4-47ad-a936-1554e52fc65d" />
+        <classShapeMoniker Id="eeee37cd-026b-4814-8326-61d86dab1d39" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(4.5 : 10); (4.5 : 9.50340006510417); (5.75 : 9.50340006510417); (5.75 : 7.875); (7.16666666666667 : 7.875 : JumpStart); (7.33333333333333 : 7.875 : JumpEnd); (14.375 : 7.875); (14.375 : 8.14822757356771); (14.75 : 8.14822757356771)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.0312525 : 12.7228011067708); (5.0312525 : 15.2315991210938); (7.16666666666667 : 15.2315991210938 : JumpStart); (7.33333333333333 : 15.2315991210938 : JumpEnd); (14.75 : 15.2315991210938)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/HistoryQuestDataContext/User/User_Task" />
       <nodes>
-        <classShapeMoniker Id="9246b242-979f-42dc-8035-b5a17e03416a" />
-        <classShapeMoniker Id="aeec4603-cb97-431c-bb42-66797a942acb" />
+        <classShapeMoniker Id="4ece282d-b8b4-47ad-a936-1554e52fc65d" />
+        <classShapeMoniker Id="191e8525-6db3-4808-93dc-f40abbc1acae" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 11.438350016276); (8.66666666666667 : 11.438350016276 : JumpStart); (8.83333333333333 : 11.438350016276 : JumpEnd); (9 : 11.438350016276)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 12.2364005533854); (9 : 12.2364005533854)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/HistoryQuestDataContext/User/User_Try" />
       <nodes>
-        <classShapeMoniker Id="9246b242-979f-42dc-8035-b5a17e03416a" />
-        <classShapeMoniker Id="4438d128-69cb-481c-a729-c46cb197653c" />
+        <classShapeMoniker Id="4ece282d-b8b4-47ad-a936-1554e52fc65d" />
+        <classShapeMoniker Id="4331a60f-f4ea-4698-9d21-99dc18d5091e" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 10.5464591471354); (3.5 : 10.5464591471354)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 10.9864005533854); (3.5 : 10.9864005533854)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/HistoryQuestDataContext/Face/Face_User" />
       <nodes>
-        <classShapeMoniker Id="c744f6c7-5098-46ea-8e9e-cd9149fdb3fe" />
-        <classShapeMoniker Id="9246b242-979f-42dc-8035-b5a17e03416a" />
+        <classShapeMoniker Id="f6c10ca4-1d40-46a4-ba45-5998262fe27f" />
+        <classShapeMoniker Id="4ece282d-b8b4-47ad-a936-1554e52fc65d" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

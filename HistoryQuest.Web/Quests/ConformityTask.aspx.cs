@@ -20,7 +20,8 @@ namespace HistoryQuest.Quests
             Answers = new Dictionary<string, string>();
             Questions = new Dictionary<string, string>();
             List<string> rightAnswers = new List<string>();
-            using (XmlReader reader = XmlReader.Create(HttpRuntime.AppDomainAppPath + task.SourceFilePath))
+            
+            using (XmlReader reader = task.SourceFile.CreateReader())
             {
                 reader.ReadToFollowing("questions");
                 if (reader.ReadToDescendant("question"))

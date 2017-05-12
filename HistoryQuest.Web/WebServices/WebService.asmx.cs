@@ -320,7 +320,8 @@ namespace HistoryQuest.WebServices
                 TaskGID = task.gid,
                 CheckPointToTryGID = checkPointToTry.gid,
                 EarnedScore = score,
-                ElapsedTime = elapsedTime
+                ElapsedTime = elapsedTime,
+                Date = DateTime.Now
             };
             checkPointToTry.TasksToTries.Add(taskToTry);
 
