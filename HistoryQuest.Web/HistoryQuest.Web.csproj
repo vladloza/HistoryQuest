@@ -124,6 +124,7 @@
     <Content Include="libs\img\checkpoint_locked.png" />
     <Content Include="libs\img\facebook-icon.png" />
     <Content Include="libs\img\Preloader_10.gif" />
+    <Content Include="libs\img\twitter-icon.png" />
     <Content Include="libs\img\wall.png" />
     <Content Include="libs\img\gmail-icon.png" />
     <Content Include="libs\img\mazepa.jpg" />
