@@ -182,10 +182,6 @@ img {
     width: 100%;
     z-index: 180;
 }
-.checkWrapper {
-    margin-right:45%;
-    display:inline-block;
-}
 .right {
     float:right;
 }
@@ -339,8 +335,9 @@ input.small-control {
     color:#d31a1a;
 }
 .like-wrapper {
-        float: right;
-    margin:0px 7%;
+    position: absolute;
+    top: 5px;
+    right: 15px;
     padding: 2px 5px 2px 3px;
     cursor:pointer;
 }
@@ -512,6 +509,13 @@ input.small-control {
 #quest-info.active {
     width:350px;
 }
+#quest-inner {
+    overflow-y: scroll;
+    height: 90vh;
+}
+.sidebar-buttons {
+    position:relative;
+}
 .arrow {
     height:100vh;
     border: 0;
@@ -549,6 +553,7 @@ input.small-control {
     float: left;
     width: 60px;
 }
+.chekpoint-name,
 .sidebar {
     padding:0px 12px;
 }
