@@ -40,7 +40,7 @@ namespace HistoryQuest
                         {
                             gid = Guid.NewGuid(),
                             User = user,
-                            RoleGID = new Guid(Constants.StudentRoleGID)
+                            RoleGID = Constants.StudentRoleGID
                         }
                     }
                 };

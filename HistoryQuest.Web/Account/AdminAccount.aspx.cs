@@ -13,7 +13,7 @@ namespace HistoryQuest.Account
         protected override void Page_Load(object sender, EventArgs e)
         {
             base.Page_Load(sender, e);
-            if (Repository.CurrentUser.UsersInRoles.FirstOrDefault(uir => uir.RoleGID == new Guid(Constants.AdminRoleGID)) == null)
+            if (Repository.CurrentUser.UsersInRoles.FirstOrDefault(uir => uir.RoleGID == Constants.AdminRoleGID) == null)
             {
                 Response.Redirect("~/Login.aspx");
             }

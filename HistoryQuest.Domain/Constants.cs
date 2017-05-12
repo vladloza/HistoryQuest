@@ -8,9 +8,13 @@ namespace HistoryQuest.Domain
 {
     public static class Constants
     {
-        public const string TeacherRoleGID = "4492ed1d-052a-491a-8897-9bbc8d8633ff";
-        public const string StudentRoleGID = "024900db-2a68-4959-a0e9-10069608d923";
-        public const string AdminRoleGID = "40f816d3-3bb4-4864-97c1-67803413389a";
+        public const string TeacherRoleGIDString = "4492ed1d-052a-491a-8897-9bbc8d8633ff";
+        public const string StudentRoleGIDString = "024900db-2a68-4959-a0e9-10069608d923";
+        public const string AdminRoleGIDString = "40f816d3-3bb4-4864-97c1-67803413389a";
+
+        public static readonly Guid TeacherRoleGID = new Guid(TeacherRoleGIDString);
+        public static readonly Guid StudentRoleGID = new Guid(StudentRoleGIDString);
+        public static readonly Guid AdminRoleGID = new Guid(AdminRoleGIDString);
 
         public static readonly Guid TestTaskTypeGID = new Guid("6D1E2691-3EAB-41A7-90C4-8BD9EC7B1FD8");
         public static readonly Guid MapTaskTypeGID = new Guid("09DAFF50-996E-4077-9BE0-3C0BF516E56C");

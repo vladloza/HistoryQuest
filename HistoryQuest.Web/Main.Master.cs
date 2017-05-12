@@ -35,6 +35,12 @@ namespace HistoryQuest
                 MainMenuHistoricalInfoButton.Attributes["style"] = "";
                 QuestInfoButton.Attributes["style"] = "" ;
             }
+
+            if (Repository.CurrentUser != null && Repository.CurrentUser.UsersInRoles.Any(uir => 
+                uir.RoleGID == Constants.AdminRoleGID || uir.RoleGID == Constants.TeacherRoleGID))
+            {
+                CostructorButton.Attributes["style"] = "";
+            }
         }
     }
 }

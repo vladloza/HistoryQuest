@@ -129,7 +129,7 @@ namespace HistoryQuest.WebServices
                             {
                                 gid = Guid.NewGuid(),
                                 User = user,
-                                RoleGID = new Guid(Constants.TeacherRoleGID)
+                                RoleGID = Constants.TeacherRoleGID
                             }
                         }
                     };
@@ -419,6 +419,94 @@ namespace HistoryQuest.WebServices
                 Repository.CurrentDataContext.Likes.InsertOnSubmit(like);
             }
             Repository.CurrentDataContext.SubmitChanges();
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string OpenCreateQuestPage(Guid? questGID)
+        {
+            string url = "/Constructor/CreateQuest.aspx";
+
+            if (HttpContext.Current.Session != null)
+            {
+                if (!questGID.HasValue)
+                {
+                    questGID = Guid.NewGuid();
+                    HistoryQuest.Domain.Quest quest = new Domain.Quest()
+                    {
+                        gid = questGID.Value,
+                        Name = "Новий квест",
+                        ImagePath = "/libs/img/mazepa.jpg",
+                        ShortInfo = "Коротенький опис нового квесту.",
+                        FullInfo = ""
+                    };
+                    Repository.CurrentDataContext.Quests.InsertOnSubmit(quest);
+                    Repository.CurrentDataContext.SubmitChanges();
+                }
+
+                Session["CreatedQuestGID"] = questGID.Value;
+            }
+
+            return url;
+        }
+        
+        [WebMethod(EnableSession = true)]
+        public string OpenCreateCheckPointPage(Guid? checkPointGID)
+        {
+            string url = "/Constructor/CreateCheckPoint.aspx";
+
+            if (HttpContext.Current.Session != null && Session["CreatedQuestGID"] != null)
+            {
+                Guid questGID = new Guid(Session["CreatedQuestGID"].ToString());
+                if (!checkPointGID.HasValue || !Repository.CurrentDataContext.CheckPoints.Any(cp => cp.gid == checkPointGID && cp.QuestGID == questGID))
+                {
+                    HistoryQuest.Domain.Quest quest = Repository.CurrentDataContext.Quests.SingleOrDefault(q => q.gid == questGID);
+                    checkPointGID = Guid.NewGuid();
+                    HistoryQuest.Domain.CheckPoint checkPoint = new CheckPoint()
+                    {
+                        gid = checkPointGID.Value,
+                        QuestGID = quest.gid,
+                        GeoCoordinates = "0;0",
+                        Name = "Новий чекпоінт",
+                        Info = "Інформація необхідна для проходження завдань цього чекпоінту.",
+                        IsBonus = false,
+                        TasksCount = 0,
+                        OrderId = 0
+                    };
+                    quest.CheckPoints.Add(checkPoint);
+                    Repository.CurrentDataContext.SubmitChanges();
+                }
+
+                Session["CreatedCheckPointGID"] = checkPointGID.Value;
+            }
+
+            return url;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string SaveCheckPoint(object entity)
+        {
+            string url = "/Constructor/CreateQuest.aspx";
+            
+            return url;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string SaveQuest(object entity)
+        {
+            string url = "/Constructor/QuestsList.aspx";
+
+            CleanConstructorSession();
+
+            return url;
+        }
+
+        public static void CleanConstructorSession()
+        {
+            if (HttpContext.Current.Session != null)
+            {
+                HttpContext.Current.Session["CreatedQuestGID"] = null;
+                HttpContext.Current.Session["CreatedCheckPointGID"] = null;
+            }
         }
     }
 }

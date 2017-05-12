@@ -209,6 +209,11 @@ QuestMap.InitializeTaskMap = function () {
             placeMarker(event.latLng);
         }));
 
+        if (mapContainer.attributes.startCoords) {
+            var coords = mapContainer.attributes.startCoords.value.split(';'); 
+            placeMarker({ lat: Number(coords[0]), lng: Number(coords[1]) });
+        }
+
         function placeMarker(location) {
             if (this.marker) {
                 this.marker.setMap(null);

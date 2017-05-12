@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace HistoryQuest.Quests
+namespace HistoryQuest.Constructor
 {
-    public partial class TestResult : BasePage
+    public partial class QuestsList : BasePage
     {
         protected override void Page_Load(object sender, EventArgs e)
         {

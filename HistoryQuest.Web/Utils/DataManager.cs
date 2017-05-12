@@ -27,6 +27,11 @@ namespace HistoryQuest.Utils
             dataItems.Add($"var { name } = '{ value }';");
         }
 
+        public static void AddVariable(string name, string value)
+        {
+            dataItems.Add($"var { name } = { value };");
+        }
+
         public static string GetData()
         {
             string result = string.Join("\r\n", dataItems.Distinct().ToList());

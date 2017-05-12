@@ -316,3 +316,43 @@ WebService.OnNextButtonPressed = function (taskGID, userAnswer, elapsedTime) {
         }
     });
 };
+
+WebService.OpenCreateQuestPage = function (questGID) {
+    var questGIDParameter = questGID ? "'" + questGID + "'" : null;
+    $.ajax({
+        type: "POST",
+        data: "{ questGID: " + questGIDParameter + " }",
+        url: "../WebServices/WebService.asmx/OpenCreateQuestPage",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (r) {
+            window.location = r.d;
+        },
+        error: function (r) {
+            alert(r.responseText);
+        },
+        failure: function (r) {
+            alert(r.responseText);
+        }
+    });
+};
+
+WebService.OpenCreateCheckPointPage = function (checkPointGID) {
+    var checkPointGIDParameter = checkPointGID ? "'" + checkPointGID + "'" : null;
+    $.ajax({
+        type: "POST",
+        data: "{ checkPointGID: " + checkPointGIDParameter + " }",
+        url: "../WebServices/WebService.asmx/OpenCreateCheckPointPage",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (r) {
+            window.location = r.d;
+        },
+        error: function (r) {
+            alert(r.responseText);
+        },
+        failure: function (r) {
+            alert(r.responseText);
+        }
+    });
+};

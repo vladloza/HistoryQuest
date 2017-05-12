@@ -45,13 +45,13 @@ namespace HistoryQuest.Domain
         {
             switch (roleGID.ToString())
             {
-                case Constants.TeacherRoleGID:
+                case Constants.TeacherRoleGIDString:
                     return "/Account/TeacherAccount.aspx";
 
-                case Constants.StudentRoleGID:
+                case Constants.StudentRoleGIDString:
                     return "/Account/StudentAccount.aspx";
 
-                case Constants.AdminRoleGID:
+                case Constants.AdminRoleGIDString:
                     return "/Account/AdminAccount.aspx";
 
                 default:

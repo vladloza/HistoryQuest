@@ -105,6 +105,10 @@
   <ItemGroup>
     <Content Include="Account\AdminAccount.aspx" />
     <Content Include="Account\TeacherAccount.aspx" />
+    <Content Include="Constructor\CreateCheckPoint.aspx" />
+    <Content Include="Constructor\CreateQuest.aspx" />
+    <Content Include="Constructor\QuestsList.aspx" />
+    <Content Include="Constructor\Scripts\CreateQuest.js" />
     <Content Include="Content\Images\sagay.jpg" />
     <Content Include="Controls\ChangePassword.ascx" />
     <Content Include="Controls\ChangeInfo.ascx" />
@@ -232,6 +236,27 @@
     </Compile>
     <Compile Include="BasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Constructor\CreateCheckPoint.aspx.cs">
+      <DependentUpon>CreateCheckPoint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Constructor\CreateCheckPoint.aspx.designer.cs">
+      <DependentUpon>CreateCheckPoint.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Constructor\CreateQuest.aspx.cs">
+      <DependentUpon>CreateQuest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Constructor\CreateQuest.aspx.designer.cs">
+      <DependentUpon>CreateQuest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Constructor\QuestsList.aspx.cs">
+      <DependentUpon>QuestsList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Constructor\QuestsList.aspx.designer.cs">
+      <DependentUpon>QuestsList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controls\ChangePassword.ascx.cs">
       <DependentUpon>ChangePassword.ascx</DependentUpon>

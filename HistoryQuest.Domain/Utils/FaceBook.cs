@@ -67,7 +67,7 @@ namespace HistoryQuest.Domain.Utils
                     {
                         gid = Guid.NewGuid(),
                         UserGID = userGID,
-                        RoleGID = new Guid(Constants.StudentRoleGID)
+                        RoleGID = Constants.StudentRoleGID
                     }
                 }
             };
