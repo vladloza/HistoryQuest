@@ -18,14 +18,16 @@
                     <div class="sidebar">
                         <p id="CheckPointShortInfo">Петро Кононович Конашевич-Сагайдачний народився бл. 1582р. в селі Кульчиці в православній родині (тепер село Самбірського району Львівської області).</p>
                         <hr />
-                        <div class="checkWrapper">
-                            <button id="StartCheckPoint" class="btn btn-info">Розпочати</button>
-                        </div>
-                        <div class="like-wrapper">
-                            <button class="like" id="Like">
-                                <i class="fa fa-heart" aria-hidden="true" id="i-like"></i>
-                                <span id="likes-count"></span>
-                            </button>
+                        <div class="sidebar-buttons">
+                            <div class="checkWrapper">
+                                <button id="StartCheckPoint" class="btn btn-info">Розпочати</button>
+                            </div>
+                            <div class="like-wrapper">
+                                <button class="like" id="Like">
+                                    <i class="fa fa-heart" aria-hidden="true" id="i-like"></i>
+                                    <span id="likes-count"></span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
