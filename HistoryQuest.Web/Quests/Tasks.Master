@@ -39,8 +39,8 @@
                             </asp:ContentPlaceHolder>
                         </div>
                         <div class="card">
-                            <button id="NextButton" runat="server" class="btn btn-primary">Дальше</button>
-                            <button id="GiveUpButton" runat="server" class="btn btn-default right">Сдаться</button>
+                            <button id="NextButton" runat="server" class="btn btn-primary">Далі</button>
+                            <button id="GiveUpButton" runat="server" class="btn btn-default right">Здатися</button>
                         </div>
                     </div>
                 </div>

@@ -8,7 +8,7 @@
                 <section class="clearfix faq-section">
                     <h2>FAQ</h2>
                     <div class="panel-group" id="accordion">
-                        <% foreach (var faq in Repository.CurrentDataContext.FAQs) { %>
+                        <% foreach (var faq in Repository.CurrentDataContext.FAQs.OrderBy(c=> c.id)) { %>
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
@@ -17,7 +17,7 @@
                             </div>
                             <div id="collapse_<%= faq.id %>" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    A: <%= faq.Answer %>
+                                    <%= faq.Answer %>
                                 </div>
                             </div>
                         </div>

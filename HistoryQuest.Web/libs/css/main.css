@@ -423,10 +423,14 @@ input.small-control {
     padding:10px 0px;
 }
 .info-comments h2 {
-    font-size:26px;
+    font-family:RobotoLight, sans-serif;
+    font-size:24px;
+    font-weight:300;
+    color:#ef4438;
 }
 .historical {
     display:block;
+    margin-bottom:20px;
 }
 .form-fieldset {
     margin-bottom: 20px;

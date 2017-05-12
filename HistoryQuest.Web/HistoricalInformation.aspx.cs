@@ -1,4 +1,5 @@
-﻿using HistoryQuest.Utils;
+﻿using HistoryQuest.Domain;
+using HistoryQuest.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,17 @@ namespace HistoryQuest
         {
             base.Page_Load(sender, e);
 
-            Guid queryGID = Guid.Empty;
-            if (Session != null && Session["CurrentQuestGID"] != null && Guid.TryParse(Session["CurrentQuestGID"].ToString(), out queryGID))
+            Guid QuestGID = Guid.Empty;
+            if (Session != null && Session["CurrentQuestGID"] != null && Guid.TryParse(Session["CurrentQuestGID"].ToString(), out QuestGID))
             {
-                DataManager.AddStringVariable("CurrentQuestGID", queryGID.ToString());
+                DataManager.AddStringVariable("CurrentQuestGID", QuestGID.ToString());
+
+                HistoryQuest.Domain.Quest quest = Repository.CurrentDataContext.Quests.SingleOrDefault(q => q.gid == QuestGID);
+
+                if (quest != null)
+                {
+                    questFullInfo.InnerHtml = quest.FullInfo;
+                }
             }
             else
             {

@@ -34,6 +34,7 @@ namespace HistoryQuest
             {
                 MainMenuHistoricalInfoButton.Attributes["style"] = "";
                 QuestInfoButton.Attributes["style"] = "" ;
+                QuestButton.Attributes["style"] = "";
             }
 
             if (Repository.CurrentUser != null && Repository.CurrentUser.UsersInRoles.Any(uir => 

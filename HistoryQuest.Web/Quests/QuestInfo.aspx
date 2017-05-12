@@ -30,9 +30,9 @@
         <div class="container">
             <section>
                 <div class="comments">
-                    <div class="info-comments">
+                    <%--<div class="info-comments clearfix">
                         <h2>Коментарі до квесту</h2>
-                    </div>
+                    </div>--%>
                     <div class="small-card card clearfix" >
                         <fieldset class="form-fieldset">
                             <label for="description" class="form-label">Залиште коментар</label>
