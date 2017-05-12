@@ -32,6 +32,14 @@
                         <img src="libs/img/facebook-icon.png" /></a>
                 </div>
                 <div class="icons-inside">
+                    <a href="<%= HistoryQuest.Domain.Socials.fbUrl %>">
+                        <img src="libs/img/gmail-icon.png" /></a>
+                </div>
+                <div class="icons-inside">
+                    <a href="<%= HistoryQuest.Domain.Socials.fbUrl %>">
+                        <img src="libs/img/twitter-icon.png" /></a>
+                </div>
+                <div class="icons-inside">
                     <a href="<%= HistoryQuest.Domain.Socials.vkUrl %>">
                         <img src="libs/img/vk-icon.png" />
                     </a>
