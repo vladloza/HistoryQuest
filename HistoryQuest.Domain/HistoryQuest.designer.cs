@@ -2652,6 +2652,8 @@ namespace HistoryQuest.Domain
 		
 		private string _ShortInfo;
 		
+		private string _ImagePath;
+		
 		private System.Nullable<System.Guid> _AuthorGID;
 		
 		private EntitySet<CheckPoint> _CheckPoints;
@@ -2678,6 +2680,8 @@ namespace HistoryQuest.Domain
     partial void OnFullInfoChanged();
     partial void OnShortInfoChanging(string value);
     partial void OnShortInfoChanged();
+    partial void OnImagePathChanging(string value);
+    partial void OnImagePathChanged();
     partial void OnAuthorGIDChanging(System.Nullable<System.Guid> value);
     partial void OnAuthorGIDChanged();
     #endregion
@@ -2792,8 +2796,29 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AuthorGID", DbType="UniqueIdentifier")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImagePath", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
 		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6)]
+		public string ImagePath
+		{
+			get
+			{
+				return this._ImagePath;
+			}
+			set
+			{
+				if ((this._ImagePath != value))
+				{
+					this.OnImagePathChanging(value);
+					this.SendPropertyChanging();
+					this._ImagePath = value;
+					this.SendPropertyChanged("ImagePath");
+					this.OnImagePathChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AuthorGID", DbType="UniqueIdentifier")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=7)]
 		public System.Nullable<System.Guid> AuthorGID
 		{
 			get
@@ -2818,7 +2843,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Quest_CheckPoint", Storage="_CheckPoints", ThisKey="gid", OtherKey="QuestGID")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=7, EmitDefaultValue=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=8, EmitDefaultValue=false)]
 		public EntitySet<CheckPoint> CheckPoints
 		{
 			get
@@ -2837,7 +2862,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Quest_Comment", Storage="_Comments", ThisKey="gid", OtherKey="QuestGID")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=8, EmitDefaultValue=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=9, EmitDefaultValue=false)]
 		public EntitySet<Comment> Comments
 		{
 			get
@@ -2856,7 +2881,7 @@ namespace HistoryQuest.Domain
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Quest_Try", Storage="_Tries", ThisKey="gid", OtherKey="QuestGID")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=9, EmitDefaultValue=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=10, EmitDefaultValue=false)]
 		public EntitySet<Try> Tries
 		{
 			get

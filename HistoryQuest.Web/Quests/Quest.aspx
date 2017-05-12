@@ -13,13 +13,13 @@
             <div>
                 <div id="quest-inner">
                     <div class="chekpoint-name">
-                        <h2 id="CheckPointName">Название чекпоинта</h2>
+                        <h2 id="CheckPointName">Петро Сагайдачний</h2>
                     </div>
                     <div class="sidebar">
-                        <p>Петро Кононович Конашевич-Сагайдачний народився бл. 1582р. в селі Кульчиці в православній родині (тепер село Самбірського району Львівської області).</p>
+                        <p id="CheckPointShortInfo">Петро Кононович Конашевич-Сагайдачний народився бл. 1582р. в селі Кульчиці в православній родині (тепер село Самбірського району Львівської області).</p>
                         <hr />
                         <div class="checkWrapper">
-                            <button id="StartCheckPoint" class="btn btn-info">Начать</button>
+                            <button id="StartCheckPoint" class="btn btn-info">Розпочати</button>
                         </div>
                         <div class="like-wrapper">
                             <button class="like" id="Like">

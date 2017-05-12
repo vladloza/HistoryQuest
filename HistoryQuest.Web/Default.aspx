@@ -24,7 +24,7 @@
                                 <div class="block-content">
                                     <a onclick="WebService.OpenQuestPage('<%= quest.gid %>')">
                                         <div class="image-blck-wrapper">
-                                            <img src="libs/img/sagay.jpg" />
+                                            <img src="<%= quest.ImagePath %>"" />
                                         </div>
                                         <div class="grid-middle">
                                             <h4><%= quest.Name %></h4>

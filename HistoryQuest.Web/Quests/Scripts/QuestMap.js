@@ -119,6 +119,7 @@ QuestMap.prototype = {
 
                     WebService.GetCheckPointLikesCount(document.currentCheckPointGid);
                     $("#CheckPointName").text(result.CheckPoints[checkPointNum].Name);
+                    $("#CheckPointShortInfo").text(result.CheckPoints[checkPointNum].Info);
 
                     if (result.CheckPoints[checkPointNum].IsCurrent) {
                         $("#StartCheckPoint").attr("checkPointGID", result.CheckPoints[checkPointNum].gid);

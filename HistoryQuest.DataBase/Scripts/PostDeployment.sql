@@ -1,5 +1,5 @@
 ﻿/*
-Этот скрипт создан Visual Studio на 12.05.2017 в 13:01.
+Этот скрипт создан Visual Studio на 12.05.2017 в 14:23.
 Выполните этот скрипт на SERGEY-PC\SQLEXPRESS.HistoryQuest.DataBase.Empty (SERGEY-PC\SERGEY), чтобы сделать этот объект таким же, как SERGEY-PC\SQLEXPRESS.HistoryQuest.DataBase (SERGEY-PC\SERGEY).
 Этот скрипт выполняет свои действия в следующем порядке.
 1. Отключение ограничений внешнего ключа.
@@ -17,41 +17,49 @@ GO
 DECLARE @pv binary(16)
 BEGIN TRANSACTION
 ALTER TABLE [dbo].[Comments] DROP CONSTRAINT [FK_Comments_Quests]
-ALTER TABLE [dbo].[Likes] DROP CONSTRAINT [FK_Likes_Users]
-ALTER TABLE [dbo].[Likes] DROP CONSTRAINT [FK_Likes_CheckPoints]
+ALTER TABLE [dbo].[CheckPointsToTries] DROP CONSTRAINT [FK_CheckpointsToTries_Checkpoints]
+ALTER TABLE [dbo].[CheckPointsToTries] DROP CONSTRAINT [FK_CheckpointsToTries_Tries]
 ALTER TABLE [dbo].[TasksToTries] DROP CONSTRAINT [FK_TasksToTries_CheckpointsToTries]
 ALTER TABLE [dbo].[TasksToTries] DROP CONSTRAINT [FK_TasksToTries_Tasks]
 ALTER TABLE [dbo].[Tasks] DROP CONSTRAINT [FK_Tasks_CheckPoints]
 ALTER TABLE [dbo].[Tasks] DROP CONSTRAINT [FK_Tasks_TaskTypes]
 ALTER TABLE [dbo].[Tasks] DROP CONSTRAINT [FK_Tasks_Users]
-ALTER TABLE [dbo].[UsersInRoles] DROP CONSTRAINT [FK_UsersInRoles_Roles]
-ALTER TABLE [dbo].[UsersInRoles] DROP CONSTRAINT [FK_UsersInRoles_Users]
 ALTER TABLE [dbo].[Tries] DROP CONSTRAINT [FK_Tries_Users]
 ALTER TABLE [dbo].[Tries] DROP CONSTRAINT [FK_Tries_Quests]
 ALTER TABLE [dbo].[PupilsToTeachersRequests] DROP CONSTRAINT [FK_PupilsToTeachersRequests_Faces]
 ALTER TABLE [dbo].[PupilsToTeachersRequests] DROP CONSTRAINT [FK_PupilsToTeachersRequests_Faces1]
-ALTER TABLE [dbo].[CheckPointsToTries] DROP CONSTRAINT [FK_CheckpointsToTries_Checkpoints]
-ALTER TABLE [dbo].[CheckPointsToTries] DROP CONSTRAINT [FK_CheckpointsToTries_Tries]
+ALTER TABLE [dbo].[Likes] DROP CONSTRAINT [FK_Likes_Users]
+ALTER TABLE [dbo].[Likes] DROP CONSTRAINT [FK_Likes_CheckPoints]
 ALTER TABLE [dbo].[CheckPoints] DROP CONSTRAINT [FK_CheckPoints_CheckPoints]
 ALTER TABLE [dbo].[CheckPoints] DROP CONSTRAINT [FK_CheckPoints_Users]
 ALTER TABLE [dbo].[CheckPoints] DROP CONSTRAINT [FK_CheckPoints_Quests]
 ALTER TABLE [dbo].[Quests] DROP CONSTRAINT [FK_Quests_Users]
+ALTER TABLE [dbo].[UsersInRoles] DROP CONSTRAINT [FK_UsersInRoles_Roles]
+ALTER TABLE [dbo].[UsersInRoles] DROP CONSTRAINT [FK_UsersInRoles_Users]
 ALTER TABLE [dbo].[Users] DROP CONSTRAINT [FK_Users_Faces]
 SET IDENTITY_INSERT [dbo].[Users] ON
 INSERT INTO [dbo].[Users] ([gid], [id], [UserName], [Password], [PasswordFormat], [PasswordSalt], [FaceGID], [SocialName]) VALUES (N'0ef2428a-c961-4526-8a27-69f415c0a255', 2, N'admin', N'1', 0, N'', N'9fa5ea05-86b2-4ce6-9a06-8e3c7b7770b9', NULL)
 INSERT INTO [dbo].[Users] ([gid], [id], [UserName], [Password], [PasswordFormat], [PasswordSalt], [FaceGID], [SocialName]) VALUES (N'4a5356d4-bb91-4210-9d70-9d1d2c79ebd0', 4, N'Vacya', N'1', 0, N'', N'b7220821-02f7-4915-bed2-c3fb2150cb50', NULL)
 INSERT INTO [dbo].[Users] ([gid], [id], [UserName], [Password], [PasswordFormat], [PasswordSalt], [FaceGID], [SocialName]) VALUES (N'f25bffd4-dc88-42d9-94f7-772e873cd8b5', 3, N'Ivanov', N'1', 0, N'', N'9a18946e-bc60-41f3-b2a0-c8a1ff5cd058', NULL)
 SET IDENTITY_INSERT [dbo].[Users] OFF
+SET IDENTITY_INSERT [dbo].[UsersInRoles] ON
+INSERT INTO [dbo].[UsersInRoles] ([gid], [id], [UserGID], [RoleGID]) VALUES (N'49b5c4fd-aa11-4659-81fc-1b9c9cbabda4', 3, N'0ef2428a-c961-4526-8a27-69f415c0a255', N'40f816d3-3bb4-4864-97c1-67803413389a')
+INSERT INTO [dbo].[UsersInRoles] ([gid], [id], [UserGID], [RoleGID]) VALUES (N'754da83a-10c9-4991-b633-a7ffa8e94fa5', 2, N'4a5356d4-bb91-4210-9d70-9d1d2c79ebd0', N'024900db-2a68-4959-a0e9-10069608d923')
+INSERT INTO [dbo].[UsersInRoles] ([gid], [id], [UserGID], [RoleGID]) VALUES (N'81b22d1d-0f17-4214-aa98-4071bc4ea824', 1, N'f25bffd4-dc88-42d9-94f7-772e873cd8b5', N'4492ed1d-052a-491a-8897-9bbc8d8633ff')
+SET IDENTITY_INSERT [dbo].[UsersInRoles] OFF
 SET IDENTITY_INSERT [dbo].[Quests] ON
-INSERT INTO [dbo].[Quests] ([gid], [id], [Name], [FullInfo], [ShortInfo], [AuthorGID]) VALUES (N'ac62ea9d-536c-4c92-b7b1-e3e3e375fdcf', 2, N'Петро Сагайдачний', N'quest1.html', N'', NULL)
+INSERT INTO [dbo].[Quests] ([gid], [id], [Name], [FullInfo], [ShortInfo], [ImagePath], [AuthorGID]) VALUES (N'ac62ea9d-536c-4c92-b7b1-e3e3e375fdcf', 2, N'Петро Сагайдачний', N'quest1.html', N'Петро Кононович Конашевич-Сагайдачний народився бл. 1582р. в селі Кульчиці в православній родині (тепер село Самбірського району Львівської області).', N'/libs/img/sagay.jpg"', NULL)
 SET IDENTITY_INSERT [dbo].[Quests] OFF
 SET IDENTITY_INSERT [dbo].[CheckPoints] ON
-INSERT INTO [dbo].[CheckPoints] ([gid], [id], [QuestGID], [Name], [GeoCoordinates], [Info], [TasksCount], [ThresholdScore], [OrderId], [IsBonus], [ParentGID], [AuthorGID]) VALUES (N'9175a546-da56-4797-b462-e12c785b3a36', 9, N'ac62ea9d-536c-4c92-b7b1-e3e3e375fdcf', N'Битва за Перекоп і Очаків', N'49;32', N'cp3.html', 6, NULL, 3, 0, N'b9d7454a-1c7a-4841-9fa5-ab3a837c551e', NULL)
-INSERT INTO [dbo].[CheckPoints] ([gid], [id], [QuestGID], [Name], [GeoCoordinates], [Info], [TasksCount], [ThresholdScore], [OrderId], [IsBonus], [ParentGID], [AuthorGID]) VALUES (N'b9d7454a-1c7a-4841-9fa5-ab3a837c551e', 8, N'ac62ea9d-536c-4c92-b7b1-e3e3e375fdcf', N'Похід на Варну', N'48;33', N'cp2.html', 6, NULL, 2, 0, N'd2ce1ed2-e7f0-4972-864c-b72c5ad0f0df', NULL)
-INSERT INTO [dbo].[CheckPoints] ([gid], [id], [QuestGID], [Name], [GeoCoordinates], [Info], [TasksCount], [ThresholdScore], [OrderId], [IsBonus], [ParentGID], [AuthorGID]) VALUES (N'c720adfa-85ad-4dcb-a50f-c7f9189003fc', 10, N'ac62ea9d-536c-4c92-b7b1-e3e3e375fdcf', N'Битва за Кілію, Білгород, Ізмаїл', N'49.5;31', N'cp4.html', 5, NULL, 1, 0, N'9175a546-da56-4797-b462-e12c785b3a36', NULL)
-INSERT INTO [dbo].[CheckPoints] ([gid], [id], [QuestGID], [Name], [GeoCoordinates], [Info], [TasksCount], [ThresholdScore], [OrderId], [IsBonus], [ParentGID], [AuthorGID]) VALUES (N'd2ce1ed2-e7f0-4972-864c-b72c5ad0f0df', 7, N'ac62ea9d-536c-4c92-b7b1-e3e3e375fdcf', N'Польсько-шведська війна', N'47.5;35', N'cp1.html', 7, NULL, 1, 0, NULL, NULL)
-INSERT INTO [dbo].[CheckPoints] ([gid], [id], [QuestGID], [Name], [GeoCoordinates], [Info], [TasksCount], [ThresholdScore], [OrderId], [IsBonus], [ParentGID], [AuthorGID]) VALUES (N'ddbfba1b-34f4-4d38-8efb-0c8cf29ee681', 11, N'ac62ea9d-536c-4c92-b7b1-e3e3e375fdcf', N'Битва за Трапезунд, Синоп', N'49.2;29', N'cp5.html', 7, NULL, 2, 0, N'c720adfa-85ad-4dcb-a50f-c7f9189003fc', NULL)
+INSERT INTO [dbo].[CheckPoints] ([gid], [id], [QuestGID], [Name], [GeoCoordinates], [Info], [TasksCount], [ThresholdScore], [OrderId], [IsBonus], [ParentGID], [AuthorGID]) VALUES (N'9175a546-da56-4797-b462-e12c785b3a36', 9, N'ac62ea9d-536c-4c92-b7b1-e3e3e375fdcf', N'Битва за Перекоп і Очаків', N'49;32', N'Основним напрямком наступу на турецькі володіння були береги Анатолії та Малої Азії. Сагайдачний розробив концепцію активної, ініціативної боротьби проти турецької агресії: не тільки давав відсіч нападам татарських орд і турецьких військ на Україну, а й переносив військові дії на територію ворога – володіння султанської Туреччини та Кримського ханства. Ставилося завдання послаблювати військову силу ворога, його економічно-матеріальну базу, знищувати ворожий флот, для чого слід було зруйнувати найважливіші порти. Відповідно цієї концепції, в 1607 році, Сагайдачний спустошив два мусульманських міста – Очаків та Перекоп. У березні 1607 р. добре оснащений великий турецький флот вийшов у Чорне море, щоб протистояти козакам. Однак під Очаковом козацькі чайки розігнали десять турецьких сторожових кораблів. У жовтня 1607 р. козаки здобули Перекоп.', 6, NULL, 3, 0, N'b9d7454a-1c7a-4841-9fa5-ab3a837c551e', NULL)
+INSERT INTO [dbo].[CheckPoints] ([gid], [id], [QuestGID], [Name], [GeoCoordinates], [Info], [TasksCount], [ThresholdScore], [OrderId], [IsBonus], [ParentGID], [AuthorGID]) VALUES (N'b9d7454a-1c7a-4841-9fa5-ab3a837c551e', 8, N'ac62ea9d-536c-4c92-b7b1-e3e3e375fdcf', N'Похід на Варну', N'48;33', N'Похід під проводом гетьмана Григорія Ізаповича, який часто приписують П.Сагайдачному – морський похід на Варну (Османська імперія) влітку 1606 року. Під час цього походу козаки здобули фортецю, що до того вважалася неприступною. Штурм Варни завершився знищенням всіх берегових укріплень та османських кораблів, які стояли на рейді. Результатом битви стало визволення кілька тисяч полонених, запорожці захопили 180 тис. злотих та 10 османських галер із вантажем та екіпажем. Через цей похід султан видав наказ перегородити Дніпро біля острова Тавані залізним ланцюгом і заблокувати козаків, проте ці заходи виявилися неефективними.', 6, NULL, 2, 0, N'd2ce1ed2-e7f0-4972-864c-b72c5ad0f0df', NULL)
+INSERT INTO [dbo].[CheckPoints] ([gid], [id], [QuestGID], [Name], [GeoCoordinates], [Info], [TasksCount], [ThresholdScore], [OrderId], [IsBonus], [ParentGID], [AuthorGID]) VALUES (N'c720adfa-85ad-4dcb-a50f-c7f9189003fc', 10, N'ac62ea9d-536c-4c92-b7b1-e3e3e375fdcf', N'Битва за Кілію, Білгород, Ізмаїл', N'49.5;31', N'Напади запорожців завдавали колосальних економічних втрат Османській імперії, зменшували її воєнну могутність, а також справляли стримуючий вплив на татар, оскільки обмежували їхні можливості у спустошенні українських земель. В 1608 — на початку 1609 року, Сагайдачний здійснив морський похід на 16 човнах-«чайках» у гирло Дунаю, під час якого було здійснено напад на Кілію, Білгород та Ізмаїл. Фортеця Ізмаїл була знищена, а Сагайдачний був задоволений важкою перемогою. Стратегічне значення Ізмаїла було дуже велике: тут сходилися шляхи з Галацу, Хотина, Бендер та Кілії; тут було найзручніше місце для вторгнення з півночі за Дунай в Добруджу.', 5, NULL, 1, 0, N'9175a546-da56-4797-b462-e12c785b3a36', NULL)
+INSERT INTO [dbo].[CheckPoints] ([gid], [id], [QuestGID], [Name], [GeoCoordinates], [Info], [TasksCount], [ThresholdScore], [OrderId], [IsBonus], [ParentGID], [AuthorGID]) VALUES (N'd2ce1ed2-e7f0-4972-864c-b72c5ad0f0df', 7, N'ac62ea9d-536c-4c92-b7b1-e3e3e375fdcf', N'Польсько-шведська війна', N'47.5;35', N'Лівонська кампанія 1600-1602 – етап польсько-шведської війни 1600-1629рр. На початку 1601 року король Речі Посполитої Сигізмунд III Ваза оголосив про приєднання до Речі Посполитої Естонії, котра до цього належала Швеції. У 1601р. у битві під Валмієру козаки приєдналися до польського війська на чолі з Яном Замойським проти шведської армії під проводом Герцога Нассауського. Серед інших козаків — П.Сагайдачний, який був під керівництвом спершу Самійла Кішки, з початку 1602-го Гаврила Крутневича', 7, NULL, 1, 0, NULL, NULL)
+INSERT INTO [dbo].[CheckPoints] ([gid], [id], [QuestGID], [Name], [GeoCoordinates], [Info], [TasksCount], [ThresholdScore], [OrderId], [IsBonus], [ParentGID], [AuthorGID]) VALUES (N'ddbfba1b-34f4-4d38-8efb-0c8cf29ee681', 11, N'ac62ea9d-536c-4c92-b7b1-e3e3e375fdcf', N'Битва за Трапезунд, Синоп', N'49.2;29', N'У серпні 1614 року 2 тисячі запорожців на 40-ка чайках подалися до берегів Османської імперії: захопили Трапезунд, узяли в облогу Синоп, захопили замок, спалили цитадель і місто, а також набільшу в Малій Азії верф, чим завдали Османській імперії збитків на 40 мли злотих, захопили величезну здобич і звільнили багато полонених. 17 жовтня 1614 р. незадоволений султан Ахмед І наказав стратити великого візира Гемюльлжюнелі Насух-пашу, котрий спробував обдурити султана, зобразивши свої дії як велику перемогу над козаками (для чого до полонених було додано кілька сотень переодягнутих рабів).', 7, NULL, 2, 0, N'c720adfa-85ad-4dcb-a50f-c7f9189003fc', NULL)
 SET IDENTITY_INSERT [dbo].[CheckPoints] OFF
+SET IDENTITY_INSERT [dbo].[Likes] ON
+INSERT INTO [dbo].[Likes] ([gid], [id], [UserGID], [CheckPointGID]) VALUES (N'3241a1e0-c922-47b1-9a66-2b1194f15027', 4, N'f25bffd4-dc88-42d9-94f7-772e873cd8b5', N'd2ce1ed2-e7f0-4972-864c-b72c5ad0f0df')
+SET IDENTITY_INSERT [dbo].[Likes] OFF
 SET IDENTITY_INSERT [dbo].[Faces] ON
 INSERT INTO [dbo].[Faces] ([gid], [id], [LastName], [FirstName], [MiddleName], [TeacherGID], [Info], [IsTeacher]) VALUES (N'02d76f17-17ef-41be-9109-267b52912db8', 101, N'Супрун', N'Ольга', N'Николаевна', NULL, NULL, 1)
 INSERT INTO [dbo].[Faces] ([gid], [id], [LastName], [FirstName], [MiddleName], [TeacherGID], [Info], [IsTeacher]) VALUES (N'12625008-8fe6-4cf4-bede-3b6007476bdf', 911, N'Бычков', N'Олексей', N'Сергеевич', NULL, NULL, 1)
@@ -63,18 +71,6 @@ INSERT INTO [dbo].[Faces] ([gid], [id], [LastName], [FirstName], [MiddleName], [
 INSERT INTO [dbo].[Faces] ([gid], [id], [LastName], [FirstName], [MiddleName], [TeacherGID], [Info], [IsTeacher]) VALUES (N'c604631f-340a-4b93-9442-5fe18efe261e', 666, N'Зинченко', N'Артём', N'Юриевич', NULL, N'-_-', 1)
 INSERT INTO [dbo].[Faces] ([gid], [id], [LastName], [FirstName], [MiddleName], [TeacherGID], [Info], [IsTeacher]) VALUES (N'f7f34923-e4df-48a6-ad8d-414588f64304', 104, N'Поперешняк', N'Светлана', N'Владимировна', NULL, NULL, 1)
 SET IDENTITY_INSERT [dbo].[Faces] OFF
-SET IDENTITY_INSERT [dbo].[UsersInRoles] ON
-INSERT INTO [dbo].[UsersInRoles] ([gid], [id], [UserGID], [RoleGID]) VALUES (N'49b5c4fd-aa11-4659-81fc-1b9c9cbabda4', 3, N'0ef2428a-c961-4526-8a27-69f415c0a255', N'40f816d3-3bb4-4864-97c1-67803413389a')
-INSERT INTO [dbo].[UsersInRoles] ([gid], [id], [UserGID], [RoleGID]) VALUES (N'754da83a-10c9-4991-b633-a7ffa8e94fa5', 2, N'4a5356d4-bb91-4210-9d70-9d1d2c79ebd0', N'024900db-2a68-4959-a0e9-10069608d923')
-INSERT INTO [dbo].[UsersInRoles] ([gid], [id], [UserGID], [RoleGID]) VALUES (N'81b22d1d-0f17-4214-aa98-4071bc4ea824', 1, N'f25bffd4-dc88-42d9-94f7-772e873cd8b5', N'4492ed1d-052a-491a-8897-9bbc8d8633ff')
-SET IDENTITY_INSERT [dbo].[UsersInRoles] OFF
-SET IDENTITY_INSERT [dbo].[TaskTypes] ON
-INSERT INTO [dbo].[TaskTypes] ([gid], [id], [Name]) VALUES (N'09daff50-996e-4077-9be0-3c0bf516e56c', 3, N'Map')
-INSERT INTO [dbo].[TaskTypes] ([gid], [id], [Name]) VALUES (N'6d1e2691-3eab-41a7-90c4-8bd9ec7b1fd8', 2, N'Test')
-INSERT INTO [dbo].[TaskTypes] ([gid], [id], [Name]) VALUES (N'9044bc32-30a7-49a5-8dc2-ba24bece5e39', 4, N'TestWithImage')
-INSERT INTO [dbo].[TaskTypes] ([gid], [id], [Name]) VALUES (N'979f14eb-265c-4080-a375-9c10cd49b544', 5, N'Writing')
-INSERT INTO [dbo].[TaskTypes] ([gid], [id], [Name]) VALUES (N'9f3a9b8b-6b56-473e-b88a-ddd33c337396', 1, N'Conformity')
-SET IDENTITY_INSERT [dbo].[TaskTypes] OFF
 SET IDENTITY_INSERT [dbo].[Tasks] ON
 INSERT INTO [dbo].[Tasks] ([gid], [id], [Text], [MaxScore], [TaskTypeGID], [CheckPointGID], [SourceFile], [AuthorGID]) VALUES (N'0fb37468-19de-41d7-8bc1-2112fa7e4ec5', 26, N'Який гетьман очолював похід на Варну?', 2, N'979f14eb-265c-4080-a375-9c10cd49b544', N'b9d7454a-1c7a-4841-9fa5-ab3a837c551e', CONVERT(xml,N'<TestTask><rightanswers><rightanswer text="vригор?й ?запович"/></rightanswers></TestTask>',1), NULL)
 INSERT INTO [dbo].[Tasks] ([gid], [id], [Text], [MaxScore], [TaskTypeGID], [CheckPointGID], [SourceFile], [AuthorGID]) VALUES (N'117582c1-3063-4bc1-89fe-52144ca44db2', 17, N'За яку територію боролися Річ Посполита та Швеція у 1600-1602рр?', 1, N'6d1e2691-3eab-41a7-90c4-8bd9ec7b1fd8', N'd2ce1ed2-e7f0-4972-864c-b72c5ad0f0df', CONVERT(xml,N'<TestTask><answers><answer text="Україна"/><answer text="Балтійське узбережжя (Естонія)"/><answer text="Литовське князівство"/><answer text="Московське царство"/></answers><rightanswer value="1"/></TestTask>',1), NULL)
@@ -108,24 +104,24 @@ INSERT INTO [dbo].[Tasks] ([gid], [id], [Text], [MaxScore], [TaskTypeGID], [Chec
 INSERT INTO [dbo].[Tasks] ([gid], [id], [Text], [MaxScore], [TaskTypeGID], [CheckPointGID], [SourceFile], [AuthorGID]) VALUES (N'f92c1c84-ec42-42f6-9a06-d7193dbebf37', 23, N'Яку назву мала кампанія в рамках польсько-шведської війни, у якій брали участь козаки у 1600-1602рр.?', 2, N'979f14eb-265c-4080-a375-9c10cd49b544', N'd2ce1ed2-e7f0-4972-864c-b72c5ad0f0df', CONVERT(xml,N'<TestTask><rightanswers><rightanswer text="Лівонська"/><rightanswer text="Лівонська кампанія"/></rightanswers></TestTask>',1), NULL)
 INSERT INTO [dbo].[Tasks] ([gid], [id], [Text], [MaxScore], [TaskTypeGID], [CheckPointGID], [SourceFile], [AuthorGID]) VALUES (N'ffd69629-5013-44bb-83da-974ad632b16a', 30, N'Частиною кампанії проти якої держави були захоплення Очакова та Перекопа?', 1, N'6d1e2691-3eab-41a7-90c4-8bd9ec7b1fd8', N'9175a546-da56-4797-b462-e12c785b3a36', CONVERT(xml,N'<TestTask><answers><answer text="Султанська Туреччина"/><answer text="Московське царство"/><answer text="Литовське князівство"/><answer text="Фашистська Німеччина"/></answers><rightanswer value="0"/></TestTask>',1), NULL)
 SET IDENTITY_INSERT [dbo].[Tasks] OFF
-SET IDENTITY_INSERT [dbo].[Likes] ON
-INSERT INTO [dbo].[Likes] ([gid], [id], [UserGID], [CheckPointGID]) VALUES (N'3241a1e0-c922-47b1-9a66-2b1194f15027', 4, N'f25bffd4-dc88-42d9-94f7-772e873cd8b5', N'd2ce1ed2-e7f0-4972-864c-b72c5ad0f0df')
-SET IDENTITY_INSERT [dbo].[Likes] OFF
 SET IDENTITY_INSERT [dbo].[Roles] ON
 INSERT INTO [dbo].[Roles] ([gid], [id], [Name]) VALUES (N'024900db-2a68-4959-a0e9-10069608d923', 1, N'Student')
 INSERT INTO [dbo].[Roles] ([gid], [id], [Name]) VALUES (N'40f816d3-3bb4-4864-97c1-67803413389a', 3, N'Admin')
 INSERT INTO [dbo].[Roles] ([gid], [id], [Name]) VALUES (N'4492ed1d-052a-491a-8897-9bbc8d8633ff', 2, N'Teacher')
 SET IDENTITY_INSERT [dbo].[Roles] OFF
-SET IDENTITY_INSERT [dbo].[Errors] ON
-INSERT INTO [dbo].[Errors] ([id], [ErrorText], [InnerErrorText], [DateTime]) VALUES (1, N'Выдано исключение типа "System.Web.HttpUnhandledException".', N'Недопустимый знак для указанной кодировки., строка 3, позиция 25.', '20170512 10:53:22.367')
-INSERT INTO [dbo].[Errors] ([id], [ErrorText], [InnerErrorText], [DateTime]) VALUES (2, N'Выдано исключение типа "System.Web.HttpUnhandledException".', N'Недопустимый знак для указанной кодировки., строка 4, позиция 25.', '20170512 10:54:02.850')
-SET IDENTITY_INSERT [dbo].[Errors] OFF
+SET IDENTITY_INSERT [dbo].[TaskTypes] ON
+INSERT INTO [dbo].[TaskTypes] ([gid], [id], [Name]) VALUES (N'09daff50-996e-4077-9be0-3c0bf516e56c', 3, N'Map')
+INSERT INTO [dbo].[TaskTypes] ([gid], [id], [Name]) VALUES (N'6d1e2691-3eab-41a7-90c4-8bd9ec7b1fd8', 2, N'Test')
+INSERT INTO [dbo].[TaskTypes] ([gid], [id], [Name]) VALUES (N'9044bc32-30a7-49a5-8dc2-ba24bece5e39', 4, N'TestWithImage')
+INSERT INTO [dbo].[TaskTypes] ([gid], [id], [Name]) VALUES (N'979f14eb-265c-4080-a375-9c10cd49b544', 5, N'Writing')
+INSERT INTO [dbo].[TaskTypes] ([gid], [id], [Name]) VALUES (N'9f3a9b8b-6b56-473e-b88a-ddd33c337396', 1, N'Conformity')
+SET IDENTITY_INSERT [dbo].[TaskTypes] OFF
 ALTER TABLE [dbo].[Comments]
     ADD CONSTRAINT [FK_Comments_Quests] FOREIGN KEY ([QuestGID]) REFERENCES [dbo].[Quests] ([gid])
-ALTER TABLE [dbo].[Likes]
-    ADD CONSTRAINT [FK_Likes_Users] FOREIGN KEY ([UserGID]) REFERENCES [dbo].[Users] ([gid])
-ALTER TABLE [dbo].[Likes]
-    ADD CONSTRAINT [FK_Likes_CheckPoints] FOREIGN KEY ([CheckPointGID]) REFERENCES [dbo].[CheckPoints] ([gid])
+ALTER TABLE [dbo].[CheckPointsToTries]
+    ADD CONSTRAINT [FK_CheckpointsToTries_Checkpoints] FOREIGN KEY ([CheckPointGID]) REFERENCES [dbo].[CheckPoints] ([gid])
+ALTER TABLE [dbo].[CheckPointsToTries]
+    ADD CONSTRAINT [FK_CheckpointsToTries_Tries] FOREIGN KEY ([TryGID]) REFERENCES [dbo].[Tries] ([gid])
 ALTER TABLE [dbo].[TasksToTries]
     ADD CONSTRAINT [FK_TasksToTries_CheckpointsToTries] FOREIGN KEY ([CheckPointToTryGID]) REFERENCES [dbo].[CheckPointsToTries] ([gid])
 ALTER TABLE [dbo].[TasksToTries]
@@ -136,10 +132,6 @@ ALTER TABLE [dbo].[Tasks]
     ADD CONSTRAINT [FK_Tasks_TaskTypes] FOREIGN KEY ([TaskTypeGID]) REFERENCES [dbo].[TaskTypes] ([gid])
 ALTER TABLE [dbo].[Tasks]
     ADD CONSTRAINT [FK_Tasks_Users] FOREIGN KEY ([AuthorGID]) REFERENCES [dbo].[Users] ([gid])
-ALTER TABLE [dbo].[UsersInRoles]
-    ADD CONSTRAINT [FK_UsersInRoles_Roles] FOREIGN KEY ([RoleGID]) REFERENCES [dbo].[Roles] ([gid])
-ALTER TABLE [dbo].[UsersInRoles]
-    ADD CONSTRAINT [FK_UsersInRoles_Users] FOREIGN KEY ([UserGID]) REFERENCES [dbo].[Users] ([gid]) ON DELETE CASCADE ON UPDATE CASCADE
 ALTER TABLE [dbo].[Tries]
     ADD CONSTRAINT [FK_Tries_Users] FOREIGN KEY ([UserGID]) REFERENCES [dbo].[Users] ([gid])
 ALTER TABLE [dbo].[Tries]
@@ -148,10 +140,10 @@ ALTER TABLE [dbo].[PupilsToTeachersRequests]
     ADD CONSTRAINT [FK_PupilsToTeachersRequests_Faces] FOREIGN KEY ([TeacherGID]) REFERENCES [dbo].[Faces] ([gid])
 ALTER TABLE [dbo].[PupilsToTeachersRequests]
     ADD CONSTRAINT [FK_PupilsToTeachersRequests_Faces1] FOREIGN KEY ([PupilGID]) REFERENCES [dbo].[Faces] ([gid])
-ALTER TABLE [dbo].[CheckPointsToTries]
-    ADD CONSTRAINT [FK_CheckpointsToTries_Checkpoints] FOREIGN KEY ([CheckPointGID]) REFERENCES [dbo].[CheckPoints] ([gid])
-ALTER TABLE [dbo].[CheckPointsToTries]
-    ADD CONSTRAINT [FK_CheckpointsToTries_Tries] FOREIGN KEY ([TryGID]) REFERENCES [dbo].[Tries] ([gid])
+ALTER TABLE [dbo].[Likes]
+    ADD CONSTRAINT [FK_Likes_Users] FOREIGN KEY ([UserGID]) REFERENCES [dbo].[Users] ([gid])
+ALTER TABLE [dbo].[Likes]
+    ADD CONSTRAINT [FK_Likes_CheckPoints] FOREIGN KEY ([CheckPointGID]) REFERENCES [dbo].[CheckPoints] ([gid])
 ALTER TABLE [dbo].[CheckPoints]
     ADD CONSTRAINT [FK_CheckPoints_CheckPoints] FOREIGN KEY ([ParentGID]) REFERENCES [dbo].[CheckPoints] ([gid])
 ALTER TABLE [dbo].[CheckPoints]
@@ -160,6 +152,10 @@ ALTER TABLE [dbo].[CheckPoints]
     ADD CONSTRAINT [FK_CheckPoints_Quests] FOREIGN KEY ([QuestGID]) REFERENCES [dbo].[Quests] ([gid])
 ALTER TABLE [dbo].[Quests]
     ADD CONSTRAINT [FK_Quests_Users] FOREIGN KEY ([AuthorGID]) REFERENCES [dbo].[Users] ([gid])
+ALTER TABLE [dbo].[UsersInRoles]
+    ADD CONSTRAINT [FK_UsersInRoles_Roles] FOREIGN KEY ([RoleGID]) REFERENCES [dbo].[Roles] ([gid])
+ALTER TABLE [dbo].[UsersInRoles]
+    ADD CONSTRAINT [FK_UsersInRoles_Users] FOREIGN KEY ([UserGID]) REFERENCES [dbo].[Users] ([gid]) ON DELETE CASCADE ON UPDATE CASCADE
 ALTER TABLE [dbo].[Users]
     ADD CONSTRAINT [FK_Users_Faces] FOREIGN KEY ([FaceGID]) REFERENCES [dbo].[Faces] ([gid]) ON DELETE CASCADE ON UPDATE CASCADE
 COMMIT TRANSACTION

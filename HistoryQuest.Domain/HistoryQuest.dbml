@@ -106,6 +106,7 @@
       <Column Name="Name" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="FullInfo" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="ShortInfo" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="ImagePath" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="AuthorGID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Association Name="Quest_CheckPoint" Member="CheckPoints" ThisKey="gid" OtherKey="QuestGID" Type="CheckPoint" />
       <Association Name="Quest_Comment" Member="Comments" ThisKey="gid" OtherKey="QuestGID" Type="Comment" />

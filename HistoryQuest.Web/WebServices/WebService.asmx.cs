@@ -219,6 +219,7 @@ namespace HistoryQuest.WebServices
                             { "id", checkPoint.id },
                             { "gid", checkPoint.gid },
                             { "Name", checkPoint.Name },
+                            { "Info", checkPoint.Info},
                             { "IsBonus", checkPoint.IsBonus },
                             { "OrderId", checkPoint.OrderId },
                             { "GeoCoordinates", checkPoint.GeoCoordinates },
