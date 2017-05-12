@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Device.Location;
+using System.Globalization;
 
 namespace HistoryQuest.Domain.TasksValidation
 {
@@ -14,19 +15,29 @@ namespace HistoryQuest.Domain.TasksValidation
 
         public override int Validate(string userAnswer, object rightAnswer)
         {
-            string[] userAnswerParts = userAnswer.Substring(1, userAnswer.Length - 2).Replace(" ", "").Split(',');
-            double userLat = double.Parse(userAnswerParts[0].Replace(".", ","));
-            double userLng = double.Parse(userAnswerParts[1].Replace(".", ","));
-            
-            string[] rightAnswerParts = rightAnswer.ToString().Replace("(", "").Replace(")", "").Replace(" ", "").Split(',');
-            double rightLat = double.Parse(rightAnswerParts[0].Replace(".", ","));
-            double rightLng = double.Parse(rightAnswerParts[1].Replace(".", ","));
-            double maxDistance = double.Parse(rightAnswerParts[2].Replace(".", ","));
+            int result = 0;
+            try
+            {
+                string[] userAnswerParts = userAnswer.Substring(1, userAnswer.Length - 2).Replace(" ", "").Split(',');
+                double userLat = double.Parse(userAnswerParts[0], CultureInfo.InvariantCulture);
+                double userLng = double.Parse(userAnswerParts[1].Replace(".", ","), CultureInfo.InvariantCulture);
 
-            var userCoord = new GeoCoordinate(userLat, userLng);
-            var rightCoord = new GeoCoordinate(rightLat, rightLng);
+                string[] rightAnswerParts = rightAnswer.ToString().Replace("(", "").Replace(")", "").Replace(" ", "").Split(',');
+                double rightLat = double.Parse(rightAnswerParts[0].Replace(".", ","));
+                double rightLng = double.Parse(rightAnswerParts[1].Replace(".", ","));
+                double maxDistance = double.Parse(rightAnswerParts[2].Replace(".", ","));
 
-            return userCoord.GetDistanceTo(rightCoord) / 1000d <= maxDistance ? MaxScore : 0;
+                var userCoord = new GeoCoordinate(userLat, userLng);
+                var rightCoord = new GeoCoordinate(rightLat, rightLng);
+
+                result = userCoord.GetDistanceTo(rightCoord) / 1000d <= maxDistance ? MaxScore : 0;
+            }
+            catch
+            {
+                result = 0;
+            }
+
+            return result;
         }
     }
 }

@@ -51,7 +51,7 @@ TasksController.ReadMapTask = function () {
         return map.attributes.userAnswer.value;
     }
 
-    return "no user entry";
+    return "(0.0, 0.0)";
 };
 
 TasksController.ReadConformityTask = function () {

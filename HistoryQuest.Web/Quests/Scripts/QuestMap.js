@@ -219,7 +219,6 @@ QuestMap.InitializeTaskMap = function () {
             });
             
             this.marker.setIcon('/libs/img/checkpoint_current.png');
-            this.marker.addListener('click', Function.createDelegate(this, function () { this.marker.setMap(null); }));
             $("#map").attr("userAnswer", location);
         }
     }
