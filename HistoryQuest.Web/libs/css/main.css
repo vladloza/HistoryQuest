@@ -110,7 +110,7 @@ p {
 section {
     margin-top:20px;
 }
-.faq-section {
+.orange-section {
     background:#fff;
     box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
     padding:0px 15px;
@@ -897,7 +897,7 @@ input.small-control {
     padding: 0px 10px;
 }
 /*----------------------collapse-----------------------------*/
-.faq-section h2 {
+.orange-section h2 {
     font-family:RobotoLight, sans-serif;
     font-size:40px;
     font-weight:300;

@@ -5,7 +5,7 @@
     <div class="wrapper">
         <div>
             <div class="container">
-                <section class="clearfix faq-section">
+                <section class="clearfix orange-section">
                     <h2>FAQ</h2>
                     <div class="panel-group" id="accordion">
                         <% foreach (var faq in Repository.CurrentDataContext.FAQs.OrderBy(c=> c.id)) { %>
