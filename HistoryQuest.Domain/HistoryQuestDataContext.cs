@@ -10,7 +10,7 @@ namespace HistoryQuest.Domain
     {
         public User GetUserByUserName(string userName)
         {
-            return Users.SingleOrDefault(u => u.UserName == userName && string.IsNullOrEmpty(u.SocialName));
+            return Users.SingleOrDefault(u => u.UserName == userName && (u.SocialName == null || u.SocialName == ""));
         }
     }
 }
