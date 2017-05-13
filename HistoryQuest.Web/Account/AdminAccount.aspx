@@ -7,7 +7,7 @@
     <div id="page">
         <div id="primary">
             <div class="tab-content">
-                <div class="main tab-pane fade in active" id="account">
+                <div class="big-main tab-pane fade in active" id="account">
                     <div class="card income">
                         <div class="small-header clearfix">
                             <i class="fa fa-bell" aria-hidden="true"></i>

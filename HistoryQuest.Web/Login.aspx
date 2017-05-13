@@ -6,6 +6,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="libs/css/font-awesome.min.css" />
     <link rel="stylesheet" href="libs/css/main.css" />
     <script src="libs/js/jquery-1.9.1.min.js"></script>
     <script src="libs/js/validation.js"></script>
@@ -32,21 +33,24 @@
             </form>
             <asp:Label runat="server" ID="error_text" />
             <div class="login-icons">
-                <div class="icons-inside">
+                <div class="icons-inside facebook">
                     <a href="<%= HistoryQuest.Domain.Socials.fbUrl %>">
-                        <img src="libs/img/facebook-icon.png" /></a>
+                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                    </a>
                 </div>
-                <div class="icons-inside">
+                <div class="icons-inside google-plus">
                     <a onclick='comeLater()'>
-                        <img src="libs/img/gmail-icon.png" /></a>
+                        <i class="fa fa-google-plus" aria-hidden="true"></i>
+                    </a>
                 </div>
-                <div class="icons-inside">
+                <div class="icons-inside twitter">
                     <a onclick='comeLater()'>
-                        <img src="libs/img/twitter-icon.png" /></a>
+                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                    </a>
                 </div>
-                <div class="icons-inside">
+                <div class="icons-inside vk">
                     <a href="<%= HistoryQuest.Domain.Socials.vkUrl %>">
-                        <img src="libs/img/vk-icon.png" />
+                        <i class="fa fa-vk" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>

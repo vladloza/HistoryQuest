@@ -1,5 +1,4 @@
 ﻿using HistoryQuest.Domain;
-using HistoryQuest.Domain.TasksValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +7,7 @@ using System.Web.Security;
 using System.Web.Script.Serialization;
 using System.Web.Services;
 using System.Xml.Linq;
+using HistoryQuest.Domain.Tasks;
 
 namespace HistoryQuest.WebServices
 {
@@ -313,7 +313,7 @@ namespace HistoryQuest.WebServices
                 HttpContext.Current.Session["CurrentCheckPointTryGID"] = checkPointToTry.gid;
             }
 
-            int score = TasksValidatorsFactory.GetTaskValidator(task.TaskTypeGID, task.MaxScore).Validate(userAnswer, HttpContext.Current.Session["RightAnswer"]);
+            int score = TasksController.GetTaskValidator(task.TaskTypeGID, task.MaxScore).Validate(userAnswer, HttpContext.Current.Session["RightAnswer"]);
 
             HistoryQuest.Domain.TasksToTry taskToTry = new HistoryQuest.Domain.TasksToTry()
             {
@@ -339,8 +339,6 @@ namespace HistoryQuest.WebServices
                 }
 
                 url = "/Quests/TestResult.aspx";
-
-                CleanCheckPointSession();
             }
             else
             {
@@ -571,11 +569,13 @@ namespace HistoryQuest.WebServices
                         quest.CheckPoints.Add(checkPoint);
                     }
                 }
+
                 checkPoint.ParentGID = data["ParentGID"].ToString() != "" ? new Guid(data["ParentGID"].ToString()) : new Guid?();
                 checkPoint.Name = data["Name"].ToString();
                 checkPoint.Info = data["Info"].ToString();
                 checkPoint.TasksCount = int.Parse(data["TasksCount"].ToString());
                 checkPoint.ThresholdScore = data["ThresholdScore"].ToString() != "" ? int.Parse(data["ThresholdScore"].ToString()) : new int?();
+                checkPoint.GeoCoordinates = data["GeoCoordinates"].ToString();
             }
             else
             {
@@ -597,7 +597,7 @@ namespace HistoryQuest.WebServices
 
                 HistoryQuest.Domain.CheckPoint checkPoint = (HistoryQuest.Domain.CheckPoint)Session["CreatedCheckPoint"];
 
-                Guid taskGID = data["gid"] != null ? new Guid(data["gid"].ToString()) : Guid.NewGuid();
+                Guid taskGID = data["TaskGID"] != null ? new Guid(data["TaskGID"].ToString()) : Guid.NewGuid();
                 HistoryQuest.Domain.Task task = checkPoint.Tasks.SingleOrDefault(t => t.gid == taskGID);
                 if (task == null)
                 {
@@ -613,7 +613,7 @@ namespace HistoryQuest.WebServices
                 task.MaxScore = int.Parse(data["MaxScore"].ToString());
                 task.TaskTypeGID = new Guid(data["TaskTypeGID"].ToString());
                 task.Text = data["Text"].ToString();
-                task.SourceFile = XElement.Parse(data["SourceFile"].ToString());
+                task.SourceFile = TasksController.GetXmlGenerator(task.TaskTypeGID).Generate((Dictionary<string, object>)data["Source"]);
             }
             else
             {
@@ -622,7 +622,7 @@ namespace HistoryQuest.WebServices
 
             return url;
         }
-
+        
         private void SaveQuestToDB(HistoryQuest.Domain.Quest createdQuest)
         {
             var existingQuest = Repository.CurrentDataContext.Quests.SingleOrDefault(q => q.gid == createdQuest.gid);

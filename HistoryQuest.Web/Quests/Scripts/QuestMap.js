@@ -156,10 +156,16 @@ QuestMap.prototype = {
             $("#menu-toggle").attr("style", "display: none");
             $("#quest-info").toggleClass("active", false);
 
-            var currentCheckPointId = result.CheckPoints.findIndex(function (item) { return item.IsCurrent; });
+            var currentCheckPointId; 
+            for (var i = 0; i < result.CheckPoints.length; ++i) { 
+                if (result.CheckPoints[i].IsCurrent== true) { 
+                    currentCheckPointId = i; 
+                break; 
+            } 
+        }
 
             if (currentCheckPointId > -1) {
-                $("#menu-toggle").attr("style", "");
+               $("#menu-toggle").attr("style", "");
                 createListener(currentCheckPointId)();
             }
         }
@@ -200,7 +206,7 @@ QuestMap.InitializeTaskMap = function () {
         });
 
         this.marker.setIcon('/libs/img/checkpoint_current.png');
-        $("#map").attr("userAnswer", location);
+        $("#map").attr("userAnswer", location.lat() + ";" + location.lng());
     }
 
     var mapContainer = document.getElementById("map");
@@ -225,7 +231,7 @@ QuestMap.InitializeTaskMap = function () {
 
         if (mapContainer.attributes.startCoords) {
             var coords = mapContainer.attributes.startCoords.value.split(';'); 
-            placeMarker({ lat: Number(coords[0]), lng: Number(coords[1]) });
+            placeMarker(new google.maps.LatLng(Number(coords[0]), Number(coords[1])));
         }
     }
 };

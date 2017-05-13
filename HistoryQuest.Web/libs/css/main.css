@@ -289,11 +289,47 @@ input.small-control {
     -moz-osx-font-smoothing: grayscale;
 }
 .login-icons {
-    margin-top: 10px;
+    margin: 20px 0px 15px;
 }
 .icons-inside {
-    padding: 0.5em;
     display: inline-block;
+    margin: 0px 3px; 
+}
+.icons-inside.vk a:hover{
+    background:#507299;
+}
+.icons-inside.google-plus a:hover{
+    background:#dd4b39;
+}
+.icons-inside.twitter a:hover{
+    background:#00acee;
+}
+.icons-inside.facebook a:hover{
+    background:#3b5998;
+}
+.icons-inside a {
+    display: block;
+    cursor:pointer;
+    position: relative;
+    padding: 5px;
+    height: 28px;
+    width: 28px;
+    color:#514545;
+    border-radius: 50%;
+    background-color: #f2f2f2;
+        -webkit-transition: -webkit-transform .2s;
+    transition: -webkit-transform .2s;
+    transition: transform .2s;
+    transition: transform .2s, -webkit-transform .2s;
+    box-sizing: initial;
+}
+.icons-inside a:hover {
+    color:#fff;
+    transform: scale(1.14);
+}
+.icons-inside i {
+    font-size:22px;
+    margin-top:2px;   
 }
 .quest-nav {
     float: left;
@@ -318,13 +354,29 @@ input.small-control {
     color: #2e4453;
     font-family: Roboto;
     font-size: 14px;
+    position:relative;
     transition: all .2s ease 0s;
 }
-.nav-menu li.active>a,
-.nav-menu li a:hover {
+.nav-menu li a::after{
+    position: absolute;
+    display: block;
+    background: #ef4438;
+    height: 1px;
+    left: 50%;
+    bottom: -5px;
+    transform: translateX(-50%);
+    width: 0%;
+    content: '';
+    transition: width ease-out 0.3s
+}
+.nav-menu li.active a::after,
+.nav-menu li a:hover::after{
+    width: 100%;
+}
+/*.nav-menu li.active>a {
     color: #ef4438;
     border-bottom:1px solid #ef4438;
-}
+}*/
 .like-wrapper span {
     font-weight:500;
 }
@@ -339,6 +391,7 @@ input.small-control {
     top: 5px;
     right: 15px;
     padding: 2px 5px 2px 3px;
+    margin-bottom:15px;
     cursor:pointer;
 }
 .like-wrapper:hover{
@@ -384,6 +437,10 @@ input.small-control {
 }
 .main {
     max-width: 720px;
+    margin: 0 auto;
+}
+.big-main {
+    max-width: 90%;
     margin: 0 auto;
 }
 .transparent {
@@ -498,6 +555,7 @@ input.small-control {
 }
 #quest-info {
     position:fixed;
+    overflow-y: scroll;
     right:0;
     bottom:0;
     top:50px;
@@ -512,10 +570,6 @@ input.small-control {
 }
 #quest-info.active {
     width:350px;
-}
-#quest-inner {
-    overflow-y: scroll;
-    height: 90vh;
 }
 .sidebar-buttons {
     position:relative;
@@ -902,6 +956,7 @@ input.small-control {
     font-size:40px;
     font-weight:300;
     color:#ef4438;
+    margin-bottom:20px;
 }
 .panel-title > a {
     padding:10px;
@@ -929,7 +984,7 @@ input.small-control {
     .profile-name,
     .sidebar-menu span {
         display: block;
-        visibility: initial;
+        visibility: visible;
     }
     .nav-wrapper,
     .dropdown {
