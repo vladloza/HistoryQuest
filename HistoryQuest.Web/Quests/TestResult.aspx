@@ -8,11 +8,11 @@
                     <h2>Результати</h2>
                 </div>
                 <div class="result-progress">
-                    <canvas class="radialBar" data-maxvalue="100" data-value="23" percent=true></canvas> <%--1--%>
-                    <canvas class="radialBar" data-maxvalue="70" data-value="50" percent=false></canvas> <%--2--%>
+                    <canvas id="RadialPercent" runat="server" class="radialBar" data-maxvalue="100" data-value="23" percent=true></canvas> <%--1--%>
+                    <canvas id="RedialCount" runat="server" class="radialBar" data-maxvalue="70" data-value="50" percent=false></canvas> <%--2--%>
                 </div>
                 <div class="result-term">
-                    <h4>Тест (не) пройден!</h4>
+                    <h4 id="ResultTitle" runat="server">Тест (не) пройден!</h4>
                 </div>
                 <div class="result-share">
                     <div class="login-icons">

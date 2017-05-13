@@ -339,8 +339,6 @@ namespace HistoryQuest.WebServices
                 }
 
                 url = "/Quests/TestResult.aspx";
-
-                CleanCheckPointSession();
             }
             else
             {
