@@ -40,7 +40,7 @@
                         </div>
                         <div class="card">
                             <button id="NextButton" runat="server" class="btn btn-primary">Далі</button>
-                            <button id="GiveUpButton" runat="server" class="btn btn-default right">Здатися</button>
+                            <asp:Button id="GiveUpButton" runat="server" class="btn btn-default right" onclick="GiveUpButton_Click" Text="Здатися"></asp:Button>
                         </div>
                     </div>
                 </div>
@@ -66,10 +66,6 @@
                 var task = $("#TaskDiv")[0].attributes.taskgid.value;
                 var tasktype = $("#TaskDiv")[0].attributes.tasktypegid.value;
                 WebService.OnNextButtonPressed(task, TasksController.ReadAnswer(tasktype), new Date().getTime() - window.StartTime);
-            });
-            $("#GiveUpButton").click(function (e) {
-                e.preventDefault();
-
             });
         </script>
 

@@ -14,11 +14,11 @@
                 <div class="result-term">
                     <h4>Тест (не) пройден!</h4>
                 </div>
-                <div class="result-share">
+<%--                <div class="result-share">
                     <div class="login-icons">
                         <div class="icons-inside">
                             <a href="#">
-                                <img src="../libs/img/gmail-icon.png" /></a> <%--4--%>
+                                <img src="../libs/img/gmail-icon.png" /></a>
                         </div>
                         <div class="icons-inside">
                             <a href="#">
@@ -26,7 +26,7 @@
                             </a>
                         </div>
                     </div>
-                </div>
+                </div>--%>
                 <div class="right-answers"></div> <%--3 --%>
             </div>
           <div class="hr-invisible-small"></div>

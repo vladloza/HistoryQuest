@@ -51,5 +51,11 @@ namespace HistoryQuest.Quests
                 return ProgressBar;
             }
         }
+
+        protected void GiveUpButton_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Response.Redirect("/Quests/Quest.aspx");
+        }
     }
 }

@@ -10,6 +10,11 @@
     <script src="libs/js/jquery-1.9.1.min.js"></script>
     <script src="libs/js/validation.js"></script>
     <script src="libs/js/preLoader.js"></script>
+    <script>
+        function comeLater() {
+            alert("З'явиться пізніше!   ");
+        }
+    </script>
     <title>Моя Україна</title>
 </head>
 <body class="admin-body">
@@ -32,11 +37,11 @@
                         <img src="libs/img/facebook-icon.png" /></a>
                 </div>
                 <div class="icons-inside">
-                    <a href="<%= HistoryQuest.Domain.Socials.fbUrl %>">
+                    <a onclick='comeLater()'>
                         <img src="libs/img/gmail-icon.png" /></a>
                 </div>
                 <div class="icons-inside">
-                    <a href="<%= HistoryQuest.Domain.Socials.fbUrl %>">
+                    <a onclick='comeLater()'>
                         <img src="libs/img/twitter-icon.png" /></a>
                 </div>
                 <div class="icons-inside">
