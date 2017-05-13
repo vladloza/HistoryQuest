@@ -200,7 +200,7 @@ QuestMap.InitializeTaskMap = function () {
         });
 
         this.marker.setIcon('/libs/img/checkpoint_current.png');
-        $("#map").attr("userAnswer", location);
+        $("#map").attr("userAnswer", location.lat() + ";" + location.lng());
     }
 
     var mapContainer = document.getElementById("map");
@@ -225,7 +225,7 @@ QuestMap.InitializeTaskMap = function () {
 
         if (mapContainer.attributes.startCoords) {
             var coords = mapContainer.attributes.startCoords.value.split(';'); 
-            placeMarker({ lat: Number(coords[0]), lng: Number(coords[1]) });
+            placeMarker(new google.maps.LatLng(Number(coords[0]), Number(coords[1])));
         }
     }
 };

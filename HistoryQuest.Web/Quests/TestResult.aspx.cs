@@ -27,9 +27,9 @@ namespace HistoryQuest.Quests
                 int maxScore = fullCurrentTasksList.Sum(t => t.MaxScore);
                 float taskCount = checkPointToTry.CheckPoint.TasksCount;
 
-                RadialPercent.Attributes["data-value"] = (100 * totalScore / (float)maxScore).ToString();
-                RedialCount.Attributes["data-value"] = checkPointToTry.TasksToTries.Sum(t => t.EarnedScore / (float)t.Task.MaxScore).ToString();
-                RedialCount.Attributes["data-maxvalue"] = fullCurrentTasksList.Count.ToString();
+                RadialPercent.Attributes["data-value"] = (100 * totalScore / (float)maxScore).ToString().Replace(",", ".");
+                RedialCount.Attributes["data-value"] = checkPointToTry.TasksToTries.Sum(t => t.EarnedScore / (float)t.Task.MaxScore).ToString().Replace(",", ".");
+                RedialCount.Attributes["data-maxvalue"] = fullCurrentTasksList.Count.ToString().Replace(",", ".");
 
                 ResultTitle.InnerText = checkPointToTry.CheckPoint.ThresholdScore == null || 
                     totalScore >= checkPointToTry.CheckPoint.ThresholdScore.Value ? "Тест пройдений!" : "Тест не пройдений!";
