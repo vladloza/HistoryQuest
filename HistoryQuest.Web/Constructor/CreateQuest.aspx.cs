@@ -32,6 +32,7 @@ namespace HistoryQuest.Constructor
 
                 QuestName.Value = quest.Name;
                 ShortInfo.InnerText = quest.ShortInfo;
+                FullInfo.InnerText = quest.FullInfo;
 
                 if (quest.CheckPoints.Count > 0)
                 {

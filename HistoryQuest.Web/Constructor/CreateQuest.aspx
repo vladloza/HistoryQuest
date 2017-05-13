@@ -23,6 +23,10 @@
                         <label for="ShortInfo" class="form-label">Короткий опис квесту</label>
                         <textarea id="ShortInfo" name="ShortInfo" runat="server" ClientIDMode="Static" class="form-input"></textarea>
                     </fieldset>
+                    <fieldset class="form-fieldset">
+                        <label for="FullInfo" class="form-label">Історична довідка квесту</label>
+                        <textarea id="FullInfo" name="FullInfo" runat="server" ClientIDMode="Static" class="form-input"></textarea>
+                    </fieldset>
                 </div>
                 <div class="card income">
                     <div class="small-header clearfix">

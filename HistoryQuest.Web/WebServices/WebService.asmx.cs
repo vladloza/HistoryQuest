@@ -440,7 +440,7 @@ namespace HistoryQuest.WebServices
                         Name = "Новий квест",
                         ImagePath = "/libs/img/mazepa.jpg",
                         ShortInfo = "Коротенький опис нового квесту.",
-                        FullInfo = ""
+                        FullInfo = "Історична довідка, що містить необхідну для проходження квесту інформацію."
                     };
                 }
 
@@ -523,6 +523,7 @@ namespace HistoryQuest.WebServices
 
                 quest.Name = data["Name"].ToString();
                 quest.ShortInfo = data["ShortInfo"].ToString();
+                quest.FullInfo = data["FullInfo"].ToString();
 
                 List<Dictionary<string, object>> checkPoints = (data["CheckPoints"] as IEnumerable<object>).Cast<Dictionary<string, object>>().ToList();
                 var checkPointsGIDs = checkPoints.Select(cp => new Guid(cp["gid"].ToString())).ToList();
@@ -635,6 +636,7 @@ namespace HistoryQuest.WebServices
             {
                 existingQuest.Name = createdQuest.Name;
                 existingQuest.ShortInfo = createdQuest.ShortInfo;
+                existingQuest.FullInfo = createdQuest.FullInfo;
                 existingQuest.AuthorGID = createdQuest.AuthorGID;
                 
                 foreach (var createdCheckPoint in createdQuest.CheckPoints)

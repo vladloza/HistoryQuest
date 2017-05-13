@@ -55,6 +55,7 @@ CreateQuest.GetQuest = function () {
     var quest = { };
     quest.Name = document.getElementById("QuestName").value; 
     quest.ShortInfo = document.getElementById("ShortInfo").value; 
+    quest.FullInfo = document.getElementById("FullInfo").value; 
     quest.CheckPoints = window.CreatedCheckPoints ? window.CreatedCheckPoints : [];
     return quest;
 };
@@ -69,18 +70,4 @@ CreateQuest.GetCheckPoint = function () {
     checkPoint.ParentGID = document.getElementById("DropDownParent").value;
     checkPoint.GeoCoordinates = document.getElementById("map").attributes.userAnswer.value;
     return checkPoint;
-};
-    
-//Debug only
-CreateQuest.CreateTask = function () {
-    var xmlString = "<TestTask></TestTask>";
-    var parser = new DOMParser();
-    var xmlDoc = parser.parseFromString(xmlString, "text/xml");
-    var root = xmlDoc.getElementsByTagName("TestTask")[0];
-    var node = xmlDoc.createElement("answers");
-    root.appendChild(node);
-
-    var serializer = new XMLSerializer();
-    xmlString = serializer.serializeToString(xmlDoc);
-    return xmlString;
 };
