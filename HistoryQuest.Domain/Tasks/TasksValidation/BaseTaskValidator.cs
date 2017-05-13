@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HistoryQuest.Domain.TasksValidation
+namespace HistoryQuest.Domain.Tasks.TasksValidation
 {
     public class BaseTaskValidator
     {

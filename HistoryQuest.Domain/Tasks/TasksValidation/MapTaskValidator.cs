@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Device.Location;
 using System.Globalization;
 
-namespace HistoryQuest.Domain.TasksValidation
+namespace HistoryQuest.Domain.Tasks.TasksValidation
 {
     public class MapTaskValidator : BaseTaskValidator
     {
