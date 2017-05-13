@@ -11,13 +11,28 @@
                     <h2>Моя Україна</h2>
                 </div>
                 <div class="body-text">
-                    <p>Вітаємо Вас у конструкторі квестів!</p>
+                    <p>Вітаємо Вас у конструкторі квестів! Тут Ви можете створити новий квест або відредагувати старий.</p>
                 </div>
             </div>
         </section>
         <section id="questBlock">
             <div class="container">
                 <div class="clearfix">
+                    <div class="col-sm-6 col-md-6 col-lg-6 questInner">
+                        <div class="about-wrapper">
+                            <div class="block-content"> 
+                                <a onclick="WebService.OpenCreateQuestPage(null)">
+                                    <div class="image-blck-wrapper">
+                                        <img src="/libs/img/new_quest.png" />
+                                    </div>
+                                    <div class="grid-middle">
+                                        <h4>Створити новий квест</h4>
+                                        <p></p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                     <% foreach (var quest in Repository.CurrentDataContext.Quests) { %>
                         <div class="col-sm-6 col-md-6 col-lg-6 questInner">
                             <div class="about-wrapper">
@@ -35,21 +50,6 @@
                             </div>
                         </div>
                     <% } %>
-                    <div class="col-sm-6 col-md-6 col-lg-6 questInner">
-                        <div class="about-wrapper">
-                            <div class="block-content"> 
-                                <a onclick="WebService.OpenCreateQuestPage(null)">
-                                    <div class="image-blck-wrapper">
-                                        <img src="/libs/img/new_quest.png" />
-                                    </div>
-                                    <div class="grid-middle">
-                                        <h4>Створити новий квест</h4>
-                                        <p></p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>

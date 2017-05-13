@@ -5,16 +5,23 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="ContentPlaceHolder">
     <div class="wrapper">
+        <section>
+            <div class="container">
+                <div class="header-text">
+                    <h2 id="ContructorTitle" runat="server">Створення нового квесту</h2>
+                </div>
+            </div>
+        </section>
         <section id="ConstructorBlock">
             <div class="container">
                 <div class="card income">
                     <fieldset class="form-fieldset">
                         <label for="QuestName" class="form-label">Назва квесту</label>
-                        <input type="text" id="QuestName" name="QuestName" runat="server" class="form-input" validation="text" />
+                        <input type="text" id="QuestName" name="QuestName" runat="server" ClientIDMode="Static" class="form-input" validation="text" />
                     </fieldset>
                     <fieldset class="form-fieldset">
                         <label for="ShortInfo" class="form-label">Короткий опис квесту</label>
-                        <textarea id="ShortInfo" name="ShortInfo" runat="server" class="form-input"></textarea>
+                        <textarea id="ShortInfo" name="ShortInfo" runat="server" ClientIDMode="Static" class="form-input"></textarea>
                     </fieldset>
                 </div>
                 <div class="card income">
@@ -27,7 +34,7 @@
                     </div>
                     <div class="card-table">
                         <table id="checkpointsTable">
-                            <tbody>
+                            <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>Назва</th>
@@ -35,12 +42,15 @@
                                     <th>Пороговий бал</th>
                                     <th>Дії</th>
                                 </tr>
+                            </thead>
+                            <tbody>
+
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <div class="card income">
-                    <button class="btn btn-info center" id="SaveButton" onclick="WebService.OpenQuestPage('AC62EA9D-536C-4C92-B7B1-E3E3E375FDCF')">Зберегти</button>
+                    <button class="btn btn-info center" id="SaveButton">Зберегти</button>
                 </div>
             </div>
         </section>
@@ -48,9 +58,14 @@
 
     <script>
         CreateQuest.Initialize();
+
         $("#CreateCheckPointButton").click(function (e) {
             e.preventDefault();
-            WebService.OpenCreateCheckPointPage(null);
+            WebService.SaveQuest(CreateQuest.GetQuest(), false, function () { WebService.OpenCreateCheckPointPage(null); });
+        });
+        $('#SaveButton').click(function (e) {
+            e.preventDefault();
+            WebService.SaveQuest(CreateQuest.GetQuest(), true);
         });
     </script>
 </asp:Content>

@@ -8,37 +8,56 @@ using System.Web.UI.WebControls;
 
 namespace HistoryQuest.Constructor
 {
-    public partial class CreateCheckPoint : BasePage
+    public partial class CreateCheckPoint : ConstructorBasePage
     {
         protected override void Page_Load(object sender, EventArgs e)
         {
             base.Page_Load(sender, e);
 
-            if (Session != null && Session["CreatedCheckPointGID"] != null)
+            if (Session != null && Session["CreatedQuest"] != null &&Session["CreatedCheckPoint"] != null)
             {
-                Guid checkPointGID = new Guid(Session["CreatedCheckPointGID"].ToString());
-                HistoryQuest.Domain.CheckPoint checkPoint = Repository.CurrentDataContext.CheckPoints.SingleOrDefault(q => q.gid == checkPointGID);
+                HistoryQuest.Domain.Quest quest = (HistoryQuest.Domain.Quest)Session["CreatedQuest"];
+                HistoryQuest.Domain.CheckPoint checkPoint = (HistoryQuest.Domain.CheckPoint)Session["CreatedCheckPoint"];
 
-                if (checkPoint != null)
+                var existingCheckPoint = Repository.CurrentDataContext.CheckPoints.SingleOrDefault(cp => cp.gid == checkPoint.gid);
+                if (existingCheckPoint != null)
                 {
-                    if (checkPoint.GeoCoordinates != "0;0")
-                    {
-                        map.Attributes["startCoords"] = checkPoint.GeoCoordinates;
-                    }
-
-                    CheckPointName.Value = checkPoint.Name;
-                    Info.InnerText = checkPoint.Info;
-                    TasksCount.Value = checkPoint.TasksCount.ToString();
-                    ThresholdScore.Value = checkPoint.ThresholdScore.HasValue ? checkPoint.ThresholdScore.Value.ToString() : "";
+                    ContructorTitle.InnerText = string.Format("{0}. Редагування чекпоінту \"{1}\"", quest.Name, existingCheckPoint.Name);
                 }
                 else
                 {
-                    Response.Redirect("/Default.aspx");
+                    ContructorTitle.InnerText = string.Format("{0}. Створення нового чекпоінту", quest.Name);
                 }
+
+                if (checkPoint.GeoCoordinates != "0;0")
+                {
+                    map.Attributes["startCoords"] = checkPoint.GeoCoordinates;
+                }
+
+                CheckPointDiv.Attributes["checkPointGID"] = checkPoint.gid.ToString();
+                CheckPointName.Value = checkPoint.Name;
+                Info.InnerText = checkPoint.Info;
+                TasksCount.Value = checkPoint.TasksCount.ToString();
+                ThresholdScore.Value = checkPoint.ThresholdScore.HasValue ? checkPoint.ThresholdScore.Value.ToString() : "";
+
+                var parents = quest.CheckPoints.Where(cp => cp.gid != checkPoint.gid).OrderBy(cp => cp.Name).ToList();
+                DropDownParent.DataSource = parents;
+                DropDownParent.DataTextField = "Name";
+                DropDownParent.DataValueField = "gid";
+                if (checkPoint.ParentGID.HasValue)
+                {
+                    DropDownParent.SelectedValue = checkPoint.ParentGID.Value.ToString();
+                }
+                else
+                {
+                    DropDownParent.SelectedIndex = 0;
+                }
+                DropDownParent.DataBind();
+                DropDownParent.Items.Insert(0, new ListItem(String.Empty, String.Empty));
             }
             else
             {
-                Response.Redirect("/Default.aspx");
+                Response.Redirect("/Constructor/QuestsList.aspx");
             }
         }
     }
