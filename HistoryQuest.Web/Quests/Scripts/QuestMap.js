@@ -189,6 +189,20 @@ QuestMap.InitializeMap = function () {
 };
 
 QuestMap.InitializeTaskMap = function () {
+    function placeMarker(location) {
+        if (this.marker) {
+            this.marker.setMap(null);
+        }
+
+        this.marker = new google.maps.Marker({
+            position: location,
+            map: googleMap
+        });
+
+        this.marker.setIcon('/libs/img/checkpoint_current.png');
+        $("#map").attr("userAnswer", location);
+    }
+
     var mapContainer = document.getElementById("map");
 
     if (mapContainer !== null) {
@@ -212,20 +226,6 @@ QuestMap.InitializeTaskMap = function () {
         if (mapContainer.attributes.startCoords) {
             var coords = mapContainer.attributes.startCoords.value.split(';'); 
             placeMarker({ lat: Number(coords[0]), lng: Number(coords[1]) });
-        }
-
-        function placeMarker(location) {
-            if (this.marker) {
-                this.marker.setMap(null);
-            }
-
-            this.marker = new google.maps.Marker({
-                position: location,
-                map: googleMap
-            });
-            
-            this.marker.setIcon('/libs/img/checkpoint_current.png');
-            $("#map").attr("userAnswer", location);
         }
     }
 };

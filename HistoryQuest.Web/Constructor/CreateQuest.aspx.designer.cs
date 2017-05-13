@@ -13,6 +13,15 @@ namespace HistoryQuest.Constructor {
     public partial class CreateQuest {
         
         /// <summary>
+        /// ContructorTitle элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ContructorTitle;
+        
+        /// <summary>
         /// QuestName элемент управления.
         /// </summary>
         /// <remarks>

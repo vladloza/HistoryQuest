@@ -238,6 +238,9 @@
     <Compile Include="BasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Constructor\ConstructorBasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Constructor\CreateCheckPoint.aspx.cs">
       <DependentUpon>CreateCheckPoint.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

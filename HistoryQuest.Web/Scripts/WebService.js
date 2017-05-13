@@ -21,7 +21,7 @@ WebService.GetComments = function (guid, countToTake) {
                 $.each(data.d, function (a, item) {
                     var sec = parseInt(item.Date.replace(/[^0-9]/g, ''));
                     var date = new Date(sec);
-                    if(data.d.length == 1){
+                    if(data.d.length === 1){
                         var commentEl = document.getElementById('comments');
 
                         var news = document.createElement('div');
@@ -356,3 +356,71 @@ WebService.OpenCreateCheckPointPage = function (checkPointGID) {
         }
     });
 };
+
+WebService.SaveQuest = function (quest, save, onSuccess) {
+    $.ajax({
+        type: "POST",
+        data: '{ entity: \'' + JSON.stringify(quest) + '\', save: \'' + save + '\' }',
+        url: "../WebServices/WebService.asmx/SaveQuest",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (r) {
+            if (onSuccess) {
+                onSuccess();
+            }
+            else {
+                window.location = r.d;
+            }
+        },
+        error: function (r) {
+            alert(r.responseText);
+        },
+        failure: function (r) {
+            alert(r.responseText);
+        }
+    });
+};
+
+WebService.SaveCheckPoint = function (quest, save, onSuccess) {
+    $.ajax({
+        type: "POST",
+        data: '{ entity: \'' + JSON.stringify(quest) + '\', save: \'' + save + '\' }',
+        url: "../WebServices/WebService.asmx/SaveCheckPoint",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (r) {
+            if (onSuccess) {
+                onSuccess();
+            }
+            else {
+                window.location = r.d;
+            }
+        },
+        error: function (r) {
+            alert(r.responseText);
+        },
+        failure: function (r) {
+            alert(r.responseText);
+        }
+    });
+};
+
+WebService.SaveTask = function (task) {
+    $.ajax({
+        type: "POST",
+        data: '{ entity: \'' + JSON.stringify(task) + '\' }',
+        url: "../WebServices/WebService.asmx/SaveTask",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (r) {
+            window.location = r.d;
+        },
+        error: function (r) {
+            alert(r.responseText);
+        },
+        failure: function (r) {
+            alert(r.responseText);
+        }
+    });
+};
+

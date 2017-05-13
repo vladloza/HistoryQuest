@@ -13,6 +13,24 @@ namespace HistoryQuest.Constructor {
     public partial class CreateCheckPoint {
         
         /// <summary>
+        /// ContructorTitle элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ContructorTitle;
+        
+        /// <summary>
+        /// CheckPointDiv элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CheckPointDiv;
+        
+        /// <summary>
         /// map элемент управления.
         /// </summary>
         /// <remarks>
@@ -56,5 +74,14 @@ namespace HistoryQuest.Constructor {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTextArea Info;
+        
+        /// <summary>
+        /// DropDownParent элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownParent;
     }
 }

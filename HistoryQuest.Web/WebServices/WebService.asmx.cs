@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Security;
 using System.Web.Script.Serialization;
 using System.Web.Services;
-
+using System.Xml.Linq;
 
 namespace HistoryQuest.WebServices
 {
@@ -421,6 +421,8 @@ namespace HistoryQuest.WebServices
             Repository.CurrentDataContext.SubmitChanges();
         }
 
+        #region Constructor
+
         [WebMethod(EnableSession = true)]
         public string OpenCreateQuestPage(Guid? questGID)
         {
@@ -428,22 +430,23 @@ namespace HistoryQuest.WebServices
 
             if (HttpContext.Current.Session != null)
             {
-                if (!questGID.HasValue)
+                HistoryQuest.Domain.Quest quest = questGID.HasValue ? Repository.CurrentDataContext.Quests.SingleOrDefault(q => q.gid == questGID.Value) : null;
+
+                if (quest == null)
                 {
                     questGID = Guid.NewGuid();
-                    HistoryQuest.Domain.Quest quest = new Domain.Quest()
+                    quest = new Domain.Quest()
                     {
                         gid = questGID.Value,
+                        AuthorGID = Repository.CurrentUser.gid,
                         Name = "Новий квест",
                         ImagePath = "/libs/img/mazepa.jpg",
                         ShortInfo = "Коротенький опис нового квесту.",
                         FullInfo = ""
                     };
-                    Repository.CurrentDataContext.Quests.InsertOnSubmit(quest);
-                    Repository.CurrentDataContext.SubmitChanges();
                 }
 
-                Session["CreatedQuestGID"] = questGID.Value;
+                Session["CreatedQuest"] = quest;
             }
 
             return url;
@@ -454,17 +457,24 @@ namespace HistoryQuest.WebServices
         {
             string url = "/Constructor/CreateCheckPoint.aspx";
 
-            if (HttpContext.Current.Session != null && Session["CreatedQuestGID"] != null)
+            if (HttpContext.Current.Session != null && Session["CreatedQuest"] != null)
             {
-                Guid questGID = new Guid(Session["CreatedQuestGID"].ToString());
-                if (!checkPointGID.HasValue || !Repository.CurrentDataContext.CheckPoints.Any(cp => cp.gid == checkPointGID && cp.QuestGID == questGID))
+                HistoryQuest.Domain.Quest quest = (HistoryQuest.Domain.Quest)Session["CreatedQuest"];
+
+                if (!checkPointGID.HasValue)
                 {
-                    HistoryQuest.Domain.Quest quest = Repository.CurrentDataContext.Quests.SingleOrDefault(q => q.gid == questGID);
                     checkPointGID = Guid.NewGuid();
-                    HistoryQuest.Domain.CheckPoint checkPoint = new CheckPoint()
+                }
+
+                HistoryQuest.Domain.CheckPoint checkPoint = quest.CheckPoints.SingleOrDefault(cp => cp.gid == checkPointGID);
+
+                if (checkPoint == null)
+                {
+                    checkPoint = new CheckPoint()
                     {
                         gid = checkPointGID.Value,
                         QuestGID = quest.gid,
+                        AuthorGID = Repository.CurrentUser.gid,
                         GeoCoordinates = "0;0",
                         Name = "Новий чекпоінт",
                         Info = "Інформація необхідна для проходження завдань цього чекпоінту.",
@@ -472,41 +482,269 @@ namespace HistoryQuest.WebServices
                         TasksCount = 0,
                         OrderId = 0
                     };
-                    quest.CheckPoints.Add(checkPoint);
-                    Repository.CurrentDataContext.SubmitChanges();
                 }
 
-                Session["CreatedCheckPointGID"] = checkPointGID.Value;
+                Session["CreatedCheckPoint"] = checkPoint;
+            }
+            else
+            {
+                url = "/Constructor/QuestsList.aspx";
             }
 
             return url;
         }
 
         [WebMethod(EnableSession = true)]
-        public string SaveCheckPoint(object entity)
+        public string OpenCreateTaskPage(Guid taskTypeGID, Guid? taskGID)
         {
-            string url = "/Constructor/CreateQuest.aspx";
-            
+            string url = "/Constructor/CreateCheckPoint.aspx";
+
+            if (HttpContext.Current.Session != null && Session["CreatedQuest"] != null)
+            {
+
+            }
+            else
+            {
+                url = "/Constructor/QuestsList.aspx";
+            }
+
             return url;
         }
 
         [WebMethod(EnableSession = true)]
-        public string SaveQuest(object entity)
+        public string SaveQuest(string entity, bool save = true)
         {
             string url = "/Constructor/QuestsList.aspx";
 
-            CleanConstructorSession();
+            if (HttpContext.Current.Session != null && Session["CreatedQuest"] != null)
+            {
+                JavaScriptSerializer deserializer = new JavaScriptSerializer();
+                Dictionary<string, object> data = (Dictionary<string, object>)deserializer.Deserialize(entity, typeof(object));
+
+                HistoryQuest.Domain.Quest quest = (HistoryQuest.Domain.Quest)Session["CreatedQuest"];
+
+                quest.Name = data["Name"].ToString();
+                quest.ShortInfo = data["ShortInfo"].ToString();
+
+                List<Dictionary<string, object>> checkPoints = (data["CheckPoints"] as IEnumerable<object>).Cast<Dictionary<string, object>>().ToList();
+                var checkPointsGIDs = checkPoints.Select(cp => new Guid(cp["gid"].ToString())).ToList();
+                var checkPointsToDelete = quest.CheckPoints.Where(cp => !checkPointsGIDs.Contains(cp.gid)).ToList();
+                foreach (var checkPoint in checkPointsToDelete)
+                {
+                    quest.CheckPoints.Remove(checkPoint);
+                }
+
+                if (save)
+                {
+                    SaveQuestToDB(quest);
+                    CleanConstructorSession();
+                }
+            }
+            else
+            {
+                url = "/Constructor/QuestsList.aspx";
+            }
 
             return url;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string SaveCheckPoint(string entity, bool save = true)
+        {
+            string url = "/Constructor/CreateQuest.aspx";
+
+            if (HttpContext.Current.Session != null && Session["CreatedQuest"] != null)
+            {
+                JavaScriptSerializer deserializer = new JavaScriptSerializer();
+                Dictionary<string, object> data = (Dictionary<string, object>)deserializer.Deserialize(entity, typeof(object));
+
+                HistoryQuest.Domain.Quest quest = (HistoryQuest.Domain.Quest)Session["CreatedQuest"];
+
+                Guid checkPointGID = new Guid(data["gid"].ToString());
+                HistoryQuest.Domain.CheckPoint checkPoint = quest.CheckPoints.SingleOrDefault(cp => cp.gid == checkPointGID);
+                
+                if (checkPoint == null)
+                {
+                    checkPoint = (HistoryQuest.Domain.CheckPoint)Session["CreatedCheckPoint"];
+                    if (save)
+                    {
+                        quest.CheckPoints.Add(checkPoint);
+                    }
+                }
+                checkPoint.ParentGID = data["ParentGID"].ToString() != "" ? new Guid(data["ParentGID"].ToString()) : new Guid?();
+                checkPoint.Name = data["Name"].ToString();
+                checkPoint.Info = data["Info"].ToString();
+                checkPoint.TasksCount = int.Parse(data["TasksCount"].ToString());
+                checkPoint.ThresholdScore = data["ThresholdScore"].ToString() != "" ? int.Parse(data["ThresholdScore"].ToString()) : new int?();
+            }
+            else
+            {
+                url = "/Constructor/QuestsList.aspx";
+            }
+
+            return url;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string SaveTask(string entity)
+        {
+            string url = "/Constructor/CreateCheckPoint.aspx";
+
+            if (HttpContext.Current.Session != null && Session["CreatedCheckPoint"] != null)
+            {
+                JavaScriptSerializer deserializer = new JavaScriptSerializer();
+                Dictionary<string, object> data = (Dictionary<string, object>)deserializer.Deserialize(entity, typeof(object));
+
+                HistoryQuest.Domain.CheckPoint checkPoint = (HistoryQuest.Domain.CheckPoint)Session["CreatedCheckPoint"];
+
+                Guid taskGID = data["gid"] != null ? new Guid(data["gid"].ToString()) : Guid.NewGuid();
+                HistoryQuest.Domain.Task task = checkPoint.Tasks.SingleOrDefault(t => t.gid == taskGID);
+                if (task == null)
+                {
+                    task = new Task()
+                    {
+                        gid = taskGID,
+                        CheckPointGID = checkPoint.gid,
+                        AuthorGID = Repository.CurrentUser.gid
+                    };
+                    checkPoint.Tasks.Add(task);
+                }
+
+                task.MaxScore = int.Parse(data["MaxScore"].ToString());
+                task.TaskTypeGID = new Guid(data["TaskTypeGID"].ToString());
+                task.Text = data["Text"].ToString();
+                task.SourceFile = XElement.Parse(data["SourceFile"].ToString());
+            }
+            else
+            {
+                url = "/Constructor/QuestsList.aspx";
+            }
+
+            return url;
+        }
+
+        private void SaveQuestToDB(HistoryQuest.Domain.Quest createdQuest)
+        {
+            var existingQuest = Repository.CurrentDataContext.Quests.SingleOrDefault(q => q.gid == createdQuest.gid);
+
+            if (existingQuest == null)
+            {
+                Repository.CurrentDataContext.Quests.InsertOnSubmit(createdQuest);
+            }
+            else
+            {
+                existingQuest.Name = createdQuest.Name;
+                existingQuest.ShortInfo = createdQuest.ShortInfo;
+                existingQuest.AuthorGID = createdQuest.AuthorGID;
+                
+                foreach (var createdCheckPoint in createdQuest.CheckPoints)
+                {
+                    var existingCheckPoint = existingQuest.CheckPoints.SingleOrDefault(cp => cp.gid == createdCheckPoint.gid);
+                    if (existingCheckPoint != null)
+                    {
+                        existingCheckPoint.Name = createdCheckPoint.Name;
+                        existingCheckPoint.GeoCoordinates = createdCheckPoint.GeoCoordinates;
+                        existingCheckPoint.Info = createdCheckPoint.Info;
+                        existingCheckPoint.IsBonus = createdCheckPoint.IsBonus;
+                        existingCheckPoint.TasksCount = createdCheckPoint.TasksCount;
+                        existingCheckPoint.ThresholdScore = createdCheckPoint.ThresholdScore;
+                        existingCheckPoint.AuthorGID = createdCheckPoint.AuthorGID;
+                        existingCheckPoint.ParentGID = createdCheckPoint.ParentGID;
+                        existingCheckPoint.OrderId = createdCheckPoint.OrderId;
+                    }
+                    else
+                    {
+                        existingCheckPoint = new CheckPoint()
+                        {
+                            gid = createdCheckPoint.gid,
+                            QuestGID = createdQuest.gid,
+                            Name = createdCheckPoint.Name,
+                            GeoCoordinates = createdCheckPoint.GeoCoordinates,
+                            Info = createdCheckPoint.Info,
+                            IsBonus = createdCheckPoint.IsBonus,
+                            TasksCount = createdCheckPoint.TasksCount,
+                            ThresholdScore = createdCheckPoint.ThresholdScore,
+                            AuthorGID = createdCheckPoint.AuthorGID,
+                            ParentGID = createdCheckPoint.ParentGID,
+                            OrderId = createdCheckPoint.OrderId
+                        };
+                        existingQuest.CheckPoints.Add(existingCheckPoint);
+                    }
+
+                    //foreach (var createdTask in createdCheckPoint.Tasks)
+                    //{
+                    //    var existingTask = existingCheckPoint.Tasks.SingleOrDefault(t => t.gid == createdTask.gid);
+                    //    if (existingTask != null)
+                    //    {
+                    //        existingTask.Text = createdTask.Text;
+                    //        existingTask.MaxScore = createdTask.MaxScore;
+                    //        existingTask.TaskTypeGID = createdTask.TaskTypeGID;
+                    //        existingTask.SourceFile = createdTask.SourceFile;
+                    //        existingTask.AuthorGID = createdTask.AuthorGID;
+                    //    }
+                    //    else
+                    //    {
+                    //        var task = new HistoryQuest.Domain.Task()
+                    //        {
+                    //            gid = createdTask.gid,
+                    //            Text = createdTask.Text,
+                    //            MaxScore = createdTask.MaxScore,
+                    //            TaskTypeGID = createdTask.TaskTypeGID,
+                    //            SourceFile = createdTask.SourceFile,
+                    //            AuthorGID = createdTask.AuthorGID,
+                    //            CheckPointGID = createdTask.CheckPointGID
+                    //        };
+
+                    //        existingCheckPoint.Tasks.Add(task);
+                    //    }
+                    //}
+
+                    //List<Task> deletedTasks = new List<Task>();
+                    //foreach (var existingTask in existingCheckPoint.Tasks)
+                    //{
+                    //    if (!createdCheckPoint.Tasks.Any(t => t.gid == existingTask.gid))
+                    //    {
+                    //        deletedTasks.Add(existingTask);
+                    //    }
+                    //}
+                    
+                    //foreach (var deletedTask in deletedTasks)
+                    //{
+                    //    existingCheckPoint.Tasks.Remove(deletedTask);
+                    //}
+
+                    //Repository.CurrentDataContext.Tasks.DeleteAllOnSubmit(deletedTasks);
+                }
+
+                List<CheckPoint> deletedCheckPoints = new List<CheckPoint>();
+                foreach (var existingCheckPoint in existingQuest.CheckPoints)
+                {
+                    if (!createdQuest.CheckPoints.Any(cp => cp.gid == existingCheckPoint.gid))
+                    {
+                        deletedCheckPoints.Add(existingCheckPoint);
+                    }
+                }
+                
+                foreach (var deletedCheckPoint in deletedCheckPoints)
+                {
+                    existingQuest.CheckPoints.Remove(deletedCheckPoint);
+                }
+
+                Repository.CurrentDataContext.CheckPoints.DeleteAllOnSubmit(deletedCheckPoints);
+            }
+
+            Repository.CurrentDataContext.SubmitChanges();
         }
 
         public static void CleanConstructorSession()
         {
             if (HttpContext.Current.Session != null)
             {
-                HttpContext.Current.Session["CreatedQuestGID"] = null;
-                HttpContext.Current.Session["CreatedCheckPointGID"] = null;
+                HttpContext.Current.Session["CreatedQuest"] = null;
+                HttpContext.Current.Session["CreatedCheckPoint"] = null;
             }
         }
+
+        #endregion
     }
 }

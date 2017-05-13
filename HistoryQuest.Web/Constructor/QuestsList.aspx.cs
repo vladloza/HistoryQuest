@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace HistoryQuest.Constructor
 {
-    public partial class QuestsList : BasePage
+    public partial class QuestsList : ConstructorBasePage
     {
         protected override void Page_Load(object sender, EventArgs e)
         {
