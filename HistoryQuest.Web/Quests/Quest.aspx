@@ -7,7 +7,7 @@
         </script>
         <div id="map"></div>
         <div class="arrows">
-            <button class="arrow" id="menu-toggle" style="display: none"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+            <button class="arrow" id="menu-toggle" style="display:none"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
         </div>
         <div id="quest-info">
             <div>

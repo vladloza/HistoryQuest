@@ -156,10 +156,16 @@ QuestMap.prototype = {
             $("#menu-toggle").attr("style", "display: none");
             $("#quest-info").toggleClass("active", false);
 
-            var currentCheckPointId = result.CheckPoints.findIndex(function (item) { return item.IsCurrent; });
+            var currentCheckPointId; 
+            for (var i = 0; i < result.CheckPoints.length; ++i) { 
+                if (result.CheckPoints[i].IsCurrent== true) { 
+                    currentCheckPointId = i; 
+                break; 
+            } 
+        }
 
             if (currentCheckPointId > -1) {
-                $("#menu-toggle").attr("style", "");
+               $("#menu-toggle").attr("style", "");
                 createListener(currentCheckPointId)();
             }
         }

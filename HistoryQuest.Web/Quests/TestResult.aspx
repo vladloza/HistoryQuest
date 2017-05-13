@@ -16,25 +16,37 @@
                 </div>
                 <div class="result-share">
                     <div class="login-icons">
-                        <div class="icons-inside">
-                            <a href="#">
-                                <img src="../libs/img/gmail-icon.png" /></a> <%--4--%>
+                        <div class="icons-inside facebook">
+                            <a href="<%= HistoryQuest.Domain.Socials.fbUrl %>">
+                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                            </a>
                         </div>
-                        <div class="icons-inside">
-                            <a href="#">
-                                <img src="../libs/img/vk-icon.png" />
+                        <div class="icons-inside google-plus">
+                            <a href="<%= HistoryQuest.Domain.Socials.fbUrl %>">
+                                <i class="fa fa-google-plus" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <div class="icons-inside twitter">
+                            <a href="<%= HistoryQuest.Domain.Socials.fbUrl %>">
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <div class="icons-inside vk">
+                            <a href="<%= HistoryQuest.Domain.Socials.vkUrl %>">
+                                <i class="fa fa-vk" aria-hidden="true"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="right-answers"></div> <%--3 --%>
+                <div class="right-answers"></div>
+                <%--3 --%>
             </div>
-          <div class="hr-invisible-small"></div>
+            <div class="hr-invisible-small"></div>
         </div>
     </div>
     <script type="text/javascript" src="Scripts/RadialBarScript.js"></script>
 </asp:Content>
-                                                <%--
+<%--
                                                     Сережа:
 
                                                     Не могу унаследоваться от Task.Master, поскольку там виднеются кнопки.
