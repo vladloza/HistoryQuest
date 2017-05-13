@@ -44,6 +44,8 @@ namespace HistoryQuest.Constructor
                 DropDownParent.DataSource = parents;
                 DropDownParent.DataTextField = "Name";
                 DropDownParent.DataValueField = "gid";
+                DropDownParent.DataBind();
+                DropDownParent.Items.Insert(0, new ListItem(String.Empty, String.Empty));
                 if (checkPoint.ParentGID.HasValue)
                 {
                     DropDownParent.SelectedValue = checkPoint.ParentGID.Value.ToString();
@@ -52,8 +54,6 @@ namespace HistoryQuest.Constructor
                 {
                     DropDownParent.SelectedIndex = 0;
                 }
-                DropDownParent.DataBind();
-                DropDownParent.Items.Insert(0, new ListItem(String.Empty, String.Empty));
             }
             else
             {

@@ -339,8 +339,6 @@ namespace HistoryQuest.WebServices
                 }
 
                 url = "/Quests/TestResult.aspx";
-
-                CleanCheckPointSession();
             }
             else
             {
@@ -571,11 +569,13 @@ namespace HistoryQuest.WebServices
                         quest.CheckPoints.Add(checkPoint);
                     }
                 }
+
                 checkPoint.ParentGID = data["ParentGID"].ToString() != "" ? new Guid(data["ParentGID"].ToString()) : new Guid?();
                 checkPoint.Name = data["Name"].ToString();
                 checkPoint.Info = data["Info"].ToString();
                 checkPoint.TasksCount = int.Parse(data["TasksCount"].ToString());
                 checkPoint.ThresholdScore = data["ThresholdScore"].ToString() != "" ? int.Parse(data["ThresholdScore"].ToString()) : new int?();
+                checkPoint.GeoCoordinates = data["GeoCoordinates"].ToString();
             }
             else
             {

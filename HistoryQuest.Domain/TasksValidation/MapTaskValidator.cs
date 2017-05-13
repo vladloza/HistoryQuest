@@ -18,14 +18,14 @@ namespace HistoryQuest.Domain.TasksValidation
             int result = 0;
             try
             {
-                string[] userAnswerParts = userAnswer.Substring(1, userAnswer.Length - 2).Replace(" ", "").Split(',');
+                string[] userAnswerParts = userAnswer.Split(';');
                 double userLat = double.Parse(userAnswerParts[0], CultureInfo.InvariantCulture);
-                double userLng = double.Parse(userAnswerParts[1].Replace(".", ","), CultureInfo.InvariantCulture);
+                double userLng = double.Parse(userAnswerParts[1], CultureInfo.InvariantCulture);
 
                 string[] rightAnswerParts = rightAnswer.ToString().Replace("(", "").Replace(")", "").Replace(" ", "").Split(',');
-                double rightLat = double.Parse(rightAnswerParts[0].Replace(".", ","));
-                double rightLng = double.Parse(rightAnswerParts[1].Replace(".", ","));
-                double maxDistance = double.Parse(rightAnswerParts[2].Replace(".", ","));
+                double rightLat = double.Parse(rightAnswerParts[0], CultureInfo.InvariantCulture);
+                double rightLng = double.Parse(rightAnswerParts[1], CultureInfo.InvariantCulture);
+                double maxDistance = double.Parse(rightAnswerParts[2], CultureInfo.InvariantCulture);
 
                 var userCoord = new GeoCoordinate(userLat, userLng);
                 var rightCoord = new GeoCoordinate(rightLat, rightLng);
