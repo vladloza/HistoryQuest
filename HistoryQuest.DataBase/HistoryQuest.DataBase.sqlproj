@@ -79,6 +79,7 @@
     <Build Include="dbo\Tables\CheckPointsToTries.sql" />
     <Build Include="dbo\Tables\TeacherRequests.sql" />
     <Build Include="dbo\Tables\Errors.sql" />
+    <Build Include="dbo\Tables\FAQ.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\PostDeployment.sql" />

@@ -456,6 +456,20 @@ INSERT INTO [dbo].[Roles] ([gid], [id], [Name]) VALUES (N'024900db-2a68-4959-a0e
 INSERT INTO [dbo].[Roles] ([gid], [id], [Name]) VALUES (N'40f816d3-3bb4-4864-97c1-67803413389a', 3, N'Admin')
 INSERT INTO [dbo].[Roles] ([gid], [id], [Name]) VALUES (N'4492ed1d-052a-491a-8897-9bbc8d8633ff', 2, N'Teacher')
 SET IDENTITY_INSERT [dbo].[Roles] OFF
+SET IDENTITY_INSERT [dbo].[FAQ] ON
+INSERT INTO [dbo].[FAQ] ([gid], [id], [Question], [Answer]) VALUES (N'327b9e60-03c7-4f3e-b7fa-39a8dac5aa53', 51, N'Чому прапорці мають різний колір?', N'<p>A: Колір прапорця вказує на статус чекпоінту:</p><p><strong>білий</strong> - чекпоінт поки що недоступний, завершіть попередній чекпоінт;</p><p><strong>жовтий</strong> - чекпоінт, доступний для виконання;</p><p><strong>зелений</strong> - чекпоінт було успішно завершено раніше.</p>')
+INSERT INTO [dbo].[FAQ] ([gid], [id], [Question], [Answer]) VALUES (N'3a04a0b2-9e2c-4343-8ee1-710b1f7e5aa9', 48, N'Я можу "лайкнути" лише пройдений чекпоінт?', N'<p>A: Ні, ви можете "лайкнути" будь-який чекпоінт на мапі.</p>')
+INSERT INTO [dbo].[FAQ] ([gid], [id], [Question], [Answer]) VALUES (N'43300705-efa6-4e27-9e8e-cdc4dd929184', 55, N'Я можу проходити одночасно більше одного квесту?', N'A: Так.')
+INSERT INTO [dbo].[FAQ] ([gid], [id], [Question], [Answer]) VALUES (N'78d84dc4-e779-49bd-8560-8911e577110f', 53, N'Скільки часу дається на проходження завдань чекпоінту?', N'<p>A: Ви не обмежені у часі.</p> ')
+INSERT INTO [dbo].[FAQ] ([gid], [id], [Question], [Answer]) VALUES (N'7b298337-a44d-4c3f-9207-731022c7f743', 50, N'Що означає прапорець на мапі?', N'<p>A: Кожен прапорець на мапі - це чекпоінт обраного квесту, або, іншими словами, збірник тестових завдань на визначену тематику.</p>')
+INSERT INTO [dbo].[FAQ] ([gid], [id], [Question], [Answer]) VALUES (N'8e2e3399-e1a8-4d4b-abde-9fbe6fb77825', 47, N'Де я можу залишити відгук?', N'<p>A: Щоб залишити відгук або коментарій до квесту перейдіть у вкладку <a href="../Quests/QuestInfo.aspx">Інформація про квест</a>.</p>')
+INSERT INTO [dbo].[FAQ] ([gid], [id], [Question], [Answer]) VALUES (N'92e70654-6337-40c8-8de0-2b1fcfb0e165', 56, N'Де я можу переглянути або змінити особисту інформацію?', N'<p>A: Натисніть на силует людини у шапці сайту та оберіть у випадаючому меню вкладку "Особистий кабінет". </p>')
+INSERT INTO [dbo].[FAQ] ([gid], [id], [Question], [Answer]) VALUES (N'c1170bf7-4601-4e54-8391-1a833a9b8e87', 49, N'Чому я не можу лайкнути квест?', N'<p>A: Сума усіх лайків чекпоінтів є кількістю лайків квесту.</p>')
+INSERT INTO [dbo].[FAQ] ([gid], [id], [Question], [Answer]) VALUES (N'cf55cd1e-d137-4b37-8d68-54c7bdec8738', 54, N'Я не набрав достатньої кількості балів для проходження порогового балу для чекпоінту. Я можу розпочати наступний чекпоінт?', N'<p>A: Ні, ви повинні переграти поточний чекпоінт до його успішного завершення.</p>')
+INSERT INTO [dbo].[FAQ] ([gid], [id], [Question], [Answer]) VALUES (N'df8ffe46-1d01-4a30-9b7f-639ecf814f34', 52, N'Як розпочати виконання завдань?', N'<p>A: Натисніть на мапі на прапорець жовтого кольору. У боковому меню ознайомтесь з історичною довідкою обраного чекпоінту та натисніть кнопку "Розпочати".<p/>')
+INSERT INTO [dbo].[FAQ] ([gid], [id], [Question], [Answer]) VALUES (N'e62e140d-f3c0-4367-9a4b-d09e2c69f5ef', 46, N'Де я можу переглянути повну історичну довідку про обраний квест?', N'<p>A: Після того, як ви розпочали хоча б один квест ви можете перейти у вкладку <a href="../HistoricalInformation.aspx">Довідка</a> та переглянути повну історичну довідку поточного квесту.</p>
+')
+SET IDENTITY_INSERT [dbo].[FAQ] OFF
 ALTER TABLE [dbo].[Comments]
     ADD CONSTRAINT [FK_Comments_Quests] FOREIGN KEY ([QuestGID]) REFERENCES [dbo].[Quests] ([gid])
 ALTER TABLE [dbo].[UsersInRoles]
