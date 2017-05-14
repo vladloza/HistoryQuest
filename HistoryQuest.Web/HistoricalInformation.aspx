@@ -4,7 +4,7 @@
 <asp:Content runat="server" ContentPlaceHolderID="noForm">
     <div class="wrapper">
         <div class="container">
-            <section class="orange-section clearfix">
+            <section class="orange-section historical clearfix">
                 <h2>Історична довідка</h2>
                 <hr style="width:40%"/>
                 <div class="info-body historical" runat="server" id="questFullInfo"></div>
