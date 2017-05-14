@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeBehind="StudentAccount.aspx.cs" Inherits="HistoryQuest.Account.StudentAccount" EnableEventValidation="false"%>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeBehind="StudentAccount.aspx.cs" Inherits="HistoryQuest.Account.StudentAccount" EnableEventValidation="false" Title="Кабінет"%>
 
 <%@ Register TagPrefix="rc" TagName="reg" Src="~/Controls/ChangeInfo.ascx" %>
 <%@ Register TagPrefix="cpc" TagName="changePass" Src="~/Controls/ChangePassword.ascx" %>
@@ -37,6 +37,10 @@
                     <div class="card statistics">
                         <div class="small-header clearfix">
                             <h2>Досягнення</h2>
+                        </div>
+                        <div class="launching">
+                            <i class="fa fa-cog" aria-hidden="true"></i>
+                            <h4>We're working on it.</h4>
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="HistoryQuest.Default" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="HistoryQuest.Default" Title="Моя Україна"%>
 
 <%@ Import Namespace="HistoryQuest.Domain" %>
 <%@ Import Namespace="HistoryQuest.WebServices" %>

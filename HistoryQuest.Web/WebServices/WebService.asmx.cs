@@ -34,7 +34,7 @@ namespace HistoryQuest.WebServices
             return null;
         }
 
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public object GetPupilsToTeacherRequests()
         {
             var requests = (from ptr in Repository.CurrentDataContext.PupilsToTeachersRequests
@@ -63,7 +63,7 @@ namespace HistoryQuest.WebServices
             return requests;
         }
 
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public void AddComment(Guid questGuid, string text)
         {
             Comment comment = new Comment()
@@ -78,7 +78,7 @@ namespace HistoryQuest.WebServices
             Repository.CurrentDataContext.SubmitChanges();
         }
 
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public void AddStudent(Guid studentGID)
         {
             var request = Repository.CurrentDataContext.PupilsToTeachersRequests.SingleOrDefault(ptr => ptr.PupilGID == studentGID && ptr.TeacherGID == Repository.CurrentUser.FaceGID);
@@ -91,7 +91,7 @@ namespace HistoryQuest.WebServices
             }
         }
 
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public void DeleteStudent(Guid studentGID)
         {
             var request = Repository.CurrentDataContext.PupilsToTeachersRequests.SingleOrDefault(ptr => ptr.PupilGID == studentGID && ptr.TeacherGID == Repository.CurrentUser.FaceGID);
@@ -181,7 +181,7 @@ namespace HistoryQuest.WebServices
             return url;
         }
 
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public object GetQuestCheckPoints(Guid questGID)
         {
             Dictionary<string, object> result = new Dictionary<string, object>();
@@ -387,7 +387,7 @@ namespace HistoryQuest.WebServices
             }
         }
 
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public object GetCheckPointLikesCount(Guid checkPointGID)
         {
             int count = Repository.CurrentDataContext.Likes.Where(l => l.CheckPointGID == checkPointGID).Count();
@@ -397,7 +397,7 @@ namespace HistoryQuest.WebServices
             return new { count, liked };
         }
 
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public void UpdateCheckPointLikesCount(Guid checkPointGID)
         {
             var request = Repository.CurrentDataContext.Likes
@@ -450,7 +450,7 @@ namespace HistoryQuest.WebServices
 
             return url;
         }
-        
+
         [WebMethod(EnableSession = true)]
         public string OpenCreateCheckPointPage(Guid? checkPointGID)
         {
