@@ -33,7 +33,7 @@ namespace HistoryQuest.Quests
 
                 ResultTitle.InnerText = checkPointToTry.CheckPoint.ThresholdScore == null || 
                     totalScore >= checkPointToTry.CheckPoint.ThresholdScore.Value ? "Тест пройдений!" : "Тест не пройдений!";
-                
+
                 WebServices.WebService.CleanCheckPointSession();
             }
             else
