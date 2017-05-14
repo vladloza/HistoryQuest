@@ -11,9 +11,10 @@ CreateTask.Initialize = function () {
 
 CreateTask.InitializeDropDown = function (TaskTypes) {
     for(var i = 0; i < TaskTypes.length; i++) {
-        var el = document.createElement("option");
-        el.textContent = TaskTypes[i].Name;
+        var el = document.createElement("option");     
         el.value = TaskTypes[i].gid;
+        el.textContent = TaskTypes[i].Caption;
+        el.setAttribute('name', TaskTypes[i].Name);
         window.DropDownTaskType.appendChild(el);
     }
     CreateTask.DropDownChanged();
@@ -21,7 +22,7 @@ CreateTask.InitializeDropDown = function (TaskTypes) {
     window.DropDownTaskType.onchange = CreateTask.DropDownChanged;
 };
 CreateTask.DropDownChanged = function () {
-    CreateTask.TaskTypeName = $("#DropDownTaskType").find(":selected").text();
+    CreateTask.TaskTypeName = $("#DropDownTaskType").find(":selected")[0].getAttribute('name');
     CreateTask.TaskTypeGID = $("#DropDownTaskType").find(":selected")[0].value;
 
     $.each(window.TaskTypes, function (a, item) {

@@ -22,7 +22,8 @@ namespace HistoryQuest.Constructor
                 {
                     cp.id,
                     cp.gid,
-                    cp.Name
+                    cp.Name,
+                    cp.Caption
                 }).OrderBy(cp => cp.id).ToList();
 
                 JavaScriptSerializer serializer = new JavaScriptSerializer();
