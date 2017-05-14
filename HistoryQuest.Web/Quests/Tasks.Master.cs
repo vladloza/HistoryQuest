@@ -54,8 +54,8 @@ namespace HistoryQuest.Quests
 
         protected void GiveUpButton_Click(object sender, EventArgs e)
         {
-            Session.Clear();
-            Response.Redirect("/Quests/Quest.aspx");
+            WebServices.WebService.CleanCheckPointSession();
+            Response.Redirect("/Default.aspx");
         }
     }
 }

@@ -30,9 +30,9 @@ namespace HistoryQuest.Constructor
                     ContructorTitle.InnerText = string.Format("Створення нового квесту");
                 }
 
-                QuestName.Value = quest.Name;
-                ShortInfo.InnerText = quest.ShortInfo;
-                FullInfo.InnerText = quest.FullInfo;
+                QuestName.Value = HttpUtility.HtmlEncode(quest.Name);
+                ShortInfo.InnerText = HttpUtility.HtmlEncode(quest.ShortInfo);
+                FullInfo.InnerText = HttpUtility.HtmlEncode(quest.FullInfo);
 
                 if (quest.CheckPoints.Count > 0)
                 {
@@ -40,7 +40,7 @@ namespace HistoryQuest.Constructor
                     {
                         id = cp.OrderId,
                         cp.gid,
-                        cp.Name,
+                        Name = HttpUtility.HtmlEncode(cp.Name),
                         Info = HttpUtility.HtmlEncode(cp.Info),
                         cp.TasksCount,
                         cp.ThresholdScore,

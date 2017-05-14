@@ -5,9 +5,11 @@
     this.ReturnDelay = 1500; //ms
     this.MarkersDropDelay = 1200; //ms
 
-    this.googleMap = null;
+    QuestMap.googleMap = null;
     this.checkPointsLis = null;
 };
+
+QuestMap.googleMap = null;
 
 QuestMap.CenterOfUkraine = { lat: 49.0, lng: 32.0 };
 
@@ -99,7 +101,7 @@ QuestMap.prototype = {
         }
     },
     onLoadSuccess: function (result) {
-        this.googleMap = new google.maps.Map(document.getElementById('map'), {
+        QuestMap.googleMap = new google.maps.Map(document.getElementById('map'), {
             center: QuestMap.CenterOfUkraine,
             zoom: 6,
             minZoom: 6,
@@ -108,9 +110,9 @@ QuestMap.prototype = {
             zoomControl: true
         });
 
-        this.googleMap.setOptions({ styles: QuestMap.styles["retro"] });
+        QuestMap.googleMap.setOptions({ styles: QuestMap.styles["retro"] });
 
-        this.googleMap.addListener('center_changed', Function.createDelegate(this, this.fixMapCenter));
+        QuestMap.googleMap.addListener('center_changed', Function.createDelegate(this, this.fixMapCenter));
 
         if (result && result.CheckPoints) {
             var createListener = function (checkPointNum) {
@@ -136,7 +138,7 @@ QuestMap.prototype = {
                     var coords = result.CheckPoints[i].GeoCoordinates.split(';');
                     var marker = new google.maps.Marker({
                         position: { lat: Number(coords[0]), lng: Number(coords[1]) },
-                        map: this.googleMap,
+                        map: QuestMap.googleMap,
                         animation: google.maps.Animation.DROP,
                         title: result.CheckPoints[i].Name
                     });
@@ -169,14 +171,14 @@ QuestMap.prototype = {
         window.clearTimeout(this.centerChangedTimeoutID);
         if (this.isCenterOutOfBorder()) {
             this.centerChangedTimeoutID = window.setTimeout(Function.createDelegate(this, function () {
-                this.googleMap.panTo(QuestMap.CenterOfUkraine);
+                QuestMap.googleMap.panTo(QuestMap.CenterOfUkraine);
             }), this.ReturnDelay);
         }
     },
 
     isCenterOutOfBorder: function () {
         var center = new google.maps.LatLng(QuestMap.CenterOfUkraine.lat, QuestMap.CenterOfUkraine.lng);
-        return QuestMap.CalculateDistance(center, this.googleMap.center) > this.MaxDistanceFromCenter;
+        return QuestMap.CalculateDistance(center, QuestMap.googleMap.center) > this.MaxDistanceFromCenter;
     }
 };
 
@@ -206,7 +208,7 @@ QuestMap.InitializeTaskMap = function () {
 
         this.marker = new google.maps.Marker({
             position: location,
-            map: googleMap
+            map: QuestMap.googleMap
         });
 
         this.marker.setIcon('/libs/img/checkpoint_current.png');
@@ -216,7 +218,7 @@ QuestMap.InitializeTaskMap = function () {
     var mapContainer = document.getElementById("map");
 
     if (mapContainer !== null) {
-        var googleMap = new google.maps.Map(mapContainer, {
+        QuestMap.googleMap = new google.maps.Map(mapContainer, {
             center: QuestMap.CenterOfUkraine,
             zoom: 6,
             minZoom: 6,
@@ -224,12 +226,12 @@ QuestMap.InitializeTaskMap = function () {
             disableDefaultUI: true,
             zoomControl: true
         });
-
-        googleMap.setOptions({ styles: QuestMap.styles["retro"] });
+        
+        QuestMap.googleMap.setOptions({ styles: QuestMap.styles["retro"] });
 
         var marker = null;
 
-        google.maps.event.addListener(googleMap, 'click', Function.createDelegate(this, function (event) {
+        google.maps.event.addListener(QuestMap.googleMap, 'click', Function.createDelegate(this, function (event) {
             placeMarker(event.latLng);
         }));
 

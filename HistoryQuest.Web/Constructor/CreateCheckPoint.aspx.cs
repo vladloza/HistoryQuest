@@ -37,8 +37,8 @@ namespace HistoryQuest.Constructor
                 }
 
                 CheckPointDiv.Attributes["checkPointGID"] = checkPoint.gid.ToString();
-                CheckPointName.Value = checkPoint.Name;
-                Info.InnerText = checkPoint.Info;
+                CheckPointName.Value = HttpUtility.HtmlEncode(checkPoint.Name);
+                Info.InnerText = HttpUtility.HtmlEncode(checkPoint.Info);
                 TasksCount.Value = checkPoint.TasksCount.ToString();
                 ThresholdScore.Value = checkPoint.ThresholdScore.HasValue ? checkPoint.ThresholdScore.Value.ToString() : "";
 

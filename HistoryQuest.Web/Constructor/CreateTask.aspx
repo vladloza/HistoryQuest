@@ -5,84 +5,88 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="ContentPlaceHolder">
     <div class="wrapper">
-        <div class="info" id="TaskContainer" runat="server" ClientIDMode="Static" taskgid="">
+        <div class="info" id="TaskContainer" runat="server" clientidmode="Static" taskgid="">
             <div class="container clearfix">
                 <div class="page-content card">
                     <fieldset class="form-fieldset">
                         <label for="DropDownTaskType" class="form-label">Оберіть тип завдання:</label>
-                        <asp:DropDownList ID="DropDownTaskType" runat="server" ClientIDMode="Static" class="form-input" > 
+                        <asp:DropDownList ID="DropDownTaskType" runat="server" ClientIDMode="Static" class="form-input">
                         </asp:DropDownList>
                     </fieldset>
                 </div>
                 <div class="task">
                     <div class="page-content card" id="Types">
                         <div class="question-text create clearfix">
-                            <textarea id="QuestionText" class="form-input" placeholder="Текст запитання"></textarea>
+                            <textarea id="QuestionText" runat="server" clientidmode="Static" class="form-input" placeholder="Текст запитання"></textarea>
                         </div>
-                        <div class="question-choises" id="Test" style="display:none">
+                        <fieldset class="form-fieldset">
+                            <label for="MaxScore" class="form-label">Максимальна кількість балів</label>
+                            <input type="number" id="MaxScore" name="MaxScore" runat="server" clientidmode="Static" class="form-input" validation="text" />
+                        </fieldset>
+                        <div class="question-choises" id="Test" style="display: none">
                             <div class="variant">
                                 <label class="question-form">
                                     <input name="taskId" value="0" type="radio" />
                                     <span class="icon"><i class="fa fa-check" aria-hidden="true"></i></span>
-                                    <input type="text" class="form-input create" placeholder="Перший варіант відповіді" validation="text" answer/>
+                                    <input type="text" class="form-input create" placeholder="Перший варіант відповіді" validation="text" answer />
                                 </label>
                             </div>
                             <div class="variant">
                                 <label class="question-form">
                                     <input name="taskId" value="1" type="radio" />
                                     <span class="icon"><i class="fa fa-check" aria-hidden="true"></i></span>
-                                    <input type="text" class="form-input create" placeholder="Другий варіант відповіді" validation="text" answer/>
+                                    <input type="text" class="form-input create" placeholder="Другий варіант відповіді" validation="text" answer />
                                 </label>
                             </div>
                             <div class="variant">
                                 <label class="question-form">
                                     <input name="taskId" value="2" type="radio" />
                                     <span class="icon"><i class="fa fa-check" aria-hidden="true"></i></span>
-                                    <input type="text" class="form-input create" placeholder="Третій варіант відповіді" validation="text" answer/>
+                                    <input type="text" class="form-input create" placeholder="Третій варіант відповіді" validation="text" answer />
                                 </label>
                             </div>
                             <div class="variant">
                                 <label class="question-form">
                                     <input name="taskId" value="3" type="radio" />
                                     <span class="icon"><i class="fa fa-check" aria-hidden="true"></i></span>
-                                    <input type="text" class="form-input create" placeholder="Четвертий варіант відповіді" validation="text" answer/>
+                                    <input type="text" class="form-input create" placeholder="Четвертий варіант відповіді" validation="text" answer />
                                 </label>
                             </div>
                         </div>
-                        <div class="question-map" id="Map" style="display:none">
+                        <div class="question-map" id="Map" style="display: none">
                             <div id="map"></div>
                             <script async defer
                                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGaJ_hdTjIj5HSIH4qyVrMf379w6k_vtg&libraries=geometry&callback=QuestMap.InitializeTaskMap">
                             </script>
                         </div>
-                        <div id="Conformity" style="display:none">
+                        <div id="Conformity" style="display: none">
                             <div class="question-choises-50">
                                 <div class="variant">
                                     <label class="question-form">
                                         <input name="taskName" value="taskId" type="radio" />
                                         <span class="icon">1</span>
-                                        <input type="text" class="form-input create" question/>
+                                        <input type="text" class="form-input create" question />
                                     </label>
                                 </div>
                                 <div class="variant">
                                     <label class="question-form">
                                         <input name="taskName" value="taskId" type="radio" />
                                         <span class="icon">2</span>
-                                        <input type="text" class="form-input create" question/>
+                                        <input type="text" class="form-input create" question />
                                     </label>
                                 </div>
                                 <div class="variant">
                                     <label class="question-form">
                                         <input name="taskName" value="taskId" type="radio" />
                                         <span class="icon">3</span>
-                                        <input type="text" class="form-input create" question/>
+                                        <input type="text" class="form-input create" question />
                                     </label>
                                 </div>
                                 <div class="variant">
                                     <label class="question-form">
                                         <input name="taskName" value="taskId" type="radio" />
                                         <span class="icon">4</span>
-                                        <input type="text" class="form-input create" question/>
+                                        <input type="text" class="form-input create" question />
                                     </label>
                                 </div>
                             </div>
@@ -91,28 +95,28 @@
                                     <label class="question-form">
                                         <input name="taskName" value="taskId" type="radio" />
                                         <span class="icon">А</span>
-                                        <input type="text" class="form-input create" answer/>
+                                        <input type="text" class="form-input create" answer />
                                     </label>
                                 </div>
                                 <div class="variant">
                                     <label class="question-form">
                                         <input name="taskName" value="taskId" type="radio" />
                                         <span class="icon">Б</span>
-                                        <input type="text" class="form-input create" answer/>
+                                        <input type="text" class="form-input create" answer />
                                     </label>
                                 </div>
                                 <div class="variant">
                                     <label class="question-form">
                                         <input name="taskName" value="taskId" type="radio" />
                                         <span class="icon">В</span>
-                                        <input type="text" class="form-input create" answer/>
+                                        <input type="text" class="form-input create" answer />
                                     </label>
                                 </div>
                                 <div class="variant">
                                     <label class="question-form">
                                         <input name="taskName" value="taskId" type="radio" />
                                         <span class="icon">Г</span>
-                                        <input type="text" class="form-input create" answer/>
+                                        <input type="text" class="form-input create" answer />
                                     </label>
                                 </div>
                             </div>
@@ -236,10 +240,10 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class=" question-choises" id="Writing" style="display:none">
+                        <div class=" question-choises" id="Writing" style="display: none">
                             <div class="variant">
                                 <label class="caption">Відповідь</label>
-                                <input class="input-answer" autocomplete="off" type="text" validation="text" rightanswer/>
+                                <input class="input-answer" autocomplete="off" type="text" validation="text" rightanswer />
                             </div>
                         </div>
                         <div id="TestWithImage"></div>

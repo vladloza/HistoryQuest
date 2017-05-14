@@ -13,7 +13,7 @@ namespace HistoryQuest.Domain.Tasks.XmlGenerators
         {
             XElement result = new XElement("Task");
 
-            List<Dictionary<string, object>> questions = (source["questions"] as IEnumerable<object>).Cast<Dictionary<string, object>>().ToList();
+            var questions = (source["questions"] as IEnumerable<object>).Cast<string>();
 
             XElement questionsElement = new XElement("questions");
             foreach (var question in questions)
@@ -21,8 +21,8 @@ namespace HistoryQuest.Domain.Tasks.XmlGenerators
                 questionsElement.Add(new XElement("question", new XAttribute("text", question)));
             }
             result.Add(questionsElement);
-            
-            List<Dictionary<string, object>> answers = (source["answers"] as IEnumerable<object>).Cast<Dictionary<string, object>>().ToList();
+
+            var answers = (source["answers"] as IEnumerable<object>).Cast<string>();
 
             XElement answersElement = new XElement("answers");
             foreach (var answer in answers)
@@ -30,8 +30,8 @@ namespace HistoryQuest.Domain.Tasks.XmlGenerators
                 answersElement.Add(new XElement("answer", new XAttribute("text", answer)));
             }
             result.Add(answersElement);
-
-            List<Dictionary<string, object>> rightanswers = (source["rightanswers"] as IEnumerable<object>).Cast<Dictionary<string, object>>().ToList();
+            
+            var rightanswers = source["rightanswer"].ToString().Split(';');
 
             XElement rightanswersElement = new XElement("rightanswers");
             foreach (var rightanswer in rightanswers)

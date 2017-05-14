@@ -595,6 +595,14 @@ namespace HistoryQuest.WebServices
                     }
                 }
 
+                List<Dictionary<string, object>> tasks = (data["Tasks"] as IEnumerable<object>).Cast<Dictionary<string, object>>().ToList();
+                var tasksGIDs = tasks.Select(t => new Guid(t["gid"].ToString())).ToList();
+                var tasksToDelete = checkPoint.Tasks.Where(t => !tasksGIDs.Contains(t.gid)).ToList();
+                foreach (var task in tasksToDelete)
+                {
+                    checkPoint.Tasks.Remove(task);
+                }
+
                 checkPoint.ParentGID = data["ParentGID"].ToString() != "" ? new Guid(data["ParentGID"].ToString()) : new Guid?();
                 checkPoint.Name = data["Name"].ToString();
                 checkPoint.Info = data["Info"].ToString();
@@ -697,49 +705,49 @@ namespace HistoryQuest.WebServices
                         existingQuest.CheckPoints.Add(existingCheckPoint);
                     }
 
-                    //foreach (var createdTask in createdCheckPoint.Tasks)
-                    //{
-                    //    var existingTask = existingCheckPoint.Tasks.SingleOrDefault(t => t.gid == createdTask.gid);
-                    //    if (existingTask != null)
-                    //    {
-                    //        existingTask.Text = createdTask.Text;
-                    //        existingTask.MaxScore = createdTask.MaxScore;
-                    //        existingTask.TaskTypeGID = createdTask.TaskTypeGID;
-                    //        existingTask.SourceFile = createdTask.SourceFile;
-                    //        existingTask.AuthorGID = createdTask.AuthorGID;
-                    //    }
-                    //    else
-                    //    {
-                    //        var task = new HistoryQuest.Domain.Task()
-                    //        {
-                    //            gid = createdTask.gid,
-                    //            Text = createdTask.Text,
-                    //            MaxScore = createdTask.MaxScore,
-                    //            TaskTypeGID = createdTask.TaskTypeGID,
-                    //            SourceFile = createdTask.SourceFile,
-                    //            AuthorGID = createdTask.AuthorGID,
-                    //            CheckPointGID = createdTask.CheckPointGID
-                    //        };
+                    foreach (var createdTask in createdCheckPoint.Tasks)
+                    {
+                        var existingTask = existingCheckPoint.Tasks.SingleOrDefault(t => t.gid == createdTask.gid);
+                        if (existingTask != null)
+                        {
+                            existingTask.Text = createdTask.Text;
+                            existingTask.MaxScore = createdTask.MaxScore;
+                            existingTask.TaskTypeGID = createdTask.TaskTypeGID;
+                            existingTask.SourceFile = createdTask.SourceFile;
+                            existingTask.AuthorGID = createdTask.AuthorGID;
+                        }
+                        else
+                        {
+                            var task = new HistoryQuest.Domain.Task()
+                            {
+                                gid = createdTask.gid,
+                                Text = createdTask.Text,
+                                MaxScore = createdTask.MaxScore,
+                                TaskTypeGID = createdTask.TaskTypeGID,
+                                SourceFile = createdTask.SourceFile,
+                                AuthorGID = createdTask.AuthorGID,
+                                CheckPointGID = createdTask.CheckPointGID
+                            };
 
-                    //        existingCheckPoint.Tasks.Add(task);
-                    //    }
-                    //}
+                            existingCheckPoint.Tasks.Add(task);
+                        }
+                    }
 
-                    //List<Task> deletedTasks = new List<Task>();
-                    //foreach (var existingTask in existingCheckPoint.Tasks)
-                    //{
-                    //    if (!createdCheckPoint.Tasks.Any(t => t.gid == existingTask.gid))
-                    //    {
-                    //        deletedTasks.Add(existingTask);
-                    //    }
-                    //}
-                    
-                    //foreach (var deletedTask in deletedTasks)
-                    //{
-                    //    existingCheckPoint.Tasks.Remove(deletedTask);
-                    //}
+                    List<Task> deletedTasks = new List<Task>();
+                    foreach (var existingTask in existingCheckPoint.Tasks)
+                    {
+                        if (!createdCheckPoint.Tasks.Any(t => t.gid == existingTask.gid))
+                        {
+                            deletedTasks.Add(existingTask);
+                        }
+                    }
 
-                    //Repository.CurrentDataContext.Tasks.DeleteAllOnSubmit(deletedTasks);
+                    foreach (var deletedTask in deletedTasks)
+                    {
+                        existingCheckPoint.Tasks.Remove(deletedTask);
+                    }
+
+                    Repository.CurrentDataContext.Tasks.DeleteAllOnSubmit(deletedTasks);
                 }
 
                 List<CheckPoint> deletedCheckPoints = new List<CheckPoint>();

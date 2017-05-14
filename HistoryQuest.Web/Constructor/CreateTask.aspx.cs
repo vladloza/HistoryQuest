@@ -22,6 +22,9 @@ namespace HistoryQuest.Constructor
 
                 TaskContainer.Attributes["taskgid"] = task.gid.ToString();
 
+                QuestionText.InnerText = HttpUtility.HtmlEncode(task.Text);
+                MaxScore.Value = task.MaxScore.ToString();
+
                 var taskTypesList = Repository.CurrentDataContext.TaskTypes.Select(cp => new
                 {
                     cp.id,

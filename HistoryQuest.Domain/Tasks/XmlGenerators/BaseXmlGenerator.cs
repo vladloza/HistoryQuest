@@ -13,7 +13,7 @@ namespace HistoryQuest.Domain.Tasks.XmlGenerators
         {
             XElement result =  new XElement("Task");
 
-            List<Dictionary<string, object>> answers = (source["answers"] as IEnumerable<object>).Cast<Dictionary<string, object>>().ToList();
+            var answers = (source["answers"] as IEnumerable<object>).Cast<string>();
 
             XElement answersElement = new XElement("answers");
             foreach (var answer in answers)

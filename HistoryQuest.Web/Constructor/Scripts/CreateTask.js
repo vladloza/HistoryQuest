@@ -7,7 +7,26 @@ CreateTask.Initialize = function () {
     if (window.TaskTypes && window.DropDownTaskType) {
         CreateTask.DropDownChanged();
         window.DropDownTaskType.onchange = CreateTask.DropDownChanged;
+        if (window.CreatedTask) {
+            CreateTask.InitializeForEdit();
+        }
     }
+};
+
+CreateTask.InitializeForEdit = function () {
+    var parentContainer = document.getElementById(CreateTask.TaskTypeName);
+};
+
+CreateTask.InitializeTestTaskForEdit = function (task, parentContainer) {
+    var elements = parentContainer.querySelectorAll('input[answer]');
+    var rightID = parentContainer.querySelector('input[name=taskId]:checked').value;
+
+    for (var i = 0; i < elements.length; i++) {
+        task.Source.answers[i] = elements[i].value;
+    }
+    task.Source.rightanswer = rightID;
+
+    return task;
 };
 
 CreateTask.InitializeDropDown = function (TaskTypes) {
@@ -32,6 +51,10 @@ CreateTask.DropDownChanged = function () {
         document.getElementById(item.Name).style.display = 'none';
     });
     document.getElementById(CreateTask.TaskTypeName).style.display = 'block';
+
+    var center = QuestMap.googleMap.getCenter();
+    google.maps.event.trigger(QuestMap.googleMap, 'resize');
+    QuestMap.googleMap.setCenter(center);
 };
 
 CreateTask.GetTask = function () {
@@ -41,7 +64,7 @@ CreateTask.GetTask = function () {
     task.TaskGID = document.getElementById("TaskContainer").attributes.taskgid.value;
     task.Text = document.getElementById("QuestionText").value;
     task.TaskTypeGID = CreateTask.TaskTypeGID;
-    task.MaxScore = 10;
+    task.MaxScore = document.getElementById("MaxScore").value;
     task.Source = {
         questions: [],
         answers: [],
@@ -66,7 +89,7 @@ CreateTask.GetTask = function () {
 };
 
 CreateTask.CreateMapTask = function (task, parentContainer) {
-    var map = parentContainer.getElementById("map");
+    var map = document.getElementById("map");
 
     if (map && map.attributes.userAnswer) {
         task.Source.rightanswer = map.attributes.userAnswer.value;

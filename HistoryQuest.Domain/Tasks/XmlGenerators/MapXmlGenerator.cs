@@ -13,7 +13,9 @@ namespace HistoryQuest.Domain.Tasks.XmlGenerators
         {
             XElement result = new XElement("Task");
 
-            result.Add(new XElement("rightanswer", new XAttribute("value", source["rightanswer"]), new XAttribute("maxError", source["maxError"])));
+            int maxError = source.ContainsKey("maxError") ? int.Parse(source["maxError"].ToString()) : 10;
+
+            result.Add(new XElement("rightanswer", new XAttribute("value", source["rightanswer"]), new XAttribute("maxError", maxError)));
 
             return result;
         }

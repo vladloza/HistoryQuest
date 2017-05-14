@@ -79,7 +79,8 @@ CreateQuest.AddTasksTableRow = function (item, table) {
     newCellText.appendChild(document.createTextNode(item.Text));
     newCellMaxScore.appendChild(document.createTextNode(item.MaxScore));
     newCellType.appendChild(document.createTextNode(taskType.Name));
-    newCellButtons.innerHTML = '<a onclick="WebService.SaveCheckPoint(CreateQuest.GetCheckPoint(), false, function () { WebService.OpenCreateTaskPage(\'' + item.gid + '\'); });"><i class="fa fa-edit" aria-hidden="true"></i></a><a onclick="CreateQuest.RemoveTask(\'' + item.gid + '\')"><i class="fa fa-times" aria-hidden="true"></i></a>';
+    //<a onclick="WebService.SaveCheckPoint(CreateQuest.GetCheckPoint(), false, function () { WebService.OpenCreateTaskPage(\'' + item.gid + '\'); });"><i class="fa fa-edit" aria-hidden="true"></i></a>
+    newCellButtons.innerHTML = '<a onclick="CreateQuest.RemoveTask(\'' + item.gid + '\')"><i class="fa fa-times" aria-hidden="true"></i></a>';
 };
 
 CreateQuest.RemoveTask = function (gid) {
@@ -108,5 +109,6 @@ CreateQuest.GetCheckPoint = function () {
     checkPoint.ThresholdScore = document.getElementById("ThresholdScore").value;
     checkPoint.ParentGID = document.getElementById("DropDownParent").value;
     checkPoint.GeoCoordinates = document.getElementById("map").attributes.userAnswer.value;
+    checkPoint.Tasks = window.CreatedTasks ? window.CreatedTasks : [];
     return checkPoint;
 };
