@@ -35,12 +35,6 @@
                     </div>
                     <div class="card statistic">
                         <div class="small-header clearfix">
-                            <i class="fa fa-pie-chart"></i>
-                            <h2>Статистика</h2>
-                        </div>
-                    </div>
-                    <div class="card statistic">
-                        <div class="small-header clearfix">
                             <i class="fa fa-clipboard" aria-hidden="true"></i>
                             <h2>Звіти</h2>
                         </div>

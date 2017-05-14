@@ -38,6 +38,10 @@
                         <div class="small-header clearfix">
                             <h2>Досягнення</h2>
                         </div>
+                        <div class="launching">
+                            <i class="fa fa-cog" aria-hidden="true"></i>
+                            <h4>We're sorry...We're working on it.</h4>
+                        </div>
                     </div>
                 </div>
                 <div class="main tab-pane fade" id="edit">
