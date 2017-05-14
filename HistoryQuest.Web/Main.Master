@@ -13,7 +13,7 @@
     <script src="../libs/js/jquery-1.9.1.min.js"></script>
     <script src="../libs/js/preLoader.js"></script>
     <script src="../libs/js/radialBar.js"></script>
-    <title></title>
+    <title>Моя Україна</title>
     <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
     <link rel="stylesheet" href="libs/css/main.css" />
 </head>
