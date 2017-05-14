@@ -185,10 +185,11 @@ namespace HistoryQuest.WebServices
         public object GetQuestCheckPoints(Guid questGID)
         {
             Dictionary<string, object> result = new Dictionary<string, object>();
-
+            
             try
             {
-                HistoryQuest.Domain.Try userTry = Repository.CurrentUser.Tries.SingleOrDefault(t => t.QuestGID == questGID && !t.IsSuccessful.HasValue);
+                HistoryQuest.Domain.Try userTry = Repository.CurrentDataContext.Tries.SingleOrDefault(t => t.UserGID == Repository.CurrentUser.gid &&
+                    t.QuestGID == questGID && !t.IsSuccessful.HasValue);
                 HistoryQuest.Domain.Quest quest = userTry != null ? userTry.Quest : null;
 
                 List<Guid> completedCheckPoints = new List<Guid>();
@@ -493,13 +494,36 @@ namespace HistoryQuest.WebServices
         }
 
         [WebMethod(EnableSession = true)]
-        public string OpenCreateTaskPage(Guid taskTypeGID, Guid? taskGID)
+        public string OpenCreateTaskPage(Guid? taskGID)
         {
-            string url = "/Constructor/CreateCheckPoint.aspx";
+            string url = "/Constructor/CreateTask.aspx";
 
-            if (HttpContext.Current.Session != null && Session["CreatedQuest"] != null)
+            if (HttpContext.Current.Session != null && Session["CreatedCheckPoint"] != null)
             {
+                HistoryQuest.Domain.CheckPoint checkPoint = (HistoryQuest.Domain.CheckPoint)Session["CreatedCheckPoint"];
 
+                if (!taskGID.HasValue)
+                {
+                    taskGID = Guid.NewGuid();
+                }
+
+                HistoryQuest.Domain.Task task = checkPoint.Tasks.SingleOrDefault(t => t.gid == taskGID.Value);
+
+                if (task == null)
+                {
+                    task = new Task()
+                    {
+                        gid = taskGID.Value,
+                        CheckPointGID = checkPoint.gid,
+                        AuthorGID = Repository.CurrentUser.gid,
+                        MaxScore = 0,
+                        Text = "Текст завдання",
+                        TaskTypeGID = Constants.TestTaskTypeGID,
+                        SourceFile = null
+                    };
+                }
+
+                Session["CreatedTask"] = task;
             }
             else
             {
@@ -744,6 +768,7 @@ namespace HistoryQuest.WebServices
             {
                 HttpContext.Current.Session["CreatedQuest"] = null;
                 HttpContext.Current.Session["CreatedCheckPoint"] = null;
+                HttpContext.Current.Session["CreatedTask"] = null;
             }
         }
 

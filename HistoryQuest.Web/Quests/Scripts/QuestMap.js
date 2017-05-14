@@ -1,6 +1,6 @@
 ﻿QuestMap = function () {
     QuestMap.initializeBase(this);
-    
+
     this.MaxDistanceFromCenter = 700; //km
     this.ReturnDelay = 1500; //ms
     this.MarkersDropDelay = 1200; //ms
@@ -156,16 +156,10 @@ QuestMap.prototype = {
             $("#menu-toggle").attr("style", "display: none");
             $("#quest-info").toggleClass("active", false);
 
-            var currentCheckPointId; 
-            for (var i = 0; i < result.CheckPoints.length; ++i) { 
-                if (result.CheckPoints[i].IsCurrent== true) { 
-                    currentCheckPointId = i; 
-                break; 
-            } 
-        }
+            var currentCheckPointId = QuestMap.FindIndex(result.CheckPoints, function (item) { return item.IsCurrent === true; });
 
             if (currentCheckPointId > -1) {
-               $("#menu-toggle").attr("style", "");
+                $("#menu-toggle").attr("style", "");
                 createListener(currentCheckPointId)();
             }
         }
@@ -184,6 +178,16 @@ QuestMap.prototype = {
         var center = new google.maps.LatLng(QuestMap.CenterOfUkraine.lat, QuestMap.CenterOfUkraine.lng);
         return QuestMap.CalculateDistance(center, this.googleMap.center) > this.MaxDistanceFromCenter;
     }
+};
+
+QuestMap.FindIndex = function (collection, predicate) {
+    for (var i = 0; i < collection.length; i++) {
+        if (predicate(collection[i])) {
+            return i;
+        }
+    }
+
+    return -1;
 };
 
 QuestMap.InitializeMap = function () {
@@ -230,7 +234,7 @@ QuestMap.InitializeTaskMap = function () {
         }));
 
         if (mapContainer.attributes.startCoords) {
-            var coords = mapContainer.attributes.startCoords.value.split(';'); 
+            var coords = mapContainer.attributes.startCoords.value.split(';');
             placeMarker(new google.maps.LatLng(Number(coords[0]), Number(coords[1])));
         }
     }

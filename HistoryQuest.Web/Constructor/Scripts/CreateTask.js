@@ -1,17 +1,17 @@
-﻿CreateTask = function () {};
+﻿CreateTask = function () { };
 
 CreateTask.TaskTypeName;
 CreateTask.TaskTypeGID;
 
 CreateTask.Initialize = function () {
     if (window.TaskTypes && window.DropDownTaskType) {
-        CreateTask.InitializeDropDown(window.TaskTypes);
+        //CreateTask.InitializeDropDown(window.TaskTypes);
     }
 };
 
 CreateTask.InitializeDropDown = function (TaskTypes) {
-    for(var i = 0; i < TaskTypes.length; i++) {
-        var el = document.createElement("option");     
+    for (var i = 0; i < TaskTypes.length; i++) {
+        var el = document.createElement("option");
         el.value = TaskTypes[i].gid;
         el.textContent = TaskTypes[i].Caption;
         el.setAttribute('name', TaskTypes[i].Name);
@@ -21,9 +21,11 @@ CreateTask.InitializeDropDown = function (TaskTypes) {
 
     window.DropDownTaskType.onchange = CreateTask.DropDownChanged;
 };
+
 CreateTask.DropDownChanged = function () {
-    CreateTask.TaskTypeName = $("#DropDownTaskType").find(":selected")[0].getAttribute('name');
     CreateTask.TaskTypeGID = $("#DropDownTaskType").find(":selected")[0].value;
+    var taskType = window.TaskTypes.firstOrDefault(function (item) { return CreateTask.TaskTypeGID.toUpperCase() === item.gid.toUpperCase(); });
+    CreateTask.TaskTypeName = taskType.Name;
 
     $.each(window.TaskTypes, function (a, item) {
         document.getElementById(item.Name).style.display = 'none';
@@ -35,18 +37,20 @@ CreateTask.GetTask = function () {
     var task = {};
     var parentContainer = document.getElementById(CreateTask.TaskTypeName);
 
+    task.TaskGID = document.getElementById("TaskContainer").attributes.taskgid.value;
     task.Text = document.getElementById("QuestionText").value;
     task.TaskTypeGID = CreateTask.TaskTypeGID;
+    task.MaxScore = 10;
     task.Source = {
         questions: [],
         answers: [],
-        rightanswer:""
+        rightanswer: ""
     };
     switch (CreateTask.TaskTypeName) {
         case 'Map':
             CreateTask.CreateMapTask(task, parentContainer);
             break;
-        case 'Test':          
+        case 'Test':
             CreateTask.CreateTestTask(task, parentContainer);
             break;
         case 'Writing':
@@ -59,16 +63,18 @@ CreateTask.GetTask = function () {
     }
     return task;
 };
+
 CreateTask.CreateMapTask = function (task, parentContainer) {
     var map = parentContainer.getElementById("map");
 
     if (map && map.attributes.userAnswer) {
-        task.Source.rightanswer =  map.attributes.userAnswer.value;
+        task.Source.rightanswer = map.attributes.userAnswer.value;
     }
     else {
-        task.Source.rightanswer = "(0.0, 0.0)";
+        task.Source.rightanswer = "0;0";
     }
 };
+
 CreateTask.CreateTestTask = function (task, parentContainer) {
     var elements = parentContainer.querySelectorAll('input[answer]');
     var rightID = parentContainer.querySelector('input[name=taskId]:checked').value;
@@ -80,9 +86,11 @@ CreateTask.CreateTestTask = function (task, parentContainer) {
 
     return task;
 };
+
 CreateTask.CreateWritingTask = function (task, parentContainer) {
     task.Source.rightanswer = parentContainer.querySelector('input[rightanswer]').value;
 };
+
 CreateTask.CreateConformityTask = function (task, parentContainer) {
     var questions = parentContainer.querySelectorAll('input[question]');
     var answers = parentContainer.querySelectorAll('input[answer]');

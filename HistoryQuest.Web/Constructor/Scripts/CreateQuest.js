@@ -2,11 +2,15 @@
 
 };
 
-CreateQuest.CheckPointsList = [];
-
 CreateQuest.Initialize = function () {
     if (window.CreatedCheckPoints && window.CreatedCheckPoints.length >= 0) {
        CreateQuest.AddCheckPoinsTableRows(window.CreatedCheckPoints);
+    }
+};
+
+CreateQuest.InitializeTasksTable = function () {
+    if (window.CreatedTasks && window.CreatedTasks.length >= 0) {
+        CreateQuest.AddTasksTableRows(window.CreatedTasks);
     }
 };
 
@@ -37,16 +41,51 @@ CreateQuest.AddCheckPoinsTableRow = function (item, table) {
     newCellTasksCount.appendChild(document.createTextNode(item.TasksCount));
     newCellThresholdScore.appendChild(document.createTextNode(item.ThresholdScore ? item.ThresholdScore : ""));
     newCellButtons.innerHTML = '<a onclick="WebService.SaveQuest(CreateQuest.GetQuest(), false, function () { WebService.OpenCreateCheckPointPage(\'' + item.gid + '\'); });"><i class="fa fa-edit" aria-hidden="true"></i></a><a onclick="CreateQuest.RemoveCheckPoint(\'' + item.gid + '\')"><i class="fa fa-times" aria-hidden="true"></i></a>';
-
-    CreateQuest.CheckPointsList.push(item);
 };
 
 CreateQuest.RemoveCheckPoint = function (gid) {
-    var checkPointIndex = window.CreatedCheckPoints.findIndex(function (item) { return item.gid.toUpperCase() === gid.toUpperCase(); });
+    var checkPointIndex = QuestMap.FindIndex(window.CreatedCheckPoints, function (item) { return item.gid.toUpperCase() === gid.toUpperCase(); });
     if (checkPointIndex !== -1) {
         window.CreatedCheckPoints.splice(checkPointIndex, 1);
     }
     CreateQuest.Initialize();
+};
+
+CreateQuest.AddTasksTableRows = function (tasksList) {
+    var table = document.getElementById("tasksTable").getElementsByTagName('tbody')[0];
+
+    while (table.firstChild) {
+        table.removeChild(table.firstChild);
+    }
+
+    $.each(tasksList, function (a, item) {
+        CreateQuest.AddTasksTableRow(item, table);
+    });
+};
+
+CreateQuest.AddTasksTableRow = function (item, table) {
+    if (!table) {
+        table = document.getElementById("tasksTable").getElementsByTagName('tbody')[0];
+    }
+
+    var newRow = table.insertRow(table.rows.length);
+    var newCellName = newRow.insertCell(0);
+    var newCellMaxScore = newRow.insertCell(1);
+    var newCellType = newRow.insertCell(2);
+    var newCellButtons = newRow.insertCell(3);
+    newRow.setAttribute("gid", item.gid);
+    newCellName.appendChild(document.createTextNode(item.Name));
+    newCellMaxScore.appendChild(document.createTextNode(item.MaxScore));
+    newCellType.appendChild(document.createTextNode(item.TaskTypeGID));
+    newCellButtons.innerHTML = '<a onclick="WebService.SaveCheckPoint(CreateQuest.GetCheckPoint(), false, function () { WebService.OpenCreateTaskPage(\'' + item.gid + '\'); });"><i class="fa fa-edit" aria-hidden="true"></i></a><a onclick="CreateQuest.RemoveTask(\'' + item.gid + '\')"><i class="fa fa-times" aria-hidden="true"></i></a>';
+};
+
+CreateQuest.RemoveTask = function (gid) {
+    var taskIndex = QuestMap.FindIndex(window.CreatedTasks, function (item) { return item.gid.toUpperCase() === gid.toUpperCase(); });
+    if (taskIndex !== -1) {
+        window.CreatedTasks.splice(taskIndex, 1);
+    }
+    CreateQuest.InitializeTasksTable();
 };
 
 CreateQuest.GetQuest = function () {

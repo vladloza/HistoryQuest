@@ -357,6 +357,27 @@ WebService.OpenCreateCheckPointPage = function (checkPointGID) {
     });
 };
 
+WebService.OpenCreateTaskPage = function (taskGID) {
+    var taskGIDParameter = taskGID ? "'" + taskGID + "'" : null;
+    $.ajax({
+        type: "POST",
+        data: "{ taskGID: " + taskGIDParameter + " }",
+        url: "../WebServices/WebService.asmx/OpenCreateTaskPage",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (r) {
+            window.location = r.d;
+        },
+        error: function (r) {
+            alert(r.responseText);
+        },
+        failure: function (r) {
+            alert(r.responseText);
+        }
+    });
+};
+
+
 WebService.SaveQuest = function (quest, save, onSuccess) {
     $.ajax({
         type: "POST",

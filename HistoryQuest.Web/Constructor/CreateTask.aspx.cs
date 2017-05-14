@@ -16,19 +16,30 @@ namespace HistoryQuest.Constructor
         {
             base.Page_Load(sender, e);
 
-            if (Session != null && Session["CreatedQuest"] != null)
+            if (Session != null && Session["CreatedQuest"] != null && Session["CreatedTask"] != null)
             {
+                HistoryQuest.Domain.Task task = (HistoryQuest.Domain.Task)Session["CreatedTask"];
+
+                TaskContainer.Attributes["taskgid"] = task.gid.ToString();
+
                 var taskTypesList = Repository.CurrentDataContext.TaskTypes.Select(cp => new
                 {
                     cp.id,
                     cp.gid,
                     cp.Name,
                     cp.Caption
-                }).OrderBy(cp => cp.id).ToList();
+                }).Where(tt => tt.gid != new Guid("9044BC32-30A7-49A5-8DC2-BA24BECE5E39")).OrderBy(cp => cp.id).ToList();
+
+                DropDownTaskType.DataSource = taskTypesList;
+                DropDownTaskType.DataTextField = "Caption";
+                DropDownTaskType.DataValueField = "gid";
+                DropDownTaskType.DataBind();
+                DropDownTaskType.Items.Insert(0, new ListItem(String.Empty, String.Empty));
+
+                DropDownTaskType.SelectedValue = task.TaskTypeGID.ToString();
 
                 JavaScriptSerializer serializer = new JavaScriptSerializer();
                 DataManager.AddVariable("TaskTypes", serializer.Serialize(taskTypesList));
-                
             }
             else
             {
