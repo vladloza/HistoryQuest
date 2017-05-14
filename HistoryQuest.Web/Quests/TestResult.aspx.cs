@@ -27,8 +27,8 @@ namespace HistoryQuest.Quests
                 int maxScore = fullCurrentTasksList.Sum(t => t.MaxScore);
                 float taskCount = checkPointToTry.CheckPoint.TasksCount;
 
-                RadialPercent.Attributes["data-value"] = (100 * totalScore / (float)maxScore).ToString().Replace(",", ".");
-                RedialCount.Attributes["data-value"] = checkPointToTry.TasksToTries.Sum(t => t.EarnedScore / (float)t.Task.MaxScore).ToString().Replace(",", ".");
+                RadialPercent.Attributes["data-value"] = (100 * totalScore / (float)Math.Max(maxScore, 1)).ToString().Replace(",", ".");
+                RedialCount.Attributes["data-value"] = checkPointToTry.TasksToTries.Sum(t => t.EarnedScore / (float)Math.Max(t.Task.MaxScore, 1)).ToString().Replace(",", ".");
                 RedialCount.Attributes["data-maxvalue"] = fullCurrentTasksList.Count.ToString().Replace(",", ".");
 
                 ResultTitle.InnerText = checkPointToTry.CheckPoint.ThresholdScore == null || 
