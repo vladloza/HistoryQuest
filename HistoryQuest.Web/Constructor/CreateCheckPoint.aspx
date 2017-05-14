@@ -77,6 +77,8 @@
     </div>
 
     <script>
+        CreateQuest.InitializeTasksTable();
+
         $("#SaveButton").click(function (e) {
             e.preventDefault();
             WebService.SaveCheckPoint(CreateQuest.GetCheckPoint(), true);

@@ -60,7 +60,7 @@
     </div>
 
     <script>
-        CreateQuest.Initialize();
+        CreateQuest.InitializeCheckPointsTable();
 
         $("#CreateCheckPointButton").click(function (e) {
             e.preventDefault();

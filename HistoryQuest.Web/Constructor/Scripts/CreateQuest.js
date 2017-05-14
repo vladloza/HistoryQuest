@@ -2,7 +2,7 @@
 
 };
 
-CreateQuest.Initialize = function () {
+CreateQuest.InitializeCheckPointsTable = function () {
     if (window.CreatedCheckPoints && window.CreatedCheckPoints.length >= 0) {
        CreateQuest.AddCheckPoinsTableRows(window.CreatedCheckPoints);
     }
@@ -48,7 +48,7 @@ CreateQuest.RemoveCheckPoint = function (gid) {
     if (checkPointIndex !== -1) {
         window.CreatedCheckPoints.splice(checkPointIndex, 1);
     }
-    CreateQuest.Initialize();
+    CreateQuest.InitializeCheckPointsTable();
 };
 
 CreateQuest.AddTasksTableRows = function (tasksList) {
@@ -68,15 +68,17 @@ CreateQuest.AddTasksTableRow = function (item, table) {
         table = document.getElementById("tasksTable").getElementsByTagName('tbody')[0];
     }
 
+    var taskType = window.TaskTypes.find(function (taskTypeItem) { return item.TaskTypeGID.toUpperCase() === taskTypeItem.gid.toUpperCase(); });
+
     var newRow = table.insertRow(table.rows.length);
-    var newCellName = newRow.insertCell(0);
+    var newCellText = newRow.insertCell(0);
     var newCellMaxScore = newRow.insertCell(1);
     var newCellType = newRow.insertCell(2);
     var newCellButtons = newRow.insertCell(3);
     newRow.setAttribute("gid", item.gid);
-    newCellName.appendChild(document.createTextNode(item.Name));
+    newCellText.appendChild(document.createTextNode(item.Text));
     newCellMaxScore.appendChild(document.createTextNode(item.MaxScore));
-    newCellType.appendChild(document.createTextNode(item.TaskTypeGID));
+    newCellType.appendChild(document.createTextNode(taskType.Name));
     newCellButtons.innerHTML = '<a onclick="WebService.SaveCheckPoint(CreateQuest.GetCheckPoint(), false, function () { WebService.OpenCreateTaskPage(\'' + item.gid + '\'); });"><i class="fa fa-edit" aria-hidden="true"></i></a><a onclick="CreateQuest.RemoveTask(\'' + item.gid + '\')"><i class="fa fa-times" aria-hidden="true"></i></a>';
 };
 

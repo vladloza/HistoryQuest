@@ -5,7 +5,8 @@ CreateTask.TaskTypeGID;
 
 CreateTask.Initialize = function () {
     if (window.TaskTypes && window.DropDownTaskType) {
-        //CreateTask.InitializeDropDown(window.TaskTypes);
+        CreateTask.DropDownChanged();
+        window.DropDownTaskType.onchange = CreateTask.DropDownChanged;
     }
 };
 
@@ -24,7 +25,7 @@ CreateTask.InitializeDropDown = function (TaskTypes) {
 
 CreateTask.DropDownChanged = function () {
     CreateTask.TaskTypeGID = $("#DropDownTaskType").find(":selected")[0].value;
-    var taskType = window.TaskTypes.firstOrDefault(function (item) { return CreateTask.TaskTypeGID.toUpperCase() === item.gid.toUpperCase(); });
+    var taskType = window.TaskTypes.find(function (item) { return CreateTask.TaskTypeGID.toUpperCase() === item.gid.toUpperCase(); });
     CreateTask.TaskTypeName = taskType.Name;
 
     $.each(window.TaskTypes, function (a, item) {

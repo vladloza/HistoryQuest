@@ -1,8 +1,10 @@
 ﻿using HistoryQuest.Domain;
+using HistoryQuest.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -53,6 +55,31 @@ namespace HistoryQuest.Constructor
                 else
                 {
                     DropDownParent.SelectedIndex = 0;
+                }
+
+                if (checkPoint.Tasks.Count > 0)
+                {
+                    var tasksList = checkPoint.Tasks.Select(t => new
+                    {
+                        id = t.id,
+                        t.gid,
+                        Text = HttpUtility.HtmlEncode(t.Text),
+                        t.MaxScore,
+                        t.TaskTypeGID
+                    }).OrderBy(t => t.id).ToList();
+
+                    JavaScriptSerializer serializer = new JavaScriptSerializer();
+                    DataManager.AddVariable("CreatedTasks", serializer.Serialize(tasksList));
+
+                    var taskTypesList = Repository.CurrentDataContext.TaskTypes.Select(cp => new
+                    {
+                        cp.id,
+                        cp.gid,
+                        cp.Name,
+                        cp.Caption
+                    }).Where(tt => tt.gid != new Guid("9044BC32-30A7-49A5-8DC2-BA24BECE5E39")).OrderBy(cp => cp.id).ToList();
+                    
+                    DataManager.AddVariable("TaskTypes", serializer.Serialize(taskTypesList));
                 }
             }
             else
