@@ -3,6 +3,7 @@
     [ErrorText]      NVARCHAR (MAX) NULL,
     [InnerErrorText] NVARCHAR (MAX) NULL,
     [DateTime]       DATETIME       NOT NULL,
+    [StackTrace] NVARCHAR(MAX) NULL, 
     CONSTRAINT [PK_Errors] PRIMARY KEY CLUSTERED ([id] ASC)
 );
 

@@ -40,6 +40,7 @@ namespace HistoryQuest
                 Repository.CurrentDataContext.Errors.InsertOnSubmit(new Domain.Error() {
                     ErrorText = LastError.Message,
                     InnerErrorText = LastError.InnerException?.Message,
+                    StackTrace = LastError.StackTrace + "----next----" + LastError.InnerException?.StackTrace,
                     DateTime = DateTime.Now
                 });
 
