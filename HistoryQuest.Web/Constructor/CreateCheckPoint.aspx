@@ -57,7 +57,6 @@
                         <table id="tasksTable">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Текст завдання</th>
                                     <th>Максимальний бал</th>
                                     <th>Тип</th>
@@ -81,6 +80,10 @@
         $("#SaveButton").click(function (e) {
             e.preventDefault();
             WebService.SaveCheckPoint(CreateQuest.GetCheckPoint(), true);
+        });
+        $("#CreateTasksButton").click(function (e) {
+            e.preventDefault();
+            WebService.SaveCheckPoint(CreateQuest.GetCheckPoint(), false, function () { WebService.OpenCreateTaskPage(null) });
         });
     </script>
 </asp:Content>

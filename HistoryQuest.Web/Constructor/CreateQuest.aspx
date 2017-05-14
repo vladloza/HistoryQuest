@@ -66,7 +66,7 @@
             e.preventDefault();
             WebService.SaveQuest(CreateQuest.GetQuest(), false, function () { WebService.OpenCreateCheckPointPage(null); });
         });
-        $('#SaveButton').click(function (e) {
+        $('#SaveButton').click(function (e) { 
             e.preventDefault();
             WebService.SaveQuest(CreateQuest.GetQuest(), true);
         });

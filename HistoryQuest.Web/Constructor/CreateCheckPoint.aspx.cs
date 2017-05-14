@@ -14,7 +14,7 @@ namespace HistoryQuest.Constructor
         {
             base.Page_Load(sender, e);
 
-            if (Session != null && Session["CreatedQuest"] != null &&Session["CreatedCheckPoint"] != null)
+            if (Session != null && Session["CreatedQuest"] != null && Session["CreatedCheckPoint"] != null)
             {
                 HistoryQuest.Domain.Quest quest = (HistoryQuest.Domain.Quest)Session["CreatedQuest"];
                 HistoryQuest.Domain.CheckPoint checkPoint = (HistoryQuest.Domain.CheckPoint)Session["CreatedCheckPoint"];
