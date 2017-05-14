@@ -40,7 +40,7 @@
                         </div>
                         <div class="launching">
                             <i class="fa fa-cog" aria-hidden="true"></i>
-                            <h4>We're sorry...We're working on it.</h4>
+                            <h4>We're working on it.</h4>
                         </div>
                     </div>
                 </div>
