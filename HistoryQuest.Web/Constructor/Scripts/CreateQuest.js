@@ -28,13 +28,11 @@ CreateQuest.AddCheckPoinsTableRow = function (item, table) {
     }
 
     var newRow = table.insertRow(table.rows.length);
-    var newCellId = newRow.insertCell(0);
-    var newCellName = newRow.insertCell(1);
-    var newCellTasksCount = newRow.insertCell(2);
-    var newCellThresholdScore = newRow.insertCell(3);
-    var newCellButtons = newRow.insertCell(4);
+    var newCellName = newRow.insertCell(0);
+    var newCellTasksCount = newRow.insertCell(1);
+    var newCellThresholdScore = newRow.insertCell(2);
+    var newCellButtons = newRow.insertCell(3);
     newRow.setAttribute("gid", item.gid);
-    newCellId.appendChild(document.createTextNode(item.id));
     newCellName.appendChild(document.createTextNode(item.Name));
     newCellTasksCount.appendChild(document.createTextNode(item.TasksCount));
     newCellThresholdScore.appendChild(document.createTextNode(item.ThresholdScore ? item.ThresholdScore : ""));

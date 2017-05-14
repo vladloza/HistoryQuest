@@ -40,7 +40,6 @@
                         <table id="checkpointsTable">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Назва</th>
                                     <th>Кількість завдань</th>
                                     <th>Пороговий бал</th>
