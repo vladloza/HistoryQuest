@@ -66,6 +66,7 @@
                 <asp:ScriptReference Path="~/Scripts/WebService.js" />
                 <asp:ScriptReference Path="~/Quests/Scripts/QuestMap.js" />
                 <asp:ScriptReference Path="~/Constructor/Scripts/CreateQuest.js" />
+                <asp:ScriptReference Path="~/Constructor/Scripts/CreateTask.js" />
             </Scripts>
         </asp:ScriptManager>
     </form>
