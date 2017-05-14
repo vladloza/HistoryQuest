@@ -47,5 +47,15 @@ namespace HistoryQuest
                 error_text.Text = "Невірний логін або пароль!";
             }
         }
+
+        protected void vkLogin_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(Socials.vkUrl);
+        }
+        protected void fbLogin_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(Socials.fbUrl);
+        }
+
     }
 }

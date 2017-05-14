@@ -9,21 +9,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Security;
+using System.Configuration;
 
 namespace HistoryQuest.Domain
 {
     public class Socials
     {
-        public const string redirect_uri = "http://localhost:64356/Login.aspx";
+        public static string redirect_uri = ConfigurationManager.AppSettings["redirectUrl"];
         public const string scope = "email";
 
         public const string fbID = "126671031222882";
         public const string fbSecret = "0e86a47832a37c7287b3407b155fb662";
-        public const string fbUrl = "https://www.facebook.com/dialog/oauth?client_id=" + fbID+"&redirect_uri=" + redirect_uri + "&state=fb&scope="+scope;
+        public static string fbUrl = "https://www.facebook.com/dialog/oauth?client_id=" + fbID+"&redirect_uri=" + redirect_uri + "&state=fb&scope="+scope;
 
         public const string vkID = "6009379";
         public const string vkSecret = "VgmVKtowqz71XXwwrC1p";
-        public const string vkUrl = "https://oauth.vk.com/authorize?client_id="+vkID+"&display=page&redirect_uri="+redirect_uri+"&scope="+scope+ "&response_type=code&v=5.63&state=vk";
+        public static string vkUrl = "https://oauth.vk.com/authorize?client_id="+vkID+"&display=page&redirect_uri="+redirect_uri+"&scope="+scope+ "&response_type=code&v=5.63&state=vk";
 
         public static void AuthoritheSocialUser(NameValueCollection request)
         {
