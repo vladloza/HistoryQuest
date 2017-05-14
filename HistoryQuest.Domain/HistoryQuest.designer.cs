@@ -67,9 +67,6 @@ namespace HistoryQuest.Domain
     partial void InsertTasksToTry(TasksToTry instance);
     partial void UpdateTasksToTry(TasksToTry instance);
     partial void DeleteTasksToTry(TasksToTry instance);
-    partial void InsertTaskType(TaskType instance);
-    partial void UpdateTaskType(TaskType instance);
-    partial void DeleteTaskType(TaskType instance);
     partial void InsertTeacherRequest(TeacherRequest instance);
     partial void UpdateTeacherRequest(TeacherRequest instance);
     partial void DeleteTeacherRequest(TeacherRequest instance);
@@ -82,6 +79,9 @@ namespace HistoryQuest.Domain
     partial void InsertFAQ(FAQ instance);
     partial void UpdateFAQ(FAQ instance);
     partial void DeleteFAQ(FAQ instance);
+    partial void InsertTaskType(TaskType instance);
+    partial void UpdateTaskType(TaskType instance);
+    partial void DeleteTaskType(TaskType instance);
     #endregion
 		
 		public HistoryQuestDataContext() : 
@@ -210,14 +210,6 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		public System.Data.Linq.Table<TaskType> TaskTypes
-		{
-			get
-			{
-				return this.GetTable<TaskType>();
-			}
-		}
-		
 		public System.Data.Linq.Table<TeacherRequest> TeacherRequests
 		{
 			get
@@ -247,6 +239,14 @@ namespace HistoryQuest.Domain
 			get
 			{
 				return this.GetTable<FAQ>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TaskType> TaskTypes
+		{
+			get
+			{
+				return this.GetTable<TaskType>();
 			}
 		}
 	}
@@ -3234,9 +3234,9 @@ namespace HistoryQuest.Domain
 		
 		private EntityRef<CheckPoint> _CheckPoint;
 		
-		private EntityRef<TaskType> _TaskType;
-		
 		private EntityRef<User> _User;
+		
+		private EntityRef<TaskType> _TaskType;
 		
 		private bool serializing;
 		
@@ -3500,40 +3500,6 @@ namespace HistoryQuest.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TaskType_Task", Storage="_TaskType", ThisKey="TaskTypeGID", OtherKey="gid", IsForeignKey=true)]
-		public TaskType TaskType
-		{
-			get
-			{
-				return this._TaskType.Entity;
-			}
-			set
-			{
-				TaskType previousValue = this._TaskType.Entity;
-				if (((previousValue != value) 
-							|| (this._TaskType.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._TaskType.Entity = null;
-						previousValue.Tasks.Remove(this);
-					}
-					this._TaskType.Entity = value;
-					if ((value != null))
-					{
-						value.Tasks.Add(this);
-						this._TaskTypeGID = value.gid;
-					}
-					else
-					{
-						this._TaskTypeGID = default(System.Guid);
-					}
-					this.SendPropertyChanged("TaskType");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Task", Storage="_User", ThisKey="AuthorGID", OtherKey="gid", IsForeignKey=true)]
 		public User User
 		{
@@ -3564,6 +3530,40 @@ namespace HistoryQuest.Domain
 						this._AuthorGID = default(Nullable<System.Guid>);
 					}
 					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TaskType_Task", Storage="_TaskType", ThisKey="TaskTypeGID", OtherKey="gid", IsForeignKey=true)]
+		public TaskType TaskType
+		{
+			get
+			{
+				return this._TaskType.Entity;
+			}
+			set
+			{
+				TaskType previousValue = this._TaskType.Entity;
+				if (((previousValue != value) 
+							|| (this._TaskType.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TaskType.Entity = null;
+						previousValue.Tasks.Remove(this);
+					}
+					this._TaskType.Entity = value;
+					if ((value != null))
+					{
+						value.Tasks.Add(this);
+						this._TaskTypeGID = value.gid;
+					}
+					else
+					{
+						this._TaskTypeGID = default(System.Guid);
+					}
+					this.SendPropertyChanged("TaskType");
 				}
 			}
 		}
@@ -3604,8 +3604,8 @@ namespace HistoryQuest.Domain
 		{
 			this._TasksToTries = new EntitySet<TasksToTry>(new Action<TasksToTry>(this.attach_TasksToTries), new Action<TasksToTry>(this.detach_TasksToTries));
 			this._CheckPoint = default(EntityRef<CheckPoint>);
-			this._TaskType = default(EntityRef<TaskType>);
 			this._User = default(EntityRef<User>);
+			this._TaskType = default(EntityRef<TaskType>);
 			OnCreated();
 		}
 		
@@ -3936,182 +3936,6 @@ namespace HistoryQuest.Domain
 		public void OnDeserializing(StreamingContext context)
 		{
 			this.Initialize();
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TaskTypes")]
-	[global::System.Runtime.Serialization.DataContractAttribute()]
-	public partial class TaskType : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private System.Guid _gid;
-		
-		private string _Name;
-		
-		private EntitySet<Task> _Tasks;
-		
-		private bool serializing;
-		
-    #region Определения метода расширяемости
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OngidChanging(System.Guid value);
-    partial void OngidChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    #endregion
-		
-		public TaskType()
-		{
-			this.Initialize();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gid", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
-		public System.Guid gid
-		{
-			get
-			{
-				return this._gid;
-			}
-			set
-			{
-				if ((this._gid != value))
-				{
-					this.OngidChanging(value);
-					this.SendPropertyChanging();
-					this._gid = value;
-					this.SendPropertyChanged("gid");
-					this.OngidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TaskType_Task", Storage="_Tasks", ThisKey="gid", OtherKey="TaskTypeGID")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4, EmitDefaultValue=false)]
-		public EntitySet<Task> Tasks
-		{
-			get
-			{
-				if ((this.serializing 
-							&& (this._Tasks.HasLoadedOrAssignedValues == false)))
-				{
-					return null;
-				}
-				return this._Tasks;
-			}
-			set
-			{
-				this._Tasks.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Tasks(Task entity)
-		{
-			this.SendPropertyChanging();
-			entity.TaskType = this;
-		}
-		
-		private void detach_Tasks(Task entity)
-		{
-			this.SendPropertyChanging();
-			entity.TaskType = null;
-		}
-		
-		private void Initialize()
-		{
-			this._Tasks = new EntitySet<Task>(new Action<Task>(this.attach_Tasks), new Action<Task>(this.detach_Tasks));
-			OnCreated();
-		}
-		
-		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnDeserializing(StreamingContext context)
-		{
-			this.Initialize();
-		}
-		
-		[global::System.Runtime.Serialization.OnSerializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnSerializing(StreamingContext context)
-		{
-			this.serializing = true;
-		}
-		
-		[global::System.Runtime.Serialization.OnSerializedAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnSerialized(StreamingContext context)
-		{
-			this.serializing = false;
 		}
 	}
 	
@@ -5359,6 +5183,207 @@ namespace HistoryQuest.Domain
 		public void OnDeserializing(StreamingContext context)
 		{
 			this.Initialize();
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TaskTypes")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
+	public partial class TaskType : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private System.Guid _gid;
+		
+		private string _Name;
+		
+		private string _Caption;
+		
+		private EntitySet<Task> _Tasks;
+		
+		private bool serializing;
+		
+    #region Определения метода расширяемости
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OngidChanging(System.Guid value);
+    partial void OngidChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnCaptionChanging(string value);
+    partial void OnCaptionChanged();
+    #endregion
+		
+		public TaskType()
+		{
+			this.Initialize();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gid", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+		public System.Guid gid
+		{
+			get
+			{
+				return this._gid;
+			}
+			set
+			{
+				if ((this._gid != value))
+				{
+					this.OngidChanging(value);
+					this.SendPropertyChanging();
+					this._gid = value;
+					this.SendPropertyChanged("gid");
+					this.OngidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Caption", DbType="NVarChar(256)")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
+		public string Caption
+		{
+			get
+			{
+				return this._Caption;
+			}
+			set
+			{
+				if ((this._Caption != value))
+				{
+					this.OnCaptionChanging(value);
+					this.SendPropertyChanging();
+					this._Caption = value;
+					this.SendPropertyChanged("Caption");
+					this.OnCaptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TaskType_Task", Storage="_Tasks", ThisKey="gid", OtherKey="TaskTypeGID")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5, EmitDefaultValue=false)]
+		public EntitySet<Task> Tasks
+		{
+			get
+			{
+				if ((this.serializing 
+							&& (this._Tasks.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
+				return this._Tasks;
+			}
+			set
+			{
+				this._Tasks.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Tasks(Task entity)
+		{
+			this.SendPropertyChanging();
+			entity.TaskType = this;
+		}
+		
+		private void detach_Tasks(Task entity)
+		{
+			this.SendPropertyChanging();
+			entity.TaskType = null;
+		}
+		
+		private void Initialize()
+		{
+			this._Tasks = new EntitySet<Task>(new Action<Task>(this.attach_Tasks), new Action<Task>(this.detach_Tasks));
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerializing(StreamingContext context)
+		{
+			this.serializing = true;
+		}
+		
+		[global::System.Runtime.Serialization.OnSerializedAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnSerialized(StreamingContext context)
+		{
+			this.serializing = false;
 		}
 	}
 }

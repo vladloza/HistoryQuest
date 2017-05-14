@@ -66,11 +66,11 @@ INSERT INTO [dbo].[Faces] ([gid], [id], [LastName], [FirstName], [MiddleName], [
 INSERT INTO [dbo].[Faces] ([gid], [id], [LastName], [FirstName], [MiddleName], [TeacherGID], [Info], [IsTeacher]) VALUES (N'f7f34923-e4df-48a6-ad8d-414588f64304', 104, N'Поперешняк', N'Светлана', N'Владимировна', NULL, NULL, 1)
 SET IDENTITY_INSERT [dbo].[Faces] OFF
 SET IDENTITY_INSERT [dbo].[TaskTypes] ON
-INSERT INTO [dbo].[TaskTypes] ([gid], [id], [Name]) VALUES (N'09daff50-996e-4077-9be0-3c0bf516e56c', 3, N'Map')
-INSERT INTO [dbo].[TaskTypes] ([gid], [id], [Name]) VALUES (N'6d1e2691-3eab-41a7-90c4-8bd9ec7b1fd8', 2, N'Test')
-INSERT INTO [dbo].[TaskTypes] ([gid], [id], [Name]) VALUES (N'9044bc32-30a7-49a5-8dc2-ba24bece5e39', 4, N'TestWithImage')
-INSERT INTO [dbo].[TaskTypes] ([gid], [id], [Name]) VALUES (N'979f14eb-265c-4080-a375-9c10cd49b544', 5, N'Writing')
-INSERT INTO [dbo].[TaskTypes] ([gid], [id], [Name]) VALUES (N'9f3a9b8b-6b56-473e-b88a-ddd33c337396', 1, N'Conformity')
+INSERT INTO [dbo].[TaskTypes] ([gid], [id], [Name], [Caption]) VALUES (N'09daff50-996e-4077-9be0-3c0bf516e56c', 3, N'Map', N'Завдання з картою')
+INSERT INTO [dbo].[TaskTypes] ([gid], [id], [Name], [Caption]) VALUES (N'6d1e2691-3eab-41a7-90c4-8bd9ec7b1fd8', 2, N'Test', N'Тестове завдання з однією правильною відповіддю')
+INSERT INTO [dbo].[TaskTypes] ([gid], [id], [Name], [Caption]) VALUES (N'9044bc32-30a7-49a5-8dc2-ba24bece5e39', 4, N'TestWithImage', '')
+INSERT INTO [dbo].[TaskTypes] ([gid], [id], [Name], [Caption]) VALUES (N'979f14eb-265c-4080-a375-9c10cd49b544', 5, N'Writing', N'Письмове завдання')
+INSERT INTO [dbo].[TaskTypes] ([gid], [id], [Name], [Caption]) VALUES (N'9f3a9b8b-6b56-473e-b88a-ddd33c337396', 1, N'Conformity', N'Завдання на відповідність')
 SET IDENTITY_INSERT [dbo].[TaskTypes] OFF
 SET IDENTITY_INSERT [dbo].[Tasks] ON
 INSERT INTO [dbo].[Tasks] ([gid], [id], [Text], [MaxScore], [TaskTypeGID], [CheckPointGID], [SourceFile], [AuthorGID]) VALUES (N'0042e433-0e1a-4c85-9ecb-3bfd78ce921a', 82, N'Що відбулося з місцем поховання Гетьмана?', 1, N'6d1e2691-3eab-41a7-90c4-8bd9ec7b1fd8', N'2e5e6d85-a5b2-4f66-895f-ef4c7462e67c', CONVERT(xml,N'<TestTask>
