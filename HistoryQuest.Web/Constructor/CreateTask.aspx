@@ -5,7 +5,7 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="ContentPlaceHolder">
     <div class="wrapper">
-        <div class="info">
+        <div class="info" id="TaskContainer" runat="server" ClientIDMode="Static" taskgid="">
             <div class="container clearfix">
                 <div class="page-content card">
                     <fieldset class="form-fieldset">

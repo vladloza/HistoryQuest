@@ -41,12 +41,12 @@ namespace HistoryQuest.Constructor
                         id = cp.OrderId,
                         cp.gid,
                         cp.Name,
-                        cp.Info,
+                        Info = HttpUtility.HtmlEncode(cp.Info),
                         cp.TasksCount,
                         cp.ThresholdScore,
                         cp.ParentGID
                     }).OrderBy(cp => cp.id).ToList();
-
+                    
                     JavaScriptSerializer serializer = new JavaScriptSerializer();
                     DataManager.AddVariable("CreatedCheckPoints", serializer.Serialize(checkPointsList));
                 }
