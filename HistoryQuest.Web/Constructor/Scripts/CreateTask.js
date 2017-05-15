@@ -104,7 +104,7 @@ CreateTask.CreateTestTask = function (task, parentContainer) {
     var rightID = parentContainer.querySelector('input[name=taskId]:checked').value;
 
     for (var i = 0; i < elements.length; i++) {
-        task.Source.answers[i] = elements[i].value;
+        task.Source.answers[i] = WebService.HtmlEncode(elements[i].value);
     }
     task.Source.rightanswer = rightID;
 
@@ -112,7 +112,7 @@ CreateTask.CreateTestTask = function (task, parentContainer) {
 };
 
 CreateTask.CreateWritingTask = function (task, parentContainer) {
-    task.Source.rightanswer = parentContainer.querySelector('input[rightanswer]').value;
+    task.Source.rightanswer = WebService.HtmlEncode(parentContainer.querySelector('input[rightanswer]').value);
 };
 
 CreateTask.CreateConformityTask = function (task, parentContainer) {
@@ -121,10 +121,10 @@ CreateTask.CreateConformityTask = function (task, parentContainer) {
     var radio_answers = parentContainer.getElementsByClassName("matching");
 
     for (var i = 0; i < questions.length; i++) {
-        task.Source.questions[i] = questions[i].value;
+        task.Source.questions[i] = WebService.HtmlEncode(questions[i].value);
     }
     for (var i = 0; i < answers.length; i++) {
-        task.Source.answers[i] = answers[i].value;
+        task.Source.answers[i] = WebService.HtmlEncode(answers[i].value);
     }
     for (var i = 0; i < radio_answers.length; i++) {
         if (radio_answers[i].children[0].checked) {

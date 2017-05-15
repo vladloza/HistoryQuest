@@ -27,7 +27,7 @@ TasksController.ReadTestTask = function () {
 
     for (var i = 0; i < answers.length; i++) {
         if (answers[i].children[0].checked) {
-            return answers[i].children[2].innerText;
+            return WebService.HtmlEncode(answers[i].children[2].innerText);
         }
     }
 
@@ -38,7 +38,7 @@ TasksController.ReadWritingTask = function () {
     var answer = document.getElementsByClassName("input-answer");
 
     if (answer.length > 0) {
-        return answer[0].value;
+        return WebService.HtmlEncode(answer[0].value);
     }
 
     return "no user entry";
