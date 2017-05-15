@@ -29,6 +29,7 @@ namespace HistoryQuest.Controls
             face.MiddleName = father_name.Value;
             face.Info = description.Value;
             Repository.CurrentDataContext.SubmitChanges();
+            Repository.CurrentUser.Face = face;
             Response.Redirect(Page.Request.Url.ToString(), true);
         }
     }
