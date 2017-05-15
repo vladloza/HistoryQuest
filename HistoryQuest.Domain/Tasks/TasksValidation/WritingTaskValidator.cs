@@ -16,9 +16,9 @@ namespace HistoryQuest.Domain.Tasks.TasksValidation
         {
             var rightAnswers = rightAnswer as List<string>;
 
+            string fixedUserAnswer = new string(userAnswer.Where(c => char.IsLetter(c)).ToArray()).Trim().ToLower();
             if (rightAnswers != null)
             {
-                string fixedUserAnswer = new string(userAnswer.Where(c => char.IsLetter(c)).ToArray()).Trim().ToLower();
                 for (int i = 0; i < rightAnswers.Count; i++)
                 {
                     string fixedRightAnswer = new string(rightAnswers[i].Where(c => char.IsLetter(c)).ToArray()).Trim().ToLower();
@@ -26,6 +26,14 @@ namespace HistoryQuest.Domain.Tasks.TasksValidation
                     {
                         return MaxScore;
                     }
+                }
+            }
+            else
+            {
+                string fixedRightAnswer = new string(rightAnswer.ToString().Where(c => char.IsLetter(c)).ToArray()).Trim().ToLower();
+                if (fixedUserAnswer == fixedRightAnswer)
+                {
+                    return MaxScore;
                 }
             }
 

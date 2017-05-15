@@ -30,7 +30,7 @@ namespace HistoryQuest.Quests
 
             if (Session != null)
             {
-                Session["RightAnswera"] = rightAnswers;
+                Session["RightAnswer"] = rightAnswers;
             }
         }
     }
