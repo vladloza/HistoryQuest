@@ -32,24 +32,25 @@
                 <asp:Button runat="server" class="button" OnClick="LoginButton_Click" Text="Увійти"></asp:Button>
             </form>
             <asp:Label runat="server" ID="error_text" />
-            <div class="login-icons">
+            <script src="http://ulogin.ru/js/ulogin.js"></script>
+            <div class="login-icons" id="uLogin" data-ulogin="display=buttons;fields=first_name,last_name,email;redirect_uri=<%= HistoryQuest.Domain.Socials.redirect_uri %>;">
                 <div class="icons-inside facebook">
-                    <a href="<%= HistoryQuest.Domain.Socials.fbUrl %>">
+                    <a data-uloginbutton="facebook">
                         <i class="fa fa-facebook" aria-hidden="true"></i>
                     </a>
                 </div>
                 <div class="icons-inside google-plus">
-                    <a onclick='comeLater()'>
+                    <a data-uloginbutton="googleplus">
                         <i class="fa fa-google-plus" aria-hidden="true"></i>
                     </a>
                 </div>
                 <div class="icons-inside twitter">
-                    <a onclick='comeLater()'>
+                    <a data-uloginbutton="twitter">
                         <i class="fa fa-twitter" aria-hidden="true"></i>
                     </a>
                 </div>
                 <div class="icons-inside vk">
-                    <a href="<%= HistoryQuest.Domain.Socials.vkUrl %>">
+                    <a data-uloginbutton="vkontakte">
                         <i class="fa fa-vk" aria-hidden="true"></i>
                     </a>
                 </div>

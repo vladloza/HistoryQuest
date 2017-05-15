@@ -76,8 +76,7 @@
       <DependentUpon>HistoryQuest.dbml</DependentUpon>
     </Compile>
     <Compile Include="HistoryQuestDataContext.cs" />
-    <Compile Include="Models\FaceBookResponce.cs" />
-    <Compile Include="Models\VKResponse.cs" />
+    <Compile Include="Models\SocialsResponce.cs" />
     <Compile Include="Socials.cs" />
     <Compile Include="Tasks\TasksController.cs" />
     <Compile Include="Tasks\TasksValidation\BaseTaskValidator.cs" />
@@ -96,8 +95,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Repository.cs" />
-    <Compile Include="Utils\FaceBook.cs" />
-    <Compile Include="Utils\VK.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

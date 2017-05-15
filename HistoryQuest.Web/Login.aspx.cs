@@ -7,7 +7,6 @@ using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using HistoryQuest.Domain.Utils;
 
 namespace HistoryQuest
 {
@@ -19,10 +18,10 @@ namespace HistoryQuest
             {
                 Response.Redirect(FormsAuthentication.DefaultUrl);
             }
-            if (Request.QueryString["state"] != null)
+            if (Request.Form["token"] != null)
             {
-                Socials.AuthoritheSocialUser(Request.QueryString);
-                Response.Redirect(FormsAuthentication.DefaultUrl);
+                Socials.AuthoritheSocialUser(Request.Form["token"], Request.ServerVariables["SERVER_NAME"]);
+                Response.Redirect("/");
             }
         }
 
@@ -47,15 +46,5 @@ namespace HistoryQuest
                 error_text.Text = "Невірний логін або пароль!";
             }
         }
-
-        protected void vkLogin_Click(object sender, EventArgs e)
-        {
-            Response.Redirect(Socials.vkUrl);
-        }
-        protected void fbLogin_Click(object sender, EventArgs e)
-        {
-            Response.Redirect(Socials.fbUrl);
-        }
-
     }
 }

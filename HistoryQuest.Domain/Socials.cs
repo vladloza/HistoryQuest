@@ -1,4 +1,4 @@
-﻿using HistoryQuest.Domain.Utils;
+﻿
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -10,45 +10,64 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Security;
 using System.Configuration;
+using System.Net;
+using System.IO;
+using HistoryQuest.Domain.Models;
 
 namespace HistoryQuest.Domain
 {
     public class Socials
     {
         public static string redirect_uri = ConfigurationManager.AppSettings["redirectUrl"];
-        public const string scope = "email";
 
-        public const string fbID = "126671031222882";
-        public const string fbSecret = "0e86a47832a37c7287b3407b155fb662";
-        public static string fbUrl = "https://www.facebook.com/dialog/oauth?client_id=" + fbID+"&redirect_uri=" + redirect_uri + "&state=fb&scope="+scope;
-
-        public const string vkID = "6009379";
-        public const string vkSecret = "VgmVKtowqz71XXwwrC1p";
-        public static string vkUrl = "https://oauth.vk.com/authorize?client_id="+vkID+"&display=page&redirect_uri="+redirect_uri+"&scope="+scope+ "&response_type=code&v=5.63&state=vk";
-
-        public static void AuthoritheSocialUser(NameValueCollection request)
+        public static void AuthoritheSocialUser(string token, string sname)
         {
-            switch (request["state"])
-            {
-                case "vk":
-                    VK.AuthoritheUser(request["code"].ToString());
-                    break;
-                case "fb":
-                    FaceBook.AuthoritheUser(request["code"].ToString());
-                    break;
-            }
-        }
+            string link = string.Format("http://ulogin.ru/token.php?token={0}&host={1}", token,
+              sname);
 
-        public static T GetResponse<T>(string token, string url)
-        {
-            System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
-            System.Net.WebRequest reqGET = System.Net.WebRequest.Create(url + token);
+            WebRequest reqGET = WebRequest.Create(link);
+
             System.Net.WebResponse resp = reqGET.GetResponse();
             System.IO.Stream stream = resp.GetResponseStream();
             System.IO.StreamReader sr = new System.IO.StreamReader(stream);
             string html = sr.ReadToEnd();
             string parsed = JObject.Parse(html).ToString();
-            return JsonConvert.DeserializeObject<T>(parsed);
+            var data = JsonConvert.DeserializeObject<SocialsResponce>(parsed);
+
+            var user = Repository.CurrentDataContext.Users.FirstOrDefault(u => (u.UserName == data.email || u.UserName == data.uid) && u.SocialName == data.network);
+
+            if (user == null)
+            {
+                Guid userGID = Guid.NewGuid();
+                user = new User()
+                {
+                    gid = userGID,
+                    Face = new Face()
+                    {
+                        gid = Guid.NewGuid(),
+                        FirstName = data.first_name,
+                        LastName = data.last_name,
+                        Info = data.profile,
+                        IsTeacher = false
+                    },
+                    SocialName = data.network,
+                    UserName = !String.IsNullOrEmpty(data.email) ? data.email : data.uid,
+                    UsersInRoles = new System.Data.Linq.EntitySet<UsersInRole>()
+                    {
+                        new UsersInRole
+                        {
+                            gid = Guid.NewGuid(),
+                            UserGID = userGID,
+                            RoleGID = Constants.StudentRoleGID
+                        }
+                    }
+                };
+
+                Repository.CurrentDataContext.Users.InsertOnSubmit(user);
+                Repository.CurrentDataContext.SubmitChanges();
+            }
+
+            Repository.CurrentUser = user;
         }
     }
 }
